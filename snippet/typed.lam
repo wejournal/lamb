@@ -1,0 +1,33 @@
+-- Combinators
+let B := ^x. ^y. ^z. x (y z) in
+let C := ^x. ^y. ^z. x z y in
+let I := ^x. x in
+let K := ^x. ^_. x in
+let S := ^x. ^y. ^z. x z (y z) in
+let W := ^x. ^y. x y y in
+
+-- Booleans
+let false := ^x. ^x. x in
+let true := ^x. ^y. x in
+let and := ^p. ^q. p q false in
+let or := ^p. ^q. p true q in
+let not := ^p. p false true in
+let if := ^p. ^x. ^y. p x y in
+
+-- Numbers
+let succ := ^n. ^f. ^x. f (n f x) in
+let pred := ^n . ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
+let plus := ^n. ^m. ^f. ^x. n f (m f x)  in
+let mult := ^n. ^m. n (plus m) 0 in
+let is_zero := ^n. n (^_. false) true in
+
+-- Lists
+let nil := ^f. ^z. z in
+let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
+let append := ^xs. ^ys. xs cons ys in
+
+let concat :=
+  let nil := ^f. ^z. z in
+  let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
+  let append := ^xs. ^ys. xs cons ys in
+    ^xss.  xss append nil in

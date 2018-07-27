@@ -1,19 +1,8 @@
-let I := ^x. x in
-let K := ^x. ^y. x in
-let Y := ^f. (^x. f (x x)) (^x. f (x x)) in
-let false := ^x. ^x. x in
-let true := ^x. ^y. x in
-let if := ^b. ^x. ^y. b x y in
-let isZero := ^n. n (K false) true in
-let pred := ^n . ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
-let plus := ^n. ^m. ^f. ^x. n f (m f x)  in
-let nil := ^f. ^z. z in
-let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let nat2char := plus 48 in
 let fib := Y (^fib. ^n.
-  if (isZero n)
+  if (is_zero n)
     0
-  (if (isZero (pred n))
+  (if (is_zero (pred n))
     1
     (plus (fib (pred (pred n))) (fib (pred n))))) in
   cons (nat2char (fib 0)) (cons 44

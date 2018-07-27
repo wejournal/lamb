@@ -1,3 +1,1 @@
-let nil := ^f. ^z. z in
-let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
-  cons 104 (cons 101 (cons 108 (cons 108 (cons 111 (cons 32 (cons 119 (cons 111 (cons 114 (cons 108 (cons 100 (cons 10 nil)))))))))))
+"hello world\n"

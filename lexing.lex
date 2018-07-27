@@ -25,12 +25,13 @@ fun unescapeString s = String.implode (unescapeCharList (String.explode s))
 
 %%
 %header (functor Lexing(structure Tokens : Parsing_TOKENS));
-alpha = [a-zA-Z];
+alpha = [a-zA-Z_];
 digit = [0-9];
 space = [\r\n\ \t];
 %%
 
 {space}+ => (lex());
+"--"[^\n]*\n => (lex());
 "(" => (Tokens.LPAREN ((), ()));
 ")" => (Tokens.RPAREN ((), ()));
 "->" => (Tokens.ARROW ((), ()));

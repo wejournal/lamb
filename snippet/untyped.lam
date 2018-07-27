@@ -1,0 +1,3 @@
+let Y := ^f. (^x. f (x x)) (^x. f (x x)) in
+let omega := ^x. x x in
+let Omega := omega omega in
