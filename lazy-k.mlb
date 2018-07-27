@@ -1,0 +1,10 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
+  implementing-lambda-calculus.mlb
+in
+  lazy-k-parsing.grm.sig
+  lazy-k-parsing.grm.sml
+  lazy-k-lexing.lex.sml
+  lazy-k.sml
+end

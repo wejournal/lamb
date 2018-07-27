@@ -1,0 +1,90 @@
+val I = Term.ABS ("x", Term.VAR "x")
+val K = Term.ABS ("x", Term.ABS ("y", Term.VAR "x"))
+val S = Term.ABS ("x", Term.ABS ("y", Term.ABS ("z", Term.APP (Term.APP (Term.VAR "x", Term.VAR "z"), Term.APP (Term.VAR "y", Term.VAR "z")))))
+%%
+%eop EOF
+%pos unit
+
+%term
+  EOF
+| CAPITAL_I
+| SMALL_I
+| CAPITAL_K
+| SMALL_K
+| CAPITAL_S
+| SMALL_S
+| BACKQUOTE
+| STAR
+| LPAREN
+| RPAREN
+| ZERO
+| ONE
+
+%nonterm
+  Program of Term.t
+| CCExpr of Term.t
+| Expr of Term.t
+| IotaExpr of Term.t
+| Expr' of Term.t
+| NonemptyJotExpr of Term.t
+| JotExpr of Term.t
+
+%name LazyKParsing
+%noshift EOF
+%%
+
+Program:
+  CCExpr
+    (CCExpr)
+
+CCExpr:
+    (I)
+| NonemptyJotExpr
+    (NonemptyJotExpr)
+| CCExpr Expr
+    (Term.APP (CCExpr, Expr))
+
+Expr:
+  SMALL_I
+    (I)
+| Expr'
+    (Expr')
+
+IotaExpr:
+  SMALL_I
+    (Term.ABS ("x", Term.APP (Term.APP (Term.VAR "x", S), K)))
+| Expr'
+    (Expr')
+
+Expr':
+  CAPITAL_I
+    (I)
+| CAPITAL_K
+    (K)
+| SMALL_K
+    (K)
+| CAPITAL_S
+    (S)
+| SMALL_S
+    (S)
+| BACKQUOTE Expr Expr
+    (Term.APP (Expr1, Expr2))
+| BACKQUOTE NonemptyJotExpr Expr
+    (Term.APP (NonemptyJotExpr, Expr))
+| STAR IotaExpr IotaExpr
+    (Term.APP (IotaExpr1, IotaExpr2))
+| STAR NonemptyJotExpr IotaExpr
+    (Term.APP (NonemptyJotExpr, IotaExpr))
+| LPAREN CCExpr RPAREN
+    (CCExpr)
+
+NonemptyJotExpr:
+  JotExpr ZERO
+    (Term.APP (Term.APP (JotExpr, S), K))
+| JotExpr ONE
+    (Term.ABS ("x", Term.ABS ("y", Term.APP (JotExpr, Term.APP (Term.VAR "x", Term.VAR "y")))))
+
+JotExpr:
+    (I)
+| NonemptyJotExpr
+    (NonemptyJotExpr)
