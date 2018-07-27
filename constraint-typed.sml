@@ -18,11 +18,11 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val nat = Type.ARR (Type.ARR (N, N), Type.ARR (N, N))
     val U = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
     val S = Unifying.unify [(T, U)]
-    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t')
+    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
     val c = Instr.compile u
     val thunk = KrivineMachine.eval c
   in
-    print (TypedTerm.show t' ^ "\n  : " ^ Type.show (Type.subst S T) ^ "\n  = " ^ KrivineMachine.showThunk thunk ^ "\n")
+    print (TypedTerm.show (Unifying.substTypedTerm S t') ^ "\n  : " ^ Type.show (Type.subst S T) ^ "\n  = " ^ KrivineMachine.showThunk thunk ^ "\n")
   end handle
     DeBruijnIndexedTerm.NotInScope x =>
       print ("not in scope: " ^ x ^ "\n")
@@ -40,7 +40,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val nat = Type.ARR (Type.ARR (N, N), Type.ARR (N, N))
     val U = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
     val _ = Unifying.unify [(T, U)]
-    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t')
+    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
     val c = Instr.compile u
     val s = SystemVCompiler.compile (SystemVCompiler.new ()) "lamb_main" c
   in
@@ -57,7 +57,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
 
   fun compileMicrosoft t = let
     val (t', T) = Inferring.infer t
-    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t')
+    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
     val c = Instr.compile u
     val s = MicrosoftCompiler.compile (MicrosoftCompiler.new ()) "lamb_main" c
   in
