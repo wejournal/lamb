@@ -25,5 +25,5 @@ let is_zero := ^n. n (^_. false) true in
 let nil := ^_. ^z. z in
 let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let append := ^xs. ^ys. xs cons ys in
-
 let concat :=  ^xss.  xss append nil in
+let map := ^f. ^xs. xs (^x. ^ys. cons (f x) ys) nil in
