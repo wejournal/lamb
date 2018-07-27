@@ -5,12 +5,12 @@ type ('a, 'b) token = ('a, 'b) Tokens.token
 type lexresult = (svalue, pos) token
 fun eof () = Tokens.EOF ((), ())
 
-fun unescapeChar "\\t" = #"\t"
-  | unescapeChar "\\n" = #"\n"
-  | unescapeChar "\\v" = #"\v"
-  | unescapeChar "\\f" = #"\f"
-  | unescapeChar "\\r" = #"\r"
-  | unescapeChar s = String.sub (s, String.size s - 1)
+fun unescapeChar "'\\t'" = #"\t"
+  | unescapeChar "'\\n'" = #"\n"
+  | unescapeChar "'\\v'" = #"\v"
+  | unescapeChar "'\\f'" = #"\f"
+  | unescapeChar "'\\r'" = #"\r"
+  | unescapeChar s = String.sub (s, String.size s - 2)
   
 fun unescapeCharList nil = nil
   | unescapeCharList (#"\\" :: #"t" :: cs) = #"\t" :: unescapeCharList cs
@@ -42,6 +42,6 @@ space = [\r\n\ \t];
 "in" => (Tokens.IN ((), ()));
 "let" => (Tokens.LET ((), ()));
 {digit}+ => (Tokens.NAT (Option.valOf (StringCvt.scanString (Word64.scan StringCvt.DEC) yytext), (), ()));
-"'"("\\"?)."'" => (Tokens.CHAR (unescapeChar (String.substring (yytext, 1, 2)), (), ()));
+"'"("\\"?)."'" => (Tokens.CHAR (unescapeChar yytext, (), ()));
 "\""([^\"]|"\\\"")*"\"" => (Tokens.STRING (unescapeString (String.substring (yytext, 1, String.size yytext - 2)), (), ()));
 {alpha}({alpha}|{digit})* => (Tokens.ID (yytext, (), ()));
