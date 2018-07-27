@@ -7,8 +7,8 @@ let S := ^x. ^y. ^z. x z (y z) in
 let W := ^x. ^y. x y y in
 
 -- Booleans
-let false := ^x. ^x. x in
-let true := ^x. ^y. x in
+let false := ^_. ^y. y in
+let true := ^x. ^_. x in
 let and := ^p. ^q. p q false in
 let or := ^p. ^q. p true q in
 let not := ^p. p false true in
@@ -22,12 +22,12 @@ let mult := ^n. ^m. n (plus m) 0 in
 let is_zero := ^n. n (^_. false) true in
 
 -- Lists
-let nil := ^f. ^z. z in
+let nil := ^_. ^z. z in
 let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let append := ^xs. ^ys. xs cons ys in
 
 let concat :=
-  let nil := ^f. ^z. z in
+  let nil := ^_. ^z. z in
   let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
   let append := ^xs. ^ys. xs cons ys in
     ^xss.  xss append nil in
