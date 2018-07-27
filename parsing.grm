@@ -1,0 +1,82 @@
+local open ImplicitTypedTerm in
+  fun encodeNat 0w0 = ABS ("f", NONE, ABS ("x", NONE, VAR "x"))
+    | encodeNat n = ABS ("f", NONE, ABS ("x", NONE, APP (VAR "f", APP (APP (encodeNat (Word64.- (n, 0w1)), VAR "f"), VAR "x"))))
+
+  fun encodeChar c = encodeNat (Word64.fromInt (ord c))
+
+  fun encodeCharList nil = ABS ("f", NONE, ABS ("x", NONE, VAR "x"))
+    | encodeCharList (t :: ts) = ABS ("f", NONE, ABS ("x", NONE, APP (APP (VAR "f", t), APP (APP (encodeCharList ts, VAR "f"), VAR "x"))))
+
+  fun encodeString s = encodeCharList (map encodeChar (String.explode s))
+end
+
+%%
+%eop EOF
+%pos unit
+
+%term
+  EOF
+| LPAREN
+| RPAREN
+| ARROW
+| DOT
+| COLON
+| COLONEQ
+| LAMBDA
+| IN
+| LET
+| NAT of Word64.word
+| CHAR of char
+| STRING of string
+| ID of string
+
+%nonterm
+  program of ImplicitTypedTerm.t
+| ty of Type.t
+| atty of Type.t
+| exp of ImplicitTypedTerm.t
+| appexp of ImplicitTypedTerm.t
+| atexp of ImplicitTypedTerm.t
+
+%name Parsing
+%noshift EOF
+%%
+
+program:
+  exp
+    (exp)
+
+ty:
+  atty
+    (atty)
+| atty ARROW ty
+    (Type.ARR (atty, ty))
+
+atty:
+  ID
+    (Type.CON ID)
+| LPAREN ty RPAREN
+    (ty)
+
+exp:
+  appexp
+    (appexp)
+| LAMBDA ID DOT exp
+    (ImplicitTypedTerm.ABS (ID, NONE, exp))
+| LAMBDA ID COLON ty DOT exp
+    (ImplicitTypedTerm.ABS (ID, SOME ty, exp))
+| LET ID COLONEQ exp IN exp
+    (ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS (ID, NONE, exp2), exp1))
+| LET ID COLON ty COLONEQ exp IN exp
+    (ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS (ID, SOME ty, exp2), exp1))
+
+appexp:
+  atexp (atexp)
+| appexp atexp (ImplicitTypedTerm.APP (appexp, atexp))
+
+atexp:
+  NAT (encodeNat NAT)
+| CHAR (encodeChar CHAR)
+| STRING (encodeString STRING)
+| ID (ImplicitTypedTerm.VAR ID)
+| LPAREN exp RPAREN (exp)
