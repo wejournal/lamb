@@ -64,7 +64,7 @@ $ x86_64-w64-mingw32-gcc runtime.c gc.c lamb.c foo.s
 ```
 
 Note: macOS target is not tested.
-But its ABI is same as Linux, System V AMD64 ABI, so I belive it works.
+But its ABI is same as Linux, System V AMD64 ABI, so I believe it works.
 
 ## Language Design Note
 
