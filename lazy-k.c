@@ -38,10 +38,14 @@ closure_t *f(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   PUSH(&env1, &stack, S);
   uintptr_t n = ACCESS(&env, &stack, 0);
 
+  --stack.count;
+  --stack.count;
+
+  if (n > 255)
+    return;
+
   putchar(n);
 
-  --stack.count;
-  --stack.count;
   GRAB(&env, &stack);
 
   env_t env2 = {0, gc_allocate(0, 0, &stack_map)};
