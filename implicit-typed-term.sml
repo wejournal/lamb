@@ -5,24 +5,6 @@ structure ImplicitTypedTerm :> IMPLICIT_TYPED_TERM = struct
   | ABS of id * Type.t option * t
   | LET of id * Type.t option * t * t
 
-  fun subst x t (VAR y) =
-        if x = y then
-          t
-        else
-          VAR y
-    | subst x t (APP (u, u')) =
-        APP (subst x t u, subst x t u')
-    | subst x t (ABS (y, Topt, u)) =
-        if x = y then
-          ABS (y, Topt, u)
-        else
-          ABS (y, Topt, subst x t u)
-    | subst x t (LET (y, Topt, u, u')) =
-        if x = y then
-          LET (y, Topt, subst x t u, u')
-        else
-          LET (y, Topt, subst x t u, subst x t u')
-
   fun implicit (Term.VAR x) = VAR x
     | implicit (Term.APP (t, u)) = APP (implicit t, implicit u)
     | implicit (Term.ABS (x, t)) = ABS (x, NONE, implicit t)
