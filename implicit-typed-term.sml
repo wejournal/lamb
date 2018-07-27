@@ -5,6 +5,11 @@ structure ImplicitTypedTerm :> IMPLICIT_TYPED_TERM = struct
   | ABS of id * Type.t option * t
   | LET of id * Type.t option * t * t
 
+  fun FV (VAR x) = [x]
+    | FV (APP (t, u)) = FV t @ FV u
+    | FV (ABS (x, _, t)) = List.filter (fn y => x = y) (FV t)
+    | FV (LET (x, _, t, u)) = FV t @ List.filter (fn y => x = y) (FV u)
+
   fun implicit (Term.VAR x) = VAR x
     | implicit (Term.APP (t, u)) = APP (implicit t, implicit u)
     | implicit (Term.ABS (x, t)) = ABS (x, NONE, implicit t)

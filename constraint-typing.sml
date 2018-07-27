@@ -12,26 +12,27 @@ structure ConstraintTyping :> CONSTRAINT_TYPING = struct
   end
 
   local open ImplicitTypedTerm in
-    fun subst fresh x t (VAR y) =
+    fun subst fresh x FVt t (VAR y) =
           if x = y then
             t
           else
             VAR y
-      | subst fresh x t (APP (u, u')) =
-          APP (subst fresh x t u, subst fresh x t u')
-      | subst fresh x t (ABS (y, Topt, u)) =
+      | subst fresh x FVt t (APP (u, u')) =
+          APP (subst fresh x FVt t u, subst fresh x FVt t u')
+      | subst fresh x FVt t (ABS (y, Topt, u)) =
           if x = y then
             ABS (y, Topt, u)
-          else let
+          else if List.exists (fn z => y = z) FVt then let
             val z = "_" ^ gensym fresh
           in
-            ABS (z, Topt, subst fresh x t (subst fresh y (VAR z) u))
-          end
-      | subst fresh x t (LET (y, Topt, u, u')) =
+            ABS (z, Topt, subst fresh x FVt t (subst fresh y [z] (VAR z) u))
+          end else
+            ABS (y, Topt, subst fresh x FVt t u)
+      | subst fresh x FVt t (LET (y, Topt, u, u')) =
           if x = y then
-            LET (y, Topt, subst fresh x t u, u')
+            LET (y, Topt, subst fresh x FVt t u, u')
           else
-            LET (y, Topt, subst fresh x t u, subst fresh x t u')
+            LET (y, Topt, subst fresh x FVt t u, subst fresh x FVt t u')
   end
 
   exception NotInScope of id
@@ -64,14 +65,14 @@ structure ConstraintTyping :> CONSTRAINT_TYPING = struct
       end
     | constraint_type fresh e (ImplicitTypedTerm.LET (x, NONE, t, u)) = let
         val (t', T, C) = constraint_type fresh e t
-        val (u', U, C') = constraint_type fresh e (subst fresh x t u)
+        val (u', U, C') = constraint_type fresh e (subst fresh x (ImplicitTypedTerm.FV t) t u)
       in
         (u', U, C @ C')
       end
     | constraint_type fresh e (ImplicitTypedTerm.LET (x, SOME T, t, u)) = let
         val t' = ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS ("x", SOME T, ImplicitTypedTerm.VAR "x"), t)
         val (t'', T', C) = constraint_type fresh e t'
-        val (u', U, C') = constraint_type fresh e (subst fresh x t' u)
+        val (u', U, C') = constraint_type fresh e (subst fresh x (ImplicitTypedTerm.FV t') t' u)
       in
         (u', U, C @ C')
       end

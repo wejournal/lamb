@@ -14,4 +14,4 @@ fib-iter: ../../runtime.h ../../runtime.c ../../gc.h ../../gc.c ../../lamb.c fib
 	gcc -o $@ $^
 
 fib-iter.s: fib-iter.lam
-	cat $^ | $(LAMB) --untyped --compile --target $(TARGET) > $@
+	cat $^ | $(LAMB) --typed --compile --target $(TARGET) > $@
