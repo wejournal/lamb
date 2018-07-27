@@ -39,4 +39,17 @@ structure ConstraintTyping :> CONSTRAINT_TYPING = struct
       in
         (TypedTerm.ABS (x, T, t'), Type.ARR (T, U), C)
       end
+    | constraint_type fresh e (ImplicitTypedTerm.LET (x, NONE, t, u)) = let
+        val (t', T, C) = constraint_type fresh e t
+        val (u', U, C') = constraint_type fresh e (ImplicitTypedTerm.subst x t u)
+      in
+        (u', U, C @ C')
+      end
+    | constraint_type fresh e (ImplicitTypedTerm.LET (x, SOME T, t, u)) = let
+        val t' = ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS ("x", SOME T, ImplicitTypedTerm.VAR "x"), t)
+        val (t'', T', C) = constraint_type fresh e t'
+        val (u', U, C') = constraint_type fresh e (ImplicitTypedTerm.subst x t' u)
+      in
+        (u', U, C @ C')
+      end
 end

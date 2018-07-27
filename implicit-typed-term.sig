@@ -3,7 +3,9 @@ signature IMPLICIT_TYPED_TERM = sig
     VAR of id
   | APP of t * t
   | ABS of id * Type.t option * t
+  | LET of id * Type.t option * t * t
 
+  val subst : id -> t -> t -> t
   val implicit : Term.t -> t
   val erase : t -> Term.t
   val show : t -> string

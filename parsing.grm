@@ -66,9 +66,9 @@ exp:
 | LAMBDA ID COLON ty DOT exp
     (ImplicitTypedTerm.ABS (ID, SOME ty, exp))
 | LET ID COLONEQ exp IN exp
-    (ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS (ID, NONE, exp2), exp1))
+    (ImplicitTypedTerm.LET (ID, NONE, exp1, exp2))
 | LET ID COLON ty COLONEQ exp IN exp
-    (ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS (ID, SOME ty, exp2), exp1))
+    (ImplicitTypedTerm.LET (ID, SOME ty, exp1, exp2))
 
 appexp:
   atexp (atexp)
