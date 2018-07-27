@@ -19,6 +19,7 @@ let succ := ^n. ^f. ^x. f (n f x) in
 let pred := ^n . ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
 let plus := ^n. ^m. ^f. ^x. n f (m f x)  in
 let mult := ^n. ^m. n (plus m) 0 in
+let minus := ^n. ^m. m pred n in
 let is_zero := ^n. n (^_. false) true in
 
 -- Lists
