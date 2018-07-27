@@ -53,6 +53,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -115,6 +118,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -177,6 +183,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -239,6 +248,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -301,6 +313,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -363,6 +378,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -425,6 +443,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -487,6 +508,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -549,6 +573,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -611,6 +638,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -673,6 +703,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -735,6 +768,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -797,6 +833,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -859,6 +898,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -921,6 +963,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -983,6 +1028,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1045,6 +1093,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1107,6 +1158,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1169,6 +1223,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1231,6 +1288,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1293,6 +1353,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1355,6 +1418,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1417,6 +1483,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1479,6 +1548,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1541,6 +1613,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1603,6 +1678,9 @@ lamb_main:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1694,6 +1772,9 @@ lamb_main_0:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1745,6 +1826,9 @@ lamb_main_0:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1796,6 +1880,9 @@ lamb_main_0:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1923,6 +2010,9 @@ lamb_main_3:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -1974,6 +2064,9 @@ lamb_main_3:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2025,6 +2118,9 @@ lamb_main_3:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2152,6 +2248,9 @@ lamb_main_6:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2221,6 +2320,9 @@ lamb_main_7:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2272,6 +2374,9 @@ lamb_main_7:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2341,6 +2446,9 @@ lamb_main_8:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2392,6 +2500,9 @@ lamb_main_8:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2443,6 +2554,9 @@ lamb_main_8:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2599,6 +2713,9 @@ lamb_main_12:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2650,6 +2767,9 @@ lamb_main_12:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2777,6 +2897,9 @@ lamb_main_15:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2828,6 +2951,9 @@ lamb_main_15:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2897,6 +3023,9 @@ lamb_main_16:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -2948,6 +3077,9 @@ lamb_main_16:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3017,6 +3149,9 @@ lamb_main_17:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3068,6 +3203,9 @@ lamb_main_17:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3195,6 +3333,9 @@ lamb_main_20:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3246,6 +3387,9 @@ lamb_main_20:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3373,6 +3517,9 @@ lamb_main_23:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3500,6 +3647,9 @@ lamb_main_26:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3551,6 +3701,9 @@ lamb_main_26:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3602,6 +3755,9 @@ lamb_main_26:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3729,6 +3885,9 @@ lamb_main_29:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3780,6 +3939,9 @@ lamb_main_29:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3831,6 +3993,9 @@ lamb_main_29:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -3987,6 +4152,9 @@ lamb_main_33:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4038,6 +4206,9 @@ lamb_main_33:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4089,6 +4260,9 @@ lamb_main_33:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4256,6 +4430,9 @@ lamb_main_33_37:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4307,6 +4484,9 @@ lamb_main_33_37:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4434,6 +4614,9 @@ lamb_main_40:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4485,6 +4668,9 @@ lamb_main_40:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4536,6 +4722,9 @@ lamb_main_40:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4587,6 +4776,9 @@ lamb_main_40:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4772,6 +4964,9 @@ lamb_main_45:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4823,6 +5018,9 @@ lamb_main_45:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4914,6 +5112,9 @@ lamb_main_45_46:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -4965,6 +5166,9 @@ lamb_main_45_46:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5081,6 +5285,9 @@ lamb_main_49:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5190,6 +5397,9 @@ lamb_main_49_51:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5259,6 +5469,9 @@ lamb_main_52:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5310,6 +5523,9 @@ lamb_main_52:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5379,6 +5595,9 @@ lamb_main_53:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5430,6 +5649,9 @@ lamb_main_53:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5481,6 +5703,9 @@ lamb_main_53:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5532,6 +5757,9 @@ lamb_main_53:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5717,6 +5945,9 @@ lamb_main_58:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5768,6 +5999,9 @@ lamb_main_58:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5906,6 +6140,9 @@ lamb_main_61:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -5968,6 +6205,9 @@ lamb_main_61:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6030,6 +6270,9 @@ lamb_main_61:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6081,6 +6324,9 @@ lamb_main_61:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6172,6 +6418,9 @@ lamb_main_61_62:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6223,6 +6472,9 @@ lamb_main_61_62:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6292,6 +6544,9 @@ lamb_main_61_63:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6343,6 +6598,9 @@ lamb_main_61_63:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6394,6 +6652,9 @@ lamb_main_61_63:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6445,6 +6706,9 @@ lamb_main_61_63:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6630,6 +6894,9 @@ lamb_main_61_68:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6681,6 +6948,9 @@ lamb_main_61_68:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6844,6 +7114,9 @@ lamb_main_73:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6906,6 +7179,9 @@ lamb_main_73:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -6986,6 +7262,9 @@ lamb_main_73_74:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7160,6 +7439,9 @@ lamb_main_79:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7334,6 +7616,9 @@ lamb_main_83_84:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7385,6 +7670,9 @@ lamb_main_83_84:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7487,6 +7775,9 @@ lamb_main_83_84_85:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7538,6 +7829,9 @@ lamb_main_83_84_85:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7676,6 +7970,9 @@ lamb_main_83_84_85_88:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7727,6 +8024,9 @@ lamb_main_83_84_85_88:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7865,6 +8165,9 @@ lamb_main_83_84_85_88_91:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -7916,6 +8219,9 @@ lamb_main_83_84_85_88_91:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8054,6 +8360,9 @@ lamb_main_83_84_85_88_91_94:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8105,6 +8414,9 @@ lamb_main_83_84_85_88_91_94:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8243,6 +8555,9 @@ lamb_main_83_84_85_88_91_94_97:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8294,6 +8609,9 @@ lamb_main_83_84_85_88_91_94_97:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8432,6 +8750,9 @@ lamb_main_83_84_85_88_91_94_97_100:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8483,6 +8804,9 @@ lamb_main_83_84_85_88_91_94_97_100:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8621,6 +8945,9 @@ lamb_main_83_84_85_88_91_94_97_100_103:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8672,6 +8999,9 @@ lamb_main_83_84_85_88_91_94_97_100_103:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8810,6 +9140,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8861,6 +9194,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -8999,6 +9335,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9050,6 +9389,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9188,6 +9530,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9239,6 +9584,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9377,6 +9725,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9428,6 +9779,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9566,6 +9920,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9617,6 +9974,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9755,6 +10115,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9806,6 +10169,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9944,6 +10310,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -9995,6 +10364,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10133,6 +10505,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10184,6 +10559,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10322,6 +10700,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10373,6 +10754,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10511,6 +10895,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10562,6 +10949,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10700,6 +11090,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10751,6 +11144,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10889,6 +11285,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -10940,6 +11339,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11078,6 +11480,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11129,6 +11534,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11267,6 +11675,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11318,6 +11729,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11456,6 +11870,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11507,6 +11924,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11645,6 +12065,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11696,6 +12119,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11834,6 +12260,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -11885,6 +12314,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12023,6 +12455,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12074,6 +12509,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12212,6 +12650,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12263,6 +12704,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12401,6 +12845,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12452,6 +12899,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12590,6 +13040,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12641,6 +13094,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12779,6 +13235,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12830,6 +13289,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -12968,6 +13430,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13019,6 +13484,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13157,6 +13625,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13208,6 +13679,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13346,6 +13820,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13397,6 +13874,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13535,6 +14015,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13586,6 +14069,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13724,6 +14210,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13775,6 +14264,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13913,6 +14405,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -13964,6 +14459,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14102,6 +14600,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14153,6 +14654,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14291,6 +14795,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14342,6 +14849,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14480,6 +14990,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14531,6 +15044,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14669,6 +15185,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14720,6 +15239,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14858,6 +15380,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -14909,6 +15434,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15047,6 +15575,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15098,6 +15629,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15236,6 +15770,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15287,6 +15824,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15425,6 +15965,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15476,6 +16019,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15614,6 +16160,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15665,6 +16214,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15803,6 +16355,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15854,6 +16409,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -15992,6 +16550,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16043,6 +16604,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16181,6 +16745,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16232,6 +16799,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16370,6 +16940,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16421,6 +16994,9 @@ lamb_main_83_84_85_88_91_94_97_100_103_106_109_112_115_118_121_124_127_130_133_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16555,6 +17131,9 @@ lamb_main_229_230:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16606,6 +17185,9 @@ lamb_main_229_230:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -16980,6 +17562,9 @@ lamb_main_229_230_231_240:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -17031,6 +17616,9 @@ lamb_main_229_230_231_240:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -17133,6 +17721,9 @@ lamb_main_229_230_231_240_241:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -17184,6 +17775,9 @@ lamb_main_229_230_231_240_241:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -17365,6 +17959,9 @@ lamb_main_229_230_247:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -17416,6 +18013,9 @@ lamb_main_229_230_247:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18070,6 +18670,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18121,6 +18724,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18223,6 +18829,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18274,6 +18883,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18412,6 +19024,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18463,6 +19078,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18601,6 +19219,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18652,6 +19273,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18790,6 +19414,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18841,6 +19468,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -18979,6 +19609,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19030,6 +19663,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19168,6 +19804,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19219,6 +19858,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19357,6 +19999,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19408,6 +20053,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19546,6 +20194,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19597,6 +20248,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19735,6 +20389,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19786,6 +20443,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19924,6 +20584,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -19975,6 +20638,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_262_264_265_268_271_27
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20138,6 +20804,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20189,6 +20858,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20291,6 +20963,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20342,6 +21017,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20480,6 +21158,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20531,6 +21212,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20669,6 +21353,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20720,6 +21407,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20858,6 +21548,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -20909,6 +21602,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21047,6 +21743,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21098,6 +21797,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21236,6 +21938,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21287,6 +21992,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_261_295_296_297_298_301_30
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21392,6 +22100,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21443,6 +22154,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21545,6 +22259,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21596,6 +22313,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21734,6 +22454,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21785,6 +22508,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21923,6 +22649,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -21974,6 +22703,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22112,6 +22844,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22163,6 +22898,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22301,6 +23039,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22352,6 +23093,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22490,6 +23234,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22541,6 +23288,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22679,6 +23429,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22730,6 +23483,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22868,6 +23624,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -22919,6 +23678,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23057,6 +23819,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23108,6 +23873,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23246,6 +24014,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23297,6 +24068,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23435,6 +24209,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23486,6 +24263,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23624,6 +24404,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23675,6 +24458,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23813,6 +24599,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -23864,6 +24653,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24002,6 +24794,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24053,6 +24848,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24191,6 +24989,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24242,6 +25043,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24380,6 +25184,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24431,6 +25238,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24569,6 +25379,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24620,6 +25433,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24758,6 +25574,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24809,6 +25628,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24947,6 +25769,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -24998,6 +25823,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25136,6 +25964,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25187,6 +26018,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25325,6 +26159,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25376,6 +26213,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25514,6 +26354,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25565,6 +26408,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25703,6 +26549,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25754,6 +26603,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25892,6 +26744,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -25943,6 +26798,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26081,6 +26939,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26132,6 +26993,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26270,6 +27134,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26321,6 +27188,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26459,6 +27329,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26510,6 +27383,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26648,6 +27524,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26699,6 +27578,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26837,6 +27719,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -26888,6 +27773,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27026,6 +27914,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27077,6 +27968,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27215,6 +28109,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27266,6 +28163,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27404,6 +28304,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27455,6 +28358,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27593,6 +28499,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27644,6 +28553,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27782,6 +28694,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27833,6 +28748,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -27971,6 +28889,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28022,6 +28943,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28160,6 +29084,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28211,6 +29138,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28349,6 +29279,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28400,6 +29333,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28538,6 +29474,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28589,6 +29528,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28727,6 +29669,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28778,6 +29723,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28916,6 +29864,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -28967,6 +29918,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29105,6 +30059,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29156,6 +30113,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29294,6 +30254,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29345,6 +30308,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29483,6 +30449,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29534,6 +30503,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29672,6 +30644,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29723,6 +30698,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_260_316_317_320_323_326_329_33
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29886,6 +30864,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -29937,6 +30918,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30039,6 +31023,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30090,6 +31077,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30228,6 +31218,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30279,6 +31272,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30417,6 +31413,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30468,6 +31467,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30606,6 +31608,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458_461:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30657,6 +31662,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458_461:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30795,6 +31803,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458_461_46
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30846,6 +31857,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_259_449_450_451_452_455_458_461_46
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -30951,6 +31965,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31002,6 +32019,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31104,6 +32124,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31155,6 +32178,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31293,6 +32319,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31344,6 +32373,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31482,6 +32514,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31533,6 +32568,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31671,6 +32709,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31722,6 +32763,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31860,6 +32904,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -31911,6 +32958,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32049,6 +33099,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32100,6 +33153,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32238,6 +33294,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32289,6 +33348,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32427,6 +33489,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32478,6 +33543,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32616,6 +33684,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32667,6 +33738,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32805,6 +33879,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32856,6 +33933,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -32994,6 +34074,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33045,6 +34128,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33183,6 +34269,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33234,6 +34323,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33372,6 +34464,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33423,6 +34518,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33561,6 +34659,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33612,6 +34713,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33750,6 +34854,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33801,6 +34908,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33939,6 +35049,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -33990,6 +35103,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34128,6 +35244,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34179,6 +35298,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34317,6 +35439,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34368,6 +35493,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34506,6 +35634,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34557,6 +35688,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34695,6 +35829,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34746,6 +35883,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34884,6 +36024,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -34935,6 +36078,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35073,6 +36219,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35124,6 +36273,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35262,6 +36414,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35313,6 +36468,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35451,6 +36609,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35502,6 +36663,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35640,6 +36804,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35691,6 +36858,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35829,6 +36999,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -35880,6 +37053,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36018,6 +37194,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36069,6 +37248,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36207,6 +37389,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36258,6 +37443,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36396,6 +37584,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36447,6 +37638,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36585,6 +37779,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36636,6 +37833,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36774,6 +37974,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36825,6 +38028,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -36963,6 +38169,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37014,6 +38223,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37152,6 +38364,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37203,6 +38418,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37341,6 +38559,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37392,6 +38613,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37530,6 +38754,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37581,6 +38808,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37719,6 +38949,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37770,6 +39003,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37908,6 +39144,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -37959,6 +39198,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38097,6 +39339,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38148,6 +39393,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38286,6 +39534,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38337,6 +39588,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38475,6 +39729,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38526,6 +39783,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38664,6 +39924,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38715,6 +39978,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38853,6 +40119,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -38904,6 +40173,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39042,6 +40314,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39093,6 +40368,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39231,6 +40509,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39282,6 +40563,9 @@ lamb_main_250_251_252_253_254_255_256_257_258_467_468_471_474_477_480_483_486_48
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39445,6 +40729,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39496,6 +40783,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39598,6 +40888,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39649,6 +40942,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39787,6 +41083,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39838,6 +41137,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -39976,6 +41278,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606_609:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40027,6 +41332,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606_609:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40165,6 +41473,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606_609_612:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40216,6 +41527,9 @@ lamb_main_250_251_252_253_254_255_256_257_600_601_602_603_606_609_612:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40321,6 +41635,9 @@ lamb_main_250_251_252_253_254_255_256_615:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40372,6 +41689,9 @@ lamb_main_250_251_252_253_254_255_256_615:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40474,6 +41794,9 @@ lamb_main_250_251_252_253_254_255_256_615_616:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40525,6 +41848,9 @@ lamb_main_250_251_252_253_254_255_256_615_616:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40663,6 +41989,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40714,6 +42043,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40852,6 +42184,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -40903,6 +42238,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41041,6 +42379,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41092,6 +42433,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41230,6 +42574,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41281,6 +42628,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41419,6 +42769,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41470,6 +42823,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41608,6 +42964,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41659,6 +43018,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41797,6 +43159,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41848,6 +43213,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -41986,6 +43354,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42037,6 +43408,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42175,6 +43549,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42226,6 +43603,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42364,6 +43744,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42415,6 +43798,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42553,6 +43939,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42604,6 +43993,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42742,6 +44134,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42793,6 +44188,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42931,6 +44329,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -42982,6 +44383,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43120,6 +44524,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43171,6 +44578,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43309,6 +44719,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43360,6 +44773,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43498,6 +44914,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43549,6 +44968,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43687,6 +45109,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43738,6 +45163,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43876,6 +45304,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -43927,6 +45358,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44065,6 +45499,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44116,6 +45553,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44254,6 +45694,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44305,6 +45748,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44443,6 +45889,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44494,6 +45943,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44632,6 +46084,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44683,6 +46138,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44821,6 +46279,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -44872,6 +46333,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45010,6 +46474,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45061,6 +46528,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45199,6 +46669,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45250,6 +46723,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45388,6 +46864,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45439,6 +46918,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45577,6 +47059,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45628,6 +47113,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45766,6 +47254,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45817,6 +47308,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -45955,6 +47449,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46006,6 +47503,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46144,6 +47644,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46195,6 +47698,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46333,6 +47839,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46384,6 +47893,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46522,6 +48034,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46573,6 +48088,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46711,6 +48229,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46762,6 +48283,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46900,6 +48424,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -46951,6 +48478,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47089,6 +48619,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47140,6 +48673,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47278,6 +48814,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47329,6 +48868,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47467,6 +49009,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47518,6 +49063,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47656,6 +49204,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47707,6 +49258,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47845,6 +49399,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -47896,6 +49453,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48034,6 +49594,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48085,6 +49648,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48223,6 +49789,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48274,6 +49843,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48412,6 +49984,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48463,6 +50038,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48601,6 +50179,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48652,6 +50233,9 @@ lamb_main_250_251_252_253_254_255_256_615_616_619_622_625_628_631_634_637_640_64
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48815,6 +50399,9 @@ lamb_main_250_251_252_253_254_255_748_749_750:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48866,6 +50453,9 @@ lamb_main_250_251_252_253_254_255_748_749_750:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -48968,6 +50558,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49019,6 +50612,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49157,6 +50753,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751_754:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49208,6 +50807,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751_754:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49346,6 +50948,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751_754_757:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49397,6 +51002,9 @@ lamb_main_250_251_252_253_254_255_748_749_750_751_754_757:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49502,6 +51110,9 @@ lamb_main_250_251_252_253_254_760:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49553,6 +51164,9 @@ lamb_main_250_251_252_253_254_760:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49655,6 +51269,9 @@ lamb_main_250_251_252_253_254_760_761:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49706,6 +51323,9 @@ lamb_main_250_251_252_253_254_760_761:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49844,6 +51464,9 @@ lamb_main_250_251_252_253_254_760_761_764:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -49895,6 +51518,9 @@ lamb_main_250_251_252_253_254_760_761_764:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50033,6 +51659,9 @@ lamb_main_250_251_252_253_254_760_761_764_767:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50084,6 +51713,9 @@ lamb_main_250_251_252_253_254_760_761_764_767:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50222,6 +51854,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50273,6 +51908,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50411,6 +52049,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50462,6 +52103,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50600,6 +52244,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50651,6 +52298,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50789,6 +52439,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50840,6 +52493,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -50978,6 +52634,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51029,6 +52688,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51167,6 +52829,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51218,6 +52883,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51356,6 +53024,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51407,6 +53078,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51545,6 +53219,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51596,6 +53273,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51734,6 +53414,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51785,6 +53468,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51923,6 +53609,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -51974,6 +53663,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52112,6 +53804,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52163,6 +53858,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52301,6 +53999,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52352,6 +54053,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52490,6 +54194,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52541,6 +54248,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52679,6 +54389,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52730,6 +54443,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52868,6 +54584,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -52919,6 +54638,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53057,6 +54779,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53108,6 +54833,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53246,6 +54974,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53297,6 +55028,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53435,6 +55169,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53486,6 +55223,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53624,6 +55364,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53675,6 +55418,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53813,6 +55559,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -53864,6 +55613,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54002,6 +55754,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54053,6 +55808,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54191,6 +55949,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54242,6 +56003,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54380,6 +56144,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54431,6 +56198,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54569,6 +56339,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54620,6 +56393,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54758,6 +56534,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54809,6 +56588,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54947,6 +56729,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -54998,6 +56783,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55136,6 +56924,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55187,6 +56978,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55325,6 +57119,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55376,6 +57173,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55514,6 +57314,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55565,6 +57368,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55703,6 +57509,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55754,6 +57563,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55892,6 +57704,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -55943,6 +57758,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56081,6 +57899,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56132,6 +57953,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56270,6 +58094,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56321,6 +58148,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56459,6 +58289,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56510,6 +58343,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56648,6 +58484,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56699,6 +58538,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56837,6 +58679,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -56888,6 +58733,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57026,6 +58874,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57077,6 +58928,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57215,6 +59069,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57266,6 +59123,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57404,6 +59264,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57455,6 +59318,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57593,6 +59459,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57644,6 +59513,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57782,6 +59654,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57833,6 +59708,9 @@ lamb_main_250_251_252_253_254_760_761_764_767_770_773_776_779_782_785_788_791_79
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -57996,6 +59874,9 @@ lamb_main_250_251_252_253_893_894_895:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58047,6 +59928,9 @@ lamb_main_250_251_252_253_893_894_895:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58149,6 +60033,9 @@ lamb_main_250_251_252_253_893_894_895_896:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58200,6 +60087,9 @@ lamb_main_250_251_252_253_893_894_895_896:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58338,6 +60228,9 @@ lamb_main_250_251_252_253_893_894_895_896_899:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58389,6 +60282,9 @@ lamb_main_250_251_252_253_893_894_895_896_899:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58494,6 +60390,9 @@ lamb_main_250_251_252_902:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58545,6 +60444,9 @@ lamb_main_250_251_252_902:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58647,6 +60549,9 @@ lamb_main_250_251_252_902_903:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58698,6 +60603,9 @@ lamb_main_250_251_252_902_903:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58836,6 +60744,9 @@ lamb_main_250_251_252_902_903_906:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -58887,6 +60798,9 @@ lamb_main_250_251_252_902_903_906:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59025,6 +60939,9 @@ lamb_main_250_251_252_902_903_906_909:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59076,6 +60993,9 @@ lamb_main_250_251_252_902_903_906_909:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59214,6 +61134,9 @@ lamb_main_250_251_252_902_903_906_909_912:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59265,6 +61188,9 @@ lamb_main_250_251_252_902_903_906_909_912:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59403,6 +61329,9 @@ lamb_main_250_251_252_902_903_906_909_912_915:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59454,6 +61383,9 @@ lamb_main_250_251_252_902_903_906_909_912_915:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59592,6 +61524,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59643,6 +61578,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59781,6 +61719,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59832,6 +61773,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -59970,6 +61914,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60021,6 +61968,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60159,6 +62109,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60210,6 +62163,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60348,6 +62304,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60399,6 +62358,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60537,6 +62499,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60588,6 +62553,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60726,6 +62694,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60777,6 +62748,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60915,6 +62889,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -60966,6 +62943,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61104,6 +63084,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61155,6 +63138,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61293,6 +63279,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61344,6 +63333,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61482,6 +63474,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61533,6 +63528,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61671,6 +63669,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61722,6 +63723,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61860,6 +63864,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -61911,6 +63918,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62049,6 +64059,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62100,6 +64113,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62238,6 +64254,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62289,6 +64308,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62427,6 +64449,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62478,6 +64503,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62616,6 +64644,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62667,6 +64698,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62805,6 +64839,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62856,6 +64893,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -62994,6 +65034,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63045,6 +65088,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63183,6 +65229,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63234,6 +65283,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63372,6 +65424,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63423,6 +65478,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63561,6 +65619,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63612,6 +65673,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63750,6 +65814,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63801,6 +65868,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63939,6 +66009,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -63990,6 +66063,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64128,6 +66204,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64179,6 +66258,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64317,6 +66399,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64368,6 +66453,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64506,6 +66594,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64557,6 +66648,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64695,6 +66789,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64746,6 +66843,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64884,6 +66984,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -64935,6 +67038,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65073,6 +67179,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65124,6 +67233,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65262,6 +67374,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65313,6 +67428,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65451,6 +67569,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65502,6 +67623,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65640,6 +67764,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65691,6 +67818,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65829,6 +67959,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -65880,6 +68013,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66018,6 +68154,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66069,6 +68208,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66207,6 +68349,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66258,6 +68403,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66396,6 +68544,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66447,6 +68598,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66585,6 +68739,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66636,6 +68793,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66774,6 +68934,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66825,6 +68988,9 @@ lamb_main_250_251_252_902_903_906_909_912_915_918_921_924_927_930_933_936_939_94
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -66988,6 +69154,9 @@ lamb_main_250_251_1035_1036_1037:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67039,6 +69208,9 @@ lamb_main_250_251_1035_1036_1037:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67141,6 +69313,9 @@ lamb_main_250_251_1035_1036_1037_1038:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67192,6 +69367,9 @@ lamb_main_250_251_1035_1036_1037_1038:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67297,6 +69475,9 @@ lamb_main_250_1041:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67348,6 +69529,9 @@ lamb_main_250_1041:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67450,6 +69634,9 @@ lamb_main_250_1041_1042:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67501,6 +69688,9 @@ lamb_main_250_1041_1042:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67639,6 +69829,9 @@ lamb_main_250_1041_1042_1045:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67690,6 +69883,9 @@ lamb_main_250_1041_1042_1045:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67828,6 +70024,9 @@ lamb_main_250_1041_1042_1045_1048:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -67879,6 +70078,9 @@ lamb_main_250_1041_1042_1045_1048:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68017,6 +70219,9 @@ lamb_main_250_1041_1042_1045_1048_1051:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68068,6 +70273,9 @@ lamb_main_250_1041_1042_1045_1048_1051:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68206,6 +70414,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68257,6 +70468,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68395,6 +70609,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68446,6 +70663,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68584,6 +70804,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68635,6 +70858,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68773,6 +70999,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68824,6 +71053,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -68962,6 +71194,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69013,6 +71248,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69151,6 +71389,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69202,6 +71443,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69340,6 +71584,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69391,6 +71638,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69529,6 +71779,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69580,6 +71833,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69718,6 +71974,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69769,6 +72028,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69907,6 +72169,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -69958,6 +72223,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70096,6 +72364,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70147,6 +72418,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70285,6 +72559,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70336,6 +72613,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70474,6 +72754,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70525,6 +72808,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70663,6 +72949,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70714,6 +73003,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70852,6 +73144,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -70903,6 +73198,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71041,6 +73339,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71092,6 +73393,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71230,6 +73534,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71281,6 +73588,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71419,6 +73729,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71470,6 +73783,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71608,6 +73924,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71659,6 +73978,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71797,6 +74119,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71848,6 +74173,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -71986,6 +74314,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72037,6 +74368,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72175,6 +74509,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72226,6 +74563,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72364,6 +74704,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72415,6 +74758,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72553,6 +74899,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72604,6 +74953,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72742,6 +75094,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72793,6 +75148,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72931,6 +75289,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -72982,6 +75343,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73120,6 +75484,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73171,6 +75538,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73309,6 +75679,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73360,6 +75733,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73498,6 +75874,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73549,6 +75928,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73687,6 +76069,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73738,6 +76123,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73876,6 +76264,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -73927,6 +76318,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74065,6 +76459,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74116,6 +76513,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74254,6 +76654,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74305,6 +76708,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74443,6 +76849,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74494,6 +76903,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74632,6 +77044,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74683,6 +77098,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74821,6 +77239,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -74872,6 +77293,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75010,6 +77434,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75061,6 +77488,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75199,6 +77629,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75250,6 +77683,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75388,6 +77824,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75439,6 +77878,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75577,6 +78019,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75628,6 +78073,9 @@ lamb_main_250_1041_1042_1045_1048_1051_1054_1057_1060_1063_1066_1069_1072_1075_1
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75791,6 +78239,9 @@ lamb_main_1174_1175_1176:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13
@@ -75842,6 +78293,9 @@ lamb_main_1174_1175_1176:
 	movq	(%rcx),	%r10
 	movq	8(%rcx),	%r11
 	movq	16(%rcx),	%r12
+	movq	$0,	(%rcx)
+	movq	$0,	8(%rcx)
+	movq	$0,	16(%rcx)
 	subq	%r13,	%rcx
 	leaq	0(%rdi, %rdi, 2),	%r13
 	salq	$3,	%r13

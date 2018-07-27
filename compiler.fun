@@ -83,6 +83,9 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
           "\tmovq\t(" ^ ABI.arg3 ^ "),\t%r10\n" ^
           "\tmovq\t8(" ^ ABI.arg3 ^ "),\t%r11\n" ^
           "\tmovq\t16(" ^ ABI.arg3 ^ "),\t%r12\n" ^
+          "\tmovq\t$0,\t(" ^ ABI.arg3 ^ ")\n" ^
+          "\tmovq\t$0,\t8(" ^ ABI.arg3 ^ ")\n" ^
+          "\tmovq\t$0,\t16(" ^ ABI.arg3 ^ ")\n" ^
           "\tsubq\t%r13,\t" ^ ABI.arg3 ^ "\n" ^
           "\tleaq\t0(" ^ ABI.arg0 ^ ", " ^ ABI.arg0 ^ ", 2),\t%r13\n" ^
           "\tsalq\t$3,\t%r13\n" ^
