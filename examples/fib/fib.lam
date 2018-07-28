@@ -5,10 +5,10 @@ let fib := Y (^fib. ^n.
   (if (is_zero (pred n))
     1
     (plus (fib (pred (pred n))) (fib (pred n))))) in
-  cons (nat2char (fib 0)) (cons ','
+  K(cons (nat2char (fib 0)) (cons ','
   (cons (nat2char (fib 1)) (cons ','
   (cons (nat2char (fib 2)) (cons ','
   (cons (nat2char (fib 3)) (cons ','
   (cons (nat2char (fib 4)) (cons ','
   (cons (nat2char (fib 5)) (cons ','
-  (cons (nat2char (fib 6)) (cons '\n' nil)))))))))))))
+  (cons (nat2char (fib 6)) (cons '\n' nil))))))))))))))

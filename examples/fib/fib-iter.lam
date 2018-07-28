@@ -8,7 +8,7 @@ let fib := ^n.
       f (plus a b) a))
     (^f. f 1 0)
     (^a. ^b. b) in
-  cons (nat2char (fib 0)) (cons ','
+  ^stdin. cons (nat2char (fib 0)) (cons ','
   (cons (nat2char (fib 1)) (cons ','
   (cons (nat2char (fib 2)) (cons ','
   (cons (nat2char (fib 3)) (cons ','
