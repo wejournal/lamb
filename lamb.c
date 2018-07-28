@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include "runtime.h"
 #include "gc.h"
@@ -261,17 +262,62 @@ closure_t *lamb_n253(uintptr_t env_count, closure_t *env_values, uintptr_t stack
 closure_t *lamb_n254(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values);
 closure_t *lamb_n255(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values);
 
+uintptr_t input_string_volume;
+uintptr_t input_string_length;
+bool input_string_is_eof;
+uint8_t *input_string;
+
 closure_t *input_cont(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   env_t env = {env_count, env_values};
   stack_t stack = {stack_count, stack_values};
 
-  int n = getchar();
+  uintptr_t i = env.values[env.count].env.count;
+
+  int n;
+
+  if (i < input_string_length) {
+    n = input_string[i];
+  } else if (input_string_is_eof) {
+    n = EOF;
+  } else if (i < input_string_volume) {
+    n = getchar();
+
+    if (n == EOF)
+      input_string_is_eof = true;
+    else {
+      input_string[i] = n;
+      ++input_string_length;
+    }
+  } else {
+    uint8_t *new_input_string = malloc(input_string_volume + 65536);
+    memcpy(new_input_string, input_string, input_string_volume);
+    free(input_string);
+    input_string = new_input_string;
+
+    n = getchar();
+
+    if (n == EOF)
+      input_string_is_eof = true;
+    else {
+      input_string[i] = n;
+      ++input_string_length;
+    }
+  }
 
   if (n == EOF)
     return ACCESS(&env, &stack, 0);
 
   uintptr_t stack_map = 0;
   env_t env1 = {0, gc_allocate(0, 0, &stack_map)};
+
+  stack_map = 4;
+  closure_t *new_env_values =
+    gc_alloc(env.count, env.values, stack.count, stack.values, env.count + 1, sizeof(closure_t), &stack_map);
+  memcpy(new_env_values, env.values, (env.count + 1) * sizeof(closure_t));
+  env.values = new_env_values;
+  env.values[env.count].code = NULL;
+  ++env.values[env.count].env.count;
+  env.values[env.count].env.values = NULL;
 
   switch (n) {
   case 0:
@@ -1308,6 +1354,16 @@ closure_t *input(uintptr_t env_count, closure_t *env_values, uintptr_t stack_cou
   stack_t stack = {stack_count, stack_values};
   GRAB(&env, &stack);
   GRAB(&env, &stack);
+
+  uintptr_t stack_map = 4;
+  closure_t *new_env_values =
+    gc_alloc(env.count, env.values, stack.count, stack.values, env.count + 1, sizeof(closure_t), &stack_map);
+  memcpy(new_env_values, env.values, env.count * sizeof(closure_t));
+  env.values = new_env_values;
+  env.values[env.count].code = NULL;
+  env.values[env.count].env.count = 0;
+  env.values[env.count].env.values = NULL;
+
   return input_cont(env.count, env.values, stack.count, stack.values);
 }
 
@@ -1346,6 +1402,11 @@ closure_t *f(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 }
 
 int main(int argc, char *argv[]) {
+  input_string_volume = 65536;
+  input_string_length = 0;
+  input_string_is_eof = false;
+  input_string = malloc(65536);
+
   runtime_init();
 
   /* States */
