@@ -1,17 +1,40 @@
-LAZYK := ../../bin/lazy-k
 TARGET := linux
 
+ifeq ($(TARGET), windows)
+SUFFIX := .exe
+else
+SUFFIX :=
+endif
+
+ifeq ($(TARGET), windows)
+GCC := x86_64-w64-mingw32-gcc
+else
+GCC := gcc
+endif
+
+LAZYK := ../../bin/lazy-k
+
 .PHONY: all
-all: hello cat
+all: hello$(SUFFIX) cat$(SUFFIX)
 
-hello: ../../runtime.h ../../runtime.c ../../gc.h ../../gc.c ../../runtime/$(TARGET)/numbers.s ../../lazy-k.c hello.s
-	gcc -o $@ $^
+hello$(SUFFIX): \
+		../../runtime/src/runtime.c \
+		../../runtime/src/gc.c \
+		../../runtime/$(TARGET)/numbers.s \
+		../../runtime/src/lazy-k.c \
+		hello$(SUFFIX).s
+	$(GCC) -I../../include -o $@ $^
 
-hello.s: hello.lazy
-	$(LAZYK)  < $< > $@
+hello$(SUFFIX).s: hello.lazy
+	cat $^ | $(LAZYK) > $@
 
-cat: ../../runtime.h ../../runtime.c ../../gc.h ../../gc.c ../../runtime/$(TARGET)/numbers.s ../../lazy-k.c cat.s
-	gcc -o $@ $^
+cat$(SUFFIX): \
+		../../runtime/src/runtime.c \
+		../../runtime/src/gc.c \
+		../../runtime/$(TARGET)/numbers.s \
+		../../runtime/src/lazy-k.c \
+		cat$(SUFFIX).s
+	$(GCC) -I../../include -o $@ $^
 
-cat.s: cat.lazy
-	$(LAZYK)  < $< > $@
+cat$(SUFFIX).s: cat.lazy
+	cat $^ | $(LAZYK) > $@
