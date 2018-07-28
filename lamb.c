@@ -293,6 +293,7 @@ closure_t *input_cont(uintptr_t env_count, closure_t *env_values, uintptr_t stac
     memcpy(new_input_string, input_string, input_string_volume);
     free(input_string);
     input_string = new_input_string;
+    input_string_volume += 65536;
 
     n = getchar();
 

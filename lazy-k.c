@@ -296,6 +296,7 @@ closure_t *input(uintptr_t env_count, closure_t *env_values, uintptr_t stack_cou
     memcpy(new_input_string, input_string, input_string_volume);
     free(input_string);
     input_string = new_input_string;
+    input_string_volume += 65536;
 
     n = getchar();
 
