@@ -7,104 +7,104 @@ MLLEX := mllex
 .PHONY: all
 all: bin/lamb runtime/linux/numbers.s runtime/windows/numbers.s
 
-bin/lamb:	lamb.mlb \
-		lamb.sml \
-		implementing-lambda-calculus.mlb \
-		term.sig \
-		term.sml \
-		de-bruijn-indexed-term.sig \
-		de-bruijn-indexed-term.sml \
-		instr.sig \
-		instr.sml \
-		krivine-machine.sig \
-		krivine-machine.sml \
-		abi.sig \
-		system-v-abi.sml \
-		microsoft-abi.sml \
-		compiler.sig \
-		compiler.fun \
-		system-v-compiler.sml \
-		microsoft-compiler.sml \
-		type.sig \
-		type.sml \
-		typed-term.sig \
-		typed-term.sml \
-		simply-typing.sig \
-		simply-typing.sml \
-		implicit-typed-term.sig \
-		implicit-typed-term.sml \
-		constraint-typing.sig \
-		constraint-typing.sml \
-		unifying.sig \
-		unifying.sml \
-		inferring.sig \
-		inferring.sml \
-		untyped.sig \
-		untyped.sml \
-		simply-typed.sig \
-		simply-typed.sml \
-		constraint-typed.sig \
-		constraint-typed.sml \
-		parsing.grm.sig \
-		parsing.grm.sml \
-		lexing.lex.sml
+bin/lamb:	mlb/lamb.mlb \
+		sml/lamb.sml \
+		mlb/implementing-lambda-calculus.mlb \
+		sig/term.sig \
+		sml/term.sml \
+		sig/de-bruijn-indexed-term.sig \
+		sml/de-bruijn-indexed-term.sml \
+		sig/instr.sig \
+		sml/instr.sml \
+		sig/krivine-machine.sig \
+		sml/krivine-machine.sml \
+		sig/abi.sig \
+		sml/system-v-abi.sml \
+		sml/microsoft-abi.sml \
+		sig/compiler.sig \
+		fun/compiler.fun \
+		sml/system-v-compiler.sml \
+		sml/microsoft-compiler.sml \
+		sig/type.sig \
+		sml/type.sml \
+		sig/typed-term.sig \
+		sml/typed-term.sml \
+		sig/simply-typing.sig \
+		sml/simply-typing.sml \
+		sig/implicit-typed-term.sig \
+		sml/implicit-typed-term.sml \
+		sig/constraint-typing.sig \
+		sml/constraint-typing.sml \
+		sig/unifying.sig \
+		sml/unifying.sml \
+		sig/inferring.sig \
+		sml/inferring.sml \
+		sig/untyped.sig \
+		sml/untyped.sml \
+		sig/simply-typed.sig \
+		sml/simply-typed.sml \
+		sig/constraint-typed.sig \
+		sml/constraint-typed.sml \
+		grm/parsing.grm.sig \
+		grm/parsing.grm.sml \
+		lex/lexing.lex.sml
 	$(MKDIR) -p bin
 	$(MLTON) -output $@ $<
 
-parsing.grm.sig parsing.grm.sml: parsing.grm
+grm/parsing.grm.sig grm/parsing.grm.sml: grm/parsing.grm
 	$(MLYACC) $<
 
-lexing.lex.sml: lexing.lex
+lex/lexing.lex.sml: lex/lexing.lex
 	$(MLLEX) $<
 
-bin/lazy-k:	lazy-k.mlb \
-		lazy-k.sml \
-		implementing-lambda-calculus.mlb \
-		term.sig \
-		term.sml \
-		de-bruijn-indexed-term.sig \
-		de-bruijn-indexed-term.sml \
-		instr.sig \
-		instr.sml \
-		krivine-machine.sig \
-		krivine-machine.sml \
-		abi.sig \
-		system-v-abi.sml \
-		microsoft-abi.sml \
-		compiler.sig \
-		compiler.fun \
-		system-v-compiler.sml \
-		microsoft-compiler.sml \
-		type.sig \
-		type.sml \
-		typed-term.sig \
-		typed-term.sml \
-		simply-typing.sig \
-		simply-typing.sml \
-		implicit-typed-term.sig \
-		implicit-typed-term.sml \
-		constraint-typing.sig \
-		constraint-typing.sml \
-		unifying.sig \
-		unifying.sml \
-		inferring.sig \
-		inferring.sml \
-		untyped.sig \
-		untyped.sml \
-		simply-typed.sig \
-		simply-typed.sml \
-		constraint-typed.sig \
-		constraint-typed.sml \
-		lazy-k-parsing.grm.sig \
-		lazy-k-parsing.grm.sml \
-		lazy-k-lexing.lex.sml
+bin/lazy-k:	mlb/lazy-k.mlb \
+		sml/lazy-k.sml \
+		mlb/implementing-lambda-calculus.mlb \
+		sig/term.sig \
+		sml/term.sml \
+		sig/de-bruijn-indexed-term.sig \
+		sml/de-bruijn-indexed-term.sml \
+		sig/instr.sig \
+		sml/instr.sml \
+		sig/krivine-machine.sig \
+		sml/krivine-machine.sml \
+		sig/abi.sig \
+		sml/system-v-abi.sml \
+		sml/microsoft-abi.sml \
+		sig/compiler.sig \
+		fun/compiler.fun \
+		sml/system-v-compiler.sml \
+		sml/microsoft-compiler.sml \
+		sig/type.sig \
+		sml/type.sml \
+		sig/typed-term.sig \
+		sml/typed-term.sml \
+		sig/simply-typing.sig \
+		sml/simply-typing.sml \
+		sig/implicit-typed-term.sig \
+		sml/implicit-typed-term.sml \
+		sig/constraint-typing.sig \
+		sml/constraint-typing.sml \
+		sig/unifying.sig \
+		sml/unifying.sml \
+		sig/inferring.sig \
+		sml/inferring.sml \
+		sig/untyped.sig \
+		sml/untyped.sml \
+		sig/simply-typed.sig \
+		sml/simply-typed.sml \
+		sig/constraint-typed.sig \
+		sml/constraint-typed.sml \
+		grm/lazy-k-parsing.grm.sig \
+		grm/lazy-k-parsing.grm.sml \
+		lex/lazy-k-lexing.lex.sml
 	$(MKDIR) -p bin
 	$(MLTON) -output $@ $<
 
-lazy-k-parsing.grm.sig lazy-k-parsing.grm.sml: lazy-k-parsing.grm
+grm/lazy-k-parsing.grm.sig grm/lazy-k-parsing.grm.sml: grm/lazy-k-parsing.grm
 	$(MLYACC) $<
 
-lazy-k-lexing.lex.sml: lazy-k-lexing.lex
+lex/lazy-k-lexing.lex.sml: lex/lazy-k-lexing.lex
 	$(MLLEX) $<
 
 runtime/linux/numbers.s: runtime/linux/n0.s runtime/linux/n1.s runtime/linux/n2.s runtime/linux/n3.s runtime/linux/n4.s runtime/linux/n5.s runtime/linux/n6.s runtime/linux/n7.s runtime/linux/n8.s runtime/linux/n9.s runtime/linux/n10.s runtime/linux/n11.s runtime/linux/n12.s runtime/linux/n13.s runtime/linux/n14.s runtime/linux/n15.s runtime/linux/n16.s runtime/linux/n17.s runtime/linux/n18.s runtime/linux/n19.s runtime/linux/n20.s runtime/linux/n21.s runtime/linux/n22.s runtime/linux/n23.s runtime/linux/n24.s runtime/linux/n25.s runtime/linux/n26.s runtime/linux/n27.s runtime/linux/n28.s runtime/linux/n29.s runtime/linux/n30.s runtime/linux/n31.s runtime/linux/n32.s runtime/linux/n33.s runtime/linux/n34.s runtime/linux/n35.s runtime/linux/n36.s runtime/linux/n37.s runtime/linux/n38.s runtime/linux/n39.s runtime/linux/n40.s runtime/linux/n41.s runtime/linux/n42.s runtime/linux/n43.s runtime/linux/n44.s runtime/linux/n45.s runtime/linux/n46.s runtime/linux/n47.s runtime/linux/n48.s runtime/linux/n49.s runtime/linux/n50.s runtime/linux/n51.s runtime/linux/n52.s runtime/linux/n53.s runtime/linux/n54.s runtime/linux/n55.s runtime/linux/n56.s runtime/linux/n57.s runtime/linux/n58.s runtime/linux/n59.s runtime/linux/n60.s runtime/linux/n61.s runtime/linux/n62.s runtime/linux/n63.s runtime/linux/n64.s runtime/linux/n65.s runtime/linux/n66.s runtime/linux/n67.s runtime/linux/n68.s runtime/linux/n69.s runtime/linux/n70.s runtime/linux/n71.s runtime/linux/n72.s runtime/linux/n73.s runtime/linux/n74.s runtime/linux/n75.s runtime/linux/n76.s runtime/linux/n77.s runtime/linux/n78.s runtime/linux/n79.s runtime/linux/n80.s runtime/linux/n81.s runtime/linux/n82.s runtime/linux/n83.s runtime/linux/n84.s runtime/linux/n85.s runtime/linux/n86.s runtime/linux/n87.s runtime/linux/n88.s runtime/linux/n89.s runtime/linux/n90.s runtime/linux/n91.s runtime/linux/n92.s runtime/linux/n93.s runtime/linux/n94.s runtime/linux/n95.s runtime/linux/n96.s runtime/linux/n97.s runtime/linux/n98.s runtime/linux/n99.s runtime/linux/n100.s runtime/linux/n101.s runtime/linux/n102.s runtime/linux/n103.s runtime/linux/n104.s runtime/linux/n105.s runtime/linux/n106.s runtime/linux/n107.s runtime/linux/n108.s runtime/linux/n109.s runtime/linux/n110.s runtime/linux/n111.s runtime/linux/n112.s runtime/linux/n113.s runtime/linux/n114.s runtime/linux/n115.s runtime/linux/n116.s runtime/linux/n117.s runtime/linux/n118.s runtime/linux/n119.s runtime/linux/n120.s runtime/linux/n121.s runtime/linux/n122.s runtime/linux/n123.s runtime/linux/n124.s runtime/linux/n125.s runtime/linux/n126.s runtime/linux/n127.s runtime/linux/n128.s runtime/linux/n129.s runtime/linux/n130.s runtime/linux/n131.s runtime/linux/n132.s runtime/linux/n133.s runtime/linux/n134.s runtime/linux/n135.s runtime/linux/n136.s runtime/linux/n137.s runtime/linux/n138.s runtime/linux/n139.s runtime/linux/n140.s runtime/linux/n141.s runtime/linux/n142.s runtime/linux/n143.s runtime/linux/n144.s runtime/linux/n145.s runtime/linux/n146.s runtime/linux/n147.s runtime/linux/n148.s runtime/linux/n149.s runtime/linux/n150.s runtime/linux/n151.s runtime/linux/n152.s runtime/linux/n153.s runtime/linux/n154.s runtime/linux/n155.s runtime/linux/n156.s runtime/linux/n157.s runtime/linux/n158.s runtime/linux/n159.s runtime/linux/n160.s runtime/linux/n161.s runtime/linux/n162.s runtime/linux/n163.s runtime/linux/n164.s runtime/linux/n165.s runtime/linux/n166.s runtime/linux/n167.s runtime/linux/n168.s runtime/linux/n169.s runtime/linux/n170.s runtime/linux/n171.s runtime/linux/n172.s runtime/linux/n173.s runtime/linux/n174.s runtime/linux/n175.s runtime/linux/n176.s runtime/linux/n177.s runtime/linux/n178.s runtime/linux/n179.s runtime/linux/n180.s runtime/linux/n181.s runtime/linux/n182.s runtime/linux/n183.s runtime/linux/n184.s runtime/linux/n185.s runtime/linux/n186.s runtime/linux/n187.s runtime/linux/n188.s runtime/linux/n189.s runtime/linux/n190.s runtime/linux/n191.s runtime/linux/n192.s runtime/linux/n193.s runtime/linux/n194.s runtime/linux/n195.s runtime/linux/n196.s runtime/linux/n197.s runtime/linux/n198.s runtime/linux/n199.s runtime/linux/n200.s runtime/linux/n201.s runtime/linux/n202.s runtime/linux/n203.s runtime/linux/n204.s runtime/linux/n205.s runtime/linux/n206.s runtime/linux/n207.s runtime/linux/n208.s runtime/linux/n209.s runtime/linux/n210.s runtime/linux/n211.s runtime/linux/n212.s runtime/linux/n213.s runtime/linux/n214.s runtime/linux/n215.s runtime/linux/n216.s runtime/linux/n217.s runtime/linux/n218.s runtime/linux/n219.s runtime/linux/n220.s runtime/linux/n221.s runtime/linux/n222.s runtime/linux/n223.s runtime/linux/n224.s runtime/linux/n225.s runtime/linux/n226.s runtime/linux/n227.s runtime/linux/n228.s runtime/linux/n229.s runtime/linux/n230.s runtime/linux/n231.s runtime/linux/n232.s runtime/linux/n233.s runtime/linux/n234.s runtime/linux/n235.s runtime/linux/n236.s runtime/linux/n237.s runtime/linux/n238.s runtime/linux/n239.s runtime/linux/n240.s runtime/linux/n241.s runtime/linux/n242.s runtime/linux/n243.s runtime/linux/n244.s runtime/linux/n245.s runtime/linux/n246.s runtime/linux/n247.s runtime/linux/n248.s runtime/linux/n249.s runtime/linux/n250.s runtime/linux/n251.s runtime/linux/n252.s runtime/linux/n253.s runtime/linux/n254.s runtime/linux/n255.s

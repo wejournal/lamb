@@ -3,8 +3,8 @@ local
   $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
   implementing-lambda-calculus.mlb
 in
-  lazy-k-parsing.grm.sig
-  lazy-k-parsing.grm.sml
-  lazy-k-lexing.lex.sml
-  lazy-k.sml
+  ../grm/lazy-k-parsing.grm.sig
+  ../grm/lazy-k-parsing.grm.sml
+  ../lex/lazy-k-lexing.lex.sml
+  ../sml/lazy-k.sml
 end

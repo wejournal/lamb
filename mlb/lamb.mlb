@@ -3,5 +3,8 @@ local
   $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
   implementing-lambda-calculus.mlb
 in
-  lamb.sml
+  ../grm/parsing.grm.sig
+  ../grm/parsing.grm.sml
+  ../lex/lexing.lex.sml
+  ../sml/lamb.sml
 end
