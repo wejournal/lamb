@@ -1,5 +1,7 @@
 #include <stdbool.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../include/runtime.h"
 #include "../include/gc.h"
 
@@ -10,7 +12,7 @@ used_chunk_t *used_chunk = NULL;
 /* If size is a multiple of 64                 *
  * then stack_map_size = (size / 64) * 8;      *
  * else stack_map_size = ((size /64) + 1) * 8; */
-static inline calc_stack_map_size(uintptr_t size) {
+static inline uintptr_t calc_stack_map_size(uintptr_t size) {
   return
     size % (sizeof(uintptr_t) * 8) == 0
     ? (size / (sizeof(uintptr_t) * 8)) * 8
@@ -49,7 +51,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   while (lives_size > 0) {
     --lives_size;
     void *live = lives[lives_size];
-    used_chunk_t *live_chunk = ((uintptr_t) live) - sizeof(used_chunk_t);
+    used_chunk_t *live_chunk = (used_chunk_t *) (((uintptr_t) live) - sizeof(used_chunk_t));
 
     if (live_chunk->size & 1 == 1)
       continue;
@@ -66,7 +68,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
         if (!ptr)
           continue;
 
-        void *p = ((uintptr_t *) live)[i * (live_chunk->size / sizeof(uintptr_t)) + j];
+        void *p = (void *) (((uintptr_t *) live)[i * (live_chunk->size / sizeof(uintptr_t)) + j]);
 
         if (!p)
           continue;
@@ -202,7 +204,7 @@ void *gc_allocate(uintptr_t n, uintptr_t size, const uintptr_t *stack_map) {
 
     used_chunk = new;
 
-    void *p = ((uintptr_t) new) + sizeof(used_chunk_t);
+    void *p = (void *) (((uintptr_t) new) + sizeof(used_chunk_t));
     memset(p, 0, nsize);
     return p;
   }

@@ -18,15 +18,15 @@ struct env {
 };
 
 struct closure {
-  closure_t *(*code)(uintptr_t, closure_t *, uintptr_t, closure_t *);
+  uintptr_t (*code)(uintptr_t, closure_t *, uintptr_t, closure_t *);
   env_t env;
 };
 
 void runtime_init(void);
 void runtime_exit(void);
 
-closure_t *ACCESS(env_t *, stack_t *, uintptr_t);
+uintptr_t ACCESS(env_t *, stack_t *, uintptr_t);
 void GRAB(env_t *, stack_t *);
-void PUSH(env_t *, stack_t *, closure_t *(*code)(uintptr_t, closure_t *, uintptr_t, closure_t *));
+void PUSH(env_t *, stack_t *, uintptr_t (*code)(uintptr_t, closure_t *, uintptr_t, closure_t *));
 
 #endif

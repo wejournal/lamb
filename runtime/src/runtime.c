@@ -1,3 +1,4 @@
+#include <string.h>
 #include "../include/runtime.h"
 #include "../include/gc.h"
 
@@ -9,7 +10,7 @@ void runtime_exit(void) {
   gc_exit();
 }
 
-closure_t *ACCESS(env_t *env, stack_t *stack, uintptr_t i)
+uintptr_t ACCESS(env_t *env, stack_t *stack, uintptr_t i)
 {
   closure_t clos = env->values[env->count - i - 1];
   return clos.code(clos.env.count, clos.env.values, stack->count, stack->values);
@@ -28,7 +29,7 @@ void GRAB(env_t *env, stack_t *stack)
   ++env->count;
 }
 
-void PUSH(env_t *env, stack_t *stack, closure_t *(*code)(uintptr_t, closure_t *, uintptr_t, closure_t *))
+void PUSH(env_t *env, stack_t *stack, uintptr_t (*code)(uintptr_t, closure_t *, uintptr_t, closure_t *))
 {
   closure_t clos;
   clos.code = code;
