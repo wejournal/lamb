@@ -32,6 +32,7 @@ space = [\r\n\ \t];
 
 {space}+ => (lex());
 "--"[^\n]*\n => (lex());
+"'" => (Tokens.QUOTE ((), ()));
 "(" => (Tokens.LPAREN ((), ()));
 ")" => (Tokens.RPAREN ((), ()));
 "->" => (Tokens.ARROW ((), ()));

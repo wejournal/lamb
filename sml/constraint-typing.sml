@@ -70,10 +70,9 @@ structure ConstraintTyping :> CONSTRAINT_TYPING = struct
         (u', U, C @ C')
       end
     | constraint_type fresh e (ImplicitTypedTerm.LET (x, SOME T, t, u)) = let
-        val t' = ImplicitTypedTerm.APP (ImplicitTypedTerm.ABS ("x", SOME T, ImplicitTypedTerm.VAR "x"), t)
-        val (t'', T', C) = constraint_type fresh e t'
-        val (u', U, C') = constraint_type fresh e (subst fresh x (ImplicitTypedTerm.FV t') t' u)
+        val (t', T', C) = constraint_type fresh e t
+        val (u', U, C') = constraint_type fresh e (subst fresh x (ImplicitTypedTerm.FV t) t u)
       in
-        (u', U, C @ C')
+        (u', U, (T, T') :: C @ C')
       end
 end

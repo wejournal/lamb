@@ -1,10 +1,10 @@
 -- Combinators
-let B := ^x. ^y. ^z. x (y z) in
-let C := ^x. ^y. ^z. x z y in
-let I := ^x. x in
-let K := ^x. ^_. x in
-let S := ^x. ^y. ^z. x z (y z) in
-let W := ^x. ^y. x y y in
+let B : ('b -> 'c) -> ('a -> 'b) -> 'a -> 'c := ^x. ^y. ^z. x (y z) in
+let C : ('b -> 'a -> 'c) -> 'a -> 'b -> 'c := ^x. ^y. ^z. x z y in
+let I : 'a -> 'a := ^x. x in
+let K : 'a -> 'b -> 'a := ^x. ^_. x in
+let S : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c := ^x. ^y. ^z. x z (y z) in
+let W : ('a -> 'a -> 'b) -> 'a -> 'b := ^x. ^y. x y y in
 
 -- Booleans
 let false := ^_. ^y. y in

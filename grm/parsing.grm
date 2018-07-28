@@ -10,12 +10,24 @@ local open ImplicitTypedTerm in
   fun encodeString s = encodeCharList (map encodeChar (String.explode s))
 end
 
+val fresh = ref 0
+
+fun gensym () = let
+  val i = !fresh
+in
+  fresh := !fresh + 1
+; Int.toString i
+end
+
+val tycxt = ref (gensym ())
+
 %%
 %eop EOF
 %pos unit
 
 %term
   EOF
+| QUOTE
 | LPAREN
 | RPAREN
 | ARROW
@@ -34,6 +46,7 @@ end
   program of ImplicitTypedTerm.t
 | ty of Type.t
 | atty of Type.t
+| tyopt of Type.t option
 | exp of ImplicitTypedTerm.t
 | appexp of ImplicitTypedTerm.t
 | atexp of ImplicitTypedTerm.t
@@ -53,22 +66,25 @@ ty:
     (Type.ARR (atty, ty))
 
 atty:
-  ID
+  QUOTE ID
+    (Type.VAR (ID ^ !tycxt))
+| ID
     (Type.CON ID)
 | LPAREN ty RPAREN
     (ty)
 
+tyopt:
+    (NONE)
+| COLON ty
+    (tycxt := gensym (); SOME ty)
+
 exp:
   appexp
     (appexp)
-| LAMBDA ID DOT exp
-    (ImplicitTypedTerm.ABS (ID, NONE, exp))
-| LAMBDA ID COLON ty DOT exp
-    (ImplicitTypedTerm.ABS (ID, SOME ty, exp))
-| LET ID COLONEQ exp IN exp
-    (ImplicitTypedTerm.LET (ID, NONE, exp1, exp2))
-| LET ID COLON ty COLONEQ exp IN exp
-    (ImplicitTypedTerm.LET (ID, SOME ty, exp1, exp2))
+| LAMBDA ID tyopt DOT exp
+    (ImplicitTypedTerm.ABS (ID, tyopt, exp))
+| LET ID tyopt COLONEQ exp IN exp
+    (ImplicitTypedTerm.LET (ID, tyopt, exp1, exp2))
 
 appexp:
   atexp (atexp)
