@@ -2,6 +2,25 @@
 
 A statically typed and lazy evaluated implementation of Lambda Calculus.
 
+## Features
+
+### Type System
+
+#### type inference
+
+<pre>
+<b>let</b> S := ^x. ^y. ^z. x z (y z) <b>in</b>
+<b>let</b> K := ^x. ^_. x <b>in</b>
+  S K K
+</pre>
+
+#### let polymorphism
+
+<pre>
+<b>let</b> I := ^x. x <b>in</b>
+  I I
+</pre>
+
 ## Language Specification
 
 ### Lexicon
@@ -28,23 +47,6 @@ the classes are defined by regular expressions.
 - *tyopt* ::= ε | `:` *ty*
 - *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
-
-### Type System
-
-#### type inference
-
-<pre>
-<b>let</b> S := ^x. ^y. ^z. x z (y z) <b>in</b>
-<b>let</b> K := ^x. ^_. x <b>in</b>
-  S K K
-</pre>
-
-#### let polymorphism
-
-<pre>
-<b>let</b> I := ^x. x <b>in</b>
-  I I
-</pre>
 
 ### Informal Semantics
 
