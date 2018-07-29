@@ -100,7 +100,7 @@ Because `^x. x x` is valid if it is valid.
 
 ### x64 Code Generation
 
-Lamb support x64 code generation by default. For example, the following command compiles `foo.lam` to `foo.s`.
+Lamb supports x64 code generation by default. For example, the following command compiles `foo.lam` to `foo.s`.
 
 ```
 lamb < foo.lam > foo.s
