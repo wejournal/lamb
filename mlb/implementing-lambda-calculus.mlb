@@ -2,23 +2,23 @@ local
   $(SML_LIB)/basis/basis.mlb
   $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
 in
-  ../sig/term.sig
-  ../sml/term.sml
-  ../sig/de-bruijn-indexed-term.sig
-  ../sml/de-bruijn-indexed-term.sml
-  ../sig/krivine-machine.sig
-  ../sml/krivine-machine.sml
-  ../sig/abi.sig
-  ../sml/system-v-abi.sml
-  ../sml/microsoft-abi.sml
-  ../sig/compiler.sig
-  ../fun/compiler.fun
-  ../sml/system-v-compiler.sml
-  ../sml/microsoft-compiler.sml
-  ../sig/type.sig
-  ../sml/type.sml
-  ../sig/typed-term.sig
-  ../sml/typed-term.sml
-  ../sig/inferring.sig
-  ../sml/inferring.sml
+  ../src/term.sig
+  ../src/term.sml
+  ../src/de-bruijn-indexed-term.sig
+  ../src/de-bruijn-indexed-term.sml
+  ../src/krivine-machine.sig
+  ../src/krivine-machine.sml
+  ../src/abi.sig
+  ../src/system-v-abi.sml
+  ../src/microsoft-abi.sml
+  ../src/compiler.sig
+  ../src/compiler.fun
+  ../src/system-v-compiler.sml
+  ../src/microsoft-compiler.sml
+  ../src/type.sig
+  ../src/type.sml
+  ../src/typed-term.sig
+  ../src/typed-term.sml
+  ../src/inferring.sig
+  ../src/inferring.sml
 end

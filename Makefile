@@ -7,38 +7,39 @@ MLLEX := mllex
 all: bin/lamb runtime/linux/numbers.s runtime/windows/numbers.s
 
 bin/lamb:	mlb/lamb.mlb \
-		sml/lamb.sml \
+		src/lamb.sml \
 		mlb/implementing-lambda-calculus.mlb \
-		sig/term.sig \
-		sml/term.sml \
-		sig/de-bruijn-indexed-term.sig \
-		sml/de-bruijn-indexed-term.sml \
-		sig/krivine-machine.sig \
-		sml/krivine-machine.sml \
-		sig/abi.sig \
-		sml/system-v-abi.sml \
-		sml/microsoft-abi.sml \
-		sig/compiler.sig \
-		fun/compiler.fun \
-		sml/system-v-compiler.sml \
-		sml/microsoft-compiler.sml \
-		sig/type.sig \
-		sml/type.sml \
-		sig/typed-term.sig \
-		sml/typed-term.sml \
-		sig/inferring.sig \
-		sml/inferring.sml \
-		grm/parsing.grm.sig \
-		grm/parsing.grm.sml \
-		lex/lexing.lex.sml
+		src/term.sig \
+		src/term.sml \
+		src/de-bruijn-indexed-term.sig \
+		src/de-bruijn-indexed-term.sml \
+		src/krivine-machine.sig \
+		src/krivine-machine.sml \
+		src/abi.sig \
+		src/system-v-abi.sml \
+		src/microsoft-abi.sml \
+		src/compiler.sig \
+		src/compiler.fun \
+		src/system-v-compiler.sml \
+		src/microsoft-compiler.sml \
+		src/type.sig \
+		src/type.sml \
+		src/typed-term.sig \
+		src/typed-term.sml \
+		src/inferring.sig \
+		src/inferring.sml \
+		src/parsing.grm.sig \
+		src/parsing.grm.sml \
+		src/lexing.lex.sml
 	$(MKDIR) -p bin
 	$(MLTON) -output $@ $<
 
-grm/parsing.grm.sig grm/parsing.grm.sml: grm/parsing.grm
+src/parsing.grm.sig src/parsing.grm.sml: src/parsing.grm
 	$(MLYACC) $<
 
-lex/lexing.lex.sml: lex/lexing.lex
+src/lexing.lex.sml: src/lexing.lex
 	$(MLLEX) $<
+
 runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
