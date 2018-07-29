@@ -23,7 +23,7 @@ make
 
 ## Run Examples
 
-After build:
+*After* build:
 
 ```
 $ make -C examples/hello TARGET=linux
