@@ -6,9 +6,8 @@ MLLEX := mllex
 .PHONY: all
 all: bin/lamb runtime/linux/numbers.s runtime/windows/numbers.s
 
-bin/lamb:	mlb/lamb.mlb \
+bin/lamb:	src/lamb.mlb \
 		src/lamb.sml \
-		mlb/implementing-lambda-calculus.mlb \
 		src/term.sig \
 		src/term.sml \
 		src/de-bruijn-indexed-term.sig \

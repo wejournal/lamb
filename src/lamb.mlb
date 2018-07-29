@@ -1,0 +1,28 @@
+local
+  $(SML_LIB)/basis/basis.mlb
+  $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
+in
+  term.sig
+  term.sml
+  de-bruijn-indexed-term.sig
+  de-bruijn-indexed-term.sml
+  krivine-machine.sig
+  krivine-machine.sml
+  abi.sig
+  system-v-abi.sml
+  microsoft-abi.sml
+  compiler.sig
+  compiler.fun
+  system-v-compiler.sml
+  microsoft-compiler.sml
+  type.sig
+  type.sml
+  typed-term.sig
+  typed-term.sml
+  inferring.sig
+  inferring.sml
+  parsing.grm.sig
+  parsing.grm.sml
+  lexing.lex.sml
+  lamb.sml
+end
