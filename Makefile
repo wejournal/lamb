@@ -28,10 +28,6 @@ bin/lamb:	mlb/lamb.mlb \
 		sml/typed-term.sml \
 		sig/inferring.sig \
 		sml/inferring.sml \
-		sig/untyped.sig \
-		sml/untyped.sml \
-		sig/constraint-typed.sig \
-		sml/constraint-typed.sml \
 		grm/parsing.grm.sig \
 		grm/parsing.grm.sml \
 		lex/lexing.lex.sml

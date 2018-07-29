@@ -79,6 +79,48 @@ fun options nil = { typing = TYPED, doing = COMPILE, target = LINUX }
   | options (opt :: _) =
       raise Unrecognized opt
 
+fun check t = let
+  val (t', T) = Inferring.infer t
+  val N = Type.CON "N"
+  val A = Type.CON "A"
+  val nat = Type.ARR (Type.ARR (N, N), Type.ARR (N, N))
+  val string = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
+  val U = Type.ARR (string, string)
+  val S = Inferring.unify [(T, U)]
+in
+  ()
+end
+
+fun compileSystemV t = let
+  val u = DeBruijnIndexedTerm.compile t
+  val c = KrivineMachine.compile u
+  val s = SystemVCompiler.compile (SystemVCompiler.new ()) "lamb_main" c
+in
+  TextIO.output (TextIO.stdOut, ".globl\tlamb_main\n" ^ s)
+end
+
+fun compileMicrosoft t = let
+  val u = DeBruijnIndexedTerm.compile t
+  val c = KrivineMachine.compile u
+  val s = MicrosoftCompiler.compile (MicrosoftCompiler.new ()) "lamb_main" c
+in
+  TextIO.output (TextIO.stdOut, ".globl\tlamb_main\n" ^ s)
+end
+
+fun eval t = let
+  val u = DeBruijnIndexedTerm.compile t
+  val c = KrivineMachine.compile u
+  val thunk = KrivineMachine.eval c
+in
+  TextIO.output (TextIO.stdOut, Term.show t ^ "\n  = " ^ KrivineMachine.showThunk thunk ^ "\n")
+end
+
+fun infer t = let
+  val (t', T) = Inferring.infer t
+in
+  TextIO.output (TextIO.stdOut, TypedTerm.show t' ^ "\n  : " ^ Type.show T ^ "\n")
+end
+
 val lines = String.fields (fn c => c = #"\n")
 
 fun split i j s = let
@@ -127,23 +169,23 @@ in
         TYPED =>
           (case target of
             LINUX =>
-              ConstraintTyped.compileSystemV t
+              (check t; compileSystemV (TypedTerm.erase t))
           | WINDOWS =>
-              ConstraintTyped.compileMicrosoft t)
+              (check t; compileMicrosoft (TypedTerm.erase t)))
       | UNTYPED =>
           (case target of
             LINUX =>
-              Untyped.compileSystemV (TypedTerm.erase t)
+              compileSystemV (TypedTerm.erase t)
           | WINDOWS =>
-              Untyped.compileMicrosoft (TypedTerm.erase t)))
+              compileMicrosoft (TypedTerm.erase t)))
   | EVAL =>
       (case typing of
         TYPED =>
-          ConstraintTyped.eval t
+          (check t; eval (TypedTerm.erase t))
       | UNTYPED =>
-          Untyped.eval (TypedTerm.erase t))
+          eval (TypedTerm.erase t))
   | INFER =>
-      ConstraintTyped.infer t
+      infer t
 end handle
   Unrecognized opt =>
     TextIO.output (TextIO.stdErr, "\027[1m:lamb:\027[0m \027[1;31merror:\027[0m \027[1munrecognized option `" ^ opt ^ "'\027[0m\n")
@@ -155,3 +197,11 @@ end handle
   end
 | Parsing.ParseError =>
     ()
+| DeBruijnIndexedTerm.NotInScope x =>
+    print ("not in scope: " ^ x ^ "\n")
+| Inferring.NotInScope x =>
+    print ("not in scope: " ^ x ^ "\n")
+| Inferring.Cyclic (x, T) =>
+    print ("cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
+| Inferring.Incompatible (T, U) =>
+    print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
