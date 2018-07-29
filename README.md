@@ -29,6 +29,15 @@ the classes are defined by regular expressions.
 - *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
 
+### Type System
+
+#### let polymorphism
+
+<pre>
+<b>let</b> I := ^x. x <b>in</b>
+  I I
+</pre>
+
 ### Informal Semantics
 
 A Lamb programs is a function from a string to a string.
