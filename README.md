@@ -123,6 +123,12 @@ Lamb supports VM (Krivine Machine) execution.
 lamb --eval < foo.lam
 ```
 
+### Infer and Print the Type
+
+```
+lamb --infer < foo.lam
+```
+
 ### Untyped Lambda Calculus
 
 *IF YOU ONLY KNEW THE POWER OF THE DARK SIDE*.
