@@ -98,18 +98,18 @@ fun print_error s (msg, i, j) = let
   val lineno = List.length lines1
   val colno = String.size line1
 in
-  print ("\027[1m<stdin>:" ^ Int.toString lineno ^ ":" ^ Int.toString colno ^ ":\027[0m \027[1;31merror: \027[0m\027[1m" ^ msg ^ "\027[0m\n")
+  TextIO.output (TextIO.stdErr, "\027[1m<stdin>:" ^ Int.toString lineno ^ ":" ^ Int.toString colno ^ ":\027[0m \027[1;31merror: \027[0m\027[1m" ^ msg ^ "\027[0m\n")
 ; case lines2 of
     [line2] => let
       val line3 = List.hd lines3
       val line = line1 ^ "\027[4m" ^ line2 ^ "\027[0m" ^ line3
     in
-      print (line ^ "\n")
+      TextIO.output (TextIO.stdErr, line ^ "\n")
     end
   | _ => let
       val line = line1 ^ "\027[4m" ^ List.hd lines2 ^ "\027[0m"
     in
-      print (line ^ "\n")
+      TextIO.output (TextIO.stdErr, line ^ "\n")
     end
 end
 
@@ -146,7 +146,7 @@ in
       ConstraintTyped.infer t
 end handle
   Unrecognized opt =>
-    print ("\027[1m:lamb:\027[0m \027[1;31merror:\027[0m \027[1munrecognized option `" ^ opt ^ "'\027[0m\n")
+    TextIO.output (TextIO.stdErr, "\027[1m:lamb:\027[0m \027[1;31merror:\027[0m \027[1munrecognized option `" ^ opt ^ "'\027[0m\n")
 | Lexing.LexError => let
     val i = !Lexing.UserDeclarations.pos
     val j = i + 1
