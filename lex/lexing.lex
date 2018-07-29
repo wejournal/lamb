@@ -25,9 +25,9 @@ fun unescapeString s = String.implode (unescapeCharList (String.explode s))
 
 %%
 %header (functor Lexing(structure Tokens : Parsing_TOKENS));
-alpha = [a-zA-Z_];
+space = [\t\n\r\ ];
 digit = [0-9];
-space = [\r\n\ \t];
+alpha = [A-Z_a-z];
 %%
 
 {space}+ => (lex());
@@ -44,5 +44,5 @@ space = [\r\n\ \t];
 "let" => (Tokens.LET ((), ()));
 {digit}+ => (Tokens.NAT (Option.valOf (StringCvt.scanString (Word64.scan StringCvt.DEC) yytext), (), ()));
 "'"("\\"?)."'" => (Tokens.CHAR (unescapeChar yytext, (), ()));
-"\""([^\"]|"\\\"")*"\"" => (Tokens.STRING (unescapeString (String.substring (yytext, 1, String.size yytext - 2)), (), ()));
+"\""([^\\\"]|"\\".)*"\"" => (Tokens.STRING (unescapeString (String.substring (yytext, 1, String.size yytext - 2)), (), ()));
 {alpha}({alpha}|{digit})* => (Tokens.ID (yytext, (), ()));

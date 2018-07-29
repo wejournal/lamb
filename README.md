@@ -2,80 +2,33 @@
 
 An implementation of Lambda Calculus.
 
-## Building
+## Language Specification
 
-Install mlton, mlyacc and mllex. And type:
+### Lexicon
 
-```
-make
-```
+*lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `in` | `let` | **NAT** | **CHAR** | **STRING** | **ID**
 
-## SYNOPSIS
+where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
+the classes are defined by regular expressions.
 
-```
-lamb [-t|--typed|-u|--untyped] [-c|--compile|-e|--eval|-i|--infer] [--target {linux|windows}] < foo.lam > foo.s
-```
+- **SPACE**: /[\t\n\r ]+/
+- **NAT**: /[0-9]+/
+- **CHAR**: /'\\?.'/
+- **STRING**: /"([^\\"]|\\.)*"/
+- **ID**: /[A-Z_a-z][A-Z_a-z0-9]+/
 
-## USAGE
+the **SPACE** is skipped by lexer.
 
-If you type simply:
+### Grammar
 
-```
-$ lamb < foo.lam > foo.s
-```
+*program* ::= *exp*
 
-Lamb's default behavior is:
+*ty*: *atty* | *atty* `->` *ty*
 
-```
-$ lamb --typed --compile --target linux < foo.lam > foo.s
-```
+*atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
 
-### VM Execution
+*tyopt* ::= ε | `:` *ty*
 
-```
-$ lamb --eval < foo.lam
-```
+*exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
 
-`--typed` is default.
-
-### Type Inference Only
-
-```
-$ lamb --infer < foo.lam
-```
-
-### Skip Type Check
-
-WITH GREAT POWER COMES GREAT RESPONSIBILITY.
-
-```
-$ lamb --untyped --compile < foo.lam > foo.s
-```
-
-```
-$ lamb --untyped --eval < foo.lam > foo.s
-```
-
-### Windows Target (Cross Compiling)
-
-```
-$ lamb --target windows < foo.lam > foo.s
-$ x86_64-w64-mingw32-gcc runtime.c gc.c lamb.c foo.s
-```
-
-Note: macOS target is not tested.
-But its ABI is same as Linux, System V AMD64 ABI, so I believe it works.
-
-## Language Design Note
-
-A Lamb program is a church list of numbers. The following code shows `a` to stdout.
-
-```
-let nil := ^f. ^z. z in
-let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
-  cons 97 nil
-```
-
-97 is an abbreviation of `S (S (.. (S O) ..))` repeating 97 times.
-(in ASCII, the charcode of `a` is 97.)
-where `S` and `O` are church number constructors.
+*atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
