@@ -2,6 +2,41 @@
 
 A statically typed and lazy evaluated implementation of Lambda Calculus.
 
+## Prerequisites
+
+*Required* commands:
+
+- gcc
+- mlton
+- mlyacc
+- mllex
+
+*Optional* commands:
+
+- x86_64-w64-mingw32-gcc (for windows target)
+
+## Building
+
+```
+make
+```
+
+## Run Examples
+
+After build:
+
+```
+$ make -C examples/hello TARGET=linux
+$ examples/hello/hello
+hello world
+```
+
+```
+# x86_64-w64-mingw32-gcc is required.
+$ make -C examples/hello TARGET=windows
+# Copy examples/hello/hello.exe to your own windows and run it.
+```
+
 ## Examples
 
 ### Hello World
@@ -81,3 +116,7 @@ The classes are defined by regular expressions.
 A Lamb programs is a function from a string to a string.
 Where a string is a church list of church numbers.
 For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
+
+## License
+
+GPLv3.
