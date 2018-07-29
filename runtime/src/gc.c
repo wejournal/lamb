@@ -77,7 +77,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
           lives[lives_size] = p;
           ++lives_size;
         } else {
-          printf("runtime error: gc lives stack over flow\n");
+          fprintf(stderr, "runtime error: gc lives stack over flow\n");
           exit(1);
         }
       }
@@ -226,7 +226,7 @@ void *gc_alloc(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count
   }
 
   if (!p) {
-    printf("runtime error: can't allocate memory.\n");
+    fprintf(stderr, "runtime error: can't allocate memory.\n");
     exit(1);
   }
 
