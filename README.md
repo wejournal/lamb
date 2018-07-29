@@ -117,6 +117,12 @@ A Lamb programs is a function from a string to a string.
 Where a string is a church list of church numbers.
 For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
 
+**NAT**, **CHAR** and **STRING** are shorthands for terms.
+
+- **NAT** is a shorthand for a church number. For example, `0` is a shorthand for `^x. ^y. y`
+- **CHAR** is a shorthand for a church number. The difference between **NAT** and **CHAR** is simply the notation.
+- **STRING** is a shorthand for a church list of church numbers.
+
 ## License
 
 GPLv3.
