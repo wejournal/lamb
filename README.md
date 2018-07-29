@@ -58,6 +58,14 @@ $ make -C examples/hello TARGET=windows
 ### Lazy Evaluation
 
 Lamb has the call-by-need semantics.
+For example, in the following program,
+the stdin (the first argument) is not evaluated.
+Therefore, the program reads no input, writes "hello world\n" to the stdout and and terminates.
+
+<pre>
+<b>let</b> K := ^x. ^_. x <b>in</b>
+  K("hello world\n")
+</pre>
 
 ### Type System
 
