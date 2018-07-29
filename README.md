@@ -11,13 +11,14 @@ An implementation of Lambda Calculus.
 where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
 the classes are defined by regular expressions.
 
-- **SPACE**: /[\t\n\r ]+/
-- **NAT**: /[0-9]+/
-- **CHAR**: /'\\?.'/
-- **STRING**: /"([^\\"]|\\.)*"/
-- **ID**: /[A-Z_a-z][A-Z_a-z0-9]+/
+- **SPACE**: `/[\t\n\r ]+/`
+- **COMMENT**: `/--[^\n]*\n/`
+- **NAT**: `/[0-9]+/`
+- **CHAR**: `/'\\?.'/`
+- **STRING**: `/"([^\\"]|\\.)*"/`
+- **ID**: `/[A-Z_a-z][A-Z_a-z0-9]+/`
 
-the **SPACE** is skipped by lexer.
+**SPACE** and **COMMENT** are skipped by lexers.
 
 ### Grammar
 
