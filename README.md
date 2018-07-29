@@ -35,8 +35,8 @@ Because `^x. x x` is valid if it is valid.
 
 - *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `in` | `let` | **NAT** | **CHAR** | **STRING** | **ID**
 
-where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
-the classes are defined by regular expressions.
+Where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
+The classes are defined by regular expressions.
 
 - **SPACE**: `/[\t\n\r ]+/`
 - **COMMENT**: `/--[^\n]*\n/`
@@ -59,5 +59,5 @@ the classes are defined by regular expressions.
 ### Informal Semantics
 
 A Lamb programs is a function from a string to a string.
-where a string is a church list of church numbers.
-for example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
+Where a string is a church list of church numbers.
+For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
