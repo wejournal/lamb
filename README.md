@@ -125,7 +125,7 @@ lamb --eval < foo.lam
 
 ### Untyped Lambda Calculus
 
-/IF YOU ONLY KNEW THE POWER OF THE DARK SIDE./
+*IF YOU ONLY KNEW THE POWER OF THE DARK SIDE*.
 
 ```
 lamb --untyped < foo.lam > foo.s
