@@ -166,7 +166,7 @@ The classes are defined by regular expressions.
 
 ### Informal Semantics
 
-A Lamb programs is a function from a string to a string,
+A Lamb program is a function from a string to a string,
 where a string is represented as a church list of church numbers.
 For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
 
