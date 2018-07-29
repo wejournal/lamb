@@ -98,6 +98,22 @@ Therefore, the following program is valid.
 *Note*: In a monomorphic language, `I I` is invalid.
 Because `^x. x x` is valid if it is valid.
 
+### x64 Code Generation
+
+Lamb support x64 code generation by default. For example, the following command compiles `foo.lam` to `foo.s`.
+
+```
+lamb < foo.lam > foo.s
+```
+
+To generate executables:
+
+- Use `as` and `ld`. It's hard.
+- Use `gcc`. It's easy.
+
+We recommend you use `gcc`.
+But you can use `as` and `ld`.
+
 ## Language Specification
 
 ### Lexicon
