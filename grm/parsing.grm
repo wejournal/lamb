@@ -1,4 +1,4 @@
-local open ImplicitTypedTerm in
+local open TypedTerm in
   fun encodeNat 0w0 = ABS ("f", NONE, ABS ("x", NONE, VAR "x"))
     | encodeNat n = ABS ("f", NONE, ABS ("x", NONE, APP (VAR "f", APP (APP (encodeNat (Word64.- (n, 0w1)), VAR "f"), VAR "x"))))
 
@@ -43,13 +43,13 @@ val tycxt = ref (gensym ())
 | ID of string
 
 %nonterm
-  program of ImplicitTypedTerm.t
+  program of TypedTerm.t
 | ty of Type.t
 | atty of Type.t
 | tyopt of Type.t option
-| exp of ImplicitTypedTerm.t
-| appexp of ImplicitTypedTerm.t
-| atexp of ImplicitTypedTerm.t
+| exp of TypedTerm.t
+| appexp of TypedTerm.t
+| atexp of TypedTerm.t
 
 %name Parsing
 %noshift EOF
@@ -82,17 +82,24 @@ exp:
   appexp
     (appexp)
 | LAMBDA ID tyopt DOT exp
-    (ImplicitTypedTerm.ABS (ID, tyopt, exp))
+    (TypedTerm.ABS (ID, tyopt, exp))
 | LET ID tyopt COLONEQ exp IN exp
-    (ImplicitTypedTerm.LET (ID, tyopt, exp1, exp2))
+    (TypedTerm.LET (ID, tyopt, exp1, exp2))
 
 appexp:
-  atexp (atexp)
-| appexp atexp (ImplicitTypedTerm.APP (appexp, atexp))
+  atexp
+    (atexp)
+| appexp atexp
+    (TypedTerm.APP (appexp, atexp))
 
 atexp:
-  NAT (encodeNat NAT)
-| CHAR (encodeChar CHAR)
-| STRING (encodeString STRING)
-| ID (ImplicitTypedTerm.VAR ID)
-| LPAREN exp RPAREN (exp)
+  NAT
+    (encodeNat NAT)
+| CHAR
+    (encodeChar CHAR)
+| STRING
+    (encodeString STRING)
+| ID
+    (TypedTerm.VAR ID)
+| LPAREN exp RPAREN
+    (exp)

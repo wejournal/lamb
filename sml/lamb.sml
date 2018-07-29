@@ -98,15 +98,15 @@ in
       | UNTYPED =>
           (case target of
             LINUX =>
-              Untyped.compileSystemV (ImplicitTypedTerm.erase t)
+              Untyped.compileSystemV (TypedTerm.erase t)
           | WINDOWS =>
-              Untyped.compileMicrosoft (ImplicitTypedTerm.erase t)))
+              Untyped.compileMicrosoft (TypedTerm.erase t)))
   | EVAL =>
       (case typing of
         TYPED =>
           ConstraintTyped.eval t
       | UNTYPED =>
-          Untyped.eval (ImplicitTypedTerm.erase t))
+          Untyped.eval (TypedTerm.erase t))
   | INFER =>
       ConstraintTyped.infer t
 end handle

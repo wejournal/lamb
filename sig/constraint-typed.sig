@@ -1,6 +1,6 @@
 signature CONSTRAINT_TYPED = sig
-  val infer : ImplicitTypedTerm.t -> unit
-  val eval : ImplicitTypedTerm.t -> unit
-  val compileSystemV : ImplicitTypedTerm.t -> unit
-  val compileMicrosoft : ImplicitTypedTerm.t -> unit
+  val infer : TypedTerm.t -> unit
+  val eval : TypedTerm.t -> unit
+  val compileSystemV : TypedTerm.t -> unit
+  val compileMicrosoft : TypedTerm.t -> unit
 end

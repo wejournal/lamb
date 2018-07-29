@@ -21,8 +21,6 @@ in
   ../sml/type.sml
   ../sig/typed-term.sig
   ../sml/typed-term.sml
-  ../sig/implicit-typed-term.sig
-  ../sml/implicit-typed-term.sml
   ../sig/inferring.sig
   ../sml/inferring.sml
   ../sig/untyped.sig

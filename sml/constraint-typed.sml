@@ -7,7 +7,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     Inferring.NotInScope x =>
       print ("not in scope: " ^ x ^ "\n")
   | Inferring.Cyclic (x, T) =>
-      print (ImplicitTypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
+      print (TypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
   | Inferring.Incompatible (T, U) =>
       print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
 
@@ -19,7 +19,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val string = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
     val U = Type.ARR (string, string)
     val S = Inferring.unify [(T, U)]
-    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
+    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
     val c = Instr.compile u
     val thunk = KrivineMachine.eval c
   in
@@ -30,7 +30,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
   | Inferring.NotInScope x =>
       print ("not in scope: " ^ x ^ "\n")
   | Inferring.Cyclic (x, T) =>
-      print (ImplicitTypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
+      print (TypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
   | Inferring.Incompatible (T, U) =>
       print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
 
@@ -42,7 +42,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val string = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
     val U = Type.ARR (string, string)
     val _ = Inferring.unify [(T, U)]
-    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
+    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
     val c = Instr.compile u
     val s = SystemVCompiler.compile (SystemVCompiler.new ()) "lamb_main" c
   in
@@ -53,13 +53,13 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
   | Inferring.NotInScope x =>
       print ("not in scope: " ^ x ^ "\n")
   | Inferring.Cyclic (x, T) =>
-      print (ImplicitTypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
+      print (TypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
   | Inferring.Incompatible (T, U) =>
       print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
 
   fun compileMicrosoft t = let
     val (t', T) = Inferring.infer t
-    val u = DeBruijnIndexedTerm.compile (ImplicitTypedTerm.erase t)
+    val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
     val c = Instr.compile u
     val s = MicrosoftCompiler.compile (MicrosoftCompiler.new ()) "lamb_main" c
   in
@@ -70,7 +70,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
   | Inferring.NotInScope x =>
       print ("not in scope: " ^ x ^ "\n")
   | Inferring.Cyclic (x, T) =>
-      print (ImplicitTypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
+      print (TypedTerm.show t ^ " is cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
   | Inferring.Incompatible (T, U) =>
       print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
 end
