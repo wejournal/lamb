@@ -19,10 +19,18 @@ structure TypedTerm :> TYPED_TERM = struct
     | erase (ABS (x, _, t)) = Term.ABS (x, erase t)
     | erase (LET (x, _, t, u)) = Term.APP (Term.ABS (x, erase u), erase t)
 
-  fun show (VAR x) = x
-    | show (APP (t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
-    | show (ABS (x, NONE, t)) = "(^" ^ x ^ "." ^ show t ^ ")"
-    | show (ABS (x, SOME T, t)) = "(^" ^ x ^ ":" ^ Type.show T ^ "." ^ show t ^ ")"
-    | show (LET (x, NONE, t, u)) = "let " ^ x ^ " := " ^ show t ^ " in " ^ show u
-    | show (LET (x, SOME T, t, u)) = "let " ^ x ^ " : " ^ Type.show T ^ " := " ^ show t ^ " in " ^ show u
+  local
+    fun indent s = let
+      val lines = String.fields (fn ch => ch = #"\n") s
+    in
+      concat (map (fn l => "  " ^ l ^ "\n") lines)
+    end
+  in
+    fun show (VAR x) = x
+      | show (APP (t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
+      | show (ABS (x, NONE, t)) = "(^" ^ x ^ "." ^ show t ^ ")"
+      | show (ABS (x, SOME T, t)) = "(^" ^ x ^ ":" ^ Type.show T ^ "." ^ show t ^ ")"
+      | show (LET (x, NONE, t, u)) = "let " ^ x ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
+      | show (LET (x, SOME T, t, u)) = "let " ^ x ^ " : " ^ Type.show T ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
+  end
 end
