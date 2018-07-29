@@ -2,6 +2,8 @@
 
 An implementation of Lambda Calculus.
 
+statically typed, lazy evaluated, 
+
 ## Language Specification
 
 ### Lexicon
@@ -33,3 +35,9 @@ the classes are defined by regular expressions.
 *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
 
 *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
+
+### Informal Semantics
+
+A Lamb programs is a function from a string to a string.
+where a string is a church list of church numbers.
+for example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
