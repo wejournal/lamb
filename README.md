@@ -168,7 +168,7 @@ The classes are defined by regular expressions.
 
 A Lamb program is a function from a string to a string,
 where a string is represented as a church list of church numbers.
-For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
+For example, `^x.x` is a valid Lamb program, reads all input from the stdin and writes they to the stdout.
 
 **NAT**, **CHAR** and **STRING** are shorthands for terms.
 
