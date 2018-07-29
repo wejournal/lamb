@@ -5,7 +5,7 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 ## Synopsis
 
 <pre>
-<b>lamb</b> [<b>-t</b>|<b>--typed</b>|<b>-u</b>|<b>--untyped</b>] [<b>-c</b>|<b>--compile</b>|<b>-e</b>|<b>--eval</b>|<b>-i</b>|<b>--infer</b>] [<b>--target</b> {<b>linux</b>|<b>windows</b>}] < <i>FILE</i>.lam > <i>FILE</i><b>.s</b>
+<b>lamb</b> [<b>-t</b>|<b>--typed</b>|<b>-u</b>|<b>--untyped</b>] [<b>-c</b>|<b>--compile</b>|<b>-e</b>|<b>--eval</b>|<b>-i</b>|<b>--infer</b>] [<b>--target</b> {<b>linux</b>|<b>windows</b>}] < <i>FILE</i><b>.lam</b> > <i>FILE</i><b>.s</b>
 </pre>
 
 ## Prerequisites
