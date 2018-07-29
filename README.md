@@ -113,6 +113,7 @@ To generate executables:
 
 We recommend you use `gcc`.
 But you can use `as` and `ld`.
+If you use `as` and `ld`, you need to link the libc manually.
 
 ## Language Specification
 
