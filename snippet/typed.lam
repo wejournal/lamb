@@ -7,20 +7,22 @@ let S : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c := ^x. ^y. ^z. x z (y z) in
 let W : ('a -> 'a -> 'b) -> 'a -> 'b := ^x. ^y. x y y in
 
 -- Booleans
-let false : 'a -> 'a -> 'a := ^_. ^y. y in
-let true : 'a -> 'a -> 'a := ^x. ^_. x in
-let and := ^p. ^q. p q false in
-let or := ^p. ^q. p true q in
-let not := ^p. p false true in
-let if := ^p. ^x. ^y. p x y in
+-- let 'bool := 'a -> 'a -> 'a
+let false : 'bool := ^_. ^y. y in
+let true : 'bool := ^x. ^_. x in
+let and : ('bool -> 'bool -> 'bool) -> 'bool -> 'bool := ^p. ^q. p q false in
+let or : ('bool -> 'bool -> 'bool) -> 'bool -> 'bool := ^p. ^q. p true q in
+let not : ('bool -> 'bool -> 'bool) -> 'bool := ^p. p false true in
+let if : 'bool -> 'a -> 'a -> 'a := ^p. ^x. ^y. p x y in
 
 -- Numbers
-let succ := ^n. ^f. ^x. f (n f x) in
-let pred := ^n . ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
-let plus := ^n. ^m. ^f. ^x. n f (m f x)  in
-let mult := ^n. ^m. n (plus m) 0 in
+-- let 'nat := ('a -> 'a) -> 'a -> 'a
+let succ : 'nat -> 'nat := ^n. ^f. ^x. f (n f x) in
+let pred := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
+let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
+let mult : (('nat -> 'nat) -> 'nat -> 'nat) -> 'nat -> 'nat := ^n. ^m. n (plus m) 0 in
 let minus := ^n. ^m. m pred n in
-let is_zero := ^n. n (^_. false) true in
+let is_zero : 'nat -> 'bool := ^n. n (^_. false) true in
 
 -- Lists
 let nil := ^_. ^z. z in
