@@ -12,10 +12,10 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 
 *Required* commands:
 
-- gcc
 - mlton
 - mlyacc
 - mllex
+- gcc
 
 *Optional* commands:
 
