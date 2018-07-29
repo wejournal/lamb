@@ -47,49 +47,6 @@ grm/parsing.grm.sig grm/parsing.grm.sml: grm/parsing.grm
 
 lex/lexing.lex.sml: lex/lexing.lex
 	$(MLLEX) $<
-
-bin/lazy-k:	mlb/lazy-k.mlb \
-		sml/lazy-k.sml \
-		mlb/implementing-lambda-calculus.mlb \
-		sig/term.sig \
-		sml/term.sml \
-		sig/de-bruijn-indexed-term.sig \
-		sml/de-bruijn-indexed-term.sml \
-		sig/instr.sig \
-		sml/instr.sml \
-		sig/krivine-machine.sig \
-		sml/krivine-machine.sml \
-		sig/abi.sig \
-		sml/system-v-abi.sml \
-		sml/microsoft-abi.sml \
-		sig/compiler.sig \
-		fun/compiler.fun \
-		sml/system-v-compiler.sml \
-		sml/microsoft-compiler.sml \
-		sig/type.sig \
-		sml/type.sml \
-		sig/typed-term.sig \
-		sml/typed-term.sml \
-		sig/implicit-typed-term.sig \
-		sml/implicit-typed-term.sml \
-		sig/inferring.sig \
-		sml/inferring.sml \
-		sig/untyped.sig \
-		sml/untyped.sml \
-		sig/constraint-typed.sig \
-		sml/constraint-typed.sml \
-		grm/lazy-k-parsing.grm.sig \
-		grm/lazy-k-parsing.grm.sml \
-		lex/lazy-k-lexing.lex.sml
-	$(MKDIR) -p bin
-	$(MLTON) -output $@ $<
-
-grm/lazy-k-parsing.grm.sig grm/lazy-k-parsing.grm.sml: grm/lazy-k-parsing.grm
-	$(MLYACC) $<
-
-lex/lazy-k-lexing.lex.sml: lex/lazy-k-lexing.lex
-	$(MLLEX) $<
-
 runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
