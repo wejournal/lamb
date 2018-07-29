@@ -8,7 +8,7 @@ structure Inferring :> INFERRING = struct
     val i = !fresh
   in
     fresh := !fresh + 1
-  ; Int.toString i
+  ; "_" ^ Int.toString i
   end
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
