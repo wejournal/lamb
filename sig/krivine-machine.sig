@@ -18,14 +18,4 @@ signature KRIVINE_MACHINE = sig
   val showCode : code -> string
   val showThunk : (code * env) -> string
   val showState : state -> string
-
-  val B : code
-  val C : code
-  val I : code
-  val K : code
-  val S : code
-  val W : code
-  val Y : code
-  val omega : code
-  val Omega : code
 end

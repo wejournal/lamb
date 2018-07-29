@@ -1,23 +1,14 @@
 structure TypedTerm :> TYPED_TERM = struct
   datatype t =
-    VAR of id
-  | APP of t * t
-  | ABS of id * Type.t option * t
-  | LET of id * Type.t option * t * t
+    VAR of region * id
+  | APP of region * t * t
+  | ABS of region * (region * id) * Type.t option * t
+  | LET of region * (region * id) * Type.t option * t * t
 
-  fun FV (VAR x) = [x]
-    | FV (APP (t, u)) = FV t @ FV u
-    | FV (ABS (x, _, t)) = List.filter (fn y => x = y) (FV t)
-    | FV (LET (x, _, t, u)) = FV t @ List.filter (fn y => x = y) (FV u)
-
-  fun implicit (Term.VAR x) = VAR x
-    | implicit (Term.APP (t, u)) = APP (implicit t, implicit u)
-    | implicit (Term.ABS (x, t)) = ABS (x, NONE, implicit t)
-
-  fun erase (VAR x) = Term.VAR x
-    | erase (APP (t, u)) = Term.APP (erase t, erase u)
-    | erase (ABS (x, _, t)) = Term.ABS (x, erase t)
-    | erase (LET (x, _, t, u)) = Term.APP (Term.ABS (x, erase u), erase t)
+  fun erase (VAR (r, x)) = Term.VAR (r, x)
+    | erase (APP (r, t, u)) = Term.APP (r, erase t, erase u)
+    | erase (ABS (r, (r', x), _, t)) = Term.ABS (r, (r', x), erase t)
+    | erase (LET (r, (r', x), _, t, u)) = Term.APP (r, Term.ABS (r, (r', x), erase u), erase t)
 
   local
     fun indent s = let
@@ -26,11 +17,11 @@ structure TypedTerm :> TYPED_TERM = struct
       concat (map (fn l => "  " ^ l ^ "\n") lines)
     end
   in
-    fun show (VAR x) = x
-      | show (APP (t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
-      | show (ABS (x, NONE, t)) = "(^" ^ x ^ "." ^ show t ^ ")"
-      | show (ABS (x, SOME T, t)) = "(^" ^ x ^ ":" ^ Type.show T ^ "." ^ show t ^ ")"
-      | show (LET (x, NONE, t, u)) = "let " ^ x ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
-      | show (LET (x, SOME T, t, u)) = "let " ^ x ^ " : " ^ Type.show T ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
+    fun show (VAR (_, x)) = x
+      | show (APP (_, t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
+      | show (ABS (_, (_, x), NONE, t)) = "(^" ^ x ^ "." ^ show t ^ ")"
+      | show (ABS (_, (_, x), SOME T, t)) = "(^" ^ x ^ ":" ^ Type.show T ^ "." ^ show t ^ ")"
+      | show (LET (_, (_, x), NONE, t, u)) = "let " ^ x ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
+      | show (LET (_, (_, x), SOME T, t, u)) = "let " ^ x ^ " : " ^ Type.show T ^ " :=\n" ^ indent (show t) ^ " in\n" ^ show u
   end
 end

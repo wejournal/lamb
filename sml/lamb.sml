@@ -81,11 +81,12 @@ fun options nil = { typing = TYPED, doing = COMPILE, target = LINUX }
 
 fun check t = let
   val (t', T) = Inferring.infer t
-  val N = Type.CON "N"
-  val A = Type.CON "A"
-  val nat = Type.ARR (Type.ARR (N, N), Type.ARR (N, N))
-  val string = Type.ARR (Type.ARR (nat, Type.ARR (A, A)), Type.ARR (A, A))
-  val U = Type.ARR (string, string)
+  val r = Type.region T
+  val N = Type.CON (r, "N")
+  val A = Type.CON (r, "A")
+  val nat = Type.ARR (r, Type.ARR (r, N, N), Type.ARR (r, N, N))
+  val string = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, A, A)), Type.ARR (r, A, A))
+  val U = Type.ARR (r, string, string)
   val S = Inferring.unify [(T, U)]
 in
   ()
@@ -190,18 +191,21 @@ end handle
   Unrecognized opt =>
     TextIO.output (TextIO.stdErr, "\027[1m:lamb:\027[0m \027[1;31merror:\027[0m \027[1munrecognized option `" ^ opt ^ "'\027[0m\n")
 | Lexing.LexError => let
-    val i = !Lexing.UserDeclarations.pos
+    val i = !Lexing.UserDeclarations.cursor
     val j = i + 1
   in
     print_error s ("unrecognized character `" ^ str (String.sub (s, i)) ^ "'", i, j)
   end
 | Parsing.ParseError =>
     ()
-| DeBruijnIndexedTerm.NotInScope x =>
-    print ("not in scope: " ^ x ^ "\n")
-| Inferring.NotInScope x =>
-    print ("not in scope: " ^ x ^ "\n")
-| Inferring.Cyclic (x, T) =>
-    print ("cyclic: '" ^ x ^ " in " ^ Type.show T ^ "\n")
-| Inferring.Incompatible (T, U) =>
-    print ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U ^ "\n")
+| DeBruijnIndexedTerm.NotInScope ((i, j), x) =>
+    print_error s ("not in scope: " ^ x, i, j)
+| Inferring.NotInScope ((i, j), x) =>
+    print_error s ("not in scope: " ^ x, i, j)
+| Inferring.Cyclic (((i, j), x), T) =>
+    print_error s ("cyclic: '" ^ x ^ " in " ^ Type.show T, i, j)
+| Inferring.Incompatible (T, U) => let
+    val (i, j) = Type.region T
+  in
+    print_error s ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U, i, j)
+  end

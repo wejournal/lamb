@@ -1,13 +1,13 @@
 local open TypedTerm in
-  fun encodeNat 0w0 = ABS ("f", NONE, ABS ("x", NONE, VAR "x"))
-    | encodeNat n = ABS ("f", NONE, ABS ("x", NONE, APP (VAR "f", APP (APP (encodeNat (Word64.- (n, 0w1)), VAR "f"), VAR "x"))))
+  fun encodeNat (r, 0w0) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
+    | encodeNat (r, n) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, encodeNat (r, Word64.- (n, 0w1)), VAR (r, "f")), VAR (r, "x")))))
 
-  fun encodeChar c = encodeNat (Word64.fromInt (ord c))
+  fun encodeChar (r, c) = encodeNat (r, Word64.fromInt (ord c))
 
-  fun encodeCharList nil = ABS ("f", NONE, ABS ("x", NONE, VAR "x"))
-    | encodeCharList (t :: ts) = ABS ("f", NONE, ABS ("x", NONE, APP (APP (VAR "f", t), APP (APP (encodeCharList ts, VAR "f"), VAR "x"))))
+  fun encodeCharList (r, nil) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
+    | encodeCharList (r, t :: ts) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, APP (r, VAR (r, "f"), t), APP (r, APP (r, encodeCharList (r, ts), VAR (r, "f")), VAR (r, "x")))))
 
-  fun encodeString s = encodeCharList (map encodeChar (String.explode s))
+  fun encodeString (r, s) = encodeCharList (r, map (fn c => encodeChar (r, c)) (String.explode s))
 end
 
 val fresh = ref 0
@@ -21,11 +21,9 @@ end
 
 val tycxt = ref (gensym ())
 
-val pos = ref 0
-
 %%
 %eop EOF
-%pos int
+%pos cursor
 
 %term
   EOF
@@ -65,13 +63,13 @@ ty:
   atty
     (atty)
 | atty ARROW ty
-    (Type.ARR (atty, ty))
+    (Type.ARR ((attyleft, tyright), atty, ty))
 
 atty:
   QUOTE ID
-    (Type.VAR (ID ^ !tycxt))
+    (Type.VAR ((QUOTEleft, IDright), ID ^ !tycxt))
 | ID
-    (Type.CON ID)
+    (Type.CON ((IDleft, IDright), ID))
 | LPAREN ty RPAREN
     (ty)
 
@@ -84,24 +82,24 @@ exp:
   appexp
     (appexp)
 | LAMBDA ID tyopt DOT exp
-    (TypedTerm.ABS (ID, tyopt, exp))
+    (TypedTerm.ABS ((LAMBDAleft, expright), ((IDleft, IDright), ID), tyopt, exp))
 | LET ID tyopt COLONEQ exp IN exp
-    (TypedTerm.LET (ID, tyopt, exp1, exp2))
+    (TypedTerm.LET ((LETleft, expright), ((IDleft, IDright), ID), tyopt, exp1, exp2))
 
 appexp:
   atexp
     (atexp)
 | appexp atexp
-    (TypedTerm.APP (appexp, atexp))
+    (TypedTerm.APP ((appexpleft, atexpright), appexp, atexp))
 
 atexp:
   NAT
-    (encodeNat NAT)
+    (encodeNat ((NATleft, NATright), NAT))
 | CHAR
-    (encodeChar CHAR)
+    (encodeChar ((CHARleft, CHARright), CHAR))
 | STRING
-    (encodeString STRING)
+    (encodeString ((STRINGleft, STRINGright), STRING))
 | ID
-    (TypedTerm.VAR ID)
+    (TypedTerm.VAR ((IDleft, IDright), ID))
 | LPAREN exp RPAREN
     (exp)

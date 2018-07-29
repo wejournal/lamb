@@ -52,14 +52,4 @@ structure KrivineMachine :> KRIVINE_MACHINE = struct
     "(" ^ showCode c ^
     ", [" ^ String.concatWith ", " (map showThunk p) ^
     "], [" ^ String.concatWith ", " (map showThunk e) ^ "])"
-
-  val B = compile DeBruijnIndexedTerm.B
-  val C = compile DeBruijnIndexedTerm.C
-  val I = compile DeBruijnIndexedTerm.I
-  val K = compile DeBruijnIndexedTerm.K
-  val S = compile DeBruijnIndexedTerm.S
-  val W = compile DeBruijnIndexedTerm.W
-  val Y = compile DeBruijnIndexedTerm.Y
-  val omega = compile DeBruijnIndexedTerm.omega
-  val Omega = compile DeBruijnIndexedTerm.Omega
 end

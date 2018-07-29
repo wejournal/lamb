@@ -1,30 +1,34 @@
 structure Type :> TYPE = struct
   datatype t =
-    VAR of id
-  | CON of id
-  | ARR of t * t
+    VAR of region * id
+  | CON of region * id
+  | ARR of region * t * t
 
   type subst = (id * t) list
 
-  fun subst S (VAR x) =
+  fun subst S (VAR (r, x)) =
         (case List.find (fn (y, _) => x = y) S of
           NONE =>
-            VAR x
+            VAR (r, x)
         | SOME (_, T) =>
             T)
-    | subst _ (CON x) =
-        CON x
-    | subst S (ARR (T, U)) =
-        ARR (subst S T, subst S U)
+    | subst _ (CON (r, x)) =
+        CON (r, x)
+    | subst S (ARR (r, T, U)) =
+        ARR (r, subst S T, subst S U)
 
   fun compose S S' =
     List.filter (fn (x, _) => List.all (fn (y, _) => x <> y) S') S @ map (fn (x, T) => (x, subst S T)) S'
 
-  fun FV (VAR x) = [x]
+  fun FV (VAR (r, x)) = [(r, x)]
     | FV (CON _) = nil
-    | FV (ARR (T, U)) = FV T @ FV U
+    | FV (ARR (_, T, U)) = FV T @ FV U
 
-  fun show (VAR x) = "'" ^ x
-    | show (CON x) = x
-    | show (ARR (T, U)) = "(" ^ show T ^ " -> " ^ show U ^ ")"
+  fun region (VAR (r, _)) = r
+    | region (CON (r, _)) = r
+    | region (ARR (r, _, _)) = r
+
+  fun show (VAR (_, x)) = "'" ^ x
+    | show (CON (_, x)) = x
+    | show (ARR (_, T, U)) = "(" ^ show T ^ " -> " ^ show U ^ ")"
 end

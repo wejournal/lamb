@@ -1,19 +1,18 @@
-structure Tokens = Tokens
-type pos = int
+type pos = cursor
 type svalue = Tokens.svalue
 type ('a, 'b) token = ('a, 'b) Tokens.token
 type lexresult = (svalue, pos) token
 
-val pos = ref 0
+val cursor = ref 0
 
-fun position yytext = let
-  val i = !pos
+fun region yytext = let
+  val i = !cursor
 in
-  pos := !pos + String.size yytext
-; (i, !pos)
+  cursor := !cursor + String.size yytext
+; (i, !cursor)
 end
 
-fun eof () = Tokens.EOF (!pos, !pos)
+fun eof () = Tokens.EOF (!cursor, !cursor)
 
 fun unescapeChar "'\\t'" = #"\t"
   | unescapeChar "'\\n'" = #"\n"
@@ -40,39 +39,39 @@ digit = [0-9];
 alpha = [A-Z_a-z];
 %%
 
-{space}+ => (position yytext; lex());
+{space}+ => (region yytext; lex());
 "--"[^\n]*\n => (lex());
-"'" => (Tokens.QUOTE (position yytext));
-"(" => (Tokens.LPAREN (position yytext));
-")" => (Tokens.RPAREN (position yytext));
-"->" => (Tokens.ARROW (position yytext));
-"." => (Tokens.DOT (position yytext));
-":" => (Tokens.COLON (position yytext));
-":=" => (Tokens.COLONEQ (position yytext));
-"^" => (Tokens.LAMBDA (position yytext));
-"in" => (Tokens.IN (position yytext));
-"let" => (Tokens.LET (position yytext));
+"'" => (Tokens.QUOTE (region yytext));
+"(" => (Tokens.LPAREN (region yytext));
+")" => (Tokens.RPAREN (region yytext));
+"->" => (Tokens.ARROW (region yytext));
+"." => (Tokens.DOT (region yytext));
+":" => (Tokens.COLON (region yytext));
+":=" => (Tokens.COLONEQ (region yytext));
+"^" => (Tokens.LAMBDA (region yytext));
+"in" => (Tokens.IN (region yytext));
+"let" => (Tokens.LET (region yytext));
 
 {digit}+ => (let
-  val (i, j) = position yytext
+  val (i, j) = region yytext
 in
   Tokens.NAT (Option.valOf (StringCvt.scanString (Word64.scan StringCvt.DEC) yytext), i, j)
 end);
 
 "'"("\\"?)."'" => (let
-  val (i, j) = position yytext
+  val (i, j) = region yytext
 in
   Tokens.CHAR (unescapeChar yytext, i, j)
 end);
 
 "\""([^\\\"]|"\\".)*"\"" => (let
-  val (i, j) = position yytext
+  val (i, j) = region yytext
 in
   Tokens.STRING (unescapeString (String.substring (yytext, 1, String.size yytext - 2)), i, j)
 end);
 
 {alpha}({alpha}|{digit})* => (let
-  val (i, j) = position yytext
+  val (i, j) = region yytext
 in
   Tokens.ID (yytext, i, j)
 end);
