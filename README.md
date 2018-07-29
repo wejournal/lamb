@@ -66,7 +66,7 @@ $ make -C examples/hello TARGET=windows
 Lamb has the call-by-need semantics.
 For example, in the following program,
 the stdin (the first argument) is not evaluated.
-Therefore, the program reads no input, writes "hello world\n" to the stdout and and terminates.
+Therefore, the program reads no input, writes "hello world\n" to the stdout and terminates.
 
 <pre>
 <b>let</b> K := ^x. ^_. x <b>in</b>
@@ -78,16 +78,16 @@ Therefore, the program reads no input, writes "hello world\n" to the stdout and 
 #### Type Inference
 
 Lamb programs are statically typed, but you don't need to write types.
-The type of the following program is inferenced `'a -> 'a` automatically.
+The type of the following program is automatically inferred to be `'a -> 'a`.
 
 <pre>
 <b>let</b> I := ^x. x <b>in</b>
   I
 </pre>
 
-#### Let Polymorphism
+#### Let-Polymorphism
 
-Lamb supports the let polymorphism.
+Lamb supports the let-polymorphism.
 Therefore, the following program is valid.
 
 <pre>
@@ -95,8 +95,8 @@ Therefore, the following program is valid.
   I I
 </pre>
 
-*Note*: In a monomorphic language, `I I` is invalid.
-Because `^x. x x` is valid if it is valid.
+*Note*: In a monomorphic language, `I I` is invalid,
+because `^x. x x` would also become valid if that expression were valid.
 
 ### x64 Code Generation
 
@@ -153,7 +153,7 @@ The classes are defined by regular expressions.
 - **STRING**: `/"([^\\"]|\\.)*"/`
 - **ID**: `/[A-Z_a-z][A-Z_a-z0-9]+/`
 
-**SPACE** and **COMMENT** are skipped by lexers.
+**SPACE** and **COMMENT** are ignored by lexers.
 
 ### Grammar
 
@@ -166,8 +166,8 @@ The classes are defined by regular expressions.
 
 ### Informal Semantics
 
-A Lamb programs is a function from a string to a string.
-Where a string is a church list of church numbers.
+A Lamb programs is a function from a string to a string,
+where a string is is represented as a church list of church numbers.
 For example, `^x.x` is a valid Lamb program, reads all inputs from the stdin and writes they to the stdout.
 
 **NAT**, **CHAR** and **STRING** are shorthands for terms.
