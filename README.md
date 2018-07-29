@@ -1,8 +1,6 @@
 # Lamb
 
-An implementation of Lambda Calculus.
-
-statically typed, lazy evaluated, 
+A statically typed and lazy evaluated implementation of Lambda Calculus.
 
 ## Language Specification
 
