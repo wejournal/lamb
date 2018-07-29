@@ -2,7 +2,27 @@
 
 A statically typed and lazy evaluated implementation of Lambda Calculus.
 
+## Examples
+
+### Hello World
+
+<pre>
+<b>let</b> K := ^x. ^_. x <b>in</b>
+  K("hello world\n")
+</pre>
+
+### Cat Program
+
+<pre>
+<b>let</b> I := ^x. x <b>in</b>
+  I
+</pre>
+
 ## Features
+
+### Lazy Evaluation
+
+Lamb has the call-by-need semantics.
 
 ### Type System
 
