@@ -13,8 +13,6 @@ bin/lamb:	mlb/lamb.mlb \
 		sml/term.sml \
 		sig/de-bruijn-indexed-term.sig \
 		sml/de-bruijn-indexed-term.sml \
-		sig/instr.sig \
-		sml/instr.sml \
 		sig/krivine-machine.sig \
 		sml/krivine-machine.sml \
 		sig/abi.sig \

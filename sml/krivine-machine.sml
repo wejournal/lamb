@@ -1,21 +1,32 @@
 structure KrivineMachine :> KRIVINE_MACHINE = struct
-  datatype env = ENV of (Instr.t list * env) list
-  type stack = (Instr.t list * env) list
-  type state = Instr.t list * stack * env
+  datatype instr =
+    ACCESS of int
+  | GRAB
+  | PUSH of instr list
+
+  type code = instr list
+
+  datatype env = ENV of (code * env) list
+  type stack = (code * env) list
+  type state = code * stack * env
+
+  fun compile (DeBruijnIndexedTerm.VAR i) = [ACCESS i]
+    | compile (DeBruijnIndexedTerm.APP (t, u)) = [PUSH (compile u)] @ compile t
+    | compile (DeBruijnIndexedTerm.ABS t) = GRAB :: compile t
 
   val trans = fn
     (nil, _, _) =>
       NONE
-  | (Instr.ACCESS i :: c, p, ENV e) => let
+  | (ACCESS i :: c, p, ENV e) => let
       val (c', e') = List.nth (e, i)
     in
       SOME (c', p, e')
     end
-  | (Instr.GRAB :: c, nil, ENV e) =>
+  | (GRAB :: c, nil, ENV e) =>
       NONE
-  | (Instr.GRAB :: c, (c', e') :: p, ENV e) =>
+  | (GRAB :: c, (c', e') :: p, ENV e) =>
       SOME (c, p, ENV ((c', e') :: e))
-  | (Instr.PUSH c' :: c, p, e) =>
+  | (PUSH c' :: c, p, e) =>
       SOME (c, (c', e) :: p, e)
 
   local
@@ -29,11 +40,26 @@ structure KrivineMachine :> KRIVINE_MACHINE = struct
     fun eval t = eval' (t, nil, ENV nil)
   end
 
+  fun showInstr (ACCESS i) = "ACCESS " ^ Int.toString i
+    | showInstr GRAB = "GRAB"
+    | showInstr (PUSH c) = "PUSH " ^ showCode c
+  and showCode c = "[" ^ String.concatWith ", " (map showInstr c) ^ "]"
+
   fun showThunk (c, ENV e) =
-    "(" ^ Instr.showList c ^ ", [" ^ String.concatWith ", " (map showThunk e) ^ "])"
+    "(" ^ showCode c ^ ", [" ^ String.concatWith ", " (map showThunk e) ^ "])"
 
   fun showState (c, p, ENV e) =
-    "(" ^ Instr.showList c ^
+    "(" ^ showCode c ^
     ", [" ^ String.concatWith ", " (map showThunk p) ^
     "], [" ^ String.concatWith ", " (map showThunk e) ^ "])"
+
+  val B = compile DeBruijnIndexedTerm.B
+  val C = compile DeBruijnIndexedTerm.C
+  val I = compile DeBruijnIndexedTerm.I
+  val K = compile DeBruijnIndexedTerm.K
+  val S = compile DeBruijnIndexedTerm.S
+  val W = compile DeBruijnIndexedTerm.W
+  val Y = compile DeBruijnIndexedTerm.Y
+  val omega = compile DeBruijnIndexedTerm.omega
+  val Omega = compile DeBruijnIndexedTerm.Omega
 end

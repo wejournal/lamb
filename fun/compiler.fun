@@ -10,7 +10,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
   ; "_" ^ Int.toString i
   end
 
-  fun compileInstr fresh name (Instr.ACCESS i) =
+  fun compileInstr fresh name (KrivineMachine.ACCESS i) =
       ( "\t/* ACCESS " ^ Int.toString i ^ " */\n" ^
         "\tpushq\t" ^ ABI.arg1 ^ "\n" ^
         "\tpushq\t" ^ ABI.arg0 ^ "\n" ^
@@ -29,7 +29,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
         "\tpopq\t%r14\n" ^
         "\tjmp\t*%r10\n"
       , "")
-    | compileInstr fresh name Instr.GRAB = let
+    | compileInstr fresh name KrivineMachine.GRAB = let
         fun push r NONE = "\tpushq\t" ^ r ^ "\n"
           | push r (SOME r') = "\tmovq\t" ^ r ^ ",\t" ^ r' ^ "\n"
         fun pop NONE = "\tpopq\t%r14\n"
@@ -97,10 +97,10 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
           "\tincq\t" ^ ABI.arg0 ^ "\n"
         , "")
       end
-    | compileInstr fresh name (Instr.PUSH c) = let
+    | compileInstr fresh name (KrivineMachine.PUSH c) = let
         val x = gensym fresh
       in
-        ( "\t/* PUSH " ^ Instr.showList c ^ " */\n" ^
+        ( "\t/* PUSH " ^ KrivineMachine.showCode c ^ " */\n" ^
           "\tleaq\t0(" ^ ABI.arg2 ^ ", " ^ ABI.arg2 ^ ", 2),\t%r10\n" ^
           "\tsalq\t$3,\t%r10\n" ^
           "\taddq\t%r10,\t" ^ ABI.arg3 ^ "\n" ^

@@ -20,7 +20,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val U = Type.ARR (string, string)
     val S = Inferring.unify [(T, U)]
     val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
-    val c = Instr.compile u
+    val c = KrivineMachine.compile u
     val thunk = KrivineMachine.eval c
   in
     print (TypedTerm.show (Inferring.substTypedTerm S t') ^ "\n  : " ^ Type.show (Type.subst S T) ^ "\n  = " ^ KrivineMachine.showThunk thunk ^ "\n")
@@ -43,7 +43,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
     val U = Type.ARR (string, string)
     val _ = Inferring.unify [(T, U)]
     val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
-    val c = Instr.compile u
+    val c = KrivineMachine.compile u
     val s = SystemVCompiler.compile (SystemVCompiler.new ()) "lamb_main" c
   in
     print (".globl\tlamb_main\n" ^ s)
@@ -60,7 +60,7 @@ structure ConstraintTyped :> CONSTRAINT_TYPED = struct
   fun compileMicrosoft t = let
     val (t', T) = Inferring.infer t
     val u = DeBruijnIndexedTerm.compile (TypedTerm.erase t)
-    val c = Instr.compile u
+    val c = KrivineMachine.compile u
     val s = MicrosoftCompiler.compile (MicrosoftCompiler.new ()) "lamb_main" c
   in
     print (".globl\tlamb_main\n" ^ s)
