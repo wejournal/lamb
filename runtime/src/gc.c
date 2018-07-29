@@ -53,7 +53,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
     void *live = lives[lives_size];
     used_chunk_t *live_chunk = (used_chunk_t *) (((uintptr_t) live) - sizeof(used_chunk_t));
 
-    if (live_chunk->size & 1 == 1)
+    if ((live_chunk->size & 1) == 1)
       continue;
 
     uintptr_t stack_map_size = calc_stack_map_size(live_chunk->size);
@@ -92,7 +92,7 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
 
   while (*addr) {
     used_chunk_t *tmp = *addr;
-    if (tmp->size & 1 == 1) {
+    if ((tmp->size & 1) == 1) {
       tmp->size &= ~1;
       addr = &tmp->next;
     } else {
