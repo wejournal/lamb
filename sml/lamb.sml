@@ -82,8 +82,44 @@ fun options nil = { typing = TYPED, doing = COMPILE, target = LINUX }
 val () = let
   val {typing, doing, target} = options (CommandLine.arguments())
 
-  fun print_error _ = print "syntax error.\n"
-  val lexer = Parsing.makeLexer (fn _ => case TextIO.inputLine TextIO.stdIn of SOME s => s | NONE => "")
+  val s = TextIO.inputAll TextIO.stdIn
+
+  val lines = String.fields (fn c => c = #"\n")
+
+  fun split i j s = let
+    val s1 = String.substring (s, 0, i)
+    val s2 = String.substring (s, i, j - i)
+    val s3 = String.extract (s, j, NONE)
+  in
+    (s1, s2, s3)
+  end
+
+  fun print_error (msg, i, j) = let
+    val (s1, s2, s3) = split i j s
+    val lines1 = lines s1
+    val lines2 = lines s2
+    val lines3 = lines s3
+    val line1 = List.last lines1
+    val lineno = List.length lines1
+    val colno = String.size line1
+  in
+    print ("\027[1m<stdin>:" ^ Int.toString lineno ^ ":" ^ Int.toString colno ^ ":\027[0m \027[1;31merror: \027[0m\027[1m" ^ msg ^ "\027[0m\n")
+  ; case lines2 of
+      [line2] => let
+        val line3 = List.hd lines3
+        val line = line1 ^ "\027[4m" ^ line2 ^ "\027[0m" ^ line3
+      in
+        print (line ^ "\n")
+      end
+    | _ => let
+        val line = line1 ^ "\027[4m" ^ List.hd lines2 ^ "\027[0m"
+      in
+        print (line ^ "\n")
+      end
+  end
+
+  val read = ref false
+  val lexer = Parsing.makeLexer (fn _ => if !read then "" else (read := true; s))
   val (t, lexer') = Parsing.parse (0, lexer, print_error, ())
 in
   case doing of
@@ -111,6 +147,6 @@ in
       ConstraintTyped.infer t
 end handle
   Unrecognized opt =>
-    print ("unrecognized option `" ^ opt ^ "'\n")
+    print ("\027[1m:lamb:\027[0m \027[1;31merror:\027[0m \027[1munrecognized option `" ^ opt ^ "'\027[0m\n")
 | Parsing.ParseError =>
-    print "parse error.\n"
+    ()

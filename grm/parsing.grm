@@ -21,9 +21,11 @@ end
 
 val tycxt = ref (gensym ())
 
+val pos = ref 0
+
 %%
 %eop EOF
-%pos unit
+%pos int
 
 %term
   EOF
