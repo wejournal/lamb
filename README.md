@@ -115,6 +115,22 @@ We recommend you use `gcc`.
 But you can use `as` and `ld`.
 If you use `as` and `ld`, you need to link the libc manually.
 
+### VM Execution
+
+Lamb supports VM (Krivine Machine) execution.
+
+```
+lamb --eval < foo.lam
+```
+
+### Untyped Lambda Calculus
+
+/IF YOU ONLY KNEW THE POWER OF THE DARK SIDE/.
+
+```
+lamb --untyped < foo.lam > foo.s
+```
+
 ## Language Specification
 
 ### Lexicon
