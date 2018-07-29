@@ -32,15 +32,15 @@ $ make
 *After* build:
 
 ```
-$ make -C examples/hello TARGET=linux
-$ examples/hello/hello
+$ make -C examples TARGET=linux
+$ examples/hello
 hello world
 ```
 
 ```
 # x86_64-w64-mingw32-gcc is required.
-$ make -C examples/hello TARGET=windows
-# Copy examples/hello/hello.exe to your own windows and run it.
+$ make -C examples TARGET=windows
+# Copy examples/hello.exe to your own windows and run it.
 ```
 
 ## Examples
