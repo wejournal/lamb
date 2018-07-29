@@ -87,7 +87,7 @@ The type of the following program is automatically inferred to be `'a -> 'a`.
 
 #### Let-Polymorphism
 
-Lamb supports the let-polymorphism.
+Lamb supports let-polymorphism.
 Therefore, the following program is valid.
 
 <pre>
