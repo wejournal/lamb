@@ -139,7 +139,7 @@ fun print_error s (msg, i, j) = let
   val lines3 = lines s3
   val line1 = List.last lines1
   val lineno = List.length lines1
-  val colno = String.size line1
+  val colno = String.size line1 + 1
 in
   TextIO.output (TextIO.stdErr, "\027[1m<stdin>:" ^ Int.toString lineno ^ ":" ^ Int.toString colno ^ ":\027[0m \027[1;31merror: \027[0m\027[1m" ^ msg ^ "\027[0m\n")
 ; case lines2 of
