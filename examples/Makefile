@@ -24,26 +24,8 @@ RUNTIME :=	../runtime/src/runtime.c \
 .PHONY: all
 all: hello$(SUFFIX) cat$(SUFFIX) fib$(SUFFIX) fib-iter$(SUFFIX)
 
-hello$(SUFFIX): $(RUNTIME) hello$(SUFFIX).s
-	$(GCC) $(PEDANTIC) -I../include -o $@ $^
-
-hello$(SUFFIX).s: hello.lam
+%$(SUFFIX).s: ../snippet/typed.lam %.lam
 	cat $^ | $(LAMB) --typed --compile --target $(TARGET) > $@
 
-cat$(SUFFIX): $(RUNTIME) cat$(SUFFIX).s
+%$(SUFFIX): $(RUNTIME) %$(SUFFIX).s
 	$(GCC) $(PEDANTIC) -I../include -o $@ $^
-
-cat$(SUFFIX).s: cat.lam
-	cat $^ | $(LAMB) --typed --compile --target $(TARGET) > $@
-
-fib$(SUFFIX): $(RUNTIME) fib$(SUFFIX).s
-	$(GCC) $(PEDANTIC) -I../include -o $@ $^
-
-fib$(SUFFIX).s: ../snippet/typed.lam ../snippet/untyped.lam fib.lam
-	cat $^ | $(LAMB) --untyped --compile --target $(TARGET) > $@
-
-fib-iter$(SUFFIX): $(RUNTIME) fib-iter$(SUFFIX).s
-	$(GCC) $(PEDANTIC) -I../include -o $@ $^
-
-fib-iter$(SUFFIX).s: fib-iter.lam
-	cat $^ | $(LAMB) --typed --compile --target $(TARGET) > $@
