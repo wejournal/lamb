@@ -8,7 +8,7 @@ statically typed, lazy evaluated,
 
 ### Lexicon
 
-*lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `in` | `let` | **NAT** | **CHAR** | **STRING** | **ID**
+- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `in` | `let` | **NAT** | **CHAR** | **STRING** | **ID**
 
 where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
 the classes are defined by regular expressions.
@@ -24,17 +24,12 @@ the classes are defined by regular expressions.
 
 ### Grammar
 
-*program* ::= *exp*
-
-*ty*: *atty* | *atty* `->` *ty*
-
-*atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
-
-*tyopt* ::= ε | `:` *ty*
-
-*exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
-
-*atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
+- *program* ::= *exp*
+- *ty* ::= *atty* | *atty* `->` *ty*
+- *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
+- *tyopt* ::= ε | `:` *ty*
+- *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
+- *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
 
 ### Informal Semantics
 
