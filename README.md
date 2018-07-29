@@ -6,20 +6,28 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 
 ### Type System
 
-#### type inference
+#### Type Inference
+
+Lamb programs are statically typed, but you don't need to write types.
+The type of the following program is inferenced `'a -> 'a` automatically.
 
 <pre>
-<b>let</b> S := ^x. ^y. ^z. x z (y z) <b>in</b>
-<b>let</b> K := ^x. ^_. x <b>in</b>
-  S K K
+<b>let</b> I := ^x. x <b>in</b>
+  I
 </pre>
 
-#### let polymorphism
+#### Let Polymorphism
+
+Lamb supports the let polymorphism.
+Therefore, the following program is valid.
 
 <pre>
 <b>let</b> I := ^x. x <b>in</b>
   I I
 </pre>
+
+*Note*: In a monomorphic language, `I I` is invalid.
+Because `^x. x x` is valid if it is valid.
 
 ## Language Specification
 
