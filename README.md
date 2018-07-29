@@ -31,6 +31,14 @@ the classes are defined by regular expressions.
 
 ### Type System
 
+#### type inference
+
+<pre>
+<b>let</b> S := ^x. ^y. ^z. x z (y z) <b>in</b>
+<b>let</b> K := ^x. ^_. x <b>in</b>
+  S K K
+</pre>
+
 #### let polymorphism
 
 <pre>
