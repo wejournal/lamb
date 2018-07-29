@@ -7,8 +7,8 @@ let S : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c := ^x. ^y. ^z. x z (y z) in
 let W : ('a -> 'a -> 'b) -> 'a -> 'b := ^x. ^y. x y y in
 
 -- Booleans
-let false := ^_. ^y. y in
-let true := ^x. ^_. x in
+let false : 'a -> 'a -> 'a := ^_. ^y. y in
+let true : 'a -> 'a -> 'a := ^x. ^_. x in
 let and := ^p. ^q. p q false in
 let or := ^p. ^q. p true q in
 let not := ^p. p false true in

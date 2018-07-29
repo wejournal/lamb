@@ -28,20 +28,12 @@ bin/lamb:	mlb/lamb.mlb \
 		sml/type.sml \
 		sig/typed-term.sig \
 		sml/typed-term.sml \
-		sig/simply-typing.sig \
-		sml/simply-typing.sml \
 		sig/implicit-typed-term.sig \
 		sml/implicit-typed-term.sml \
-		sig/constraint-typing.sig \
-		sml/constraint-typing.sml \
-		sig/unifying.sig \
-		sml/unifying.sml \
 		sig/inferring.sig \
 		sml/inferring.sml \
 		sig/untyped.sig \
 		sml/untyped.sml \
-		sig/simply-typed.sig \
-		sml/simply-typed.sml \
 		sig/constraint-typed.sig \
 		sml/constraint-typed.sml \
 		grm/parsing.grm.sig \
@@ -78,20 +70,12 @@ bin/lazy-k:	mlb/lazy-k.mlb \
 		sml/type.sml \
 		sig/typed-term.sig \
 		sml/typed-term.sml \
-		sig/simply-typing.sig \
-		sml/simply-typing.sml \
 		sig/implicit-typed-term.sig \
 		sml/implicit-typed-term.sml \
-		sig/constraint-typing.sig \
-		sml/constraint-typing.sml \
-		sig/unifying.sig \
-		sml/unifying.sml \
 		sig/inferring.sig \
 		sml/inferring.sml \
 		sig/untyped.sig \
 		sml/untyped.sml \
-		sig/simply-typed.sig \
-		sml/simply-typed.sml \
 		sig/constraint-typed.sig \
 		sml/constraint-typed.sml \
 		grm/lazy-k-parsing.grm.sig \
