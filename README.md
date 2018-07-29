@@ -24,7 +24,7 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 ## Building
 
 ```
-make
+$ make
 ```
 
 ## Run Examples
@@ -103,7 +103,7 @@ because `^x. x x` would also become valid if that expression were valid.
 Lamb supports x64 code generation by default. For example, the following command compiles `foo.lam` to `foo.s`.
 
 ```
-lamb < foo.lam > foo.s
+$ lamb < foo.lam > foo.s
 ```
 
 To generate executables:
@@ -120,13 +120,13 @@ If you use `as` and `ld`, you need to link the libc manually.
 Lamb supports VM (Krivine Machine) execution.
 
 ```
-lamb --eval < foo.lam
+$ lamb --eval < foo.lam
 ```
 
 ### Infer and Print the Type
 
 ```
-lamb --infer < foo.lam
+$ lamb --infer < foo.lam
 ```
 
 ### Untyped Lambda Calculus
@@ -134,7 +134,7 @@ lamb --infer < foo.lam
 *IF YOU ONLY KNEW THE POWER OF THE DARK SIDE*.
 
 ```
-lamb --untyped < foo.lam > foo.s
+$ lamb --untyped < foo.lam > foo.s
 ```
 
 ## Language Specification
