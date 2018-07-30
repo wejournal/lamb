@@ -12,8 +12,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
 
   local
     fun compileInstr fresh name (KrivineMachine.ACCESS i) =
-        ( ["\t/* ACCESS ", Int.toString i, " */\n",
-          "\tsubq\t$", Int.toString (i + 1), ",\t", ABI.arg0, "\n",
+        ( ["\tsubq\t$", Int.toString (i + 1), ",\t", ABI.arg0, "\n",
           "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n",
           "\tsalq\t$3,\t", ABI.arg0, "\n",
           "\taddq\t", ABI.arg0, ",\t", ABI.arg1, "\n",
@@ -30,8 +29,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
           fun pop NONE = ["\tpopq\t%r14\n"]
             | pop (SOME _) = nil
         in
-          ( ["\t/* GRAB */\n",
-            "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n",
+          ( ["\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n",
             "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n",
             "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n",
             "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n",
@@ -87,8 +85,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
       | compileInstr fresh name (KrivineMachine.PUSH c) = let
           val x = gensym fresh
         in
-          ( ["\t/* PUSH ", KrivineMachine.showCode c, " */\n",
-            "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n",
+          ( ["\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n",
             "\tsalq\t$3,\t%r10\n",
             "\taddq\t%r10,\t", ABI.arg3, "\n",
             "\tmovq\t$", name, x, ",\t(", ABI.arg3, ")\n",
