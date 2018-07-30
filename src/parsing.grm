@@ -1,11 +1,25 @@
 local open TypedTerm in
-  fun encodeNat (r, 0w0) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
-    | encodeNat (r, n) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, encodeNat (r, LargeWord.- (n, 0w1)), VAR (r, "f")), VAR (r, "x")))))
+  fun encodeNat' (r, 0w0) = VAR (r, "O")
+    | encodeNat' (r, n) = APP (r, VAR (r, "S"), encodeNat' (r, LargeWord.- (n, 0w1)))
+
+  fun encodeNat (r, n) = let
+    val O = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
+    val S = ABS (r, (r, "n"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), VAR (r, "z"))))))
+  in
+    LET (r, (r, "O"), NONE, O, LET (r, (r, "S"), NONE, S, encodeNat' (r, n)))
+  end
 
   fun encodeChar (r, c) = encodeNat (r, LargeWord.fromInt (ord c))
 
-  fun encodeCharList (r, nil) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
-    | encodeCharList (r, t :: ts) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, APP (r, VAR (r, "f"), t), APP (r, APP (r, encodeCharList (r, ts), VAR (r, "f")), VAR (r, "x")))))
+  fun encodeCharList' (r, nil) = VAR (r, "nil")
+    | encodeCharList' (r, t :: ts) = APP (r, APP (r, VAR (r, "cons"), t), encodeCharList' (r, ts))
+
+  fun encodeCharList (r, l) = let
+    val nil' = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
+    val cons = ABS (r, (r, "x"), NONE, ABS (r, (r, "xs"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, APP (r, VAR (r, "f"), VAR (r, "x")), APP (r, APP (r, VAR (r, "xs"), VAR (r, "f")), VAR (r, "z")))))))
+  in
+    LET (r, (r, "nil"), NONE, nil', LET (r, (r, "cons"), NONE, cons, encodeCharList' (r, l)))
+  end
 
   fun encodeString (r, s) = encodeCharList (r, map (fn c => encodeChar (r, c)) (String.explode s))
 end
