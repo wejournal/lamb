@@ -28,6 +28,8 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
           "\tmovq\t%r12,\t", ABI.arg1, "\n",
           "\tpopq\t%r13\n",
           "\tpopq\t%r14\n",
+          "\taddq\t$32,\t%rsp\n",
+          "\tpopq\t%rbp\n",
           "\tjmp\t*%r10\n" ]
         , nil)
       | compileInstr fresh name KrivineMachine.GRAB = let
@@ -37,10 +39,10 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             | pop (SOME _) = nil
         in
           ( ["\t/* GRAB */\n",
-            "\tpushq\t", ABI.arg0, "\n",
-            "\tpushq\t", ABI.arg1, "\n",
-            "\tpushq\t", ABI.arg2, "\n",
-            "\tpushq\t", ABI.arg3, "\n",
+            "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n",
+            "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n",
+            "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n",
+            "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n",
             "\tmovq\t", ABI.arg0, ",\t%r10\n",
             "\tincq\t%r10\n",
             "\tmovq\t$24,\t%r11\n",
@@ -59,23 +61,16 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             "\tpopq\t%r12\n" ::
             ABI.leave 1 @
           [ "\tpopq\t%r12\n",
-            "\tpopq\t", ABI.arg3, "\n",
-            "\tpopq\t", ABI.arg2, "\n",
-            "\tpopq\t", ABI.arg1, "\n",
-            "\tpopq\t", ABI.arg0, "\n",
+            "\tmovq\t-16(%rbp),", ABI.arg1, "\n",
+            "\tmovq\t-8(%rbp),", ABI.arg0, "\n",
             "\tpushq\t%rax\n",
-            "\tpushq\t", ABI.arg0, "\n",
-            "\tpushq\t", ABI.arg1, "\n",
-            "\tpushq\t", ABI.arg2, "\n",
-            "\tpushq\t", ABI.arg3, "\n",
             "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n",
             "\tsalq\t$3,\t", ABI.arg2, "\n",
             "\tmovq\t%rax,\t", ABI.arg0, "\n" ] @
             ABI.call "memcpy" @
-          [ "\tpopq\t", ABI.arg3, "\n",
-            "\tpopq\t", ABI.arg2, "\n",
-            "\tpopq\t", ABI.arg1, "\n",
-            "\tpopq\t", ABI.arg0, "\n",
+          [ "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n",
+            "\tmovq\t-24(%rbp),", ABI.arg2, "\n",
+            "\tmovq\t-8(%rbp),", ABI.arg0, "\n",
             "\tpopq\t", ABI.arg1, "\n",
             "\tdecq\t", ABI.arg2, "\n",
             "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r13\n",
@@ -118,7 +113,11 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
       val codes = List.map (compileInstr fresh name) c
       val s = List.map #1 codes @ List.concat (List.map #2 codes)
     in
-      [name, ":\n"] :: s
+      [ name, ":\n"
+      , "\tpushq\t%rbp\n"
+      , "\tmovq\t%rsp,\t%rbp\n"
+      , "\tsubq\t$32,\t%rsp\n"
+      ] :: s
     end
   in
     fun compile fresh name c = concat (List.concat (compileCode fresh name c))
