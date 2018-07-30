@@ -24,7 +24,7 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 ## Building
 
 ```
-$ make
+$ make -j8
 ```
 
 ## Run Examples
@@ -32,14 +32,14 @@ $ make
 *After* build:
 
 ```
-$ make -C examples TARGET=linux
+$ make -C examples -j8 TARGET=linux
 $ examples/hello
 hello world
 ```
 
 ```
 # x86_64-w64-mingw32-gcc is required.
-$ make -C examples TARGET=windows
+$ make -C examples -j8 TARGET=windows
 # Copy examples/hello.exe to your own windows and run it.
 ```
 
