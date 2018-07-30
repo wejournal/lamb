@@ -1,8 +1,8 @@
 local open TypedTerm in
   fun encodeNat (r, 0w0) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
-    | encodeNat (r, n) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, encodeNat (r, Word64.- (n, 0w1)), VAR (r, "f")), VAR (r, "x")))))
+    | encodeNat (r, n) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, encodeNat (r, LargeWord.- (n, 0w1)), VAR (r, "f")), VAR (r, "x")))))
 
-  fun encodeChar (r, c) = encodeNat (r, Word64.fromInt (ord c))
+  fun encodeChar (r, c) = encodeNat (r, LargeWord.fromInt (ord c))
 
   fun encodeCharList (r, nil) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, VAR (r, "x")))
     | encodeCharList (r, t :: ts) = ABS (r, (r, "f"), NONE, ABS (r, (r, "x"), NONE, APP (r, APP (r, VAR (r, "f"), t), APP (r, APP (r, encodeCharList (r, ts), VAR (r, "f")), VAR (r, "x")))))
@@ -37,7 +37,7 @@ val tycxt = ref (gensym ())
 | LAMBDA
 | IN
 | LET
-| NAT of Word64.word
+| NAT of LargeWord.word
 | CHAR of char
 | STRING of string
 | ID of string

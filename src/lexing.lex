@@ -55,7 +55,7 @@ alpha = [A-Z_a-z];
 {digit}+ => (let
   val (i, j) = region yytext
 in
-  Tokens.NAT (Option.valOf (StringCvt.scanString (Word64.scan StringCvt.DEC) yytext), i, j)
+  Tokens.NAT (Option.valOf (StringCvt.scanString (LargeWord.scan StringCvt.DEC) yytext), i, j)
 end);
 
 "'"("\\"?)."'" => (let
