@@ -33,18 +33,22 @@ bin/lamb:	src/lamb.mlb \
 	$(MKDIR) -p bin
 	$(MLTON) -output $@ $<
 
+.INTERMEDIATE: src/parsing.grm.sig src/parsing.grm.sml
 src/parsing.grm.sig src/parsing.grm.sml: src/parsing.grm
 	$(MLYACC) $<
 
+.INTERMEDIATE: src/lexing.lex.sml
 src/lexing.lex.sml: src/lexing.lex
 	$(MLLEX) $<
 
+.INTERMEDIATE: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
 runtime/linux/n%.s: bin/lamb
 	echo $(patsubst runtime/linux/n%.s,%,$@) | bin/lamb --untyped --compile --target linux | sed 's/lamb_main/lamb_n$(patsubst runtime/linux/n%.s,%,$@)/' > runtime/linux/n$(patsubst runtime/linux/n%.s,%,$@).s
 
+.INTERMEDIATE: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 runtime/windows/numbers.s: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
