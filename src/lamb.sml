@@ -82,11 +82,15 @@ fun options nil = { typing = TYPED, doing = COMPILE, target = LINUX }
 fun check t = let
   val (t', T) = Inferring.infer t
   val r = Type.region T
+  val n = Type.VAR (r, "n")
+  val a = Type.VAR (r, "a")
+  val nat = Type.ARR (r, Type.ARR (r, n, n), Type.ARR (r, n, n))
+  val stdin = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, a, a)), Type.ARR (r, a, a))
   val N = Type.CON (r, "N")
   val A = Type.CON (r, "A")
-  val nat = Type.ARR (r, Type.ARR (r, N, N), Type.ARR (r, N, N))
-  val string = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, A, A)), Type.ARR (r, A, A))
-  val U = Type.ARR (r, string, string)
+  val NAT = Type.ARR (r, Type.ARR (r, N, N), Type.ARR (r, N, N))
+  val stdout = Type.ARR (r, Type.ARR (r, NAT, Type.ARR (r, A, A)), Type.ARR (r, A, A))
+  val U = Type.ARR (r, stdin, stdout)
   val S = Inferring.unify [(T, U)]
 in
   ()
