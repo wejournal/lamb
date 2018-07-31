@@ -19,9 +19,14 @@ let if : 'bool -> 'a -> 'a -> 'a := ^p. ^x. ^y. p x y in
 -- let 'nat := ('a -> 'a) -> 'a -> 'a
 let succ : 'nat -> 'nat := ^n. ^f. ^x. f (n f x) in
 let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
+let odd : 'nat -> 'bool := ^n. n not false in
+let even : 'nat -> 'bool := ^n. n not true in
 
 -- Lists
 -- let 'alist := ('a -> 'b -> 'b) -> 'b -> 'b
 let nil : 'alist := ^_. ^z. z in
 let cons : 'a -> 'alist -> 'alist := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let filter : ('a -> 'bool) -> 'alist -> 'alist := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
+let reverse := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
+let reverse_range := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
+let range := ^n. ^m. reverse (reverse_range n m) in
