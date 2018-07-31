@@ -75,14 +75,30 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   uintptr_t lives_size = 0;
   void *lives[65536];
 
+#ifdef GC_DEBUG
+  if (env_values && !is_used(env_values) && !is_free(env_values))
+    fprintf(stderr, "env_values is an unmanaged pointer: %p\n", (void *) env_values);
+
+  if (env_values && is_free(env_values))
+    fprintf(stderr, "env_values is a dangling pointer: %p\n", (void *) env_values);
+
+  if (stack_values && !is_used(stack_values) && !is_free(stack_values))
+    fprintf(stderr, "stack_values is an unmanaged pointer: %p\n", (void *) stack_values);
+
+  if (stack_values && is_free(stack_values))
+    fprintf(stderr, "stack_values is a dangling pointer: %p\n", (void *) stack_values);
+#endif
+
   for (uintptr_t i = 0; i < env_count; ++i) {
     void *p = (void *) env_values[i].env.values;
 
+#ifdef GC_DEBUG
     if (p && !is_used(p) && !is_free(p))
       fprintf(stderr, "an unmanaged pointer in env_values: %p\n", p);
 
     if (p && is_free(p))
       fprintf(stderr, "a dangling pointer in env_values: %p\n", p);
+#endif
 
     if (!p || !is_used(p))
       continue;
@@ -99,11 +115,13 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   for (uintptr_t i = 0; i < stack_count; ++i) {
     void *p = (void *) stack_values[i].env.values;
 
+#ifdef GC_DEBUG
     if (p && !is_used(p) && !is_free(p))
       fprintf(stderr, "an unmanaged pointer in stack_values: %p\n", p);
 
     if (p && is_free(p))
       fprintf(stderr, "a dangling pointer in stack_values: %p\n", p);
+#endif
 
     if (!p || !is_used(p))
       continue;
@@ -116,13 +134,12 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
       exit(1);
     }
   }
-
   used_chunk_t *env_chunk = (used_chunk_t *) (((uintptr_t) env_values) - sizeof(used_chunk_t));
   used_chunk_t *stack_chunk = (used_chunk_t *) (((uintptr_t) stack_values) - sizeof(used_chunk_t));
   env_chunk->size |= 1;
   stack_chunk->size |= 1;
 
-  /*
+#ifdef GC_DEBUG
   uintptr_t *env_stack_map = (uintptr_t *) (((uintptr_t) env_chunk) - 8);
   uintptr_t *stack_stack_map = (uintptr_t *) (((uintptr_t) stack_chunk) - 8);
 
@@ -131,7 +148,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
   if (*stack_stack_map != 4)
     fprintf(stderr, "*stack_stack_map = %ld\n", *stack_stack_map);
-  */
+#endif
 
   while (lives_size > 0) {
     --lives_size;
@@ -155,11 +172,13 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
         void *p = (void *) (((uintptr_t *) live)[i * (live_chunk->size / sizeof(uintptr_t)) + j]);
 
+#ifdef GC_DEBUG
         if (p && !is_used(p) && !is_free(p))
           fprintf(stderr, "an unmanaged pointer in %p: %p\n", live, p);
 
         if (p && is_free(p))
           fprintf(stderr, "a dangling pointer in %p: %p\n", live, p);
+#endif
 
         if (!p || !is_used(p))
           continue;
@@ -271,8 +290,10 @@ void *gc_allocate(uintptr_t n, uintptr_t size, const uintptr_t *stack_map) {
   uintptr_t stack_map_size = calc_stack_map_size(size);
   uintptr_t used_chunk_size = stack_map_size + sizeof(used_chunk_t) + nsize;
 
+#ifdef GC_DEBUG
   if (stack_map_size != 8)
     fprintf(stderr, "stack_map_size = %ld\n", stack_map_size);
+#endif
 
   free_chunk_t **addr = &free_chunk;
 
