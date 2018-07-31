@@ -24,3 +24,4 @@ let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
 -- let 'alist := ('a -> 'b -> 'b) -> 'b -> 'b
 let nil : 'alist := ^_. ^z. z in
 let cons : 'a -> 'alist -> 'alist := ^x. ^xs. ^f. ^z. f x (xs f z) in
+let filter : ('a -> 'bool) -> 'alist -> 'alist := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
