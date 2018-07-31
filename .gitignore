@@ -1,3 +1,6 @@
 bin
 runtime/linux/numbers.s
 runtime/windows/numbers.s
+src/parsing.grm.sig
+src/parsing.grm.sml
+src/lexing.lex.sml
