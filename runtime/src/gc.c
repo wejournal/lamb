@@ -41,12 +41,59 @@ void gc_exit(void) {
   }
 }
 
+bool is_alive(void *p) {
+  used_chunk_t *tmp = used_chunk;
+
+  while (tmp) {
+    uintptr_t q = ((uintptr_t) tmp) + sizeof(used_chunk_t);
+
+    if (((uintptr_t) p) == q)
+      return true;
+
+    tmp = tmp->next;
+  }
+
+  return false;
+}
+
 void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
-  uintptr_t lives_size = 2;
+  uintptr_t lives_size = 0;
   void *lives[65536];
 
-  lives[0] = env_values;
-  lives[1] = stack_values;
+  for (uintptr_t i = 0; i < env_count; ++i) {
+    void *p = (void *) env_values[i].env.values;
+
+    if (!is_alive(p))
+      continue;
+
+    if (lives_size < 65536) {
+      lives[lives_size] = p;
+      ++lives_size;
+    } else {
+      fprintf(stderr, "runtime error: gc lives stack over flow\n");
+      exit(1);
+    }
+  }
+
+  for (uintptr_t i = 0; i < stack_count; ++i) {
+    void *p = (void *) stack_values[i].env.values;
+
+    if (!is_alive(p))
+      continue;
+
+    if (lives_size < 65536) {
+      lives[lives_size] = p;
+      ++lives_size;
+    } else {
+      fprintf(stderr, "runtime error: gc lives stack over flow\n");
+      exit(1);
+    }
+  }
+
+  used_chunk_t *env_chunk = (used_chunk_t *) (((uintptr_t) env_values) - sizeof(used_chunk_t));
+  used_chunk_t *stack_chunk = (used_chunk_t *) (((uintptr_t) stack_values) - sizeof(used_chunk_t));
+  env_chunk->size |= 1;
+  stack_chunk->size |= 1;
 
   while (lives_size > 0) {
     --lives_size;
@@ -59,9 +106,6 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
     uintptr_t stack_map_size = calc_stack_map_size(live_chunk->size);
     uintptr_t *stack_map = (uintptr_t *) (((uintptr_t) live_chunk) - stack_map_size);
 
-    if (live_chunk->size >= GC_MEMORY_SIZE)
-      continue;
-
     for (uintptr_t i = 0; i < live_chunk->n; ++i) {
       for (uintptr_t j = 0; j < live_chunk->size / sizeof(uintptr_t); ++j) {
         uintptr_t x = j / (sizeof(uintptr_t) * 8);
@@ -73,7 +117,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
         void *p = (void *) (((uintptr_t *) live)[i * (live_chunk->size / sizeof(uintptr_t)) + j]);
 
-        if (!p)
+        if (!is_alive(p))
           continue;
 
         if (lives_size < 65536) {
