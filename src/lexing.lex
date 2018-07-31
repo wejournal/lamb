@@ -40,7 +40,7 @@ alpha = [A-Z_a-z];
 %%
 
 {space}+ => (region yytext; lex());
-"--"[^\n]*\n => (lex());
+"--"[^\n]*\n => (region yytext; lex());
 "'" => (Tokens.QUOTE (region yytext));
 "(" => (Tokens.LPAREN (region yytext));
 ")" => (Tokens.RPAREN (region yytext));

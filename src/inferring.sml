@@ -30,7 +30,7 @@ structure Inferring :> INFERRING = struct
           raise NotInScope (r, x)
       | SOME (_, T) => let
           val polyVars' = List.filter (fn y => List.exists (fn z => y = z) polyVars) (Type.FV T)
-          val S = map (fn (r', y) => (y, Type.VAR (r', gensym fresh))) polyVars'
+          val S = map (fn (_, y) => (y, Type.VAR (r, gensym fresh))) polyVars'
         in
           (TypedTerm.VAR (r, x), Type.subst S T, nil)
         end)
