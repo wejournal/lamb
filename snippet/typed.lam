@@ -18,21 +18,9 @@ let if : 'bool -> 'a -> 'a -> 'a := ^p. ^x. ^y. p x y in
 -- Numbers
 -- let 'nat := ('a -> 'a) -> 'a -> 'a
 let succ : 'nat -> 'nat := ^n. ^f. ^x. f (n f x) in
-let pred := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
 let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
-let mult : (('nat -> 'nat) -> 'nat -> 'nat) -> 'nat -> 'nat := ^n. ^m. n (plus m) 0 in
-let minus := ^n. ^m. m pred n in
-let is_zero : 'nat -> 'bool := ^n. n (^_. false) true in
-let odd := ^n. n not false in
-let even := ^n. n not true in
 
 -- Lists
-let nil := ^_. ^z. z in
-let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
-let append := ^xs. ^ys. xs cons ys in
-let concat :=  ^xss.  xss append nil in
-let map := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
-let filter := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
-let reverse := ^xs. xs (^x. ^k. ^ys. k (cons x ys)) I nil in
-let reverse_range := ^n. ^m. (m (^f. ^g. f (^k. ^ns. g (succ k) (cons k ns))) (^f. f n nil)) (^_. ^ns. ns) in
-let range := ^n. ^m. reverse (reverse_range n m) in
+-- let 'alist := ('a -> 'b -> 'b) -> 'b -> 'b
+let nil : 'alist := ^_. ^z. z in
+let cons : 'a -> 'alist -> 'alist := ^x. ^xs. ^f. ^z. f x (xs f z) in

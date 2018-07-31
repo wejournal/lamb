@@ -1,1 +1,1 @@
-^stdin. "hello world\n"
+K("hello world\n")

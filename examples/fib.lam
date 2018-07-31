@@ -1,6 +1,3 @@
-let plus := ^n. ^m. ^f. ^x. n f (m f x)  in
-let nil := ^_. ^z. z in
-let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let nat2char := plus 48 in
 let fib := ^n.
   n
