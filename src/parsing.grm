@@ -9,7 +9,35 @@ local open TypedTerm in
     LET (r, (r, "O"), NONE, O, LET (r, (r, "S"), NONE, S, encodeNat' (r, n)))
   end
 
-  fun encodeChar (r, c) = encodeNat (r, LargeWord.fromInt (ord c))
+  fun encodeNatOpt' (r, 0w0) = encodeNat' (r, 0w0)
+    | encodeNatOpt' (r, 0w1) = encodeNat' (r, 0w1)
+    | encodeNatOpt' (r, 0w2) = encodeNat' (r, 0w2)
+    | encodeNatOpt' (r, 0w3) = encodeNat' (r, 0w3)
+    | encodeNatOpt' (r, n) = let
+        val m = LargeWord.div (n, 0w2)
+        val t = encodeNatOpt' (r, m)
+        val x = "n" ^ LargeWord.fmt StringCvt.DEC m
+        val t' = VAR (r, x)
+      in
+        if LargeWord.mod (n, 0w2) = 0w0 then
+          LET (r, (r, x), NONE, t, APP (r, APP (r, VAR (r, "plus"), t'), t'))
+        else
+          LET (r, (r, x), NONE, t, APP (r, VAR (r, "S"), APP (r, APP (r, VAR (r, "plus"), t'), t')))
+      end
+
+  fun encodeNatOpt (r, 0w0) = encodeNat (r, 0w0)
+    | encodeNatOpt (r, 0w1) = encodeNat (r, 0w1)
+    | encodeNatOpt (r, 0w2) = encodeNat (r, 0w2)
+    | encodeNatOpt (r, 0w3) = encodeNat (r, 0w3)
+    | encodeNatOpt (r, n) = let
+        val O = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
+        val S = ABS (r, (r, "n"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), VAR (r, "z"))))))
+        val plus = ABS (r, (r, "n"), NONE, ABS (r, (r, "m"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), APP (r, APP (r, VAR (r, "m"), VAR (r, "f")), VAR (r, "z")))))))
+      in
+        LET (r, (r, "O"), NONE, O, LET (r, (r, "S"), NONE, S, LET (r, (r, "plus"), NONE, plus, encodeNatOpt' (r, n))))
+      end
+
+  fun encodeChar (r, c) = encodeNatOpt (r, LargeWord.fromInt (ord c))
 
   fun encodeCharList' (r, nil) = VAR (r, "nil")
     | encodeCharList' (r, t :: ts) = APP (r, APP (r, VAR (r, "cons"), t), encodeCharList' (r, ts))
@@ -108,7 +136,7 @@ appexp:
 
 atexp:
   NAT
-    (encodeNat ((NATleft, NATright), NAT))
+    (encodeNatOpt ((NATleft, NATright), NAT))
 | CHAR
     (encodeChar ((CHARleft, CHARright), CHAR))
 | STRING
