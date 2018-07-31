@@ -59,7 +59,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
     uintptr_t stack_map_size = calc_stack_map_size(live_chunk->size);
     uintptr_t *stack_map = (uintptr_t *) (((uintptr_t) live_chunk) - stack_map_size);
 
-    if (live_chunk-> size >= GC_MEMORY_SIZE)
+    if (live_chunk->size >= GC_MEMORY_SIZE)
       continue;
 
     for (uintptr_t i = 0; i < live_chunk->n; ++i) {
