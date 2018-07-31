@@ -63,7 +63,7 @@ uintptr_t input_cont(uintptr_t env_count, closure_t *env_values, uintptr_t stack
   env.values[env.count].env.values = NULL;
 
   stack_map = 0;
-  env_t env1 = {0, gc_allocate(0, 0, &stack_map)};
+  env_t env1 = {0, gc_allocate(0, sizeof(closure_t), &stack_map)};
 
 #define CASE(n) \
   case n: \
@@ -369,10 +369,11 @@ uintptr_t f(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, c
   env_t env = {env_count, env_values};
   stack_t stack = {stack_count, stack_values};
 
-  uintptr_t stack_map = 0;
-  env_t env1 = {0, gc_allocate(0, 0, &stack_map)};
-
   GRAB(&env, &stack);
+
+  uintptr_t stack_map = 0;
+  env_t env1 = {0, gc_allocate(0, sizeof(closure_t), &stack_map)};
+
   PUSH(&env1, &stack, O);
   PUSH(&env1, &stack, S);
   uintptr_t n = ACCESS(&env, &stack, 0);
