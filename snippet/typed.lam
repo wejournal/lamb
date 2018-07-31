@@ -23,6 +23,8 @@ let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
 let mult : (('nat -> 'nat) -> 'nat -> 'nat) -> 'nat -> 'nat := ^n. ^m. n (plus m) 0 in
 let minus := ^n. ^m. m pred n in
 let is_zero : 'nat -> 'bool := ^n. n (^_. false) true in
+let odd := ^n. n not false in
+let even := ^n. n not true in
 
 -- Lists
 let nil := ^_. ^z. z in
@@ -30,3 +32,7 @@ let cons := ^x. ^xs. ^f. ^z. f x (xs f z) in
 let append := ^xs. ^ys. xs cons ys in
 let concat :=  ^xss.  xss append nil in
 let map := ^f. ^xs. xs (^x. ^ys. cons (f x) ys) nil in
+let filter := ^f. ^xs. xs (^x. ^ys. if (f x) (cons x ys) ys) nil in
+let reverse := ^xs. xs (^x. ^k. ^ys. k (cons x ys)) I nil in
+let reverse_range := ^n. ^m. (m (^f. ^g. f (^k. ^ns. g (succ k) (cons k ns))) (^f. f n nil)) (^_. ^ns. ns) in
+let range := ^n. ^m. reverse (reverse_range n m) in
