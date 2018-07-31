@@ -222,7 +222,6 @@ void gc_free() {
           free_addr = &tmp->next;
       }
 
-      fprintf(stderr, "gc_free();\n");
       *addr = mem->next;
       free(mem->array);
       free(mem);
