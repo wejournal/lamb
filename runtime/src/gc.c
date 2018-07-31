@@ -41,7 +41,7 @@ void gc_exit(void) {
   }
 }
 
-bool is_alive(void *p) {
+bool is_used(void *p) {
   used_chunk_t *tmp = used_chunk;
 
   while (tmp) {
@@ -63,7 +63,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   for (uintptr_t i = 0; i < env_count; ++i) {
     void *p = (void *) env_values[i].env.values;
 
-    if (!is_alive(p))
+    if (!p || !is_used(p))
       continue;
 
     if (lives_size < 65536) {
@@ -78,7 +78,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   for (uintptr_t i = 0; i < stack_count; ++i) {
     void *p = (void *) stack_values[i].env.values;
 
-    if (!is_alive(p))
+    if (!p || !is_used(p))
       continue;
 
     if (lives_size < 65536) {
@@ -117,7 +117,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
         void *p = (void *) (((uintptr_t *) live)[i * (live_chunk->size / sizeof(uintptr_t)) + j]);
 
-        if (!is_alive(p))
+        if (!p || !is_used(p))
           continue;
 
         if (lives_size < 65536) {

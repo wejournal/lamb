@@ -53,10 +53,7 @@ uintptr_t input_cont(uintptr_t env_count, closure_t *env_values, uintptr_t stack
   if (n == EOF)
     return ACCESS(&env, &stack, 0);
 
-  uintptr_t stack_map = 0;
-  env_t env1 = {0, gc_allocate(0, 0, &stack_map)};
-
-  stack_map = 4;
+  uintptr_t stack_map = 4;
   closure_t *new_env_values =
     gc_alloc(env.count, env.values, stack.count, stack.values, env.count + 1, sizeof(closure_t), &stack_map);
   memcpy(new_env_values, env.values, (env.count + 1) * sizeof(closure_t));
@@ -64,6 +61,9 @@ uintptr_t input_cont(uintptr_t env_count, closure_t *env_values, uintptr_t stack
   env.values[env.count].code = NULL;
   ++env.values[env.count].env.count;
   env.values[env.count].env.values = NULL;
+
+  stack_map = 0;
+  env_t env1 = {0, gc_allocate(0, 0, &stack_map)};
 
 #define CASE(n) \
   case n: \
