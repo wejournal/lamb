@@ -56,6 +56,7 @@ void gc_exit(void);
 void gc_mark(uintptr_t, closure_t *, uintptr_t, closure_t *);
 void gc_sweep(uintptr_t, closure_t *, uintptr_t, closure_t *);
 void gc_compact(void);
+void gc_free(void);
 void gc_perform(uintptr_t, closure_t *, uintptr_t, closure_t *);
 void gc_extend(void);
 void *gc_allocate(uintptr_t, uintptr_t, const uintptr_t *);

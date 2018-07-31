@@ -182,10 +182,61 @@ void gc_compact(void) {
   }
 }
 
+void gc_free() {
+  memory_t **addr = &memory;
+
+  while (*addr) {
+    memory_t *mem = *addr;
+
+    if (!mem->next)
+      return;
+
+    uintptr_t i = (uintptr_t) mem->array;
+    uintptr_t j = i + mem->volume;
+
+    bool empty = true;
+    used_chunk_t *tmp = used_chunk;
+
+    while (tmp) {
+      uintptr_t k = (uintptr_t) tmp;
+
+      if (i <= k && k < j) {
+        empty = false;
+        break;
+      }
+
+      tmp = tmp->next;
+    }
+
+    if (empty) {
+      free_chunk_t **free_addr = &free_chunk;
+
+      while (*free_addr) {
+        free_chunk_t *tmp = *free_addr;
+
+        uintptr_t k = (uintptr_t) tmp;
+
+        if (i <= k && k < j)
+          *free_addr = tmp->next;
+        else
+          free_addr = &tmp->next;
+      }
+
+      fprintf(stderr, "gc_free();\n");
+      *addr = mem->next;
+      free(mem->array);
+      free(mem);
+    } else {
+      addr = &mem->next;
+    }
+  }
+}
+
 void gc_perform(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   gc_mark(env_count, env_values, stack_count, stack_values);
   gc_sweep(env_count, env_values, stack_count, stack_values);
   gc_compact();
+  gc_free();
 }
 
 void gc_extend() {
