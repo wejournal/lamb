@@ -83,12 +83,10 @@ fun check t = let
   val (t', T) = Inferring.infer t
   val r = Type.region T
   val N = Type.CON (r, "N")
-  val a = Type.VAR (r, "a")
   val A = Type.CON (r, "A")
   val nat = Type.ARR (r, Type.ARR (r, N, N), Type.ARR (r, N, N))
-  val stdin = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, a, a)), Type.ARR (r, a, a))
-  val stdout = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, A, A)), Type.ARR (r, A, A))
-  val U = Type.ARR (r, stdin, stdout)
+  val string = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, A, A)), Type.ARR (r, A, A))
+  val U = Type.ARR (r, string, string)
   val S = Inferring.unify [(T, U)]
 in
   ()
