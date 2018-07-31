@@ -14,7 +14,7 @@ structure TypedTerm :> TYPED_TERM = struct
     fun indent s = let
       val lines = String.fields (fn ch => ch = #"\n") s
     in
-      concat (map (fn l => "  " ^ l ^ "\n") lines)
+      String.concatWith "\n" (map (fn l => "  " ^ l) lines)
     end
   in
     fun show (VAR (_, x)) = x
