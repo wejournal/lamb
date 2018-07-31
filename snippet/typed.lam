@@ -10,9 +10,9 @@ let W : ('a -> 'a -> 'b) -> 'a -> 'b := ^x. ^y. x y y in
 -- let 'bool := 'a -> 'a -> 'a
 let false : 'bool := ^_. ^y. y in
 let true : 'bool := ^x. ^_. x in
-let and : ('bool -> 'bool -> 'bool) -> 'bool -> 'bool := ^p. ^q. p q false in
-let or : ('bool -> 'bool -> 'bool) -> 'bool -> 'bool := ^p. ^q. p true q in
-let not : ('bool -> 'bool -> 'bool) -> 'bool := ^p. p false true in
+let and : 'bool -> 'bool -> 'bool := ^p. ^q. ^x. ^y. p (q x y) y in
+let or : 'bool -> 'bool -> 'bool := ^p. ^q. ^x. ^y. p x (q x y) in
+let not : 'bool -> 'bool := ^p. ^x. ^y. p y x in
 let if : 'bool -> 'a -> 'a -> 'a := ^p. ^x. ^y. p x y in
 
 -- Numbers
