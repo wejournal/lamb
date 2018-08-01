@@ -11,7 +11,7 @@ structure Inferring :> INFERRING = struct
   ; "_" ^ Int.toString i
   end
 
-  fun generalize suffix (Type.VAR (r, x)) = Type.VAR (r, x)
+  fun generalize suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
     | generalize suffix (Type.CON (r, x)) = Type.VAR (r, x ^ suffix)
     | generalize suffix (Type.ARR (r, T, U)) = Type.ARR (r, generalize suffix T, generalize suffix U)
 

@@ -52,17 +52,6 @@ local open TypedTerm in
   fun encodeString (r, s) = encodeCharList (r, map (fn c => encodeChar (r, c)) (String.explode s))
 end
 
-val fresh = ref 0
-
-fun gensym () = let
-  val i = !fresh
-in
-  fresh := !fresh + 1
-; Int.toString i
-end
-
-val tycxt = ref (gensym ())
-
 %%
 %eop EOF
 %pos cursor
@@ -109,7 +98,7 @@ ty:
 
 atty:
   QUOTE ID
-    (Type.VAR ((QUOTEleft, IDright), ID ^ !tycxt))
+    (Type.VAR ((QUOTEleft, IDright), ID))
 | ID
     (Type.CON ((IDleft, IDright), ID))
 | LPAREN ty RPAREN
@@ -118,7 +107,7 @@ atty:
 tyopt:
     (NONE)
 | COLON ty
-    (tycxt := gensym (); SOME ty)
+    (SOME ty)
 
 exp:
   appexp
