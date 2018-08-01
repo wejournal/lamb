@@ -11,6 +11,10 @@ structure Inferring :> INFERRING = struct
   ; "_" ^ Int.toString i
   end
 
+  fun generalize suffix (Type.VAR (r, x)) = Type.VAR (r, x)
+    | generalize suffix (Type.CON (r, x)) = Type.VAR (r, x ^ suffix)
+    | generalize suffix (Type.ARR (r, T, U)) = Type.ARR (r, generalize suffix T, generalize suffix U)
+
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
 
   fun substTypedTerm S (TypedTerm.VAR (r, x)) = TypedTerm.VAR (r, x)
@@ -58,6 +62,7 @@ structure Inferring :> INFERRING = struct
         val (t', T, C) = constraint_type fresh polyVars e t
         val S = unify C
         val (t', T, C) = (substTypedTerm S t', Type.subst S T, substConstraints S C)
+        val T = generalize (gensym fresh) T
         val monoVars = List.concat (map (Type.FV o #2) e)
         val polyVars' = List.filter (fn y => not (List.exists (fn z => y = z) monoVars)) (Type.FV T) @ polyVars
         val e' = (x, T) :: e
@@ -69,6 +74,7 @@ structure Inferring :> INFERRING = struct
         val (t', T', C) = constraint_type fresh polyVars e t
         val S = unify ((T, T') :: C)
         val (t', T, C) = (substTypedTerm S t', Type.subst S T, substConstraints S C)
+        val T = generalize (gensym fresh) T
         val monoVars = List.concat (map (Type.FV o #2) e)
         val polyVars' = List.filter (fn y => not (List.exists (fn z => y = z) monoVars)) (Type.FV T) @ polyVars
         val e' = (x, T) :: e
