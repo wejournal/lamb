@@ -19,6 +19,12 @@ let true
   : (a -> a -> a) -- bool[a]
   := ^x. ^_. x in
 
+--| not : bool[a] -> bool[a]
+let not
+  : (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
+  := ^p. ^x. ^y. p y x in
+
 --| and : bool[a] -> bool[a] -> bool[a]
 let and
   : (a -> a -> a) -- bool[a]
@@ -33,11 +39,12 @@ let or
   -> (a -> a -> a) -- bool[a]
   := ^p. ^q. ^x. ^y. p x (q x y) in
 
---| not : bool[a] -> bool[a]
-let not
+--| xor : bool[a] -> bool[a] -> bool[a]
+let xor
   : (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
-  := ^p. ^x. ^y. p y x in
+  -> (a -> a -> a) -- bool[a]
+  := ^p. ^q. ^x. ^y. p (q y x) (q x y) in
 
 --| if : bool[a] -> a -> a -> a
 let if
@@ -185,3 +192,374 @@ let range
   -> (((((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -- nat[nat[a] -> (b -> b) -> (b -> b)]
   -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
   := ^n. ^m. reverse (reverse_range n m) in
+
+-- type bin8[a] := (bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> a) -> a
+
+--| zero8 : bin8[a]
+let zero8
+  : ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^f. f false false false false false false false false in
+
+--| sup8 : bin8[a]
+let sup8
+  : ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^f. f true true true true true true true true in
+
+--| not8 : bin8[a] -> bin8[a]
+let not8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    f (not _0) (not _1) (not _2) (not _3) (not _4) (not _5) (not _6) (not _7)) in
+
+--| and8 : bin8[a] -> bin8[a] -> bin8[a]
+let and8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
+    f (and _0 __0) (and _1 __1) (and _2 __2) (and _3 __3) (and _4 __4) (and _5 __5) (and _6 __6) (and _7 __7))) in
+
+--| or8 : bin8[a] -> bin8[a] -> bin8[a]
+let or8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
+    f (or _0 __0) (or _1 __1) (or _2 __2) (or _3 __3) (or _4 __4) (or _5 __5) (or _6 __6) (or _7 __7))) in
+
+--| xor8 : bin8[a] -> bin8[a] -> bin8[a]
+let xor8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
+    f (xor _0 __0) (xor _1 __1) (xor _2 __2) (xor _3 __3) (xor _4 __4) (xor _5 __5) (xor _6 __6) (xor _7 __7))) in
+
+--| is_zero8 : bin8[a] -> bool[a]
+let is_zero8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (a -> a -> a)
+  := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+      not (or _0 (or _1 (or _2 (or _3 (or _4 (or _5 (or _6 _7))))))) x y) in
+
+--| sl8 : bin8[a] -> bin8[a]
+let sl8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    f false _0 _1 _2 _3 _4 _5 _6) in
+
+--| sr8 : bin8[a] -> bin8[a]
+let sr8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    f _1 _2 _3 _4 _5 _6 _7 false) in
+
+--| add8 : bin8[a] -> bin8[a]
+let add8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. fst (8 (^p. ^f. p (^n. ^m. f (xor8 n m) (sl8 (and8 n m)))) (pair n m)) in
+
+--| inc8 : bin8[a] -> bin8[a]
+let inc8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    let __0 := ^x. ^y. not _0 x y in
+    let __1 := ^x. ^y. if _0 (not _1 x y) (_1 x y) in
+    let p := and _0 _1 in
+    let __2 := ^x. ^y. if p (not _2 x y) (_2 x y) in
+    let p := and p _2 in
+    let __3 := ^x. ^y. if p (not _3 x y) (_3 x y) in
+    let p := and p _3 in
+    let __4 := ^x. ^y. if p (not _4 x y) (_4 x y) in
+    let p := and p _4 in
+    let __5 := ^x. ^y. if p (not _5 x y) (_5 x y) in
+    let p := and p _5 in
+    let __6 := ^x. ^y. if p (not _6 x y) (_6 x y) in
+    let p := and p _6 in
+    let __7 := ^x. ^y. if p (not _7 x y) (_7 x y) in
+    f __0 __1 __2 __3 __4 __5 __6 __7) in
+
+--| dec8 : bin8[a] -> bin8[a]
+let dec8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    let __7 := not _7 in
+    let __6 := if __7 (not _6) _6 in
+    let __5 := if __6 (not _5) _5 in
+    let __4 := if __5 (not _4) _4 in
+    let __3 := if __4 (not _3) _3 in
+    let __2 := if __3 (not _2) _2 in
+    let __1 := if __2 (not _1) _1 in
+    let __0 := if __1 (not _0) _0 in
+    f __0 __1 __2 __3 __4 __5 __6 __7) in
+
+--| bin8 : nat[bin[a]] -> bin8[a]
+let bin8
+  : (('a -> 'a) -> 'a -> 'a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  := ^n. n inc8 zero8 in
+
+--| nat8 : bin8[a] -> nat[a]
+let nat8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a) -> a -> a)
+  := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    let g := ^f. ^z. if _7 (f z) z in
+    let g := ^f. ^z. if _6 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _5 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _4 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _3 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _2 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _1 (f (g f (g f z))) (g f (g f z)) in
+    let g := ^f. ^z. if _0 (f (g f (g f z))) (g f (g f z)) in
+    g f z) in
