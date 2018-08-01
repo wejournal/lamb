@@ -81,6 +81,12 @@ let even
   -> ('a -> 'a -> 'a) -- bool['a]
   := ^n. n not true in
 
+--| is_zero : nat['a] -> bool['a]
+let is_zero
+  : (('a -> 'a) -> 'a -> 'a)
+  -> ('a -> 'a -> 'a)
+  := ^n. ^x. ^y. n (K x) y in
+
 -- Pairs
 -- type pair['a, 'b, 'c] := ('a -> 'b -> 'c) -> 'c
 
