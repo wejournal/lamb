@@ -169,3 +169,34 @@ let reverse_range
 let range
   : 'TODO
   := ^n. ^m. reverse (reverse_range n m) in
+
+-- Bytes
+-- type byte['a, 'b] :=
+--   (bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] ->  'b) -> 'b
+-- type bytes['a, 'b] := list[byte['a, 'b]]
+
+--| byte : bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> byte['a, 'b]
+let byte
+  : 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool
+  -> (('bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'b) -> 'b)
+  := ^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7. ^f. f b0 b1 b2 b3 b4 b5 b6 b7 in
+
+--| byte_AND : byte['a, 'b] -> byte['a, 'b] -> byte['a, 'b]
+let byte_AND
+  := ^a. ^b. ^f.
+    a (^a0. ^a1. ^a2. ^a3. ^a4. ^a5. ^a6. ^a7.
+    b (^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7.
+    f (and a0 b0) (and a1 b1) (and a2 b2) (and a3 b3) (and a4 b4) (and a5 b5) (and a6 b6) (and a7 b7))) in
+
+--| byte_OR : byte['a, 'b] -> byte['a, 'b] -> byte['a, 'b]
+let byte_OR
+  := ^a. ^b. ^f.
+    a (^a0. ^a1. ^a2. ^a3. ^a4. ^a5. ^a6. ^a7.
+    b (^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7.
+    f (or a0 b0) (or a1 b1) (or a2 b2) (or a3 b3) (or a4 b4) (or a5 b5) (or a6 b6) (or a7 b7))) in
+
+--| AND : bytes['a, 'b] -> bytes['a, 'b]
+let AND := map byte_AND in
+
+--| OR : bytes['a, 'b] -> bytes['a, 'b]
+let OR := map byte_OR in
