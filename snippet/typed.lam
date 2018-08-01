@@ -452,88 +452,38 @@ let add8
     -> a)
   -> a
   := ^n. ^m. ^f.
-    m (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      if _0
-        (let n0 := xor8 n m in
-        let m0 := sl8 (and8 n m) in
-        let n1 := xor8 n0 m0 in
+    if (is_zero8 m)
+      (n f)
+      (let n0 := xor8 n m in
+      let m0 := sl8 (and8 n m) in
+      if (is_zero8 m0)
+        (n0 f)
+        (let n1 := xor8 n0 m0 in
         let m1 := sl8 (and8 n0 m0) in
-        let n2 := xor8 n1 m1 in
-        let m2 := sl8 (and8 n1 m1) in
-        let n3 := xor8 n2 m2 in
-        let m3 := sl8 (and8 n2 m2) in
-        let n4 := xor8 n3 m3 in
-        let m4 := sl8 (and8 n3 m3) in
-        let n5 := xor8 n4 m4 in
-        let m5 := sl8 (and8 n4 m4) in
-        let n6 := xor8 n5 m5 in
-        let m6 := sl8 (and8 n5 m5) in
-        let n7 := xor8 n6 m6 in
-          n7 f)
-        (if _1
-          (let n0 := xor8 n m in
-          let m0 := sl8 (and8 n m) in
-          let n1 := xor8 n0 m0 in
-          let m1 := sl8 (and8 n0 m0) in
-          let n2 := xor8 n1 m1 in
-          let m2 := sl8 (and8 n1 m1) in
-          let n3 := xor8 n2 m2 in
-          let m3 := sl8 (and8 n2 m2) in
-          let n4 := xor8 n3 m3 in
-          let m4 := sl8 (and8 n3 m3) in
-          let n5 := xor8 n4 m4 in
-          let m5 := sl8 (and8 n4 m4) in
-          let n6 := xor8 n5 m5 in
-            n6 f)
-          (if _2
-            (let n0 := xor8 n m in
-            let m0 := sl8 (and8 n m) in
-            let n1 := xor8 n0 m0 in
-            let m1 := sl8 (and8 n0 m0) in
-            let n2 := xor8 n1 m1 in
+          if (is_zero8 m1)
+            (n1 f)
+            (let n2 := xor8 n1 m1 in
             let m2 := sl8 (and8 n1 m1) in
-            let n3 := xor8 n2 m2 in
-            let m3 := sl8 (and8 n2 m2) in
-            let n4 := xor8 n3 m3 in
-            let m4 := sl8 (and8 n3 m3) in
-            let n5 := xor8 n4 m4 in
-              n5 f)
-            (if _3
-              (let n0 := xor8 n m in
-              let m0 := sl8 (and8 n m) in
-              let n1 := xor8 n0 m0 in
-              let m1 := sl8 (and8 n0 m0) in
-              let n2 := xor8 n1 m1 in
-              let m2 := sl8 (and8 n1 m1) in
-              let n3 := xor8 n2 m2 in
-              let m3 := sl8 (and8 n2 m2) in
-              let n4 := xor8 n3 m3 in
-                n4 f)
-              (if _4
-                (let n0 := xor8 n m in
-                let m0 := sl8 (and8 n m) in
-                let n1 := xor8 n0 m0 in
-                let m1 := sl8 (and8 n0 m0) in
-                let n2 := xor8 n1 m1 in
-                let m2 := sl8 (and8 n1 m1) in
-                let n3 := xor8 n2 m2 in
-                  n3 f)
-                (if _5
-                  (let n0 := xor8 n m in
-                  let m0 := sl8 (and8 n m) in
-                  let n1 := xor8 n0 m0 in
-                  let m1 := sl8 (and8 n0 m0) in
-                  let n2 := xor8 n1 m1 in
-                    n2 f)
-                  (if _6
-                    (let n0 := xor8 n m in
-                    let m0 := sl8 (and8 n m) in
-                    let n1 := xor8 n0 m0 in
-                      n1 f)
-                    (if _7
-                      (let n0 := xor8 n m in
-                        (n0 f))
-                      (n f))))))))) in
+              if (is_zero8 m2)
+                (n2 f)
+                (let n3 := xor8 n2 m2 in
+                let m3 := sl8 (and8 n2 m2) in
+                  if (is_zero8 m3)
+                    (n3 f)
+                    (let n4 := xor8 n3 m3 in
+                    let m4 := sl8 (and8 n3 m3) in
+                      if (is_zero8 m1)
+                        (n4 f)
+                        (let n5 := xor8 n4 m4 in
+                        let m5 := sl8 (and8 n4 m4) in
+                          if (is_zero8 m5)
+                            (n5 f)
+                            (let n6 := xor8 n5 m5 in
+                            let m6 := sl8 (and8 n5 m5) in
+                              if (is_zero8 m6)
+                                (n6 f)
+                                (let n7 := xor8 n6 m6 in
+                                  n7 f)))))))) in
 
 --| nat8 : bin8[a] -> nat[a]
 let nat8
