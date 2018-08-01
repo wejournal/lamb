@@ -467,15 +467,15 @@ let nat8
     -> a)
   -> ((a -> a) -> a -> a)
   := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    let g := ^f. ^z. if _7 (f z) z in
-    let g := ^f. ^z. if _6 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _5 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _4 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _3 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _2 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _1 (f (g f (g f z))) (g f (g f z)) in
-    let g := ^f. ^z. if _0 (f (g f (g f z))) (g f (g f z)) in
-    g f z) in
+    let g := ^z. if _7 (f z) z in
+    let g := ^z. if _6 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _5 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _4 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _3 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _2 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _1 (f (g (g z))) (g (g z)) in
+    let g := ^z. if _0 (f (g (g z))) (g (g z)) in
+    g z) in
 
 --| inc8 : bin8[a] -> bin8[a]
 let inc8
