@@ -131,6 +131,13 @@ let tl
   -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
   := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z)) in
 
+--| map : ('a -> 'b) -> list['a, 'c] -> list['b, 'c]
+let map
+  : ('a -> 'b)
+  -> (('a -> 'c -> 'c) -> 'c -> 'c) -- list['a, 'c]
+  -> (('b -> 'c -> 'c) -> 'c -> 'c) -- list['b, 'c]
+  := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
+
 --| filter : bool['a] -> list['a, 'b] -> list['a, 'b]
 let filter
   : ('a
