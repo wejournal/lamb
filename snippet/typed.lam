@@ -476,3 +476,69 @@ let nat8
     let g := ^f. ^z. if _1 (f (g f (g f z))) (g f (g f z)) in
     let g := ^f. ^z. if _0 (f (g f (g f z))) (g f (g f z)) in
     g f z) in
+
+--| inc8 : bin8[a] -> bin8[a]
+let inc8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    f (not _0)
+      (^x. ^y. if _0 (not _1 x y) (_1 x y))
+      (^x. ^y. if (and _0 _1) (not _2 x y) (_2 x y))
+      (^x. ^y. if (and _0 (and _1 _2)) (not _3 x y) (_3 x y))
+      (^x. ^y. if (and _0 (and _1 (and _2 _3))) (not _4 x y) (_4 x y))
+      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 _4)))) (not _5 x y) (_5 x y))
+      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 (and _4 _5))))) (not _6 x y) (_6 x y))
+      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 (and _4 (and _5 _6)))))) (not _7 x y) (_7 x y))) in
+
+--| sub8 : bin8[a] -> bin8[a] -> bin8[a]
+let sub8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. add8 n (inc8 (not8 m)) in

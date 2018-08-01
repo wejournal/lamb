@@ -73,7 +73,7 @@ bool is_free(void *p) {
 
 void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   uintptr_t lives_size = 0;
-  void *lives[65536];
+  void **lives = malloc(16777216);
 
   /* If env_values is an invalid pointer, ignore it. */
   if (!(env_values && !is_used(env_values) && !is_free(env_values))) {
@@ -109,7 +109,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
         if (!p)
           continue;
 
-        if (lives_size < 65536) {
+        if (lives_size < 16777216) {
           lives[lives_size] = p;
           ++lives_size;
         } else {
@@ -121,6 +121,8 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
     live_chunk->size |= 1;
   }
+
+  free(lives);
 }
 
 void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
