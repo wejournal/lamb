@@ -29,6 +29,10 @@ structure Type :> TYPE = struct
     | FV (CON _) = nil
     | FV (ARR (_, T, U)) = FV T @ FV U
 
+  fun BV (VAR (r, x)) = nil
+    | BV (CON (r, x)) = [(r, x)]
+    | BV (ARR (_, T, U)) = BV T @ BV U
+
   fun region (VAR (r, _)) = r
     | region (CON (r, _)) = r
     | region (ARR (r, _, _)) = r

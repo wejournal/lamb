@@ -11,9 +11,13 @@ structure Inferring :> INFERRING = struct
   ; "_" ^ Int.toString i
   end
 
-  fun generalize suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
-    | generalize suffix (Type.CON (r, x)) = Type.VAR (r, x ^ suffix)
-    | generalize suffix (Type.ARR (r, T, U)) = Type.ARR (r, generalize suffix T, generalize suffix U)
+  fun generalize boundedVars suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
+    | generalize boundedVars suffix (Type.CON (r, x)) =
+        if List.exists (fn (_, y) => x = y) boundedVars then
+          Type.CON (r, x)
+        else
+          Type.VAR (r, x ^ suffix)
+    | generalize boundedVars suffix (Type.ARR (r, T, U)) = Type.ARR (r, generalize boundedVars suffix T, generalize boundedVars suffix U)
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
 
@@ -23,6 +27,8 @@ structure Inferring :> INFERRING = struct
     | substTypedTerm S (TypedTerm.ABS (r, (r', x), SOME T, t)) = TypedTerm.ABS (r, (r', x), SOME (Type.subst S T), substTypedTerm S t)
     | substTypedTerm S (TypedTerm.LET (r, (r', x), NONE, t, u)) = TypedTerm.LET (r, (r', x), NONE, substTypedTerm S t, substTypedTerm S u)
     | substTypedTerm S (TypedTerm.LET (r, (r', x), SOME T, t, u)) = TypedTerm.LET (r, (r', x), SOME (Type.subst S T), substTypedTerm S t, substTypedTerm S u)
+
+  fun substEnv S e = map (fn (x, T) => (x, Type.subst S T)) e
 
   exception NotInScope of region * id
   exception Cyclic of (region * id) * Type.t
@@ -61,8 +67,9 @@ structure Inferring :> INFERRING = struct
     | constraint_type fresh polyVars e (TypedTerm.LET (r, (r', x), NONE, t, u)) = let
         val (t', T, C) = constraint_type fresh polyVars e t
         val S = unify C
-        val (t', T, C) = (substTypedTerm S t', Type.subst S T, substConstraints S C)
-        val T = generalize (gensym fresh) T
+        val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
+        val boundedVars = List.concat (map (Type.BV o #2) e)
+        val T = generalize boundedVars (gensym fresh) T
         val monoVars = List.concat (map (Type.FV o #2) e)
         val polyVars' = List.filter (fn y => not (List.exists (fn z => y = z) monoVars)) (Type.FV T) @ polyVars
         val e' = (x, T) :: e
@@ -73,8 +80,9 @@ structure Inferring :> INFERRING = struct
     | constraint_type fresh polyVars e (TypedTerm.LET (r, (r', x), SOME T, t, u)) = let
         val (t', T', C) = constraint_type fresh polyVars e t
         val S = unify ((T, T') :: C)
-        val (t', T, C) = (substTypedTerm S t', Type.subst S T, substConstraints S C)
-        val T = generalize (gensym fresh) T
+        val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
+        val boundedVars = List.concat (map (Type.BV o #2) e)
+        val T = generalize boundedVars (gensym fresh) T
         val monoVars = List.concat (map (Type.FV o #2) e)
         val polyVars' = List.filter (fn y => not (List.exists (fn z => y = z) monoVars)) (Type.FV T) @ polyVars
         val e' = (x, T) :: e

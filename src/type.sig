@@ -10,6 +10,7 @@ signature TYPE = sig
   val subst : subst -> t -> t
   val compose : subst -> subst -> subst
   val FV : t -> (region * id) list
+  val BV : t -> (region * id) list
   val region : t -> region
   val show : t -> string
 end
