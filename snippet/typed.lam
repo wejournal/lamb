@@ -7,44 +7,44 @@ let S : (a -> b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x z (y z) in
 let W : (a -> a -> b) -> a -> b := ^x. ^y. x y y in
 
 -- Booleans
--- type bool['a] := 'a -> 'a -> 'a
+-- type bool[a] := a -> a -> a
 
---| false : bool['a]
+--| false : bool[a]
 let false
-  : ('a -> 'a -> 'a) -- bool['a]
+  : (a -> a -> a) -- bool[a]
   := ^_. ^y. y in
 
---| true : bool['a]
+--| true : bool[a]
 let true
-  : ('a -> 'a -> 'a) -- bool['a]
+  : (a -> a -> a) -- bool[a]
   := ^x. ^_. x in
 
---| and : bool['a] -> bool['a] -> bool['a]
+--| and : bool[a] -> bool[a] -> bool[a]
 let and
-  : ('a -> 'a -> 'a) -- bool['a]
-  -> ('a -> 'a -> 'a) -- bool['a]
-  -> ('a -> 'a -> 'a) -- bool['a]
+  : (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
   := ^p. ^q. ^x. ^y. p (q x y) y in
 
---| or : bool['a] -> bool['a] -> bool['a]
+--| or : bool[a] -> bool[a] -> bool[a]
 let or
-  : ('a -> 'a -> 'a) -- bool['a]
-  -> ('a -> 'a -> 'a) -- bool['a]
-  -> ('a -> 'a -> 'a) -- bool['a]
+  : (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
   := ^p. ^q. ^x. ^y. p x (q x y) in
 
---| not : bool['a] -> bool['a]
+--| not : bool[a] -> bool[a]
 let not
-  : ('a -> 'a -> 'a) -- bool['a]
-  -> ('a -> 'a -> 'a) -- bool['a]
+  : (a -> a -> a) -- bool[a]
+  -> (a -> a -> a) -- bool[a]
   := ^p. ^x. ^y. p y x in
 
---| if : bool['a] -> 'a -> 'a -> 'a
+--| if : bool[a] -> a -> a -> a
 let if
-  : ('a -> 'a -> 'a) -- bool['a]
-  -> 'a
-  -> 'a
-  -> 'a
+  : (a -> a -> a) -- bool[a]
+  -> a
+  -> a
+  -> a
   := ^p. ^x. ^y. p x y in
 
 -- Pairs
