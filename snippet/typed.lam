@@ -453,21 +453,6 @@ let add8
   -> a
   := ^n. ^m. fst (8 (^p. ^f. p (^n. ^m. f (xor8 n m) (sl8 (and8 n m)))) (pair n m)) in
 
---| bin8 : nat[bin[a]] -> bin8[a]
-let bin8
-  : (('a -> 'a) -> 'a -> 'a)
-  -> (((a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> (a -> a -> a)
-      -> a)
-    -> a)
-  := ^n. n inc8 zero8 in
-
 --| nat8 : bin8[a] -> nat[a]
 let nat8
   : (((a -> a -> a)
