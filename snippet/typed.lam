@@ -48,131 +48,131 @@ let if
   := ^p. ^x. ^y. p x y in
 
 -- Pairs
--- type pair['a, 'b, 'c] := ('a -> 'b -> 'c) -> 'c
+-- type pair[a, b, c] := (a -> b -> c) -> c
 
---| pair : 'a -> 'b -> pair['a, 'b, 'c]
+--| pair : a -> b -> pair[a, b, c]
 let pair
-  : 'a
-  -> 'b
-  -> (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
+  : a
+  -> b
+  -> ((a -> b -> c) -> c) -- pair[a, b, c]
   := ^x. ^y. ^f. f x y in
 
---| fst : pair['a, 'b, 'c] -> 'a
+--| fst : pair[a, b, a] -> a
 let fst
-  : (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
-  -> 'a
+  : ((a -> b -> a) -> a) -- pair[a, b, a]
+  -> a
   := ^p. p K in
 
---| snd : pair['a, 'b, 'c] -> 'b
+--| snd : pair[a, b, b] -> b
 let snd
-  : (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
-  -> 'b
+  : ((a -> b -> b) -> b) -- pair[a, b, b]
+  -> b
   := ^p. p (K I) in
 
 -- Numbers
--- type nat['a] := ('a -> 'a) -> 'a -> 'a
+-- type nat[a] := (a -> a) -> a -> a
 
---| succ : nat['a] -> nat['a]
+--| succ : nat[a] -> nat[a]
 let succ
-  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
-  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  : ((a -> a) -> a -> a) -- nat[a]
+  -> ((a -> a) -> a -> a) -- nat[a]
   := ^n. ^f. ^x. f (n f x) in
 
---| pred : nat[('a -> 'a) -> 'a] -> nat['a]
+--| pred : nat[(a -> a) -> a] -> nat[a]
 let pred
-  : (((('a -> 'a) -> 'a) -> ('a -> 'a) -> 'a) -> (('a -> 'a) -> 'a) -> ('a -> 'a) -> 'a) -- nat[('a -> 'a) -> 'a]
-  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  : ((((a -> a) -> a) -> (a -> a) -> a) -> ((a -> a) -> a) -> (a -> a) -> a) -- nat[(a -> a) -> a]
+  -> ((a -> a) -> a -> a) -- nat[a]
   := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
 
---| plus : nat['a] -> nat['a] -> nat['a]
+--| plus : nat[a] -> nat[a] -> nat[a]
 let plus
-  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
-  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
-  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  : ((a -> a) -> a -> a) -- nat[a]
+  -> ((a -> a) -> a -> a) -- nat[a]
+  -> ((a -> a) -> a -> a) -- nat[a]
   := ^n. ^m. ^f. ^x. n f (m f x)  in
 
---| odd : nat[bool['a]] -> bool['a]
+--| odd : nat[bool[a]] -> bool[a]
 let odd
-  : ((('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -> ('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -- nat[bool['a]]
-  -> ('a -> 'a -> 'a) -- bool['a]
+  : (((a -> a -> a) -> a -> a -> a) -> (a -> a -> a) -> a -> a -> a) -- nat[bool[a]]
+  -> (a -> a -> a) -- bool[a]
   := ^n. n not false in
 
---| even : nat[bool['a]] -> bool['a]
+--| even : nat[bool[a]] -> bool[a]
 let even
-  : ((('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -> ('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -- nat[bool['a]]
-  -> ('a -> 'a -> 'a) -- bool['a]
+  : (((a -> a -> a) -> a -> a -> a) -> (a -> a -> a) -> a -> a -> a) -- nat[bool[a]]
+  -> (a -> a -> a) -- bool[a]
   := ^n. n not true in
 
---| is_zero : nat['a] -> bool['a]
+--| is_zero : nat[a] -> bool[a]
 let is_zero
-  : (('a -> 'a) -> 'a -> 'a)
-  -> ('a -> 'a -> 'a)
+  : ((a -> a) -> a -> a)
+  -> (a -> a -> a)
   := ^n. ^x. ^y. n (K x) y in
 
---| odd_copy : nat[pair[bool['a], nat['a]]] -> pair[bool['a], nat['a]]
+--| odd_copy : nat[pair[bool[a], nat[a]]] -> pair[bool[a], nat[a]]
 let odd_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f false 0) in
 
---| even_copy : nat[pair[bool['a], nat['a]]] -> pair[bool['a], nat['a]]
+--| even_copy : nat[pair[bool[a], nat[a]]] -> pair[bool[a], nat[a]]
 let even_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f true 0) in
 
 -- Lists
--- type list['a, 'b] := ('a -> 'b -> 'b) -> 'b -> 'b
+-- type list[a, b] := (a -> b -> b) -> b -> b
 
---| nil : list['a, 'b]
+--| nil : list[a, b]
 let nil
-  : (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  : ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^_. ^z. z in
 
---| cons : 'a -> list['a, 'b] -> list['a, 'b]
+--| cons : a -> list[a, b] -> list[a, b]
 let cons
-  : 'a
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  : a
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^x. ^xs. ^f. ^z. f x (xs f z) in
 
---| hd : list['a, 'b] -> 'a -> 'a
+--| hd : list[a, a] -> a -> a
 let hd
-  : (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
-  -> 'a
-  -> 'a
+  : ((a -> a -> a) -> a -> a) -- list[a, a]
+  -> a
+  -> a
   := ^xs. xs K in
 
---| tl : list['a, pair['b, 'b, 'b]] -> list['a, 'b]
+--| tl : list[a, pair[b, b, b]] -> list[a, b]
 let tl
-  : (('a -> (('b -> 'b -> 'b) -> 'b) -> (('b -> 'b -> 'b) -> 'b)) -> (('b -> 'b -> 'b) -> 'b) -> ('b -> 'b -> 'b) -> 'b) -- list['a, pair['b, 'b, 'b]]
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  : ((a -> ((b -> b -> b) -> b) -> ((b -> b -> b) -> b)) -> ((b -> b -> b) -> b) -> (b -> b -> b) -> b) -- list[a, pair[b, b, b]]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z)) in
 
---| map : ('a -> 'b) -> list['a, 'c] -> list['b, 'c]
+--| map : (a -> b) -> list[a, c] -> list[b, c]
 let map
-  : ('a -> 'b)
-  -> (('a -> 'c -> 'c) -> 'c -> 'c) -- list['a, 'c]
-  -> (('b -> 'c -> 'c) -> 'c -> 'c) -- list['b, 'c]
+  : (a -> b)
+  -> ((a -> c -> c) -> c -> c) -- list[a, c]
+  -> ((b -> c -> c) -> c -> c) -- list[b, c]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
 
---| filter : ('a -> bool['a]) -> list['a, 'b] -> list['a, 'b]
+--| filter : (a -> bool[a]) -> list[a, b] -> list[a, b]
 let filter
-  : ('a
-    -> ('a -> 'a -> 'a)) -- bool['a]
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  : (a
+    -> (b -> b -> b)) -- bool[b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
 
---| filter_map : ('a -> pair[bool['a], 'b]) -> list['a, 'c] -> list['b, 'c]
+--| filter_map : (a -> pair[bool[a], b]) -> list[a, c] -> list[b, c]
 let filter_map
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. f x (^b. ^y. if b (g y z) z)) z in
 
---| reverse : list['a, 'b -> 'b] -> list['a, 'b]
+--| reverse : list[a, b -> b] -> list[a, b]
 let reverse
-  : (('a -> ('b -> 'b) -> 'b -> 'b) -> ('b -> 'b) -> 'b -> 'b) -- list['a, 'b -> 'b]
-  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  : ((a -> (b -> b) -> b -> b) -> (b -> b) -> b -> b) -- list[a, b -> b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
 
---| reverse_range : nat['a] -> 'TODO -> list[nat['a], 'b]
+--| reverse_range : nat[a] -> 'TODO -> list[nat[a], b]
 let reverse_range
-  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
-  -> 'TODO -- nat[nat['a] -> 'b -> 'b]
-  -> (((('a -> 'a) -> 'a -> 'a) -> 'b -> 'b) -> 'b -> 'b) -- list[nat['a], 'b]
+  : ((a -> a) -> a -> a) -- nat[a]
+  -> 'TODO -- nat[nat[a] -> b -> b]
+  -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
   := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
 
 --| range : 'TODO
@@ -181,32 +181,32 @@ let range
   := ^n. ^m. reverse (reverse_range n m) in
 
 -- Bytes
--- type byte['a, 'b] :=
---   (bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] ->  'b) -> 'b
--- type bytes['a, 'b] := list[byte['a, 'b]]
+-- type byte[a, b] :=
+--   (bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] ->  b) -> b
+-- type bytes[a, b] := list[byte[a, b]]
 
---| byte : bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> bool['a] -> byte['a, 'b]
+--| byte : bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> byte[a, b]
 let byte
-  : 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool
-  -> (('bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'bool -> 'b) -> 'b)
+  : bool -> bool -> bool -> bool -> bool -> bool -> bool -> bool
+  -> ((bool -> bool -> bool -> bool -> bool -> bool -> bool -> bool -> b) -> b)
   := ^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7. ^f. f b0 b1 b2 b3 b4 b5 b6 b7 in
 
---| byte_AND : byte['a, 'b] -> byte['a, 'b] -> byte['a, 'b]
+--| byte_AND : byte[a, b] -> byte[a, b] -> byte[a, b]
 let byte_AND
   := ^a. ^b. ^f.
     a (^a0. ^a1. ^a2. ^a3. ^a4. ^a5. ^a6. ^a7.
     b (^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7.
     f (and a0 b0) (and a1 b1) (and a2 b2) (and a3 b3) (and a4 b4) (and a5 b5) (and a6 b6) (and a7 b7))) in
 
---| byte_OR : byte['a, 'b] -> byte['a, 'b] -> byte['a, 'b]
+--| byte_OR : byte[a, b] -> byte[a, b] -> byte[a, b]
 let byte_OR
   := ^a. ^b. ^f.
     a (^a0. ^a1. ^a2. ^a3. ^a4. ^a5. ^a6. ^a7.
     b (^b0. ^b1. ^b2. ^b3. ^b4. ^b5. ^b6. ^b7.
     f (or a0 b0) (or a1 b1) (or a2 b2) (or a3 b3) (or a4 b4) (or a5 b5) (or a6 b6) (or a7 b7))) in
 
---| AND : bytes['a, 'b] -> bytes['a, 'b]
+--| AND : bytes[a, b] -> bytes[a, b]
 let AND := map byte_AND in
 
---| OR : bytes['a, 'b] -> bytes['a, 'b]
+--| OR : bytes[a, b] -> bytes[a, b]
 let OR := map byte_OR in
