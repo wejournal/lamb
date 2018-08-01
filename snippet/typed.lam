@@ -419,7 +419,7 @@ let sr8
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
     f _1 _2 _3 _4 _5 _6 _7 false) in
 
---| add8 : bin8[a] -> bin8[a]
+--| add8 : bin8[a] -> bin8[a] -> bin8[a]
 let add8
   : (((a -> a -> a)
       -> (a -> a -> a)
