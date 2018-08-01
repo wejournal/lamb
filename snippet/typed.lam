@@ -168,14 +168,16 @@ let reverse
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
 
---| reverse_range : nat[a] -> 'TODO -> list[nat[a], b]
+--| reverse_range : nat[a] -> nat[nat[a] -> b -> b] -> list[nat[a], b]
 let reverse_range
   : ((a -> a) -> a -> a) -- nat[a]
-  -> 'TODO -- nat[nat[a] -> b -> b]
+  -> (((((a -> a) -> a -> a) -> b -> b) -> (((a -> a) -> a -> a) -> b -> b)) -> (((a -> a) -> a -> a) -> b -> b) -> (((a -> a) -> a -> a) -> b -> b)) -- nat[nat[a] -> b -> b]
   -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
   := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
 
---| range : 'TODO
+--| reverse_range : nat[a] -> nat[nat[a] -> (b -> b) -> (b -> b)] -> list[nat[a], b]
 let range
-  : 'TODO
+  : ((a -> a) -> a -> a) -- nat[a]
+  -> (((((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -- nat[nat[a] -> (b -> b) -> (b -> b)]
+  -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
   := ^n. ^m. reverse (reverse_range n m) in
