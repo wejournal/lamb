@@ -500,14 +500,21 @@ let inc8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f (not _0)
-      (^x. ^y. if _0 (not _1 x y) (_1 x y))
-      (^x. ^y. if (and _0 _1) (not _2 x y) (_2 x y))
-      (^x. ^y. if (and _0 (and _1 _2)) (not _3 x y) (_3 x y))
-      (^x. ^y. if (and _0 (and _1 (and _2 _3))) (not _4 x y) (_4 x y))
-      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 _4)))) (not _5 x y) (_5 x y))
-      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 (and _4 _5))))) (not _6 x y) (_6 x y))
-      (^x. ^y. if (and _0 (and _1 (and _2 (and _3 (and _4 (and _5 _6)))))) (not _7 x y) (_7 x y))) in
+    if _0
+      (if _1
+        (if _2
+          (if _3
+            (if _4
+              (if _5
+                (if _6
+                  (f false false false false false false false (not _7))
+                  (f false false false false false false (not _6) _7))
+                (f false false false false false (not _5) _6 _7))
+              (f false false false false (not _4) _5 _6 _7))
+            (f false false false (not _3) _4 _5 _6 _7))
+          (f false false (not _2) _3 _4 _5 _6 _7))
+        (f false (not _1) _2 _3 _4 _5 _6 _7))
+        (f (not _0) _1 _2 _3 _4 _5 _6 _7)) in
 
 --| sub8 : bin8[a] -> bin8[a] -> bin8[a]
 let sub8
