@@ -7,33 +7,104 @@ let S : ('a -> 'b -> 'c) -> ('a -> 'b) -> 'a -> 'c := ^x. ^y. ^z. x z (y z) in
 let W : ('a -> 'a -> 'b) -> 'a -> 'b := ^x. ^y. x y y in
 
 -- Booleans
--- let 'bool := 'a -> 'a -> 'a
-let false : 'bool := ^_. ^y. y in
-let true : 'bool := ^x. ^_. x in
-let and : 'bool -> 'bool -> 'bool := ^p. ^q. ^x. ^y. p (q x y) y in
-let or : 'bool -> 'bool -> 'bool := ^p. ^q. ^x. ^y. p x (q x y) in
-let not : 'bool -> 'bool := ^p. ^x. ^y. p y x in
-let if : 'bool -> 'a -> 'a -> 'a := ^p. ^x. ^y. p x y in
+-- type bool['a] := 'a -> 'a -> 'a
+let false
+  : ('a -> 'a -> 'a) -- bool['a]
+  := ^_. ^y. y in
+let true
+  : ('a -> 'a -> 'a) -- bool['a]
+  := ^x. ^_. x in
+let and
+  : ('a -> 'a -> 'a) -- bool['a]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  := ^p. ^q. ^x. ^y. p (q x y) y in
+let or
+  : ('a -> 'a -> 'a) -- bool['a]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  := ^p. ^q. ^x. ^y. p x (q x y) in
+let not
+  : ('a -> 'a -> 'a) -- bool['a]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  := ^p. ^x. ^y. p y x in
+let if
+  : ('a -> 'a -> 'a) -- bool['a]
+  -> 'a
+  -> 'a
+  -> 'a
+  := ^p. ^x. ^y. p x y in
 
 -- Numbers
--- let 'nat := ('a -> 'a) -> 'a -> 'a
-let succ : 'nat -> 'nat := ^n. ^f. ^x. f (n f x) in
-let plus : 'nat -> 'nat -> 'nat := ^n. ^m. ^f. ^x. n f (m f x)  in
-let odd : 'nat -> 'bool := ^n. n not false in
-let even : 'nat -> 'bool := ^n. n not true in
+-- type nat['a] := ('a -> 'a) -> 'a -> 'a
+let succ
+  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  := ^n. ^f. ^x. f (n f x) in
+let plus
+  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  := ^n. ^m. ^f. ^x. n f (m f x)  in
+let odd
+  : ((('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -> ('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -- nat[bool['a]]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  := ^n. n not false in
+let even
+  : ((('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -> ('a -> 'a -> 'a) -> 'a -> 'a -> 'a) -- nat[bool['a]]
+  -> ('a -> 'a -> 'a) -- bool['a]
+  := ^n. n not true in
 
 -- Pairs
-let pair : 'a -> 'b -> 'abpair := ^x. ^y. ^f. f x y in
-let fst : 'abpair -> 'a := ^p. p K in
-let snd : 'abpair -> 'b := ^p. p (K I) in
+-- type pair['a, 'b, 'c] := ('a -> 'b -> 'c) -> 'c
+let pair
+  : 'a
+  -> 'b
+  -> (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
+  := ^x. ^y. ^f. f x y in
+let fst
+  : (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
+  -> 'a
+  := ^p. p K in
+let snd
+  : (('a -> 'b -> 'c) -> 'c) -- pair['a, 'b, 'c]
+  -> 'b
+  := ^p. p (K I) in
 
 -- Lists
--- let 'alist := ('a -> 'b -> 'b) -> 'b -> 'b
-let nil : 'alist := ^_. ^z. z in
-let cons : 'a -> 'alist -> 'alist := ^x. ^xs. ^f. ^z. f x (xs f z) in
-let hd : 'alist -> 'a -> 'a := ^xs. xs K in
-let tl : 'alist -> 'blist := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z)) in
-let filter : ('a -> 'bool) -> 'alist -> 'alist := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
-let reverse := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
-let reverse_range := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
-let range := ^n. ^m. reverse (reverse_range n m) in
+-- type list['a, 'b] := ('a -> 'b -> 'b) -> 'b -> 'b
+let nil
+  : (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  := ^_. ^z. z in
+let cons
+  : 'a
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  := ^x. ^xs. ^f. ^z. f x (xs f z) in
+let hd
+  : (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  -> 'a
+  -> 'a
+  := ^xs. xs K in
+let tl
+  : (('a -> (('b -> 'b -> 'b) -> 'b) -> (('b -> 'b -> 'b) -> 'b)) -> (('b -> 'b -> 'b) -> 'b) -> ('b -> 'b -> 'b) -> 'b) -- list['a, pair['b, 'b, 'b]]
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z)) in
+let filter
+  : ('a
+    -> ('a -> 'a -> 'a)) -- bool['a]
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
+let reverse
+  : (('a -> ('b -> 'b) -> 'b -> 'b) -> ('b -> 'b) -> 'b -> 'b) -- list['a, 'b -> 'b]
+  -> (('a -> 'b -> 'b) -> 'b -> 'b) -- list['a, 'b]
+  := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
+let reverse_range
+  : (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  -> 'TODO -- nat[nat['a] -> 'b -> 'b]
+  -> (((('a -> 'a) -> 'a -> 'a) -> 'b -> 'b) -> 'b -> 'b) -- list[nat['a], 'b]
+  := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
+let range
+  : 'TODO
+  := ^n. ^m. reverse (reverse_range n m) in
