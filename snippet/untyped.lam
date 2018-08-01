@@ -1,3 +1,5 @@
+let U := ^z. ^x. x (z z x) in
+let Theta := U U in
 let Y := ^f. (^x. f (x x)) (^x. f (x x)) in
 let omega := ^x. x x in
 let Omega := omega omega in
