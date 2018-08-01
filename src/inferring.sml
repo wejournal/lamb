@@ -78,7 +78,7 @@ structure Inferring :> INFERRING = struct
       end
   and unify nil = nil
     | unify ((T, U) :: C) =
-        if T = U then
+        if Type.eq T U then
           unify C
         else
           (case (T, U) of

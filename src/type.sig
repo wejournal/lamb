@@ -6,6 +6,7 @@ signature TYPE = sig
 
   type subst = (id * t) list
 
+  val eq : t -> t -> bool
   val subst : subst -> t -> t
   val compose : subst -> subst -> subst
   val FV : t -> (region * id) list
