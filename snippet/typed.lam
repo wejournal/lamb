@@ -150,7 +150,7 @@ let map
   -> ((b -> c -> c) -> c -> c) -- list[b, c]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
 
---| filter : (a -> bool[a]) -> list[a, b] -> list[a, b]
+--| filter : (a -> bool[b]) -> list[a, b] -> list[a, b]
 let filter
   : (a
     -> (b -> b -> b)) -- bool[b]
@@ -158,8 +158,12 @@ let filter
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
 
---| filter_map : (a -> pair[bool[a], b]) -> list[a, c] -> list[b, c]
+--| filter_map : (a -> pair[bool[c], b, c]) -> list[a, c] -> list[b, c]
 let filter_map
+  : (a
+    -> (((c -> c -> c) -> b -> c) -> c)) -- pair[bool[c], b, c]
+  -> ((a -> c -> c) -> c -> c) -- list[a, c]
+  -> ((b -> c -> c) -> c -> c) -- list[b, c]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. f x (^b. ^y. if b (g y z) z)) z in
 
 --| reverse : list[a, b -> b] -> list[a, b]
