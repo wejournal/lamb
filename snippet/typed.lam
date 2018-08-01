@@ -56,6 +56,12 @@ let succ
   -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
   := ^n. ^f. ^x. f (n f x) in
 
+--| pred : nat[('a -> 'a) -> 'a] -> nat['a]
+let pred
+  : (((('a -> 'a) -> 'a) -> ('a -> 'a) -> 'a) -> (('a -> 'a) -> 'a) -> ('a -> 'a) -> 'a) -- nat[('a -> 'a) -> 'a]
+  -> (('a -> 'a) -> 'a -> 'a) -- nat['a]
+  := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
+
 --| plus : nat['a] -> nat['a] -> nat['a]
 let plus
   : (('a -> 'a) -> 'a -> 'a) -- nat['a]
