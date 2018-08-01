@@ -175,7 +175,7 @@ let reverse_range
   -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
   := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
 
---| reverse_range : nat[a] -> nat[nat[a] -> (b -> b) -> (b -> b)] -> list[nat[a], b]
+--| range : nat[a] -> nat[nat[a] -> (b -> b) -> (b -> b)] -> list[nat[a], b]
 let range
   : ((a -> a) -> a -> a) -- nat[a]
   -> (((((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -- nat[nat[a] -> (b -> b) -> (b -> b)]
