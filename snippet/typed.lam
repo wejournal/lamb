@@ -644,6 +644,56 @@ let even8
   := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
       _0 y x) in
 
+--| ntz8 : bin8[a] -> a -> a -> a -> a -> a -> a -> a -> a -> a -> a
+let ntz8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  := ^n. ^x0. ^x1. ^x2. ^x3. ^x4. ^x5. ^x6. ^x7. ^x8. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+      if _0 x0 (if _1 x1 (if _2 x2 (if _3 x3 (if _4 x4 (if _5 x5 (if _6 x6 (if _7 x7 x8)))))))) in
+
+--| nlz8 : bin8[a] -> a -> a -> a -> a -> a -> a -> a -> a -> a -> a
+let nlz8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  -> a
+  := ^n. ^x0. ^x1. ^x2. ^x3. ^x4. ^x5. ^x6. ^x7. ^x8. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+      if _7 x7 (if _6 x6 (if _5 x5 (if _4 x4 (if _3 x3 (if _2 x2 (if _1 x1 (if _0 x0 x8)))))))) in
+
 --| sl1_8 : bin8[a] -> bin8[a]
 let sl1_8
   : (((a -> a -> a)
@@ -1243,6 +1293,114 @@ let mul8
       let n6 := ^f. if _6 (sl6_8 n f) (zero8 f) in
       let n7 := ^f. if _7 (sl7_8 n f) (zero8 f) in
         add8 (add8 (add8 (add8 (add8 (add8 (add8 n0 n1) n2) n3) n4) n5) n6) n7 f) in
+
+--| div8 : bin8[a] -> bin8[a] -> bin8[a]
+let div8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^m. ^f.
+    if (lt8 n m)
+      (zero8 f)
+    (let one := inc8 zero8 in
+    let j := ^f.
+      nlz8 n
+        (one f)
+        (nlz8 m (sl1_8 one f) (one f) (one f) (one f) (one f) (one f) (one f) (one f) (one f))
+        (nlz8 m (sl2_8 one f) (sl1_8 one f) (one f) (one f) (one f) (one f) (one f) (one f) (one f))
+        (nlz8 m (sl3_8 one f) (sl2_8 one f) (sl1_8 one f) (one f) (one f) (one f) (one f) (one f) (one f))
+        (nlz8 m (sl4_8 one f) (sl3_8 one f) (sl2_8 one f) (sl1_8 one f) (one f) (one f) (one f) (one f) (one f))
+        (nlz8 m (sl5_8 one f) (sl4_8 one f) (sl3_8 one f) (sl2_8 one f) (sl1_8 one f) (one f) (one f) (one f) (one f))
+        (nlz8 m (sl6_8 one f) (sl5_8 one f) (sl4_8 one f) (sl3_8 one f) (sl2_8 one f) (sl1_8 one f) (one f) (one f) (one f))
+        (nlz8 m (sl7_8 one f) (sl6_8 one f) (sl5_8 one f) (sl4_8 one f) (sl3_8 one f) (sl2_8 one f) (sl1_8 one f) (one f) (one f))
+        (one f) in
+    let m := ^f.
+      nlz8 n
+        (m f)
+        (nlz8 m (sl1_8 m f) (m f) (m f) (m f) (m f) (m f) (m f) (m f) (m f))
+        (nlz8 m (sl2_8 m f) (sl1_8 m f) (m f) (m f) (m f) (m f) (m f) (m f) (m f))
+        (nlz8 m (sl3_8 m f) (sl2_8 m f) (sl1_8 m f) (m f) (m f) (m f) (m f) (m f) (m f))
+        (nlz8 m (sl4_8 m f) (sl3_8 m f) (sl2_8 m f) (sl1_8 m f) (m f) (m f) (m f) (m f) (m f))
+        (nlz8 m (sl5_8 m f) (sl4_8 m f) (sl3_8 m f) (sl2_8 m f) (sl1_8 m f) (m f) (m f) (m f) (m f))
+        (nlz8 m (sl6_8 m f) (sl5_8 m f) (sl4_8 m f) (sl3_8 m f) (sl2_8 m f) (sl1_8 m f) (m f) (m f) (m f))
+        (nlz8 m (sl7_8 m f) (sl6_8 m f) (sl5_8 m f) (sl4_8 m f) (sl3_8 m f) (sl2_8 m f) (sl1_8 m f) (m f) (m f))
+        (m f) in
+    if (is_zero8 m)
+      (zero8 f)
+    (let i := ^f. if (lt8 n m) (zero8 f) (j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+    if (is_zero8 m)
+      (i f)
+    (let j := sr1_8 j in
+    let i := ^f. if (lt8 n m) (i f) (or8 i j f) in
+    let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
+    let m := sr1_8 m in
+      i f)))))))))
+    in
 
 --| bin8 : nat8[bin8[a]] -> bin8[a]
 let bin8 := ^n. n inc8 zero8 in
