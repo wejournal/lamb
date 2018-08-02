@@ -157,6 +157,13 @@ let map
   -> ((b -> c -> c) -> c -> c) -- list[b, c]
   := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
 
+--| append : list[a, b] -> list[a, b] -> list[a, b]
+let append
+  : ((a -> b -> b) -> b -> b) -- list[a, b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
+  := ^xs. ^ys. ^f. ^z. xs f (ys f z) in
+
 --| filter : (a -> bool[b]) -> list[a, b] -> list[a, b]
 let filter
   : (a
