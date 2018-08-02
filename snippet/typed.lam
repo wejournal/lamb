@@ -1429,3 +1429,13 @@ let eight8 := ^f. f false false false true false false false false in
 let nine8 := ^f. f true false false true false false false false in
 
 let show_nat := ^n. reverse (n (cons '\'') "0") in
+
+let show_bin8 := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+  f (_7 '1' '0')
+  (f (_6 '1' '0')
+  (f (_5 '1' '0')
+  (f (_4 '1' '0')
+  (f (_3 '1' '0')
+  (f (_2 '1' '0')
+  (f (_1 '1' '0')
+  (f (_0 '1' '0') z)))))))) in
