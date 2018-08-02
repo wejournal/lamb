@@ -395,6 +395,94 @@ let not_eq8
   := ^n. ^m. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
       or (xor _0 __0) (or (xor _1 __1) (or (xor _2 __2) (or (xor _3 __3) (or (xor _4 __4) (or (xor _5 __6) (or (xor _6 __6) (xor _7 __7))))))) x y)) in
 
+--| lt8 : bin8[a] -> bin8[a] -> bool[a]
+let lt8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (a -> a -> a)
+  := ^n. ^m. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
+    let k :=
+      if _0
+        (if __0
+          y
+          y)
+        (if __0
+          x
+          y) in
+    let k :=
+      if _1
+        (if __1
+          k
+          y)
+        (if __1
+          x
+          k) in
+    let k :=
+      if _2
+        (if __2
+          k
+          y)
+        (if __2
+          x
+          k) in
+    let k :=
+      if _3
+        (if __3
+          k
+          y)
+        (if __3
+          x
+          k) in
+    let k :=
+      if _4
+        (if __4
+          k
+          y)
+        (if __4
+          x
+          k) in
+    let k :=
+      if _5
+        (if __5
+          k
+          y)
+        (if __5
+          x
+          k) in
+    let k :=
+      if _6
+        (if __6
+          k
+          y)
+        (if __6
+          x
+          k) in
+      if _7
+        (if __7
+          k
+          y)
+        (if __7
+          x
+          k))) in
+
 --| eq8 : bin8[a] -> bin8[a] -> bool[a]
 let eq8
   : (((a -> a -> a)
@@ -419,6 +507,38 @@ let eq8
     -> a)
   -> (a -> a -> a)
   := ^n. ^m. not (not_eq8 n m) in
+
+--| odd8 : bin8[a] -> bool[a]
+let odd8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (a -> a -> a)
+  := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+      _0 x y) in
+
+--| even8 : bin8[a] -> bool[a]
+let even8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> (a -> a -> a)
+  := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+      _0 y x) in
 
 --| sl8 : bin8[a] -> bin8[a]
 let sl8
@@ -590,14 +710,57 @@ let inc8
             (if _4
               (if _5
                 (if _6
-                  (f false false false false false false false (not _7))
-                  (f false false false false false false (not _6) _7))
-                (f false false false false false (not _5) _6 _7))
-              (f false false false false (not _4) _5 _6 _7))
-            (f false false false (not _3) _4 _5 _6 _7))
-          (f false false (not _2) _3 _4 _5 _6 _7))
-        (f false (not _1) _2 _3 _4 _5 _6 _7))
-        (f (not _0) _1 _2 _3 _4 _5 _6 _7)) in
+                  (if _7
+                    (f false false false false false false false false)
+                    (f false false false false false false false true))
+                  (f false false false false false false true _7))
+                (f false false false false false true _6 _7))
+              (f false false false false true _5 _6 _7))
+            (f false false false true _4 _5 _6 _7))
+          (f false false true _3 _4 _5 _6 _7))
+        (f false true _2 _3 _4 _5 _6 _7))
+        (f true _1 _2 _3 _4 _5 _6 _7)) in
+
+--| dec8 : bin8[a] -> bin8[a]
+let dec8
+  : (((a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> (a -> a -> a)
+      -> a)
+    -> a)
+  -> ((a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> (a -> a -> a)
+    -> a)
+  -> a
+  := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+    if _0
+      (f false _1 _2 _3 _4 _5 _6 _7)
+      (if _1
+        (f true false _2 _3 _4 _5 _6 _7)
+        (if _2
+          (f true true false _3 _4 _5 _6 _7)
+          (if _3
+            (f true true true false _4 _5 _6 _7)
+            (if _4
+              (f true true true true false _5 _6 _7)
+              (if _5
+                (f true true true true true false _6 _7)
+                (if _6
+                  (f true true true true true true false _7)
+                  (if _7
+                    (f true true true true true true true false)
+                    (f true true true true true true true true))))))))) in
 
 --| sub8 : bin8[a] -> bin8[a] -> bin8[a]
 let sub8
