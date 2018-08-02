@@ -795,3 +795,6 @@ let sub8
     -> a)
   -> a
   := ^n. ^m. add8 n (inc8 (not8 m)) in
+
+--| bin8 : nat8[bin8[a]] -> bin8[a]
+let bin8 := ^n. n inc8 zero8 in
