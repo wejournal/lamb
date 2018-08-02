@@ -1404,3 +1404,9 @@ let div8
 
 --| bin8 : nat8[bin8[a]] -> bin8[a]
 let bin8 := ^n. n inc8 zero8 in
+
+--| is_multiple8 : bin8[a] -> bin8[a] -> bool[a]
+let is_multiple8 := ^n. ^m. eq8 n (mul8 (div8 n m) m) in
+
+--| is_not_multiple8 : bin8[a] -> bin8[a] -> bool[a]
+let is_not_multiple8 := ^n. ^m. not_eq8 n (mul8 (div8 n m) m) in
