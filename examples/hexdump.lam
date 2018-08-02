@@ -65,4 +65,4 @@ let hex := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
             '0'))) in
   f x (f y z)) in
 
-B (^xs. xs append nil) (map (B hex bin8))
+B concat (map (B hex bin8))

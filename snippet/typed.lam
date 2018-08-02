@@ -164,6 +164,12 @@ let append
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   := ^xs. ^ys. ^f. ^z. xs f (ys f z) in
 
+--| concat : list[list[a, b], list[a, b]] -> list[a, b]
+let concat
+  : ((((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b)) -> ((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b)) -- list[list[a, b], list[a, b]]
+  -> ((a -> b -> b) -> b -> b) -- list[a, b]
+  := ^xs. xs append nil in
+
 --| filter : (a -> bool[b]) -> list[a, b] -> list[a, b]
 let filter
   : (a
