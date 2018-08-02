@@ -1417,3 +1417,15 @@ let is_multiple8 := ^n. ^m. eq8 n (mul8 (div8 n m) m) in
 
 --| is_not_multiple8 : bin8[a] -> bin8[a] -> bool[a]
 let is_not_multiple8 := ^n. ^m. not_eq8 n (mul8 (div8 n m) m) in
+
+let one8 := ^f. f true false false false false false false false in
+let two8 := ^f. f false true false false false false false false in
+let three8 := ^f. f true true false false false false false false in
+let four8 := ^f. f false false true false false false false false in
+let five8 := ^f. f true false true false false false false false in
+let six8 := ^f. f false true true false false false false false in
+let seven8 := ^f. f true true true false false false false false in
+let eight8 := ^f. f false false false true false false false false in
+let nine8 := ^f. f true false false true false false false false in
+
+let show_nat := ^n. reverse (n (cons '\'') "0") in
