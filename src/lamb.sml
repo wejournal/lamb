@@ -254,22 +254,22 @@ fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
   | args ("-i" :: argv) = let
       val {target, doing, output, files} = args argv
     in
-      { target = WINDOWS, doing = INFER, output = output, files = files }
+      { target = LINUX, doing = INFER, output = output, files = files }
     end
   | args ("-S" :: argv) = let
       val {target, doing, output, files} = args argv
     in
-      { target = WINDOWS, doing = COMPILE, output = output, files = files }
+      { target = LINUX, doing = COMPILE, output = output, files = files }
     end
   | args ("-c" :: argv) = let
       val {target, doing, output, files} = args argv
     in
-      { target = WINDOWS, doing = ASSEMBLE, output = output, files = files }
+      { target = LINUX, doing = ASSEMBLE, output = output, files = files }
     end
   | args ("--link" :: argv) = let
       val {target, doing, output, files} = args argv
     in
-      { target = WINDOWS, doing = LINK, output = output, files = files }
+      { target = LINUX, doing = LINK, output = output, files = files }
     end
   | args ("-o" :: arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
