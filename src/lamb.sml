@@ -433,7 +433,7 @@ in
       in
         List.app
           (fn (asmfile, objfile) =>
-            (OS.Process.system ("x86_64-w64-mingw-32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile); ()))
+            (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile); ()))
           files
       end
 
@@ -445,7 +445,7 @@ in
 
         val objfiles = map (fn file => file ^ ".o") files
       in
-        (OS.Process.system ("x86_64-w64-mingw-32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
+        (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
       end
     in
       case doing of
