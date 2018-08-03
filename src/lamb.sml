@@ -123,7 +123,7 @@ end
 fun infer t = let
   val (t', T) = Inferring.infer t
 in
-  TextIO.output (TextIO.stdOut, TypedTerm.show t' ^ "\n  : " ^ Type.show T ^ "\n")
+  TextIO.output (TextIO.stdOut, Type.show T ^ "\n")
 end
 
 val lines = String.fields (fn c => c = #"\n")
