@@ -83,7 +83,7 @@ def K := ^x. ^y. x
 そのような場合，まず `-c` オプションをつけて， `k.lam` 単体でコンパイルしておきます．
 
 ```
-lam -o k.o -c k.lam
+$ lamb -o k.o -c k.lam
 ```
 
 それから， `k.o` を使いたいファイルでは，つぎのように `val` で型宣言をします:
@@ -96,14 +96,14 @@ def main := K("hello world\n")
 このファイルを `hello.lam` としましょう． こちらも `-c` オプションでコンパイルしておきます:
 
 ```
-lam -o hello.o -c hello.lam
+$ lamb -o hello.o -c hello.lam
 ```
 
 これで `k.o` と `hello.o` というふたつのオブジェクトコードができました．
 あとは `--link` オプションで， `k.o` と `hello.o` をリンクするのみです!
 
 ```
-lam -o hello --link k.o hello.o
+$ lamb -o hello --link k.o hello.o
 ```
 
 若干まわりくどいように思えるかもしれませんが，
@@ -113,10 +113,10 @@ lam -o hello --link k.o hello.o
 OBJS := k.o hello.o
 
 hello: $(OBJS)
-	lam --link $^
+	lamb --link $^
 
 %.o: %.lam
-	lam -o $@ $<
+	lamb -o $@ $<
 ```
 
 あとはファイルが増えたら `OBJS` に追記してゆけばよいわけです．
