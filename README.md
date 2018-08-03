@@ -48,15 +48,15 @@ $ make -C examples -j8 TARGET=windows
 ### Hello World
 
 <pre>
-<b>let</b> K := ^x. ^_. x <b>in</b>
-  K("hello world\n")
+<b>def</b> main := ^stdin.
+  "hello world\n"
 </pre>
 
 ### Cat Program
 
 <pre>
-<b>let</b> I := ^x. x <b>in</b>
-  I
+<b>def</b> main := ^stdin.
+  stdin
 </pre>
 
 ## Features
@@ -69,8 +69,8 @@ the stdin (the first argument) is not evaluated.
 Therefore, the program reads no input, writes "hello world\n" to the stdout and terminates.
 
 <pre>
-<b>let</b> K := ^x. ^_. x <b>in</b>
-  K("hello world\n")
+<b>def</b> main := ^stdin.
+  "hello world\n"
 </pre>
 
 ### Type System
@@ -81,8 +81,7 @@ Lamb programs are statically typed, but you don't need to write types.
 The type of the following program is automatically inferred to be `'a -> 'a`.
 
 <pre>
-<b>let</b> I := ^x. x <b>in</b>
-  I
+<b>def</b> I := ^x. x
 </pre>
 
 #### Let-Polymorphism
@@ -91,8 +90,9 @@ Lamb supports let-polymorphism.
 Therefore, the following program is valid.
 
 <pre>
-<b>let</b> I := ^x. x <b>in</b>
-  I I
+<b>def</b> I :=
+  <b>let</b> I := ^x. x <b>in</b>
+    I I
 </pre>
 
 *Note*: In a monomorphic language, `I I` is invalid,
