@@ -69,6 +69,7 @@ end
 | DEF
 | IN
 | LET
+| TYPE
 | VAL
 | NAT of LargeWord.word
 | CHAR of char
@@ -100,7 +101,9 @@ decls:
     (decl :: decls)
 
 decl:
-  VAL ID COLON ty
+  TYPE ID
+    (AST.TYPE ((TYPEleft, IDright), ((IDleft, IDright), ID)))
+| VAL ID COLON ty
     (AST.VAL ((VALleft, tyright), ((IDleft, IDright), ID), ty))
 | DEF ID tyopt COLONEQ exp
     (AST.DEF ((DEFleft, expright), ((IDleft, IDright), ID), tyopt, exp))

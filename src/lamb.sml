@@ -55,11 +55,13 @@ in
   Type.ARR (r, stdin, stdout)
 end
 
-fun inferDecl (AST.VAL (_, (r, x), T), (inferring, e)) = (
+fun inferDecl (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) =
+      (inferring, (r, x) :: boundedVars, e)
+  | inferDecl (AST.VAL (_, (r, x), T), (inferring, boundedVars, e)) = (
       checkDup (r, x) e
-    ; (inferring, (x, Inferring.generalize nil (Inferring.gensym inferring) T) :: e)
+    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
     )
-  | inferDecl (AST.DEF (_, (r, x), Topt, t), (inferring, e)) = let
+  | inferDecl (AST.DEF (_, (r, x), Topt, t), (inferring, boundedVars, e)) = let
       val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
@@ -75,15 +77,19 @@ fun inferDecl (AST.VAL (_, (r, x), T), (inferring, e)) = (
               Inferring.unify [(T, U)]
     in
       checkDup (r, x) e
-    ; (inferring, (x, Inferring.generalize nil (Inferring.gensym inferring) (Type.subst S U)) :: e)
+    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)) :: e)
     end
 
-fun printDecl outstream (AST.VAL (_, (r, x), T), (inferring, e)) = (
-      checkDup (r, x) e
-    (*; TextIO.output (outstream, "val " ^ x ^ " : " ^ Type.show T ^ "\n")*)
-    ; (inferring, (x, Inferring.generalize nil (Inferring.gensym inferring) T) :: e)
+fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
+      TextIO.output (outstream, "type " ^ x ^ "\n")
+    ; (inferring, (r, x) :: boundedVars, e)
     )
-  | printDecl outstream (AST.DEF (_, (r, x), Topt, t), (inferring, e)) = let
+  | printDecl outstream (AST.VAL (_, (r, x), T), (inferring, boundedVars, e)) = (
+      checkDup (r, x) e
+    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ Type.show T ^ "\n")
+    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
+    )
+  | printDecl outstream (AST.DEF (_, (r, x), Topt, t), (inferring, boundedVars, e)) = let
       val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
@@ -97,11 +103,11 @@ fun printDecl outstream (AST.VAL (_, (r, x), T), (inferring, e)) = (
               Inferring.unify [(mainType r, T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val T = Inferring.generalize nil (Inferring.gensym inferring) (Type.subst S U)
+      val T = Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)
     in
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ Type.show T ^ "\n")
-    ; (inferring, (x, T) :: e)
+    ; (inferring, boundedVars, (x, T) :: e)
     end
 
 fun inferFile outstream (file, z0) = let
@@ -149,7 +155,9 @@ end handle
   )
 
 functor Main(Compiler : COMPILER) = struct
-  fun compileDecl outstream (AST.VAL (_, (_, x), _), (compiler, e)) = let
+  fun compileDecl outstream (AST.TYPE _, (compiler, e)) =
+        (compiler, e)
+    | compileDecl outstream (AST.VAL (_, (_, x), _), (compiler, e)) = let
         val e' = (x, 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         (compiler, e')
@@ -328,7 +336,7 @@ in
           (fn file => LAMB_RUNTIME ^ "/" ^ file)
           ["src/runtime.c", "src/gc.c", "linux/numbers.s", "src/lamb.c"]
 
-      val z0 = (Inferring.new (), nil)
+      val z0 = (Inferring.new (), nil, nil)
       val z1 = (SystemVCompiler.new (), nil)
 
       fun infer output = let
@@ -396,7 +404,7 @@ in
           (fn file => LAMB_RUNTIME ^ "/" ^ file)
           ["src/runtime.c", "src/gc.c", "windows/numbers.s", "src/lamb.c"]
 
-      val z0 = (Inferring.new (), nil)
+      val z0 = (Inferring.new (), nil,nil)
       val z1 = (MicrosoftCompiler.new (), nil)
 
       fun infer output = let

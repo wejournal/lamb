@@ -52,6 +52,7 @@ alpha = [A-Z_a-z];
 "def" => (Tokens.DEF (region yytext));
 "in" => (Tokens.IN (region yytext));
 "let" => (Tokens.LET (region yytext));
+"type" => (Tokens.TYPE (region yytext));
 "val" => (Tokens.VAL (region yytext));
 
 {digit}+ => (let
