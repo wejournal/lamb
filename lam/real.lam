@@ -1,0 +1,24 @@
+type unit
+type bool
+type uint64_t
+type string
+
+val seq : a -> b -> b
+
+val false : bool
+val true : bool
+val if : bool -> a -> a -> a
+
+val zero64 : uint64_t
+val succ64 : uint64_t -> uint64_t
+val eq64 : uint64_t -> uint64_t -> bool
+val lt64 : uint64_t -> uint64_t -> bool
+val add64 : uint64_t -> uint64_t -> uint64_t
+val sub64 : uint64_t -> uint64_t -> uint64_t
+val mul64 : uint64_t -> uint64_t -> uint64_t
+val div64 : uint64_t -> uint64_t -> uint64_t
+val mod64 : uint64_t -> uint64_t -> uint64_t
+val print64 : uint64_t -> unit
+
+val newline : string
+val puts : string -> unit
