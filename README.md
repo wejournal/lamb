@@ -5,7 +5,7 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 ## Synopsis
 
 <pre>
-<b>lamb</b> [<b>-t</b>|<b>--typed</b>|<b>-u</b>|<b>--untyped</b>] [<b>-c</b>|<b>--compile</b>|<b>-e</b>|<b>--eval</b>|<b>-i</b>|<b>--infer</b>] [<b>--target</b> {<b>linux</b>|<b>windows</b>}] < <i>FILE</i><b>.lam</b> > <i>FILE</i><b>.s</b>
+<b>lamb</b> [<b>--target</b> {<b>linux</b>|<b>windows</b>}] [<b>-i</b>|<b>-S</b>|<b>-c</b>|<b>-i</b>|<b>--infer</b>] [<b>-o</b> <i>FILE</i>] <i>FILE</i><b>.lam</b>
 </pre>
 
 ## Prerequisites
@@ -103,7 +103,7 @@ because `^x. x x` would also become valid if that expression were valid.
 Lamb supports x64 code generation by default. For example, the following command compiles `foo.lam` to `foo.s`.
 
 ```
-$ lamb < foo.lam > foo.s
+$ lamb -S -o foo.s foo.lam
 ```
 
 To generate executables:
@@ -115,33 +115,11 @@ We recommend you use `gcc`.
 But you can use `as` and `ld`.
 If you use `as` and `ld`, you need to link the libc manually.
 
-### VM Execution
-
-Lamb supports VM (Krivine Machine) execution.
-
-```
-$ lamb --eval < foo.lam
-```
-
-### Infer and Print the Type
-
-```
-$ lamb --infer < foo.lam
-```
-
-### Untyped Lambda Calculus
-
-*IF YOU ONLY KNEW THE POWER OF THE DARK SIDE*.
-
-```
-$ lamb --untyped < foo.lam > foo.s
-```
-
 ## Language Specification
 
 ### Lexicon
 
-- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `in` | `let` | **NAT** | **CHAR** | **STRING** | **ID**
+- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `def` | `in` | `let` | `val` | **NAT** | **CHAR** | **STRING** | **ID**
 
 Where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
 The classes are defined by regular expressions.
@@ -157,7 +135,9 @@ The classes are defined by regular expressions.
 
 ### Grammar
 
-- *program* ::= *exp*
+- *program* ::= *decls*
+- *decls* ::= ε | *decl* *decls*
+- *decl* ::= `val` **ID** `:` *ty* | `def` **ID** *tyopt* `:=` *exp*
 - *ty* ::= *atty* | *atty* `->` *ty*
 - *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
 - *tyopt* ::= ε | `:` *ty*

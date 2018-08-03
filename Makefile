@@ -46,11 +46,11 @@ runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
 runtime/linux/n%.s: runtime/lam/n%.lam bin/lamb
-	bin/lamb --target linux -o $@ $<
+	LAMB_HOME=. bin/lamb --target linux -o $@ -S $<
 
 .INTERMEDIATE: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 runtime/windows/numbers.s: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
 runtime/windows/n%.s: runtime/lam/n%.lam bin/lamb
-	bin/lamb --target windows -o $@ $<
+	LAMB_HOME=. bin/lamb --target windows -o $@ -S $<
