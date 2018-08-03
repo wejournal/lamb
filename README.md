@@ -119,7 +119,7 @@ If you use `as` and `ld`, you need to link the libc manually.
 
 ### Lexicon
 
-- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `def` | `in` | `let` | `val` | **NAT** | **CHAR** | **STRING** | **ID**
+- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `def` | `in` | `let` | `type` | `val` | **NAT** | **CHAR** | **STRING** | **ID**
 
 Where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
 The classes are defined by regular expressions.
