@@ -237,10 +237,10 @@ functor Main(Compiler : COMPILER) = struct
 end
 
 datatype target = LINUX | WINDOWS
-datatype doing = INFER | COMPILE | ASSEMBLE | LINK
+datatype doing = INFER | COMPILE | ASSEMBLE | LINK | MAKE
 exception Unrecognized of string
 
-fun args nil = { target = LINUX, doing = LINK, output = NONE, files = nil }
+fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
   | args ("--target" :: "linux" :: argv) = let
       val {target, doing, output, files} = args argv
     in
@@ -266,6 +266,11 @@ fun args nil = { target = LINUX, doing = LINK, output = NONE, files = nil }
     in
       { target = WINDOWS, doing = ASSEMBLE, output = output, files = files }
     end
+  | args ("--link" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = WINDOWS, doing = ASSEMBLE, output = output, files = files }
+    end
   | args ("-o" :: arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
         raise Unrecognized arg
@@ -275,7 +280,7 @@ fun args nil = { target = LINUX, doing = LINK, output = NONE, files = nil }
         { target = target, doing = doing, output = SOME arg, files = files }
       end
   | args ("--" :: files) =
-      { target = LINUX, doing = LINK, output = NONE, files = files }
+      { target = LINUX, doing = MAKE, output = NONE, files = files }
   | args (arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
         raise Unrecognized arg
@@ -329,6 +334,11 @@ in
         (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
       else
         ()
+  | MAKE =>
+      if List.length files = 0 then
+        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
+      else
+        ()
 ; case target of
     LINUX => let
       val runtimes =
@@ -377,13 +387,11 @@ in
           files
       end
 
-      fun link output = let
+      fun link output objfiles = let
         val output =
           case output of
             NONE => "a.out"
           | SOME output => output
-
-        val objfiles = map (fn file => file ^ ".o") files
       in
         (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
       end
@@ -396,7 +404,9 @@ in
       | ASSEMBLE =>
           (compile NONE; assemble output)
       | LINK =>
-          (compile NONE; assemble NONE; link output)
+          link output files
+      | MAKE =>
+          (compile NONE; assemble NONE; link output (map (fn file => file ^ ".o") files))
     end
   | WINDOWS => let
       val runtimes =
@@ -445,13 +455,11 @@ in
           files
       end
 
-      fun link output = let
+      fun link output objfiles = let
         val output =
           case output of
             NONE => "a.exe"
           | SOME output => output
-
-        val objfiles = map (fn file => file ^ ".o") files
       in
         (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
       end
@@ -464,7 +472,9 @@ in
       | ASSEMBLE =>
           (compile NONE; assemble output)
       | LINK =>
-          (compile NONE; assemble NONE; link output)
+          link output files
+      | MAKE =>
+          (compile NONE; assemble NONE; link output (map (fn file => file ^ ".o") files))
     end
 end handle
   Unrecognized arg => (
