@@ -97,7 +97,7 @@ in
 end
 
 fun compileSystemV t = let
-  val u = DeBruijnIndexedTerm.compile t
+  val u = DeBruijnIndexedTerm.compile nil t
   val c = KrivineMachine.compile u
   val s = SystemVCompiler.compile (SystemVCompiler.new ()) "lamb_main" c
 in
@@ -105,7 +105,7 @@ in
 end
 
 fun compileMicrosoft t = let
-  val u = DeBruijnIndexedTerm.compile t
+  val u = DeBruijnIndexedTerm.compile nil t
   val c = KrivineMachine.compile u
   val s = MicrosoftCompiler.compile (MicrosoftCompiler.new ()) "lamb_main" c
 in
@@ -113,7 +113,7 @@ in
 end
 
 fun eval t = let
-  val u = DeBruijnIndexedTerm.compile t
+  val u = DeBruijnIndexedTerm.compile nil t
   val c = KrivineMachine.compile u
   val thunk = KrivineMachine.eval c
 in

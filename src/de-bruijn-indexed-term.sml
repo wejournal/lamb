@@ -6,24 +6,16 @@ structure DeBruijnIndexedTerm :> DE_BRUIJN_INDEXED_TERM = struct
 
   exception NotInScope of region * id
 
-  local
-    fun index' i _ nil = NONE
-      | index' i x (y :: ys) = if x = y then SOME i else index' (i + 1) x ys
-
-    fun index x env = index' 0 x env
-
-    fun compile' env (Term.VAR (r, x)) =
-          (case index x env of NONE =>
-              raise NotInScope (r, x)
-          | SOME i =>
-              VAR i)
-      | compile' env (Term.APP (_, t, u)) =
-          APP (compile' env t, compile' env u)
-      | compile' env (Term.ABS (_, (_, x), t)) =
-          ABS (compile' (x :: env) t)
-  in
-    val compile = compile' nil
-  end
+  fun compile e (Term.VAR (r, x)) =
+        (case List.find (fn (y, _) => x = y) e of
+          NONE =>
+            raise NotInScope (r, x)
+        | SOME (_, i) =>
+            VAR i)
+    | compile e (Term.APP (_, t, u)) =
+        APP (compile e t, compile e u)
+    | compile e (Term.ABS (_, (_, x), t)) =
+        ABS (compile ((x, 0) :: map (fn (y, i) => (y, i + 1)) e) t)
 
   fun show (VAR i) = Int.toString i
     | show (APP (t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
