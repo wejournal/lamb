@@ -137,7 +137,7 @@ The classes are defined by regular expressions.
 
 - *program* ::= *decls*
 - *decls* ::= ε | *decl* *decls*
-- *decl* ::= `val` **ID** `:` *ty* | `def` **ID** *tyopt* `:=` *exp*
+- *decl* ::= `type` **ID** | `val` **ID** `:` *ty* | `def` **ID** *tyopt* `:=` *exp*
 - *ty* ::= *atty* | *atty* `->` *ty*
 - *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
 - *tyopt* ::= ε | `:` *ty*
