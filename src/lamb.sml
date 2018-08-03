@@ -309,36 +309,10 @@ val () = let
 
   val {target, doing, output, files} = args (CommandLine.arguments ())
 in
-  case doing of
-    INFER =>
-      if List.length files = 0 then
-        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
-      else
-        ()
-  | COMPILE =>
-      if List.length files = 0 then
-        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
-      else if List.length files > 1 then
-        (print_error "lamb" "too many arguments." ""; OS.Process.exit OS.Process.failure)
-      else
-        ()
-  | ASSEMBLE =>
-      if List.length files = 0 then
-        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
-      else if List.length files > 1 then
-        (print_error "lamb" "too many arguments." ""; OS.Process.exit OS.Process.failure)
-      else
-        ()
-  | LINK =>
-      if List.length files = 0 then
-        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
-      else
-        ()
-  | MAKE =>
-      if List.length files = 0 then
-        (print_error "lamb" "too few arguments." ""; OS.Process.exit OS.Process.failure)
-      else
-        ()
+  if List.length files = 0 then
+    (print_error "lamb" "no input files." ""; OS.Process.exit OS.Process.failure)
+  else
+    ()
 ; case target of
     LINUX => let
       val runtimes =
