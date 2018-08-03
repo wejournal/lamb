@@ -106,6 +106,24 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
       ] :: s
     end
   in
-    fun compile fresh name c = concat (List.concat (compileCode fresh name c))
+    fun compile fresh names name c = let
+      fun f name =
+        ["\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n",
+          "\tsalq\t$3,\t%r10\n",
+          "\taddq\t%r10,\t", ABI.arg3, "\n",
+          "\tmovq\t$", name, ",\t(", ABI.arg3, ")\n",
+          "\tmovq\t", ABI.arg0, ",\t8(", ABI.arg3, ")\n",
+          "\tmovq\t", ABI.arg1, ",\t16(", ABI.arg3, ")\n",
+          "\tsubq\t%r10,\t", ABI.arg3, "\n",
+          "\tincq\t", ABI.arg2, "\n" ]
+
+      val s = concat (List.concat (map f names))
+
+      val grabs = List.tabulate (List.length names, fn _ => KrivineMachine.GRAB)
+      val name' = name ^ gensym fresh
+      val s' = concat (List.concat (compileCode fresh name' (grabs @ c)))
+    in
+      ".globl\t" ^ name ^ "\n" ^ name ^ ":\n" ^ s ^ s'
+    end
   end
 end

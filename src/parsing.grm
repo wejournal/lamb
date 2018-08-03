@@ -66,15 +66,19 @@ end
 | COLON
 | COLONEQ
 | LAMBDA
+| DEF
 | IN
 | LET
+| VAL
 | NAT of LargeWord.word
 | CHAR of char
 | STRING of string
 | ID of string
 
 %nonterm
-  program of TypedTerm.t
+  program of AST.t
+| decls of AST.decl list
+| decl of AST.decl
 | ty of Type.t
 | atty of Type.t
 | tyopt of Type.t option
@@ -87,8 +91,19 @@ end
 %%
 
 program:
-  exp
-    (exp)
+  decls
+    (decls)
+
+decls:
+    (nil)
+| decl decls
+    (decl :: decls)
+
+decl:
+  VAL ID COLON ty
+    (AST.VAL ((VALleft, tyright), ((IDleft, IDright), ID), ty))
+| DEF ID tyopt COLONEQ exp
+    (AST.DEF ((DEFleft, expright), ((IDleft, IDright), ID), tyopt, exp))
 
 ty:
   atty

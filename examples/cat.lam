@@ -1,1 +1,1 @@
-I
+def main := ^stdin. stdin

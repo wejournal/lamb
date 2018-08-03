@@ -49,8 +49,10 @@ alpha = [A-Z_a-z];
 ":" => (Tokens.COLON (region yytext));
 ":=" => (Tokens.COLONEQ (region yytext));
 "^" => (Tokens.LAMBDA (region yytext));
+"def" => (Tokens.DEF (region yytext));
 "in" => (Tokens.IN (region yytext));
 "let" => (Tokens.LET (region yytext));
+"val" => (Tokens.VAL (region yytext));
 
 {digit}+ => (let
   val (i, j) = region yytext

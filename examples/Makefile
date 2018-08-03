@@ -22,10 +22,10 @@ RUNTIME :=	../runtime/src/runtime.c \
 		../runtime/src/lamb.c
 
 .PHONY: all
-all: hello$(SUFFIX) cat$(SUFFIX) fib$(SUFFIX) alphabet$(SUFFIX) reverse$(SUFFIX) hexdump$(SUFFIX)
+all: hello$(SUFFIX) cat$(SUFFIX) reverse$(SUFFIX)
 
-%$(SUFFIX).s: ../snippet/typed.lam %.lam
-	cat $^ | $(LAMB) --typed --compile --target $(TARGET) > $@
+%$(SUFFIX).s: %.lam
+	$(LAMB) --target $(TARGET) -o $@ $^
 
 %$(SUFFIX): $(RUNTIME) %$(SUFFIX).s
-	$(GCC) $(PEDANTIC) -I../include -o $@ $^
+	$(GCC) $(PEDANTIC) -I../runtime/include -o $@ $^

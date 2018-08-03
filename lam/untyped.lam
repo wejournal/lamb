@@ -1,0 +1,5 @@
+def U := ^z. ^x. x (z z x)
+def Theta := U U
+def Y := ^f. (^x. f (x x)) (^x. f (x x))
+def omega := ^x. x x
+def Omega := omega omega

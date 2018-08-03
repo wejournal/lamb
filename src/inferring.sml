@@ -117,8 +117,8 @@ structure Inferring :> INFERRING = struct
           | _ =>
               raise Incompatible (T, U))
 
-  fun infer t = let
-    val (t', T, C) = constraint_type (new ()) nil nil t
+  fun infer inferring polyVars e t = let
+    val (t', T, C) = constraint_type inferring polyVars e t
     val S = unify C
     val U = Type.subst S T
     val u = substTypedTerm S t'

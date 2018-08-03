@@ -1,215 +1,215 @@
 -- Combinators
-let B : (b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x (y z) in
-let C : (b -> a -> c) -> a -> b -> c := ^x. ^y. ^z. x z y in
-let I : a -> a := ^x. x in
-let K : a -> b -> a := ^x. ^_. x in
-let S : (a -> b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x z (y z) in
-let W : (a -> a -> b) -> a -> b := ^x. ^y. x y y in
+def B : (b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x (y z)
+def C : (b -> a -> c) -> a -> b -> c := ^x. ^y. ^z. x z y
+def I : a -> a := ^x. x
+def K : a -> b -> a := ^x. ^_. x
+def S : (a -> b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x z (y z)
+def W : (a -> a -> b) -> a -> b := ^x. ^y. x y y
 
 -- Booleans
 -- type bool[a] := a -> a -> a
 
 --| false : bool[a]
-let false
+def false
   : (a -> a -> a) -- bool[a]
-  := ^_. ^y. y in
+  := ^_. ^y. y
 
 --| true : bool[a]
-let true
+def true
   : (a -> a -> a) -- bool[a]
-  := ^x. ^_. x in
+  := ^x. ^_. x
 
 --| not : bool[a] -> bool[a]
-let not
+def not
   : (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
-  := ^p. ^x. ^y. p y x in
+  := ^p. ^x. ^y. p y x
 
 --| and : bool[a] -> bool[a] -> bool[a]
-let and
+def and
   : (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
-  := ^p. ^q. ^x. ^y. p (q x y) y in
+  := ^p. ^q. ^x. ^y. p (q x y) y
 
 --| or : bool[a] -> bool[a] -> bool[a]
-let or
+def or
   : (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
-  := ^p. ^q. ^x. ^y. p x (q x y) in
+  := ^p. ^q. ^x. ^y. p x (q x y)
 
 --| xor : bool[a] -> bool[a] -> bool[a]
-let xor
+def xor
   : (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
   -> (a -> a -> a) -- bool[a]
-  := ^p. ^q. ^x. ^y. p (q y x) (q x y) in
+  := ^p. ^q. ^x. ^y. p (q y x) (q x y)
 
 --| if : bool[a] -> a -> a -> a
-let if
+def if
   : (a -> a -> a) -- bool[a]
   -> a
   -> a
   -> a
-  := ^p. ^x. ^y. p x y in
+  := ^p. ^x. ^y. p x y
 
 -- Pairs
 -- type pair[a, b, c] := (a -> b -> c) -> c
 
 --| pair : a -> b -> pair[a, b, c]
-let pair
+def pair
   : a
   -> b
   -> ((a -> b -> c) -> c) -- pair[a, b, c]
-  := ^x. ^y. ^f. f x y in
+  := ^x. ^y. ^f. f x y
 
 --| fst : pair[a, b, a] -> a
-let fst
+def fst
   : ((a -> b -> a) -> a) -- pair[a, b, a]
   -> a
-  := ^p. p K in
+  := ^p. p K
 
 --| snd : pair[a, b, b] -> b
-let snd
+def snd
   : ((a -> b -> b) -> b) -- pair[a, b, b]
   -> b
-  := ^p. p (K I) in
+  := ^p. p (K I)
 
 -- Numbers
 -- type nat[a] := (a -> a) -> a -> a
 
 --| succ : nat[a] -> nat[a]
-let succ
+def succ
   : ((a -> a) -> a -> a) -- nat[a]
   -> ((a -> a) -> a -> a) -- nat[a]
-  := ^n. ^f. ^x. f (n f x) in
+  := ^n. ^f. ^x. f (n f x)
 
 --| pred : nat[(a -> a) -> a] -> nat[a]
-let pred
+def pred
   : ((((a -> a) -> a) -> (a -> a) -> a) -> ((a -> a) -> a) -> (a -> a) -> a) -- nat[(a -> a) -> a]
   -> ((a -> a) -> a -> a) -- nat[a]
-  := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I in
+  := ^n. ^f. ^x. n (^g. ^h. h (g f)) (K x) I
 
 --| plus : nat[a] -> nat[a] -> nat[a]
-let plus
+def plus
   : ((a -> a) -> a -> a) -- nat[a]
   -> ((a -> a) -> a -> a) -- nat[a]
   -> ((a -> a) -> a -> a) -- nat[a]
-  := ^n. ^m. ^f. ^x. n f (m f x)  in
+  := ^n. ^m. ^f. ^x. n f (m f x) 
 
 --| odd : nat[bool[a]] -> bool[a]
-let odd
+def odd
   : (((a -> a -> a) -> a -> a -> a) -> (a -> a -> a) -> a -> a -> a) -- nat[bool[a]]
   -> (a -> a -> a) -- bool[a]
-  := ^n. n not false in
+  := ^n. n not false
 
 --| even : nat[bool[a]] -> bool[a]
-let even
+def even
   : (((a -> a -> a) -> a -> a -> a) -> (a -> a -> a) -> a -> a -> a) -- nat[bool[a]]
   -> (a -> a -> a) -- bool[a]
-  := ^n. n not true in
+  := ^n. n not true
 
 --| is_zero : nat[a] -> bool[a]
-let is_zero
+def is_zero
   : ((a -> a) -> a -> a)
   -> (a -> a -> a)
-  := ^n. ^x. ^y. n (K x) y in
+  := ^n. ^x. ^y. n (K x) y
 
 --| odd_copy : nat[pair[bool[a], nat[a]]] -> pair[bool[a], nat[a]]
-let odd_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f false 0) in
+def odd_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f false 0)
 
 --| even_copy : nat[pair[bool[a], nat[a]]] -> pair[bool[a], nat[a]]
-let even_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f true 0) in
+def even_copy := ^n. n (^p. ^f. p (^b. ^n. f (not b) (succ n))) (^f. f true 0)
 
 -- Lists
 -- type list[a, b] := (a -> b -> b) -> b -> b
 
 --| nil : list[a, b]
-let nil
+def nil
   : ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^_. ^z. z in
+  := ^_. ^z. z
 
 --| cons : a -> list[a, b] -> list[a, b]
-let cons
+def cons
   : a
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^x. ^xs. ^f. ^z. f x (xs f z) in
+  := ^x. ^xs. ^f. ^z. f x (xs f z)
 
 --| hd : list[a, a] -> a -> a
-let hd
+def hd
   : ((a -> a -> a) -> a -> a) -- list[a, a]
   -> a
   -> a
-  := ^xs. xs K in
+  := ^xs. xs K
 
 --| tl : list[a, pair[b, b, b]] -> list[a, b]
-let tl
+def tl
   : ((a -> ((b -> b -> b) -> b) -> ((b -> b -> b) -> b)) -> ((b -> b -> b) -> b) -> (b -> b -> b) -> b) -- list[a, pair[b, b, b]]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z)) in
+  := ^xs. ^f. ^z. fst (xs (^y. ^z. pair (snd z) (f y (snd z))) (pair z z))
 
 --| map : (a -> b) -> list[a, c] -> list[b, c]
-let map
+def map
   : (a -> b)
   -> ((a -> c -> c) -> c -> c) -- list[a, c]
   -> ((b -> c -> c) -> c -> c) -- list[b, c]
-  := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z in
+  := ^f. ^xs. ^g. ^z. xs (^x. ^z. g (f x) z) z
 
 --| append : list[a, b] -> list[a, b] -> list[a, b]
-let append
+def append
   : ((a -> b -> b) -> b -> b) -- list[a, b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^xs. ^ys. ^f. ^z. xs f (ys f z) in
+  := ^xs. ^ys. ^f. ^z. xs f (ys f z)
 
 --| concat : list[list[a, b], list[a, b]] -> list[a, b]
-let concat
+def concat
   : ((((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b)) -> ((a -> b -> b) -> b -> b) -> ((a -> b -> b) -> b -> b)) -- list[list[a, b], list[a, b]]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^xs. xs append nil in
+  := ^xs. xs append nil
 
 --| filter : (a -> bool[b]) -> list[a, b] -> list[a, b]
-let filter
+def filter
   : (a
     -> (b -> b -> b)) -- bool[b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z in
+  := ^f. ^xs. ^g. ^z. xs (^x. ^z. if (f x) (g x z) z) z
 
 --| filter_map : (a -> pair[bool[c], b, c]) -> list[a, c] -> list[b, c]
-let filter_map
+def filter_map
   : (a
     -> (((c -> c -> c) -> b -> c) -> c)) -- pair[bool[c], b, c]
   -> ((a -> c -> c) -> c -> c) -- list[a, c]
   -> ((b -> c -> c) -> c -> c) -- list[b, c]
-  := ^f. ^xs. ^g. ^z. xs (^x. ^z. f x (^b. ^y. if b (g y z) z)) z in
+  := ^f. ^xs. ^g. ^z. xs (^x. ^z. f x (^b. ^y. if b (g y z) z)) z
 
 --| reverse : list[a, b -> b] -> list[a, b]
-let reverse
+def reverse
   : ((a -> (b -> b) -> b -> b) -> (b -> b) -> b -> b) -- list[a, b -> b]
   -> ((a -> b -> b) -> b -> b) -- list[a, b]
-  := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z in
+  := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) I z
 
 --| reverse_range : nat[a] -> nat[nat[a] -> b -> b] -> list[nat[a], b]
-let reverse_range
+def reverse_range
   : ((a -> a) -> a -> a) -- nat[a]
   -> (((((a -> a) -> a -> a) -> b -> b) -> (((a -> a) -> a -> a) -> b -> b)) -> (((a -> a) -> a -> a) -> b -> b) -> (((a -> a) -> a -> a) -> b -> b)) -- nat[nat[a] -> b -> b]
   -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
-  := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z in
+  := ^n. ^m. ^f. ^z. m (^k. ^n. ^z. k (succ n) (f n z)) (K I) n z
 
 --| range : nat[a] -> nat[nat[a] -> (b -> b) -> (b -> b)] -> list[nat[a], b]
-let range
+def range
   : ((a -> a) -> a -> a) -- nat[a]
   -> (((((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b)) -> (((a -> a) -> a -> a) -> (b -> b) -> (b -> b))) -- nat[nat[a] -> (b -> b) -> (b -> b)]
   -> ((((a -> a) -> a -> a) -> b -> b) -> b -> b) -- list[nat[a], b]
-  := ^n. ^m. reverse (reverse_range n m) in
+  := ^n. ^m. reverse (reverse_range n m)
 
 -- type bin8[a] := (bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> bool[a] -> a) -> a
 
 --| zero8 : bin8[a]
-let zero8
+def zero8
   : ((a -> a -> a)
     -> (a -> a -> a)
     -> (a -> a -> a)
@@ -220,10 +220,10 @@ let zero8
     -> (a -> a -> a)
     -> a)
   -> a
-  := ^f. f false false false false false false false false in
+  := ^f. f false false false false false false false false
 
 --| sup8 : bin8[a]
-let sup8
+def sup8
   : ((a -> a -> a)
     -> (a -> a -> a)
     -> (a -> a -> a)
@@ -234,10 +234,10 @@ let sup8
     -> (a -> a -> a)
     -> a)
   -> a
-  := ^f. f true true true true true true true true in
+  := ^f. f true true true true true true true true
 
 --| not8 : bin8[a] -> bin8[a]
-let not8
+def not8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -259,10 +259,10 @@ let not8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f (not _0) (not _1) (not _2) (not _3) (not _4) (not _5) (not _6) (not _7)) in
+    f (not _0) (not _1) (not _2) (not _3) (not _4) (not _5) (not _6) (not _7))
 
 --| and8 : bin8[a] -> bin8[a] -> bin8[a]
-let and8
+def and8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -294,10 +294,10 @@ let and8
     -> a)
   -> a
   := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
-    f (and _0 __0) (and _1 __1) (and _2 __2) (and _3 __3) (and _4 __4) (and _5 __5) (and _6 __6) (and _7 __7))) in
+    f (and _0 __0) (and _1 __1) (and _2 __2) (and _3 __3) (and _4 __4) (and _5 __5) (and _6 __6) (and _7 __7)))
 
 --| or8 : bin8[a] -> bin8[a] -> bin8[a]
-let or8
+def or8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -329,10 +329,10 @@ let or8
     -> a)
   -> a
   := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
-    f (or _0 __0) (or _1 __1) (or _2 __2) (or _3 __3) (or _4 __4) (or _5 __5) (or _6 __6) (or _7 __7))) in
+    f (or _0 __0) (or _1 __1) (or _2 __2) (or _3 __3) (or _4 __4) (or _5 __5) (or _6 __6) (or _7 __7)))
 
 --| xor8 : bin8[a] -> bin8[a] -> bin8[a]
-let xor8
+def xor8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -364,10 +364,10 @@ let xor8
     -> a)
   -> a
   := ^n. ^m. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
-    f (xor _0 __0) (xor _1 __1) (xor _2 __2) (xor _3 __3) (xor _4 __4) (xor _5 __5) (xor _6 __6) (xor _7 __7))) in
+    f (xor _0 __0) (xor _1 __1) (xor _2 __2) (xor _3 __3) (xor _4 __4) (xor _5 __5) (xor _6 __6) (xor _7 __7)))
 
 --| is_not_zero8 : bin8[a] -> bool[a]
-let is_not_zero8
+def is_not_zero8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -380,10 +380,10 @@ let is_not_zero8
     -> a)
   -> (a -> a -> a)
   := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      or _0 (or _1 (or _2 (or _3 (or _4 (or _5 (or _6 _7)))))) x y) in
+      or _0 (or _1 (or _2 (or _3 (or _4 (or _5 (or _6 _7)))))) x y)
 
 --| is_zero8 : bin8[a] -> bool[a]
-let is_zero8
+def is_zero8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -396,10 +396,10 @@ let is_zero8
     -> a)
   -> (a -> a -> a)
   := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      not (or _0 (or _1 (or _2 (or _3 (or _4 (or _5 (or _6 _7))))))) x y) in
+      not (or _0 (or _1 (or _2 (or _3 (or _4 (or _5 (or _6 _7))))))) x y)
 
 --| not_eq8 : bin8[a] -> bin8[a] -> bool[a]
-let not_eq8
+def not_eq8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -422,10 +422,10 @@ let not_eq8
     -> a)
   -> (a -> a -> a)
   := ^n. ^m. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. m (^__0. ^__1. ^__2. ^__3. ^__4. ^__5. ^__6. ^__7.
-      or (xor _0 __0) (or (xor _1 __1) (or (xor _2 __2) (or (xor _3 __3) (or (xor _4 __4) (or (xor _5 __6) (or (xor _6 __6) (xor _7 __7))))))) x y)) in
+      or (xor _0 __0) (or (xor _1 __1) (or (xor _2 __2) (or (xor _3 __3) (or (xor _4 __4) (or (xor _5 __6) (or (xor _6 __6) (xor _7 __7))))))) x y))
 
 --| lt8 : bin8[a] -> bin8[a] -> bool[a]
-let lt8
+def lt8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -510,10 +510,10 @@ let lt8
           y)
         (if __7
           x
-          k))) in
+          k)))
 
 --| lte8 : bin8[a] -> bin8[a] -> bool[a]
-let lte8
+def lte8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -598,10 +598,10 @@ let lte8
           y)
         (if __7
           x
-          k))) in
+          k)))
 
 --| eq8 : bin8[a] -> bin8[a] -> bool[a]
-let eq8
+def eq8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -623,10 +623,10 @@ let eq8
       -> a)
     -> a)
   -> (a -> a -> a)
-  := ^n. ^m. not (not_eq8 n m) in
+  := ^n. ^m. not (not_eq8 n m)
 
 --| odd8 : bin8[a] -> bool[a]
-let odd8
+def odd8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -639,10 +639,10 @@ let odd8
     -> a)
   -> (a -> a -> a)
   := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      _0 x y) in
+      _0 x y)
 
 --| even8 : bin8[a] -> bool[a]
-let even8
+def even8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -655,10 +655,10 @@ let even8
     -> a)
   -> (a -> a -> a)
   := ^n. ^x. ^y. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      _0 y x) in
+      _0 y x)
 
 --| ntz8 : bin8[a] -> a -> a -> a -> a -> a -> a -> a -> a -> a -> a
-let ntz8
+def ntz8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -680,10 +680,10 @@ let ntz8
   -> a
   -> a
   := ^n. ^x0. ^x1. ^x2. ^x3. ^x4. ^x5. ^x6. ^x7. ^x8. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      if _0 x0 (if _1 x1 (if _2 x2 (if _3 x3 (if _4 x4 (if _5 x5 (if _6 x6 (if _7 x7 x8)))))))) in
+      if _0 x0 (if _1 x1 (if _2 x2 (if _3 x3 (if _4 x4 (if _5 x5 (if _6 x6 (if _7 x7 x8))))))))
 
 --| nlz8 : bin8[a] -> a -> a -> a -> a -> a -> a -> a -> a -> a -> a
-let nlz8
+def nlz8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -705,10 +705,10 @@ let nlz8
   -> a
   -> a
   := ^n. ^x0. ^x1. ^x2. ^x3. ^x4. ^x5. ^x6. ^x7. ^x8. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-      if _7 x7 (if _6 x6 (if _5 x5 (if _4 x4 (if _3 x3 (if _2 x2 (if _1 x1 (if _0 x0 x8)))))))) in
+      if _7 x7 (if _6 x6 (if _5 x5 (if _4 x4 (if _3 x3 (if _2 x2 (if _1 x1 (if _0 x0 x8))))))))
 
 --| sl1_8 : bin8[a] -> bin8[a]
-let sl1_8
+def sl1_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -730,10 +730,10 @@ let sl1_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false _0 _1 _2 _3 _4 _5 _6) in
+    f false _0 _1 _2 _3 _4 _5 _6)
 
 --| sl2_8 : bin8[a] -> bin8[a]
-let sl2_8
+def sl2_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -755,10 +755,10 @@ let sl2_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false _0 _1 _2 _3 _4 _5) in
+    f false false _0 _1 _2 _3 _4 _5)
 
 --| sl3_8 : bin8[a] -> bin8[a]
-let sl3_8
+def sl3_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -780,10 +780,10 @@ let sl3_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false false _0 _1 _2 _3 _4) in
+    f false false false _0 _1 _2 _3 _4)
 
 --| sl4_8 : bin8[a] -> bin8[a]
-let sl4_8
+def sl4_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -805,10 +805,10 @@ let sl4_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false false false _0 _1 _2 _3) in
+    f false false false false _0 _1 _2 _3)
 
 --| sl5_8 : bin8[a] -> bin8[a]
-let sl5_8
+def sl5_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -830,10 +830,10 @@ let sl5_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false false false false _0 _1 _2) in
+    f false false false false false _0 _1 _2)
 
 --| sl6_8 : bin8[a] -> bin8[a]
-let sl6_8
+def sl6_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -855,10 +855,10 @@ let sl6_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false false false false false _0 _1) in
+    f false false false false false false _0 _1)
 
 --| sl7_8 : bin8[a] -> bin8[a]
-let sl7_8
+def sl7_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -880,10 +880,10 @@ let sl7_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f false false false false false false false _0) in
+    f false false false false false false false _0)
 
 --| sr1_8 : bin8[a] -> bin8[a]
-let sr1_8
+def sr1_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -905,10 +905,10 @@ let sr1_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _1 _2 _3 _4 _5 _6 _7 false) in
+    f _1 _2 _3 _4 _5 _6 _7 false)
 
 --| sr2_8 : bin8[a] -> bin8[a]
-let sr2_8
+def sr2_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -930,10 +930,10 @@ let sr2_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _2 _3 _4 _5 _6 _7 false false) in
+    f _2 _3 _4 _5 _6 _7 false false)
 
 --| sr3_8 : bin8[a] -> bin8[a]
-let sr3_8
+def sr3_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -955,10 +955,10 @@ let sr3_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _3 _4 _5 _6 _7 false false false) in
+    f _3 _4 _5 _6 _7 false false false)
 
 --| sr4_8 : bin8[a] -> bin8[a]
-let sr4_8
+def sr4_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -980,10 +980,10 @@ let sr4_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _4 _5 _6 _7 false false false false) in
+    f _4 _5 _6 _7 false false false false)
 
 --| sr5_8 : bin8[a] -> bin8[a]
-let sr5_8
+def sr5_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1005,10 +1005,10 @@ let sr5_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _5 _6 _7 false false false false false) in
+    f _5 _6 _7 false false false false false)
 
 --| sr6_8 : bin8[a] -> bin8[a]
-let sr6_8
+def sr6_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1030,10 +1030,10 @@ let sr6_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _6 _7 false false false false false false) in
+    f _6 _7 false false false false false false)
 
 --| sr7_8 : bin8[a] -> bin8[a]
-let sr7_8
+def sr7_8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1055,10 +1055,10 @@ let sr7_8
     -> a)
   -> a
   := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
-    f _7 false false false false false false false) in
+    f _7 false false false false false false false)
 
 --| add8 : bin8[a] -> bin8[a] -> bin8[a]
-let add8
+def add8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1121,10 +1121,10 @@ let add8
                               if (is_zero8 m6)
                                 (n6 f)
                                 (let n7 := xor8 n6 m6 in
-                                  n7 f)))))))) in
+                                  n7 f))))))))
 
 --| nat8 : bin8[a] -> nat[a]
-let nat8
+def nat8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1145,10 +1145,10 @@ let nat8
     let g := ^z. if _2 (f (g (g z))) (g (g z)) in
     let g := ^z. if _1 (f (g (g z))) (g (g z)) in
     let g := ^z. if _0 (f (g (g z))) (g (g z)) in
-    g z) in
+    g z)
 
 --| inc8 : bin8[a] -> bin8[a]
-let inc8
+def inc8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1186,10 +1186,10 @@ let inc8
             (f false false false true _4 _5 _6 _7))
           (f false false true _3 _4 _5 _6 _7))
         (f false true _2 _3 _4 _5 _6 _7))
-        (f true _1 _2 _3 _4 _5 _6 _7)) in
+        (f true _1 _2 _3 _4 _5 _6 _7))
 
 --| dec8 : bin8[a] -> bin8[a]
-let dec8
+def dec8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1227,10 +1227,10 @@ let dec8
                   (f true true true true true true false _7)
                   (if _7
                     (f true true true true true true true false)
-                    (f true true true true true true true true))))))))) in
+                    (f true true true true true true true true)))))))))
 
 --| sub8 : bin8[a] -> bin8[a] -> bin8[a]
-let sub8
+def sub8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1261,10 +1261,10 @@ let sub8
     -> (a -> a -> a)
     -> a)
   -> a
-  := ^n. ^m. add8 n (inc8 (not8 m)) in
+  := ^n. ^m. add8 n (inc8 (not8 m))
 
 --| mul8 : bin8[a] -> bin8[a] -> bin8[a]
-let mul8
+def mul8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1305,10 +1305,10 @@ let mul8
       let n5 := ^f. if _5 (sl5_8 n f) (zero8 f) in
       let n6 := ^f. if _6 (sl6_8 n f) (zero8 f) in
       let n7 := ^f. if _7 (sl7_8 n f) (zero8 f) in
-        add8 (add8 (add8 (add8 (add8 (add8 (add8 n0 n1) n2) n3) n4) n5) n6) n7 f) in
+        add8 (add8 (add8 (add8 (add8 (add8 (add8 n0 n1) n2) n3) n4) n5) n6) n7 f)
 
 --| div8 : bin8[a] -> bin8[a] -> bin8[a]
-let div8
+def div8
   : (((a -> a -> a)
       -> (a -> a -> a)
       -> (a -> a -> a)
@@ -1413,30 +1413,29 @@ let div8
     let n := ^f. if (lt8 n m) (n f) (sub8 n m f) in
     let m := sr1_8 m in
       i f)))))))))
-    in
 
 --| bin8 : nat8[bin8[a]] -> bin8[a]
-let bin8 := ^n. n inc8 zero8 in
+def bin8 := ^n. n inc8 zero8
 
 --| is_multiple8 : bin8[a] -> bin8[a] -> bool[a]
-let is_multiple8 := ^n. ^m. eq8 n (mul8 (div8 n m) m) in
+def is_multiple8 := ^n. ^m. eq8 n (mul8 (div8 n m) m)
 
 --| is_not_multiple8 : bin8[a] -> bin8[a] -> bool[a]
-let is_not_multiple8 := ^n. ^m. not_eq8 n (mul8 (div8 n m) m) in
+def is_not_multiple8 := ^n. ^m. not_eq8 n (mul8 (div8 n m) m)
 
-let one8 := ^f. f true false false false false false false false in
-let two8 := ^f. f false true false false false false false false in
-let three8 := ^f. f true true false false false false false false in
-let four8 := ^f. f false false true false false false false false in
-let five8 := ^f. f true false true false false false false false in
-let six8 := ^f. f false true true false false false false false in
-let seven8 := ^f. f true true true false false false false false in
-let eight8 := ^f. f false false false true false false false false in
-let nine8 := ^f. f true false false true false false false false in
+def one8 := ^f. f true false false false false false false false
+def two8 := ^f. f false true false false false false false false
+def three8 := ^f. f true true false false false false false false
+def four8 := ^f. f false false true false false false false false
+def five8 := ^f. f true false true false false false false false
+def six8 := ^f. f false true true false false false false false
+def seven8 := ^f. f true true true false false false false false
+def eight8 := ^f. f false false false true false false false false
+def nine8 := ^f. f true false false true false false false false
 
-let show_nat := ^n. reverse (n (cons '\'') "0") in
+def show_nat := ^n. reverse (n (cons '\'') "0")
 
-let show_bin8 := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
+def show_bin8 := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
   f (_7 '1' '0')
   (f (_6 '1' '0')
   (f (_5 '1' '0')
@@ -1444,4 +1443,4 @@ let show_bin8 := ^n. ^f. ^z. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7.
   (f (_3 '1' '0')
   (f (_2 '1' '0')
   (f (_1 '1' '0')
-  (f (_0 '1' '0') z)))))))) in
+  (f (_0 '1' '0') z))))))))

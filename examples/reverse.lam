@@ -1,1 +1,1 @@
-reverse
+def main := ^xs. ^f. ^z. xs (^x. ^k. ^z. k (f x z)) (^x. x) z

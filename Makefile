@@ -45,12 +45,12 @@ src/lexing.lex.sml: src/lexing.lex
 runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
-runtime/linux/n%.s: bin/lamb
-	echo $(patsubst runtime/linux/n%.s,%,$@) | bin/lamb --untyped --compile --target linux | sed 's/lamb_main/lamb_n$(patsubst runtime/linux/n%.s,%,$@)/' > runtime/linux/n$(patsubst runtime/linux/n%.s,%,$@).s
+runtime/linux/n%.s: runtime/lam/n%.lam bin/lamb
+	bin/lamb --target linux -o $@ $<
 
 .INTERMEDIATE: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 runtime/windows/numbers.s: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 	cat $^ > $@
 
-runtime/windows/n%.s: bin/lamb
-	echo $(patsubst runtime/windows/n%.s,%,$@) | bin/lamb --untyped --compile --target windows | sed 's/lamb_main/lamb_n$(patsubst runtime/windows/n%.s,%,$@)/' > runtime/windows/n$(patsubst runtime/windows/n%.s,%,$@).s
+runtime/windows/n%.s: runtime/lam/n%.lam bin/lamb
+	bin/lamb --target windows -o $@ $<

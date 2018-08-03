@@ -21,6 +21,8 @@ in
   typed-term.sml
   inferring.sig
   inferring.sml
+  ast.sig
+  ast.sml
   parsing.grm.sig
   parsing.grm.sml
   lexing.lex.sml
