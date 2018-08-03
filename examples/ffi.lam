@@ -1,0 +1,8 @@
+type void
+type string
+
+val seq : a -> b -> b
+val puts : string -> void
+val hello : string
+
+def main := ^_. seq (puts hello) ""

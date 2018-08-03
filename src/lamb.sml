@@ -269,7 +269,7 @@ fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
   | args ("--link" :: argv) = let
       val {target, doing, output, files} = args argv
     in
-      { target = WINDOWS, doing = ASSEMBLE, output = output, files = files }
+      { target = WINDOWS, doing = LINK, output = output, files = files }
     end
   | args ("-o" :: arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
