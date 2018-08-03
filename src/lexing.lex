@@ -14,19 +14,25 @@ end
 
 fun eof () = Tokens.EOF (!cursor, !cursor)
 
-fun unescapeChar "'\\t'" = #"\t"
+fun unescapeChar "'\\a'" = #"\a"
+  | unescapeChar "'\\b'" = #"\b"
+  | unescapeChar "'\\t'" = #"\t"
   | unescapeChar "'\\n'" = #"\n"
   | unescapeChar "'\\v'" = #"\v"
   | unescapeChar "'\\f'" = #"\f"
   | unescapeChar "'\\r'" = #"\r"
+  | unescapeChar "'\\e'" = #"\027"
   | unescapeChar s = String.sub (s, String.size s - 2)
   
 fun unescapeCharList nil = nil
+  | unescapeCharList (#"\\" :: #"a" :: cs) = #"\a" :: unescapeCharList cs
+  | unescapeCharList (#"\\" :: #"b" :: cs) = #"\b" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: #"t" :: cs) = #"\t" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: #"n" :: cs) = #"\n" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: #"v" :: cs) = #"\v" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: #"f" :: cs) = #"\f" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: #"r" :: cs) = #"\r" :: unescapeCharList cs
+  | unescapeCharList (#"\\" :: #"e" :: cs) = #"\027" :: unescapeCharList cs
   | unescapeCharList (#"\\" :: c :: cs) = c :: unescapeCharList cs
   | unescapeCharList (c :: s) = c :: unescapeCharList s
 
@@ -61,7 +67,7 @@ in
   Tokens.NAT (Option.valOf (StringCvt.scanString (LargeWord.scan StringCvt.DEC) yytext), i, j)
 end);
 
-"'"("\\"?)."'" => (let
+"'"([^\\']|"\\".)"'" => (let
   val (i, j) = region yytext
 in
   Tokens.CHAR (unescapeChar yytext, i, j)

@@ -127,7 +127,7 @@ The classes are defined by regular expressions.
 - **SPACE**: `/[\t\n\r ]+/`
 - **COMMENT**: `/--[^\n]*\n/`
 - **NAT**: `/[0-9]+/`
-- **CHAR**: `/'\\?.'/`
+- **CHAR**: `/'([^\\']|\\.)'/`
 - **STRING**: `/"([^\\"]|\\.)*"/`
 - **ID**: `/[A-Z_a-z][A-Z_a-z0-9]+/`
 
