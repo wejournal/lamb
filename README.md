@@ -4,9 +4,7 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 
 ## SYNOPSIS
 
-<pre>
-<b>lamb</b> [<b>--target</b> {<b>linux</b>|<b>windows</b>}] [<b>-i</b>|<b>-S</b>|<b>-c</b>|<b>--link</b>] [<b>-o</b> <i>FILE</i>] <i>FILE</i><b>.lam</b>
-</pre>
+<pre><code><strong>lamb</strong> [<strong>--target</strong> {<strong>linux</strong>|<strong>windows</strong>}] [<strong>-i</strong>|<strong>-S</strong>|<strong>-c</strong>|<strong>--link</strong>] [<strong>-o</strong> <em>FILE</em>] [<em>FILE</em>...]</code></pre>
 
 ## ENVIRONMENT
 
