@@ -32,16 +32,35 @@ $ export PATH="$HOME/.lamb/bin:$PATH"
 
 ## HELLO WORLD
 
-つぎのような内容の `hello.lam` を用意してください．
+つぎのような内容の **hello.lam** を用意してください．
 
 <pre><code><strong>def</strong> main := ^stdin.
-  "hello world\n"
-</code></pre>
+  "hello world\n"</code></pre>
 
 実行形式を生成するのは簡単です．
 
 ```
 $ lamb hello.lam
+$ ./a.out
+hello world
+```
+## SEPARATE COMPILATION
+
+**k.lam**:
+
+<pre><code><strong>def</strong> K := ^x. ^_. x</code></pre>
+
+**hello.lam**:
+
+<pre><code><strong>def</strong> main := K("hello world\n")</code></pre>
+
+```sh
+$ lamb -o k.lami -i k.lam
+$ cat k.lami
+val K : a -> b -> a
+$ lamb -c k.lam
+$ lamb -c k.lami hello.lam
+$ lamb --link k.lam.o hello.lam.o
 $ ./a.out
 hello world
 ```
