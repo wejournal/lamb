@@ -128,7 +128,7 @@ The classes are defined by regular expressions.
 - **NAT**: `/[0-9]+/`
 - **CHAR**: `/'([^\\']|\\.)'/`
 - **STRING**: `/"([^\\"]|\\.)*"/`
-- **ID**: `/[A-Z_a-z][A-Z_a-z0-9]+/`
+- **ID**: `/[A-Z_a-z][A-Z_a-z0-9]*/`
 
 **SPACE** and **COMMENT** are ignored by lexers.
 
