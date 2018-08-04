@@ -54,7 +54,7 @@ hello world
 
 <pre><code><strong>def</strong> main := K("hello world\n")</code></pre>
 
-```sh
+```
 $ lamb -o k.lami -i k.lam
 $ cat k.lami
 val K : a -> b -> a
