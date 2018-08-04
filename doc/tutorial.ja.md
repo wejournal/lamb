@@ -1,4 +1,4 @@
-# Lamb Tutorial
+# A Lamb Tutorial
 
 ## PREREQUISITES
 
