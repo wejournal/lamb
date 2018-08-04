@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <runtime.h>
+#include <lamb/runtime.h>
 
 uintptr_t lamb_seq(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   env_t env = {env_count, env_values};
