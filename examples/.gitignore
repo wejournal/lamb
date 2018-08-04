@@ -2,5 +2,8 @@ hello
 hello.exe
 cat
 cat.exe
-fib
-fib.exe
+reverse
+reverse.exe
+ffi
+ffi.exe
+ffi.c.o

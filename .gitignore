@@ -12,3 +12,5 @@ lib/lamb/windows/runtime.o
 lib/lamb/windows/gc.o
 lib/lamb/windows/numbers.o
 lib/lamb/windows/lamb.o
+include/lamb/runtime.h
+include/lamb/gc.h
