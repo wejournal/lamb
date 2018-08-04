@@ -1,6 +1,6 @@
 # Lamb チュートリアル
 
-## 前提
+## PREREQUISITES
 
 以下のコマンドが必要です:
 
@@ -18,7 +18,7 @@ $ sudo apt install mlton
 $ sudo apt install mingw-w64
 ```
 
-## インストール
+## INSTALLATION
 
 つぎのコマンドを実行すると， `~/.lamb` に必要な諸々のファイルがインストールされます．
 
