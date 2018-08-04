@@ -36,8 +36,4 @@ structure Type :> TYPE = struct
   fun region (VAR (r, _)) = r
     | region (CON (r, _)) = r
     | region (ARR (r, _, _)) = r
-
-  fun show (VAR (_, x)) = "'" ^ x
-    | show (CON (_, x)) = x
-    | show (ARR (_, T, U)) = "(" ^ show T ^ " -> " ^ show U ^ ")"
 end

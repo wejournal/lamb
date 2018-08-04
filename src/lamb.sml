@@ -121,6 +121,38 @@ in
         showType i e boundedVars T ^ " -> " ^ showTypeArr i e boundedVars U
     | showTypeArr i e boundedVars T =
         showType i e boundedVars T
+
+  fun showMonoType i e boundedVars (Type.VAR (_, x)) = let
+        val (j, e') =
+          case List.find (fn (y, _) => x = y) (!e) of
+            NONE => let
+              val j = !i
+            in
+              i := !i + 1
+            ; e := (x, j) :: !e
+            ; (j, !e)
+            end
+          | SOME (_, j) =>
+              (j, !e)
+
+        val a = alpha j
+        val k = ref 0
+      in
+        if List.exists (fn (_, b) => x = b) boundedVars then (
+          while List.exists (fn (_, b) => a ^ Int.toString (!k) = b) boundedVars do
+            k := !k + 1
+        ; "'" ^ a ^ Int.toString (!k)
+        ) else
+          "'" ^ a
+      end
+    | showMonoType _ _ _ (Type.CON (_, x)) =
+        x
+    | showMonoType i e boundedVars (Type.ARR (_, T, U)) =
+        "(" ^ showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U ^ ")"
+  and showMonoTypeArr i e boundedVars (Type.ARR (_, T, U)) =
+        showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U
+    | showMonoTypeArr i e boundedVars T =
+        showMonoType i e boundedVars T
 end
 
 fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
@@ -178,12 +210,18 @@ in
       ()
   | Inferring.NotInScope (r, x) =>
       print_error_in_file file s r ("not in scope: `" ^ x ^ "'")
-  | Inferring.Cyclic ((r, x), T) =>
-      print_error_in_file file s r ("cyclic: '" ^ x ^ " in " ^ Type.show T)
+  | Inferring.Cyclic ((r, x), T) => let
+      val i = ref 0
+      val e = ref nil
+    in
+      print_error_in_file file s r ("cyclic: " ^ showMonoType i e nil (Type.VAR (r, x)) ^ " in " ^ showMonoType i e nil T)
+    end
   | Inferring.Incompatible (T, U) => let
       val r = Type.region T
+      val i = ref 0
+      val e = ref nil
     in
-      print_error_in_file file s r ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U)
+      print_error_in_file file s r ("incompatible types: " ^  showMonoType i e nil T ^ " and " ^ showMonoType i e nil U)
     end
   | Duplicate (r, x) =>
       print_error_in_file file s r ("duplicate variable: `" ^ x ^ "'")
@@ -259,12 +297,18 @@ functor Main(Compiler : COMPILER) = struct
         print_error_in_file file s r ("not in scope: `" ^ x ^ "'")
     | Inferring.NotInScope (r, x) =>
         print_error_in_file file s r ("not in scope: `" ^ x ^ "'")
-    | Inferring.Cyclic ((r, x), T) =>
-        print_error_in_file file s r ("cyclic: '" ^ x ^ " in " ^ Type.show T)
+    | Inferring.Cyclic ((r, x), T) => let
+        val i = ref 0
+        val e = ref nil
+      in
+        print_error_in_file file s r ("cyclic: " ^ showMonoType i e nil (Type.VAR (r, x)) ^ " in " ^  showMonoType i e nil T)
+      end
     | Inferring.Incompatible (T, U) => let
         val r = Type.region T
+        val i = ref 0
+        val e = ref nil
       in
-        print_error_in_file file s r ("incompatible types: " ^ Type.show T ^ " and " ^ Type.show U)
+        print_error_in_file file s r ("incompatible types: " ^  showMonoType i e nil T ^ " and " ^  showMonoType i e nil U)
       end
     | Duplicate (r, x) =>
         print_error_in_file file s r ("duplicate variable: `" ^ x ^ "'")

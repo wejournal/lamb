@@ -12,5 +12,4 @@ signature TYPE = sig
   val FV : t -> (region * id) list
   val BV : t -> (region * id) list
   val region : t -> region
-  val show : t -> string
 end
