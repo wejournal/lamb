@@ -16,8 +16,4 @@ structure DeBruijnIndexedTerm :> DE_BRUIJN_INDEXED_TERM = struct
         APP (compile e t, compile e u)
     | compile e (Term.ABS (_, (_, x), t)) =
         ABS (compile ((x, 0) :: map (fn (y, i) => (y, i + 1)) e) t)
-
-  fun show (VAR i) = Int.toString i
-    | show (APP (t, u)) = "(" ^ show t ^ " " ^ show u ^ ")"
-    | show (ABS t) = "(^ " ^ show t ^ ")"
 end

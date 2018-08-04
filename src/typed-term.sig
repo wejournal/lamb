@@ -6,5 +6,4 @@ signature TYPED_TERM = sig
   | LET of region * (region * id) * Type.t option * t * t
 
   val erase : t -> Term.t
-  val show : t -> string
 end

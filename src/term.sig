@@ -7,6 +7,4 @@ signature TERM = sig
     VAR of region * id
   | APP of region * t * t
   | ABS of region * (region * id) * t
-
-  val show : t -> string
 end

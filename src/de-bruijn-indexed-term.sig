@@ -6,6 +6,4 @@ signature DE_BRUIJN_INDEXED_TERM = sig
 
   exception NotInScope of region * id
   val compile : (id * int) list -> Term.t -> t
-
-  val show : t -> string
 end
