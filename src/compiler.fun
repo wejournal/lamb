@@ -56,7 +56,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n",
             "\tsalq\t$3,\t", ABI.arg2, "\n",
             "\tmovq\t%rax,\t", ABI.arg0, "\n" ] @
-          [ "\tcall\tgc_memcpy\n",
+          [ "\tcall\tmemcpy\n",
             "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n",
             "\tmovq\t-24(%rbp),", ABI.arg2, "\n",
             "\tmovq\t-8(%rbp),", ABI.arg0, "\n",

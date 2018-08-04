@@ -384,15 +384,22 @@ val () = let
   val LAMB_HOME =
     case OS.Process.getEnv "LAMB_HOME" of
       NONE =>
-        (print_error "lamb" "set LAMB_HOME." ""; OS.Process.exit OS.Process.failure)
+        (case OS.Process.getEnv "HOME" of
+          NONE =>
+            (print_error "lamb" "set LAMB_HOME." ""; OS.Process.exit OS.Process.failure)
+        | SOME HOME => let
+            val LAMB_HOME = OS.Path.concat (HOME, ".lamb")
+            val dir = OS.FileSys.openDir LAMB_HOME
+          in
+            OS.FileSys.closeDir dir
+          ; LAMB_HOME
+          end handle
+            OS.SysErr _ =>
+              (print_error "lamb" "set LAMB_HOME." ""; OS.Process.exit OS.Process.failure))
     | SOME LAMB_HOME =>
         LAMB_HOME
 
-  val LAMB_RUNTIME =
-      if String.size LAMB_HOME > 0 andalso String.sub (LAMB_HOME, String.size LAMB_HOME - 1) = #"/" then
-        LAMB_HOME ^ "runtime"
-      else
-        LAMB_HOME ^ "/runtime"
+  val LAMB_RUNTIME = OS.Path.concat (OS.Path.concat (LAMB_HOME, "lib"), "lamb")
 
   val {target, doing, output, files} = args (CommandLine.arguments ())
 in
@@ -404,8 +411,8 @@ in
     LINUX => let
       val runtimes =
         map
-          (fn file => LAMB_RUNTIME ^ "/" ^ file)
-          ["src/runtime.c", "src/gc.c", "linux/numbers.s", "src/lamb.c"]
+          (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
+          ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
 
       val z0 = (Inferring.new (), nil, nil)
       val z1 = (SystemVCompiler.new (), nil)
@@ -472,8 +479,8 @@ in
   | WINDOWS => let
       val runtimes =
         map
-          (fn file => LAMB_RUNTIME ^ "/" ^ file)
-          ["src/runtime.c", "src/gc.c", "windows/numbers.s", "src/lamb.c"]
+          (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
+          ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
 
       val z0 = (Inferring.new (), nil,nil)
       val z1 = (MicrosoftCompiler.new (), nil)

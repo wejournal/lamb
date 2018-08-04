@@ -16,15 +16,14 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 - mlyacc
 - mllex
 - gcc
+- x86_64-w64-mingw32-gcc
 
-*Optional* commands:
-
-- x86_64-w64-mingw32-gcc (for windows target)
-
-## Building
+## Installation
 
 ```
 $ make -j8
+$ make install # to install ~/.lamb
+$ export PATH="$HOME/.lamb/bin:$PATH"
 ```
 
 ## Run Examples
