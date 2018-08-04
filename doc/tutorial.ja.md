@@ -35,8 +35,8 @@ $ export PATH="$HOME/.lamb/bin:$PATH"
 つぎのような内容の `hello.lam` を用意してください．
 
 <pre><code>
-<strong>def</strong> <strong color="#800000">main</strong> := ^stdin.
-  <span color="#808000">"hello world\n"</span>
+<strong>def</strong> <em>main</em> := ^stdin.
+  "hello world\n"
 </code></pre>
 
 実行形式を生成するのは簡単です．
