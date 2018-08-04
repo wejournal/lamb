@@ -11,6 +11,4 @@ signature ABI = sig
 
   val enter : int -> instr list
   val leave : int -> instr list
-
-  val call : id -> instr list
 end

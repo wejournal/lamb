@@ -11,6 +11,4 @@ structure MicrosoftABI :> ABI = struct
 
   fun enter i = ["\tsubq\t$" ^ Int.toString (i * 8) ^ ",\t%rsp\n"]
   fun leave i = ["\taddq\t$" ^ Int.toString (i * 8) ^ ",\t%rsp\n"]
-
-  fun call f = ["\tcall\t" ^ f ^ "\n"]
 end

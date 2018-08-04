@@ -11,6 +11,4 @@ structure SystemVABI :> ABI = struct
 
   fun enter i = nil
   fun leave i = nil
-
-  fun call f = ["\tcall\t" ^ f ^ "\n"]
 end
