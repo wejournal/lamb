@@ -24,7 +24,7 @@ $ make install # to install ~/.lamb
 $ export PATH="$HOME/.lamb/bin:$PATH"
 ```
 
-## Language Specification
+## LANGUAGE SPECIFICATION
 
 ### Lexicon
 
