@@ -1,4 +1,4 @@
-# Lamb チュートリアル
+# Lamb Tutorial
 
 ## PREREQUISITES
 
