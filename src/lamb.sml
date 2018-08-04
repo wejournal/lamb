@@ -106,7 +106,7 @@ in
         val a = alpha j
         val k = ref 0
       in
-        if List.exists (fn (_, b) => x = b) boundedVars then (
+        if List.exists (fn (_, b) => a = b) boundedVars then (
           while List.exists (fn (_, b) => a ^ Int.toString (!k) = b) boundedVars do
             k := !k + 1
         ; a ^ Int.toString (!k)
