@@ -161,7 +161,7 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
     )
   | printDecl outstream (AST.VAL (_, (r, x), T), (inferring, boundedVars, e)) = (
       checkDup (r, x) e
-    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showType (ref 0) (ref nil) boundedVars T ^ "\n")
+    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
     ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
     )
   | printDecl outstream (AST.DEF (_, (r, x), Topt, t), (inferring, boundedVars, e)) = let
@@ -181,7 +181,7 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
       val T = Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)
     in
       checkDup (r, x) e
-    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showType (ref 0) (ref nil) boundedVars T ^ "\n")
+    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
     ; (inferring, boundedVars, (x, T) :: e)
     end
 
