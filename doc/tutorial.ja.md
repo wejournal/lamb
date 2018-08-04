@@ -34,8 +34,7 @@ $ export PATH="$HOME/.lamb/bin:$PATH"
 
 つぎのような内容の `hello.lam` を用意してください．
 
-<pre><code>
-<strong>def</strong> main := ^stdin.
+<pre><code><strong>def</strong> main := ^stdin.
   "hello world\n"
 </code></pre>
 
