@@ -8,6 +8,12 @@ A statically typed and lazy evaluated implementation of Lambda Calculus.
 <b>lamb</b> [<b>--target</b> {<b>linux</b>|<b>windows</b>}] [<b>-i</b>|<b>-S</b>|<b>-c</b>|<b>--link</b>] [<b>-o</b> <i>FILE</i>] <i>FILE</i><b>.lam</b>
 </pre>
 
+## ENVIRONMENT
+
+### LAMB_HOME
+
+The directory where lamb is being installed. default: **~/.lamb**
+
 ## PREREQUISITES
 
 - mlton
