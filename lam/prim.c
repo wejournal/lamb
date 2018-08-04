@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <runtime.h>
+#include <lamb/runtime.h>
 
 #define LAMB_BINOP(type, name, op) \
   uintptr_t name(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) { \
