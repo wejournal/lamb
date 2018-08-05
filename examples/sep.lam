@@ -1,0 +1,1 @@
+def main := K("hello world\n")

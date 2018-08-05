@@ -434,7 +434,7 @@ in
       fun compile output = let
         val outstream =
           case output of
-            NONE => NONE
+            NONE => SOME (TextIO.openOut (List.last files ^ ".s"))
           | SOME output => SOME (TextIO.openOut output)
       in
         List.foldl (SystemVMain.compile outstream) (z0, z1) files
@@ -444,15 +444,15 @@ in
       end
 
       fun assemble output = let
-        val files =
+        val asmfile =
+          List.last files ^ ".s"
+        val objfile =
           case output of
-            NONE => map (fn file => (file ^ ".s", file ^ ".o")) files
-          | SOME output => [(List.hd files ^ ".s", output)]
+            NONE => List.last files ^ ".o"
+          | SOME output => output
       in
-        List.app
-          (fn (asmfile, objfile) =>
-            (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile); ()))
-          files
+        OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
+      ; ()
       end
 
       fun link output objfiles = let
@@ -463,6 +463,24 @@ in
       in
         (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
       end
+
+      fun removeAssembly output = let
+        val asmfile =
+          case output of
+            NONE => List.last files ^ ".s"
+          | SOME output => output
+      in
+        OS.FileSys.remove asmfile
+      end
+
+      fun removeObjectCode output = let
+        val objfile =
+          case output of
+            NONE => List.last files ^ ".o"
+          | SOME output => output
+      in
+        OS.FileSys.remove objfile
+      end
     in
       case doing of
         INFER =>
@@ -470,11 +488,17 @@ in
       | COMPILE =>
           compile output
       | ASSEMBLE =>
-          (compile NONE; assemble output)
+          ( compile NONE
+          ; assemble output
+          ; removeAssembly NONE )
       | LINK =>
           link output files
       | MAKE =>
-          (compile NONE; assemble NONE; link output (map (fn file => file ^ ".o") files))
+          ( compile NONE
+          ; assemble NONE
+          ; link output [List.last files ^ ".o"]
+          ; removeObjectCode NONE
+          ; removeAssembly NONE )
     end
   | WINDOWS => let
       val runtimes =
@@ -502,7 +526,7 @@ in
       fun compile output = let
         val outstream =
           case output of
-            NONE => NONE
+            NONE => SOME (TextIO.openOut (List.last files ^ ".s"))
           | SOME output => SOME (TextIO.openOut output)
       in
         List.foldl (MicrosoftMain.compile outstream) (z0, z1) files
@@ -512,24 +536,42 @@ in
       end
 
       fun assemble output = let
-        val files =
+        val asmfile =
+          List.last files ^ ".s"
+        val objfile =
           case output of
-            NONE => map (fn file => (file ^ ".s", file ^ ".o")) files
-          | SOME output => [(List.hd files ^ ".s", output)]
+            NONE => List.last files ^ ".o"
+          | SOME output => output
       in
-        List.app
-          (fn (asmfile, objfile) =>
-            (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile); ()))
-          files
+        OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
+      ; ()
       end
 
       fun link output objfiles = let
         val output =
           case output of
-            NONE => "a.exe"
+            NONE => "a.out"
           | SOME output => output
       in
         (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
+      end
+
+      fun removeAssembly output = let
+        val asmfile =
+          case output of
+            NONE => List.last files ^ ".s"
+          | SOME output => output
+      in
+        OS.FileSys.remove asmfile
+      end
+
+      fun removeObjectCode output = let
+        val objfile =
+          case output of
+            NONE => List.last files ^ ".o"
+          | SOME output => output
+      in
+        OS.FileSys.remove objfile
       end
     in
       case doing of
@@ -538,11 +580,17 @@ in
       | COMPILE =>
           compile output
       | ASSEMBLE =>
-          (compile NONE; assemble output)
+          ( compile NONE
+          ; assemble output
+          ; removeAssembly NONE )
       | LINK =>
           link output files
       | MAKE =>
-          (compile NONE; assemble NONE; link output (map (fn file => file ^ ".o") files))
+          ( compile NONE
+          ; assemble NONE
+          ; link output [List.last files ^ ".o"]
+          ; removeObjectCode NONE
+          ; removeAssembly NONE )
     end
 end handle
   Unrecognized arg => (
