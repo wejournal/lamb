@@ -55,11 +55,11 @@ hello world
 <pre><code><strong>def</strong> main := K("hello world\n")</code></pre>
 
 ```
-$ lamb -o k.lami -i k.lam
-$ cat k.lami
+$ lamb -o k.la -i k.lam
+$ cat k.la
 val K : a -> b -> a
 $ lamb -c k.lam
-$ lamb -c k.lami hello.lam
+$ lamb -c k.la hello.lam
 $ lamb --link k.lam.o hello.lam.o
 $ ./a.out
 hello world
