@@ -146,9 +146,34 @@ Lamb では，この場合 `two` の型に含まれる `a` と，
 
 ## EXPRESSIONS
 
+式は自然数，文字，文字列，変数，適用，抽象そして `let` です．
+
 - *asc* ::= ε | `:` *ty*
-- *exp* ::= *atexp* | `^` **ID** *asc* `.` *exp* | `let` **ID** *asc* `:=` *exp* `in` *exp*
+- *exp* ::= *appexp* | `^` **ID** *asc* `.` *exp* | `let` **ID** *asc* `:=` *exp* `in` *exp*
+- *appexp* ::= **atexp** | **appexp** **atexp**
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
+
+このうち自然数，文字および文字列は，変数，抽象，抽象のみっつの要素に還元できます．
+具体的には，それぞれ自然数と文字はチャーチ数，文字列はチャーチリストにエンコーディングされます．
+たとえば，
+
+- `0 = ^f. ^x. x`
+- `1 = ^f. ^x. f x`
+- `2 = ^f. ^x. f (f x)`
+- `'a' = 97`
+- `'b' = 98`
+- `'c' = 99`
+- "" = `^f. ^x. x`
+- "a" = `^f. ^x. f 'a' x`
+- `"abc" = ^f. ^x. f 'a' (f 'b' (f 'c' x))`
+
+です． したがって Lamb の式のうち本質的な要素は，変数，適用，抽象，そして `let` といえます．
+
+### Let 多相
+
+<pre><code><strong>def</strong> I :=
+  <strong>let</strong> I := ^x. x <strong>in</strong>
+    I I</code></pre>
 
 ## DECLARATIONS
 
