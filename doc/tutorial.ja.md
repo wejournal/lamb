@@ -214,14 +214,52 @@ Lamb には多相性があるためこの条件を満たさないので，単な
 
 ## DECLARATIONS
 
+宣言は `type`, `val`, `def` のみっつです．
+
 - *decls* ::= ε | *decl* *decls*
 - *decl* ::= `type` **ID** | `val` **ID** `:` *ty* | `def` **ID** *asc* `:=` *exp*
 
-## PROGRAMS
+またプログラム全体は，宣言の列です．
 
 - *program* ::= *decls*
 
-## SEPARATE COMPILATION
+### 単相宣言
+
+`type` は単相宣言といい，
+基底型が単相であることを宣言します．
+たとえばつぎのコードでは， `a` は多相ですが `false` は単相です．
+
+<pre><code><strong>type</strong> false
+<strong>val</strong> absurd : false -> a
+</code></pre>
+
+これは一見無意味な仕様に思えるかもしれませんが，後述する FFI を書くときに便利です．
+たとえば， チャーチ数では遅いから，
+C の `uint64_t` などを直接使いたい，としましょう．
+その場合，つぎのように書くことになります:
+
+<pre><code><strong>type</strong> uint64_t
+<strong>val</strong> zero64 : uint64_t
+<strong>val</strong> succ64 : uint64_t -> uint64_t
+<strong>val</strong> add64 : uint64_t -> uint64_t -> uint64_t
+<strong>val</strong> sub64 : uint64_t -> uint64_t -> uint64_t
+<strong>val</strong> mul64 : uint64_t -> uint64_t -> uint64_t
+<strong>val</strong> div64 : uint64_t -> uint64_t -> uint64_t
+<strong>val</strong> mod64 : uint64_t -> uint64_t -> uint64_t
+</code></pre>
+
+しかし `uint64_t` に多相になってほしいわけではないでしょう．
+そこで `type` で単相であることを宣言しておくわけです．
+
+### val 宣言
+
+`val` 宣言にはふたつの用途があります．
+ひとつめは分割コンパイル， ふたつめは FFI です．
+
+#### 分割コンパイル
+
+Lamb は分割コンパイルをサポートしています．
+たとえば，つぎのふたつのコードを，べつべつにコンパイルしてリンクしたいとしましょう．
 
 **k.lam**:
 
@@ -231,22 +269,65 @@ Lamb には多相性があるためこの条件を満たさないので，単な
 
 <pre><code><strong>def</strong> main := K("hello world\n")</code></pre>
 
+その場合，まず **k.lam** の型定義をするファイルが必要です．
+手書きすることもできますが，さいわい，これは `-i` オプションで自動生成できます:
+
 ```
 $ lamb -o k.la -i k.lam
-$ cat k.la
-val K : a -> b -> a
+```
+
+拡張子はなんでもかまいませんが， *.la* という拡張子をつける習慣があります．
+
+**k.la**:
+
+<pre><code><strong>val</strong> K : a -> b -> a</code></pre>
+
+つぎに， **k.lam** と **sep.lam** を `-c` オプションをつけてコンパイルします．
+**sep.lam** は **k.lam** に依存しているので，
+コンパイルするために型定義ファイルが必要です．
+そのため， 自動生成した **k.la** を引数として与えます．
+
+```
 $ lamb -c k.lam
 $ lamb -c k.la sep.lam
+```
+
+引数の順番には意味があります． 依存関係の順番にコマンドラインから与えなければなりません．
+エラーメッセージの表示位置など厳密には細かい違いがありますが，
+基本的には， `cat` で結合したファイルをコンパイルしていると考えてください．
+
+最後に，生成されたオブジェクトコードを `--link` オプションでリンクします:
+
+```
 $ lamb --link k.lam.o sep.lam.o
 $ ./a.out
 hello world
 ```
 
-## FFI
+リンクは `ld` などでもできますが，
+libc や Lamb のランタイムも手動でリンクしなければなりません．
+`lamb` コマンドでリンクすることがもっとも簡単です．
+
+#### FFI
+
+Lamb は FFI もサポートしています．
+
+この節の最後に載せてある内容の **ffi.lam** と **ffi.c** を用意してください．
+まず， **ffi.c** をコンパイルしておきましょう．
 
 ```
 $ gcc -I$HOME/.lamb/include -c -o ffi.c.o ffi.c
+```
+
+つぎに， **ffi.lam** をコンパイルしておきます．
+
+```
 $ lamb -c -o ffi.lam.o ffi.lam
+```
+
+最後に， **ffi.c.o** と **ffi.lam.o** をリンクします．
+
+```
 $ lamb --link ffi.lam.o ffi.c.o
 $ ./a.out
 hello world
