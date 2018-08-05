@@ -47,10 +47,11 @@ hello world
 
 ## LEXEMES
 
+Lamb の語彙素はつぎのとおり．
+
 - *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `def` | `in` | `let` | `type` | `val` | **NAT** | **CHAR** | **STRING** | **ID**
 
-Where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
-The classes are defined by regular expressions.
+ただし **NAT**, **CHAR**, **STRING** および **ID** は語彙素のクラスで，正規表現で定義されます．
 
 - **SPACE**: `/[\t\n\r ]+/`
 - **COMMENT**: `/--[^\n]*\n/`
@@ -59,12 +60,48 @@ The classes are defined by regular expressions.
 - **STRING**: `/"([^\\"]|\\.)*"/`
 - **ID**: `/[A-Z_a-z][A-Z_a-z0-9]*/`
 
-**SPACE** and **COMMENT** are ignored by lexers.
+**SPACE** と **COMMENT** は字句解析器によって無視されます．
 
 ## TYPES
 
+型は型変数， 基底型， 関数型のみ．
+
 - *ty* ::= *atty* | *atty* `->` *ty*
 - *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
+
+型変数は，識別子のまえに `'` をつけたものです．例．
+
+<pre><code><strong>def</strong> I : 'a -> 'a := ^x. x</code></pre>
+
+基底型は， 識別子です．例．
+
+<pre><code><strong>def</strong> I : a -> a := ^x. x</code></pre>
+
+型変数と基底型の違いは，
+言葉で説明するのはすこし難しい．そこで例で説明しましょう．
+たとえば，チャーチ数の 2 は基底型でつぎのように書くことができます:
+
+<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f x</code></pre>
+
+ここで `a -> a` という部分に着目しますと，
+これは `two` の型に2回出現することがわかります．
+そこで `'b = a -> a` とおいて，
+これをひとつにまとめたい．
+それなら型変数でもって，つぎのように書いてもよろしい:
+
+<pre><code><strong>def</strong> two : 'b -> 'b := ^f. ^x. f x</code></pre>
+
+ここで `'b = a -> a` であることは， 処理系によって推論されます．
+ところが型変数でつぎのようには書けません:
+
+<pre><code><em>-- これは非合法</em>
+<strong>def</strong> two : c -> c := ^f. ^x. f x</code></pre>
+
+なんとなれば， `c` というのは基底型であって，関数型ではないからです．
+関数型でないのにもかかわらず関数としてもちいているので，
+エラーになるというわけです．
+
+型変数は，いうなれば基底型としても，関数型としてももちいることができる型を表すわけです．
 
 ## EXPRESSIONS
 
