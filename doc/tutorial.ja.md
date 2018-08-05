@@ -44,6 +44,43 @@ $ lamb hello.lam
 $ ./a.out
 hello world
 ```
+
+## LEXEMES
+
+- *lexeme* ::= `'` | `(` | `)` | `->` | `.` | `:` | `:=` | `^` | `def` | `in` | `let` | `type` | `val` | **NAT** | **CHAR** | **STRING** | **ID**
+
+Where **NAT**, **CHAR**, **STRING** and **ID** are classes of lexemes.
+The classes are defined by regular expressions.
+
+- **SPACE**: `/[\t\n\r ]+/`
+- **COMMENT**: `/--[^\n]*\n/`
+- **NAT**: `/[0-9]+/`
+- **CHAR**: `/'([^\\']|\\.)'/`
+- **STRING**: `/"([^\\"]|\\.)*"/`
+- **ID**: `/[A-Z_a-z][A-Z_a-z0-9]*/`
+
+**SPACE** and **COMMENT** are ignored by lexers.
+
+## TYPES
+
+- *ty* ::= *atty* | *atty* `->` *ty*
+- *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
+
+## EXPRESSIONS
+
+- *tyopt* ::= ε | `:` *ty*
+- *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
+- *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
+
+## DECLARATIONS
+
+- *decls* ::= ε | *decl* *decls*
+- *decl* ::= `type` **ID** | `val` **ID** `:` *ty* | `def` **ID** *tyopt* `:=` *exp*
+
+## PROGRAMS
+
+- *program* ::= *decls*
+
 ## SEPARATE COMPILATION
 
 **k.lam**:
