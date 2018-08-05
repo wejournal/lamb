@@ -82,7 +82,7 @@ end
 | decl of AST.decl
 | ty of Type.t
 | atty of Type.t
-| tyopt of Type.t option
+| asc of Type.t option
 | exp of TypedTerm.t
 | appexp of TypedTerm.t
 | atexp of TypedTerm.t
@@ -105,8 +105,8 @@ decl:
     (AST.TYPE ((TYPEleft, IDright), ((IDleft, IDright), ID)))
 | VAL ID COLON ty
     (AST.VAL ((VALleft, tyright), ((IDleft, IDright), ID), ty))
-| DEF ID tyopt COLONEQ exp
-    (AST.DEF ((DEFleft, expright), ((IDleft, IDright), ID), tyopt, exp))
+| DEF ID asc COLONEQ exp
+    (AST.DEF ((DEFleft, expright), ((IDleft, IDright), ID), asc, exp))
 
 ty:
   atty
@@ -122,7 +122,7 @@ atty:
 | LPAREN ty RPAREN
     (ty)
 
-tyopt:
+asc:
     (NONE)
 | COLON ty
     (SOME ty)
@@ -130,10 +130,10 @@ tyopt:
 exp:
   appexp
     (appexp)
-| LAMBDA ID tyopt DOT exp
-    (TypedTerm.ABS ((LAMBDAleft, expright), ((IDleft, IDright), ID), tyopt, exp))
-| LET ID tyopt COLONEQ exp IN exp
-    (TypedTerm.LET ((LETleft, expright), ((IDleft, IDright), ID), tyopt, exp1, exp2))
+| LAMBDA ID asc DOT exp
+    (TypedTerm.ABS ((LAMBDAleft, expright), ((IDleft, IDright), ID), asc, exp))
+| LET ID asc COLONEQ exp IN exp
+    (TypedTerm.LET ((LETleft, expright), ((IDleft, IDright), ID), asc, exp1, exp2))
 
 appexp:
   atexp

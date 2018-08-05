@@ -106,14 +106,14 @@ Lamb の語彙素はつぎのとおり．
 
 ## EXPRESSIONS
 
-- *tyopt* ::= ε | `:` *ty*
-- *exp* ::= *atexp* | `^` **ID** *tyopt* `.` *exp* | `let` **ID** *tyopt* `:=` *exp* `in` *exp*
+- *asc* ::= ε | `:` *ty*
+- *exp* ::= *atexp* | `^` **ID** *asc* `.` *exp* | `let` **ID** *asc* `:=` *exp* `in` *exp*
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
 
 ## DECLARATIONS
 
 - *decls* ::= ε | *decl* *decls*
-- *decl* ::= `type` **ID** | `val` **ID** `:` *ty* | `def` **ID** *tyopt* `:=` *exp*
+- *decl* ::= `type` **ID** | `val` **ID** `:` *ty* | `def` **ID** *asc* `:=` *exp*
 
 ## PROGRAMS
 
