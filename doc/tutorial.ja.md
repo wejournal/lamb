@@ -171,9 +171,15 @@ Lamb では，この場合 `two` の型に含まれる `a` と，
 
 ### Let 多相
 
+Lamb は let 多相をサポートしています．
+したがって， つぎのコードは合法です:
+
 <pre><code><strong>def</strong> I :=
   <strong>let</strong> I := ^x. x <strong>in</strong>
     I I</code></pre>
+
+もし多相性がない単相な言語だとすれば，
+このコードは型が循環してしまうため，型エラーにならなければならないことに注意してください．
 
 ## DECLARATIONS
 
