@@ -125,7 +125,7 @@ Lamb の語彙素はつぎのとおり．
 
 <pre><code><strong>def</strong> K := ^x. ^_. x</code></pre>
 
-**hello.lam**:
+**sep.lam**:
 
 <pre><code><strong>def</strong> main := K("hello world\n")</code></pre>
 
@@ -134,8 +134,8 @@ $ lamb -o k.la -i k.lam
 $ cat k.la
 val K : a -> b -> a
 $ lamb -c k.lam
-$ lamb -c k.la hello.lam
-$ lamb --link k.lam.o hello.lam.o
+$ lamb -c k.la sep.lam
+$ lamb --link k.lam.o sep.lam.o
 $ ./a.out
 hello world
 ```
