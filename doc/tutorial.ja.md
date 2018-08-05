@@ -81,7 +81,7 @@ Lamb の語彙素はつぎのとおり．
 言葉で説明するのはすこし難しい．そこで例で説明しましょう．
 たとえば，チャーチ数の 2 は基底型でつぎのように書くことができます:
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f x</code></pre>
+<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
 
 ここで `a -> a` という部分に着目しますと，
 これは `two` の型に2回出現することがわかります．
@@ -89,13 +89,13 @@ Lamb の語彙素はつぎのとおり．
 これをひとつにまとめたい．
 それなら型変数でもって，つぎのように書いてもよろしい:
 
-<pre><code><strong>def</strong> two : 'b -> 'b := ^f. ^x. f x</code></pre>
+<pre><code><strong>def</strong> two : 'b -> 'b := ^f. ^x. f (f x)</code></pre>
 
 ここで `'b = a -> a` であることは， 処理系によって推論されます．
 ところが型変数でつぎのようには書けません:
 
 <pre><code><em>-- これは非合法</em>
-<strong>def</strong> two : c -> c := ^f. ^x. f x</code></pre>
+<strong>def</strong> two : c -> c := ^f. ^x. f (f x)</code></pre>
 
 なんとなれば， `c` というのは基底型であって，関数型ではないからです．
 関数型でないのにもかかわらず関数としてもちいているので，
