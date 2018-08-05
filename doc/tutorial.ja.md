@@ -92,7 +92,7 @@ Lamb の語彙素はつぎのとおり．
 <pre><code><strong>def</strong> two : 'b -> 'b := ^f. ^x. f (f x)</code></pre>
 
 ここで `'b = a -> a` であることは， 処理系によって推論されます．
-ところが型変数でつぎのようには書けません:
+ところが基底型でつぎのようには書けません:
 
 <pre><code><em>-- これは非合法</em>
 <strong>def</strong> two : c -> c := ^f. ^x. f (f x)</code></pre>
