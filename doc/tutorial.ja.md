@@ -104,6 +104,45 @@ Lamb の語彙素はつぎのとおり．
 
 型変数は，そこに具体的な，すなわち基底型もしくは関数型が代入されることを表すわけです．
 
+### 型変数と基底型のスコープ
+
+型変数と基底型にはスコープがあります．
+たとえば，つぎのように `one` と `two` を定義した場合，
+`one` の型に含まれる `a` と `two` の型に含まれる `a` はべつのものである，
+と考えるほうが自然でしょう．
+
+<pre><code><strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+では，つぎの場合はどうでしょうか？
+
+<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+  <strong>let</strong> g : a := f x <strong>in</strong>
+    f x</code></pre>
+
+すくなくともわたしは， `g : a` という部分の `a` は，
+`two` の型に含まれる `a` と同じ型を表しているつもりです．
+
+Lamb では，この場合 `two` の `a` に含まれる `a` と，
+`g : a` の `a` は同じ型として扱われます．
+したがって，上記の例は合法です．
+
+ところが，プログラム全体ですべての `a` が同じ型として扱われるわけではありません．
+たとえば，この節の最初で示したつぎの例では，
+`a` はべつの型として扱われます．
+
+<pre><code><strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+まれではありますが， `one` と `two` の `a` を同じ型として扱いたいこともあるかもしれません．
+その場合， `type` 宣言をすればよろしい:
+
+<pre><code><strong>type</strong> a
+<strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+この仕様は FFI を書くとき便利です．このことはのちのちの節でくわしく説明します．
+
 ## EXPRESSIONS
 
 - *asc* ::= ε | `:` *ty*
