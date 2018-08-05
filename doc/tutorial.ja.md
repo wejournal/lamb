@@ -117,8 +117,8 @@ Lamb の語彙素はつぎのとおり．
 では，つぎの場合はどうでしょうか？
 
 <pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
-  <strong>let</strong> g : a := f x <strong>in</strong>
-    f x</code></pre>
+  <strong>let</strong> y : a := f x <strong>in</strong>
+    f y</code></pre>
 
 すくなくともわたしは， `g : a` という部分の `a` は，
 `two` の型に含まれる `a` と同じ型を表しているつもりです．
