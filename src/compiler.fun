@@ -11,6 +11,11 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
   end
 
   local
+    fun push r NONE = ["\tpushq\t", r, "\n"]
+      | push r (SOME r') = ["\tmovq\t", r, ",\t", r', "\n"]
+    fun pop NONE = ["\tpopq\t%r14\n"]
+      | pop (SOME _) = nil
+
     fun compileInstr fresh name (KrivineMachine.ACCESS i) =
         ( ["\tsubq\t$", Int.toString (i + 1), ",\t", ABI.arg0, "\n",
           "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n",
@@ -23,12 +28,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
           "\tpopq\t%rbp\n",
           "\tjmp\t*%r10\n" ]
         , nil)
-      | compileInstr fresh name KrivineMachine.GRAB = let
-          fun push r NONE = ["\tpushq\t", r, "\n"]
-            | push r (SOME r') = ["\tmovq\t", r, ",\t", r', "\n"]
-          fun pop NONE = ["\tpopq\t%r14\n"]
-            | pop (SOME _) = nil
-        in
+      | compileInstr fresh name KrivineMachine.GRAB =
           ( ["\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n",
             "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n",
             "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n",
@@ -50,16 +50,16 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             "\tpopq\t%r12\n" ::
             ABI.leave 1 @
           [ "\tpopq\t%r12\n",
-            "\tmovq\t-16(%rbp),", ABI.arg1, "\n",
-            "\tmovq\t-8(%rbp),", ABI.arg0, "\n",
+            "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n",
+            "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n",
             "\tpushq\t%rax\n",
             "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n",
             "\tsalq\t$3,\t", ABI.arg2, "\n",
             "\tmovq\t%rax,\t", ABI.arg0, "\n" ] @
           [ "\tcall\tmemcpy\n",
             "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n",
-            "\tmovq\t-24(%rbp),", ABI.arg2, "\n",
-            "\tmovq\t-8(%rbp),", ABI.arg0, "\n",
+            "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n",
+            "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n",
             "\tpopq\t", ABI.arg1, "\n",
             "\tdecq\t", ABI.arg2, "\n",
             "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r13\n",
@@ -81,7 +81,6 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             "\tsubq\t%r13,\t", ABI.arg1, "\n",
             "\tincq\t", ABI.arg0, "\n" ]
           , nil)
-        end
       | compileInstr fresh name (KrivineMachine.PUSH c) = let
           val x = gensym fresh
         in
@@ -107,21 +106,59 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
     end
   in
     fun compile fresh names name c = let
-      fun f name =
-        ["\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n",
-          "\tsalq\t$3,\t%r10\n",
-          "\taddq\t%r10,\t", ABI.arg3, "\n",
-          "\tmovq\t$", name, ",\t(", ABI.arg3, ")\n",
-          "\tmovq\t", ABI.arg0, ",\t8(", ABI.arg3, ")\n",
-          "\tmovq\t", ABI.arg1, ",\t16(", ABI.arg3, ")\n",
-          "\tsubq\t%r10,\t", ABI.arg3, "\n",
-          "\tincq\t", ABI.arg2, "\n" ]
-
-      val s = concat (List.concat (map f names))
-
-      val grabs = List.tabulate (List.length names, fn _ => KrivineMachine.GRAB)
+      val s =
+        concat
+          ( ["\tpushq\t%rbp\n",
+            "\tmovq\t%rsp,\t%rbp\n",
+            "\tsubq\t$32,\t%rsp\n",
+            "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n",
+            "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n",
+            "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n",
+            "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n",
+            "\tleaq\t", Int.toString (List.length names), "(", ABI.arg0, "),\t%r10\n",
+            "\tmovq\t$24,\t%r11\n",
+            "\tmovq\t$4,\t%r12\n",
+            "\tpushq\t%r12\n",
+            "\tmovq\t%rsp,\t%r12\n",
+            concat (ABI.enter 1),
+            "\tpushq\t%r12\n" ] @
+            push "%r11" ABI.arg5 @
+            push "%r10" ABI.arg4 @
+            ABI.enter 4 @
+            ["\tcall\tgc_alloc\n"] @
+            ABI.leave 4 @
+            pop ABI.arg4 @
+            pop ABI.arg5 @
+            "\tpopq\t%r12\n" ::
+            ABI.leave 1 @
+          [ "\tpopq\t%r12\n",
+            "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n",
+            "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n",
+            "\tpushq\t%rax\n",
+            "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n",
+            "\tsalq\t$3,\t", ABI.arg2, "\n",
+            "\tmovq\t%rax,\t", ABI.arg0, "\n" ] @
+          [ "\tcall\tmemcpy\n",
+            "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n",
+            "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n",
+            "\tmovq\t-16(%rbp),\t%r14\n",
+            "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n",
+            "\tpopq\t", ABI.arg1, "\n" ] @
+          List.concat (map
+            (fn name =>
+              ["\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r13\n",
+              "\tsalq\t$3,\t%r13\n",
+              "\taddq\t%r13,\t", ABI.arg1, "\n",
+              "\tmovq\t$", name, ",\t(", ABI.arg1, ")\n",
+              "\tmovq\t$0,\t8(", ABI.arg1, ")\n",
+              "\tmovq\t%r14,\t16(", ABI.arg1, ")\n",
+              "\tsubq\t%r13,\t", ABI.arg1, "\n",
+              "\tincq\t", ABI.arg0, "\n"])
+            (List.rev names)) @
+          [ "\taddq\t$32,\t%rsp\n",
+            "\tpopq\t%rbp\n" ] )
       val name' = name ^ gensym fresh
-      val s' = concat (List.concat (compileCode fresh name' (grabs @ c)))
+      val s' = concat (List.concat (compileCode fresh name' c))
     in
       ".globl\t" ^ name ^ "\n" ^ name ^ ":\n" ^ s ^ s'
     end
