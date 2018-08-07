@@ -1,10 +1,11 @@
-type id = string
 type cursor = int
 type region = cursor * cursor
+type 'a node = region * 'a
+type id = string node
 
 signature TERM = sig
   datatype t =
-    VAR of region * id
-  | APP of region * t * t
-  | ABS of region * (region * id) * t
+    VAR of id
+  | APP of (t * t) node
+  | ABS of (id * t) node
 end

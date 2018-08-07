@@ -1,6 +1,6 @@
 structure Term :> TERM = struct
   datatype t =
-    VAR of region * id
-  | APP of region * t * t
-  | ABS of region * (region * id) * t
+    VAR of id
+  | APP of (t * t) node
+  | ABS of (id * t) node
 end

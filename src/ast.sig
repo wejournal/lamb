@@ -1,8 +1,8 @@
 signature AST = sig
   datatype decl =
-    TYPE of region * (region * id)
-  | VAL of region * (region * id) * Type.t
-  | DEF of region * (region * id) * Type.t option * TypedTerm.t
+    TYPE of id node
+  | VAL of (id * Type.t) node
+  | DEF of (id * Type.t option * TypedTerm.t) node
 
   type t = decl list
 end

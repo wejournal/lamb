@@ -34,10 +34,10 @@ in
   print_error (file ^ ":" ^ Int.toString lineno ^ ":" ^ Int.toString colno) msg (highlight_line ^ "\n")
 end
 
-exception Duplicate of region * id
+exception Duplicate of id
 
 fun checkDup (r, x) e =
-  if List.exists (fn (y, _) => x = y) e then
+  if List.exists (fn ((_, y), _) => x = y) e then
     raise Duplicate (r, x)
   else
     ()
@@ -45,23 +45,23 @@ fun checkDup (r, x) e =
 fun mainType r = let
   val n = Type.VAR (r, "n")
   val a = Type.VAR (r, "a")
-  val nat = Type.ARR (r, Type.ARR (r, n, n), Type.ARR (r, n, n))
-  val stdin = Type.ARR (r, Type.ARR (r, nat, Type.ARR (r, a, a)), Type.ARR (r, a, a))
+  val nat = Type.ARR (r, (Type.ARR (r, (n, n)), Type.ARR (r, (n, n))))
+  val stdin = Type.ARR (r, (Type.ARR (r, (nat, Type.ARR (r, (a, a)))), Type.ARR (r, (a, a))))
   val N = Type.CON (r, "N")
   val A = Type.CON (r, "A")
-  val NAT = Type.ARR (r, Type.ARR (r, N, N), Type.ARR (r, N, N))
-  val stdout = Type.ARR (r, Type.ARR (r, NAT, Type.ARR (r, A, A)), Type.ARR (r, A, A))
+  val NAT = Type.ARR (r, (Type.ARR (r, (N, N)), Type.ARR (r, (N, N))))
+  val stdout = Type.ARR (r, (Type.ARR (r, (NAT, Type.ARR (r, (A, A)))), Type.ARR (r, (A, A))))
 in
-  Type.ARR (r, stdin, stdout)
+  Type.ARR (r, (stdin, stdout))
 end
 
 fun inferDecl (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) =
       (inferring, (r, x) :: boundedVars, e)
-  | inferDecl (AST.VAL (_, (r, x), T), (inferring, boundedVars, e)) = (
+  | inferDecl (AST.VAL (_, ((r, x), T)), (inferring, boundedVars, e)) = (
       checkDup (r, x) e
-    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
+    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
     )
-  | inferDecl (AST.DEF (_, (r, x), Topt, t), (inferring, boundedVars, e)) = let
+  | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (inferring, boundedVars, e)) = let
       val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
@@ -77,7 +77,7 @@ fun inferDecl (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) =
               Inferring.unify [(T, U)]
     in
       checkDup (r, x) e
-    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)) :: e)
+    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)) :: e)
     end
 
 local
@@ -90,14 +90,14 @@ local
       alpha (i div 26) ^ letter
   end
 in
-  fun showType i e boundedVars (Type.VAR (_, x)) = let
+  fun showType i e boundedVars (Type.VAR (r, x)) = let
         val (j, e') =
-          case List.find (fn (y, _) => x = y) (!e) of
+          case List.find (fn ((_, y), _) => x = y) (!e) of
             NONE => let
               val j = !i
             in
               i := !i + 1
-            ; e := (x, j) :: !e
+            ; e := ((r, x), j) :: !e
             ; (j, !e)
             end
           | SOME (_, j) =>
@@ -115,21 +115,21 @@ in
       end
     | showType _ _ _ (Type.CON (_, x)) =
         x
-    | showType i e boundedVars (Type.ARR (_, T, U)) =
+    | showType i e boundedVars (Type.ARR (_, (T, U))) =
         "(" ^ showType i e boundedVars T ^ " -> " ^ showTypeArr i e boundedVars U ^ ")"
-  and showTypeArr i e boundedVars (Type.ARR (_, T, U)) =
+  and showTypeArr i e boundedVars (Type.ARR (_, (T, U))) =
         showType i e boundedVars T ^ " -> " ^ showTypeArr i e boundedVars U
     | showTypeArr i e boundedVars T =
         showType i e boundedVars T
 
-  fun showMonoType i e boundedVars (Type.VAR (_, x)) = let
+  fun showMonoType i e boundedVars (Type.VAR (r, x)) = let
         val (j, e') =
-          case List.find (fn (y, _) => x = y) (!e) of
+          case List.find (fn ((_, y), _) => x = y) (!e) of
             NONE => let
               val j = !i
             in
               i := !i + 1
-            ; e := (x, j) :: !e
+            ; e := ((r, x), j) :: !e
             ; (j, !e)
             end
           | SOME (_, j) =>
@@ -147,9 +147,9 @@ in
       end
     | showMonoType _ _ _ (Type.CON (_, x)) =
         x
-    | showMonoType i e boundedVars (Type.ARR (_, T, U)) =
+    | showMonoType i e boundedVars (Type.ARR (_, (T, U))) =
         "(" ^ showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U ^ ")"
-  and showMonoTypeArr i e boundedVars (Type.ARR (_, T, U)) =
+  and showMonoTypeArr i e boundedVars (Type.ARR (_, (T, U))) =
         showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U
     | showMonoTypeArr i e boundedVars T =
         showMonoType i e boundedVars T
@@ -159,12 +159,12 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
       TextIO.output (outstream, "type " ^ x ^ "\n")
     ; (inferring, (r, x) :: boundedVars, e)
     )
-  | printDecl outstream (AST.VAL (_, (r, x), T), (inferring, boundedVars, e)) = (
+  | printDecl outstream (AST.VAL (_, ((r, x), T)), (inferring, boundedVars, e)) = (
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (inferring, boundedVars, (x, Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
+    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
     )
-  | printDecl outstream (AST.DEF (_, (r, x), Topt, t), (inferring, boundedVars, e)) = let
+  | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (inferring, boundedVars, e)) = let
       val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
@@ -182,7 +182,7 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
     in
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (inferring, boundedVars, (x, T) :: e)
+    ; (inferring, boundedVars, ((r, x), T) :: e)
     end
 
 fun inferFile outstream (file, z0) = let
@@ -238,17 +238,17 @@ end handle
 functor Main(Compiler : COMPILER) = struct
   fun compileDecl outstream (AST.TYPE _, (compiler, e)) =
         (compiler, e)
-    | compileDecl outstream (AST.VAL (_, (_, x), _), (compiler, e)) = let
-        val e' = (x, 0) :: map (fn (y, i) => (y, i + 1)) e
+    | compileDecl outstream (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
+        val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         (compiler, e')
       end
-    | compileDecl outstream (AST.DEF (_, (_, x), _, t), (compiler, e)) = let
+    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
         val t = TypedTerm.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val s' = Compiler.compile compiler (map (fn (y, _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
-        val e' = (x, 0) :: map (fn (y, i) => (y, i + 1)) e
+        val s' = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         TextIO.output (outstream, s')
       ; (compiler, e')

@@ -1,12 +1,12 @@
 local open TypedTerm in
   fun encodeNat' (r, 0w0) = VAR (r, "O")
-    | encodeNat' (r, n) = APP (r, VAR (r, "S"), encodeNat' (r, LargeWord.- (n, 0w1)))
+    | encodeNat' (r, n) = APP (r, (VAR (r, "S"), encodeNat' (r, LargeWord.- (n, 0w1))))
 
   fun encodeNat (r, n) = let
-    val O = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
-    val S = ABS (r, (r, "n"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), VAR (r, "z"))))))
+    val O = ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, VAR (r, "z")))))
+    val S = ABS (r, ((r, "n"), NONE, ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, APP (r, (VAR (r, "f"), APP (r, (APP (r, (VAR (r, "n"), VAR (r, "f"))), VAR (r, "z")))))))))))
   in
-    LET (r, (r, "O"), NONE, O, LET (r, (r, "S"), NONE, S, encodeNat' (r, n)))
+    LET (r, ((r, "O"), NONE, O, LET (r, ((r, "S"), NONE, S, encodeNat' (r, n)))))
   end
 
   fun encodeNatOpt' (r, 0w0) = encodeNat' (r, 0w0)
@@ -20,9 +20,9 @@ local open TypedTerm in
         val t' = VAR (r, x)
       in
         if LargeWord.mod (n, 0w2) = 0w0 then
-          LET (r, (r, x), NONE, t, APP (r, APP (r, VAR (r, "plus"), t'), t'))
+          LET (r, ((r, x), NONE, t, APP (r, (APP (r, (VAR (r, "plus"), t')), t'))))
         else
-          LET (r, (r, x), NONE, t, APP (r, VAR (r, "S"), APP (r, APP (r, VAR (r, "plus"), t'), t')))
+          LET (r, ((r, x), NONE, t, APP (r, (VAR (r, "S"), APP (r, (APP (r, (VAR (r, "plus"), t')), t'))))))
       end
 
   fun encodeNatOpt (r, 0w0) = encodeNat (r, 0w0)
@@ -30,23 +30,23 @@ local open TypedTerm in
     | encodeNatOpt (r, 0w2) = encodeNat (r, 0w2)
     | encodeNatOpt (r, 0w3) = encodeNat (r, 0w3)
     | encodeNatOpt (r, n) = let
-        val O = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
-        val S = ABS (r, (r, "n"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, VAR (r, "f"), APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), VAR (r, "z"))))))
-        val plus = ABS (r, (r, "n"), NONE, ABS (r, (r, "m"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, APP (r, VAR (r, "n"), VAR (r, "f")), APP (r, APP (r, VAR (r, "m"), VAR (r, "f")), VAR (r, "z")))))))
+        val O = ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, VAR (r, "z")))))
+        val S = ABS (r, ((r, "n"), NONE, ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, APP (r, (VAR (r, "f"), APP (r, (APP (r, (VAR (r, "n"), VAR (r, "f"))), VAR (r, "z")))))))))))
+        val plus = ABS (r, ((r, "n"), NONE, ABS (r, ((r, "m"), NONE, ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, APP (r, (APP (r, (VAR (r, "n"), VAR (r, "f"))), APP (r, (APP (r, (VAR (r, "m"), VAR (r, "f"))), VAR (r, "z")))))))))))))
       in
-        LET (r, (r, "O"), NONE, O, LET (r, (r, "S"), NONE, S, LET (r, (r, "plus"), NONE, plus, encodeNatOpt' (r, n))))
+        LET (r, ((r, "O"), NONE, O, LET (r, ((r, "S"), NONE, S, LET (r, ((r, "plus"), NONE, plus, encodeNatOpt' (r, n)))))))
       end
 
   fun encodeChar (r, c) = encodeNatOpt (r, LargeWord.fromInt (ord c))
 
   fun encodeCharList' (r, nil) = VAR (r, "nil")
-    | encodeCharList' (r, t :: ts) = APP (r, APP (r, VAR (r, "cons"), t), encodeCharList' (r, ts))
+    | encodeCharList' (r, t :: ts) = APP (r, (APP (r, (VAR (r, "cons"), t)), encodeCharList' (r, ts)))
 
   fun encodeCharList (r, l) = let
-    val nil' = ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, VAR (r, "z")))
-    val cons = ABS (r, (r, "x"), NONE, ABS (r, (r, "xs"), NONE, ABS (r, (r, "f"), NONE, ABS (r, (r, "z"), NONE, APP (r, APP (r, VAR (r, "f"), VAR (r, "x")), APP (r, APP (r, VAR (r, "xs"), VAR (r, "f")), VAR (r, "z")))))))
+    val nil' = ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, VAR (r, "z")))))
+    val cons = ABS (r, ((r, "x"), NONE, ABS (r, ((r, "xs"), NONE, ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, APP (r, (APP (r, (VAR (r, "f"), VAR (r, "x"))), APP (r, (APP (r, (VAR (r, "xs"), VAR (r, "f"))), VAR (r, "z")))))))))))))
   in
-    LET (r, (r, "nil"), NONE, nil', LET (r, (r, "cons"), NONE, cons, encodeCharList' (r, l)))
+    LET (r, ((r, "nil"), NONE, nil', LET (r, ((r, "cons"), NONE, cons, encodeCharList' (r, l)))))
   end
 
   fun encodeString (r, s) = encodeCharList (r, map (fn c => encodeChar (r, c)) (String.explode s))
@@ -102,17 +102,17 @@ decls:
 
 decl:
   TYPE ID
-    (AST.TYPE ((TYPEleft, IDright), ((IDleft, IDright), ID)))
+    (AST.TYPE ((TYPEleft, IDright), (((IDleft, IDright), ID))))
 | VAL ID COLON ty
-    (AST.VAL ((VALleft, tyright), ((IDleft, IDright), ID), ty))
+    (AST.VAL ((VALleft, tyright), (((IDleft, IDright), ID), ty)))
 | DEF ID asc COLONEQ exp
-    (AST.DEF ((DEFleft, expright), ((IDleft, IDright), ID), asc, exp))
+    (AST.DEF ((DEFleft, expright), (((IDleft, IDright), ID), asc, exp)))
 
 ty:
   atty
     (atty)
 | atty ARROW ty
-    (Type.ARR ((attyleft, tyright), atty, ty))
+    (Type.ARR ((attyleft, tyright), (atty, ty)))
 
 atty:
   QUOTE ID
@@ -131,15 +131,15 @@ exp:
   appexp
     (appexp)
 | LAMBDA ID asc DOT exp
-    (TypedTerm.ABS ((LAMBDAleft, expright), ((IDleft, IDright), ID), asc, exp))
+    (TypedTerm.ABS ((LAMBDAleft, expright), (((IDleft, IDright), ID), asc, exp)))
 | LET ID asc COLONEQ exp IN exp
-    (TypedTerm.LET ((LETleft, expright), ((IDleft, IDright), ID), asc, exp1, exp2))
+    (TypedTerm.LET ((LETleft, expright), (((IDleft, IDright), ID), asc, exp1, exp2)))
 
 appexp:
   atexp
     (atexp)
 | appexp atexp
-    (TypedTerm.APP ((appexpleft, atexpright), appexp, atexp))
+    (TypedTerm.APP ((appexpleft, atexpright), (appexp, atexp)))
 
 atexp:
   NAT

@@ -4,6 +4,6 @@ signature DE_BRUIJN_INDEXED_TERM = sig
   | APP of t * t
   | ABS of t
 
-  exception NotInScope of region * id
+  exception NotInScope of id
   val compile : (id * int) list -> Term.t -> t
 end

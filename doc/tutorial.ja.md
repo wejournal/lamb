@@ -13,22 +13,18 @@
 これらのコマンドをインストールする方法は環境によって異なると思いますが，
 Ubuntu の場合は，つぎのパッケージをインストールすればよろしい．
 
-```
-$ sudo apt install mlton
-$ sudo apt install mingw-w64
-```
+<pre><code>$ sudo apt install mlton
+$ sudo apt install mingw-w64</code></pre>
 
 ## INSTALLATION
 
 つぎのコマンドを実行すると， `~/.lamb` に必要な諸々のファイルがインストールされます．
 
-```
-$ git clone git://github.com/wejournal/lamb.git
+<code><pre>$ git clone git://github.com/wejournal/lamb.git
 $ cd lamb
 $ make -j8
 $ make install # ~/.lamb にインストールする
-$ export PATH="$HOME/.lamb/bin:$PATH"
-```
+$ export PATH="$HOME/.lamb/bin:$PATH"</code></pre>
 
 ## HELLO WORLD
 
@@ -39,11 +35,9 @@ $ export PATH="$HOME/.lamb/bin:$PATH"
 
 実行形式を生成するのは簡単です．
 
-```
-$ lamb hello.lam
+<code><pre>$ lamb hello.lam
 $ ./a.out
-hello world
-```
+hello world</code></pre>
 
 ## LEXEMES
 
@@ -324,9 +318,7 @@ Lamb は分割コンパイルをサポートしています．
 その場合，まず **k.lam** の型定義をするファイルが必要です．
 手書きすることもできますが，さいわい，これは `-i` オプションで自動生成できます:
 
-```
-$ lamb -o k.la -i k.lam
-```
+<code><pre>$ lamb -o k.la -i k.lam</code></pre>
 
 拡張子はなんでもかまいませんが， **.la** という拡張子をつける習慣があります．
 
@@ -339,10 +331,8 @@ $ lamb -o k.la -i k.lam
 コンパイルするために型定義ファイルが必要です．
 そのため， 自動生成した **k.la** を引数として与えます．
 
-```
-$ lamb -c k.lam
-$ lamb -c k.la sep.lam
-```
+<code><pre>$ lamb -c k.lam
+$ lamb -c k.la sep.lam</code></pre>
 
 引数の順番には意味があります． 依存関係の順番にコマンドラインから与えなければなりません．
 エラーメッセージの表示位置など厳密には細かい違いがありますが，
@@ -350,11 +340,9 @@ $ lamb -c k.la sep.lam
 
 最後に，生成されたオブジェクトコードを `--link` オプションでリンクします:
 
-```
-$ lamb --link k.lam.o sep.lam.o
+<code><pre>$ lamb --link k.lam.o sep.lam.o
 $ ./a.out
-hello world
-```
+hello world</code></pre>
 
 リンクは `ld` などでもできますが，
 libc や Lamb のランタイムも手動でリンクしなければなりません．
@@ -367,23 +355,17 @@ Lamb は FFI もサポートしています．
 この節の最後に載せてある内容の **ffi.lam** と **ffi.c** を用意してください．
 まず， **ffi.c** をコンパイルしておきましょう．
 
-```
-$ gcc -I$HOME/.lamb/include -c -o ffi.c.o ffi.c
-```
+<code><pre>$ gcc -I$HOME/.lamb/include -c -o ffi.c.o ffi.c</code></pre>
 
 つぎに， **ffi.lam** をコンパイルしておきます．
 
-```
-$ lamb -c -o ffi.lam.o ffi.lam
-```
+<code><pre>$ lamb -c -o ffi.lam.o ffi.lam</code></pre>
 
 最後に， **ffi.c.o** と **ffi.lam.o** をリンクします．
 
-```
-$ lamb --link ffi.lam.o ffi.c.o
+<code><pre>$ lamb --link ffi.lam.o ffi.c.o
 $ ./a.out
-hello world
-```
+hello world</code></pre>
 
 **ffi.lam**:
 
