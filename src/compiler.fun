@@ -143,19 +143,21 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n",
             "\tmovq\t-16(%rbp),\t%r14\n",
             "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n",
-            "\tpopq\t", ABI.arg1, "\n" ] @
+            "\tpopq\t", ABI.arg1, "\n",
+            "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r13\n",
+            "\tsalq\t$3,\t%r13\n",
+            "\taddq\t%r13,\t", ABI.arg1, "\n" ] @
           List.concat (map
             (fn name =>
-              ["\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r13\n",
-              "\tsalq\t$3,\t%r13\n",
-              "\taddq\t%r13,\t", ABI.arg1, "\n",
-              "\tmovq\t$", name, ",\t(", ABI.arg1, ")\n",
+              ["\tmovq\t$", name, ",\t(", ABI.arg1, ")\n",
               "\tmovq\t$0,\t8(", ABI.arg1, ")\n",
               "\tmovq\t%r14,\t16(", ABI.arg1, ")\n",
-              "\tsubq\t%r13,\t", ABI.arg1, "\n",
-              "\tincq\t", ABI.arg0, "\n"])
+              "\tincq\t", ABI.arg0, "\n",
+              "\taddq\t$24,\t", ABI.arg1, "\n"])
             (List.rev names)) @
-          [ "\taddq\t$32,\t%rsp\n",
+          [ "\tsubq\t$", Int.toString (List.length names * 24), ",\t", ABI.arg1, "\n",
+            "\tsubq\t%r13,\t", ABI.arg1, "\n",
+            "\taddq\t$32,\t%rsp\n",
             "\tpopq\t%rbp\n" ] )
       val name' = name ^ gensym fresh
       val s' = concat (List.concat (compileCode fresh name' c))
