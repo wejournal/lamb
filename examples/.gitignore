@@ -6,4 +6,5 @@ reverse
 reverse.exe
 ffi
 ffi.exe
-ffi.c.o
+sep
+sep.exe
