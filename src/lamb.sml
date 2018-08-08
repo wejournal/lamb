@@ -236,22 +236,24 @@ end handle
   )
 
 functor Main(Compiler : COMPILER) = struct
-  fun compileDecl outstream (AST.TYPE _, (compiler, e)) =
-        (compiler, e)
-    | compileDecl outstream (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
+  fun compileDecl outstream (AST.TYPE _, ((gensym, emitting), e)) =
+        ((gensym, emitting), e)
+    | compileDecl outstream (AST.VAL (_, ((r, x), _)), ((gensym, emitting), e)) = let
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
-        (compiler, e')
+        ((gensym, emitting), e')
       end
-    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
+    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), ((gensym, emitting), e)) = let
         val t = AST.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val s = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val () = Compiler.compile gensym emitting (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val s = concat (List.rev (Emitting.toList emitting))
+        val () = Emitting.setList nil emitting
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         TextIO.output (outstream, s)
-      ; (compiler, e')
+      ; ((gensym, emitting), e')
       end
 
   fun compile outstream (file, (z0, z1)) = let
@@ -421,7 +423,7 @@ in
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
         val z0 = (Inferring.new (), nil, nil)
-        val z1 = (SystemVCompiler.new (), nil)
+        val z1 = ((Gensym.new (), Emitting.new ()), nil)
       in
         List.foldl (SystemVMain.compile outstream) (z0, z1) files
       ; TextIO.closeOut outstream
@@ -511,7 +513,7 @@ in
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
         val z0 = (Inferring.new (), nil, nil)
-        val z1 = (MicrosoftCompiler.new (), nil)
+        val z1 = ((Gensym.new (), Emitting.new ()), nil)
       in
         List.foldl (MicrosoftMain.compile outstream) (z0, z1) files
       ; TextIO.closeOut outstream

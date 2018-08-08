@@ -11,6 +11,10 @@ in
   abi.sig
   system-v-abi.sml
   microsoft-abi.sml
+  gensym.sig
+  gensym.sml
+  emitting.sig
+  emitting.sml
   compiler.sig
   compiler.fun
   system-v-compiler.sml
