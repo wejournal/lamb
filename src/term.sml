@@ -1,5 +1,5 @@
-val region : id -> region = #1
-val name : id -> string = #2
+val region : 'a node -> region = #1
+val value : 'a node -> 'a = #2
 
 structure Term :> TERM = struct
   datatype t =
