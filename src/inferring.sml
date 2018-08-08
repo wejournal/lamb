@@ -6,11 +6,6 @@ structure Inferring :> INFERRING = struct
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
 
-  fun substTypedTerm S (TypedTerm.VAR (r, x)) = TypedTerm.VAR (r, x)
-    | substTypedTerm S (TypedTerm.APP (r, (t, u))) = TypedTerm.APP (r, (substTypedTerm S t, substTypedTerm S u))
-    | substTypedTerm S (TypedTerm.ABS (r, ((r', x), T, t))) = TypedTerm.ABS (r, ((r', x), Type.subst S T, substTypedTerm S t))
-    | substTypedTerm S (TypedTerm.LET (r, ((r', x), T, t, u))) = TypedTerm.LET (r, ((r', x), Type.subst S T, substTypedTerm S t, substTypedTerm S u))
-
   fun substEnv S e = map (fn ((r, x), T) => ((r, x), Type.subst S T)) e
 
   exception NotInScope of id
@@ -60,13 +55,13 @@ structure Inferring :> INFERRING = struct
         NONE =>
           raise NotInScope x
       | SOME T =>
-          (TypedTerm.VAR x, instantiate gensym PV T, nil))
+          (instantiate gensym PV T, nil))
     | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
-        val (t', T, C) = constraint_type gensym PV e t
-        val (u', U, C') = constraint_type gensym PV e u
+        val (T, C) = constraint_type gensym PV e t
+        val (U, C') = constraint_type gensym PV e u
         val V = Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym))
       in
-        (TypedTerm.APP (r, (t', u')), V, (T, Type.ARR (r, (U, V))) :: C @ C')
+        (V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
     | constraint_type gensym PV e (AST.ABS (r, ((r', x), Topt, t))) = let
         val T =
@@ -76,9 +71,9 @@ structure Inferring :> INFERRING = struct
           | SOME T =>
               T
         val e' = ((r', x), T) :: e
-        val (t', U, C) = constraint_type gensym PV e' t
+        val (U, C) = constraint_type gensym PV e' t
       in
-        (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
+        (Type.ARR (r, (T, U)), C)
       end
     | constraint_type gensym PV e (AST.LET (r, ((r', x), Topt, t, u))) = let
         val T =
@@ -87,16 +82,16 @@ structure Inferring :> INFERRING = struct
               Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
-        val (t', T', C) = constraint_type gensym PV e t
+        val (T', C) = constraint_type gensym PV e t
         val S = unify ((T, T') :: C)
-        val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
+        val (T, C, e) = (Type.subst S T, substConstraints S C, substEnv S e)
         val FV = List.concat (map (Type.FV o #2) e)
         val BV = List.concat (map (Type.BV o #2) e)
         val (T, PV') = generalize gensym FV BV T
         val e' = ((r', x), T) :: e
-        val (u', U, C') = constraint_type gensym (PV' @ PV) e' u
+        val (U, C') = constraint_type gensym (PV' @ PV) e' u
       in
-        (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
+        (U, C @ C')
       end
   and unify nil = nil
     | unify ((T, U) :: C) =
@@ -136,11 +131,10 @@ structure Inferring :> INFERRING = struct
           raise Incompatible (T, U))
 
   fun infer inferring PV e t = let
-    val (t', T, C) = constraint_type inferring PV e t
+    val (T, C) = constraint_type inferring PV e t
     val S = unify C
     val U = Type.subst S T
-    val u = substTypedTerm S t'
   in
-    (u, U)
+    U
   end
 end

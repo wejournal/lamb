@@ -62,7 +62,7 @@ fun inferDecl (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
     ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars T)) :: e)
     )
   | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
-      val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
+      val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
           NONE =>
@@ -166,7 +166,7 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
     ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars T)) :: e)
     )
   | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
-      val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
+      val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
           NONE =>

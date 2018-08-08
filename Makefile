@@ -55,8 +55,6 @@ bin/lamb:	src/lamb.mlb \
 		src/microsoft-compiling.sml \
 		src/type.sig \
 		src/type.sml \
-		src/typed-term.sig \
-		src/typed-term.sml \
 		src/ast.sig \
 		src/ast.sml \
 		src/inferring.sig \

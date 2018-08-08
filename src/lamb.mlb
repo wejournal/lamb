@@ -21,8 +21,6 @@ in
   microsoft-compiling.sml
   type.sig
   type.sml
-  typed-term.sig
-  typed-term.sml
   ast.sig
   ast.sml
   inferring.sig
