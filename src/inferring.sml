@@ -15,7 +15,7 @@ structure Inferring :> INFERRING = struct
   fun lookup x e = Option.map #2 (List.find (fn (y, _) => value x = value y) e)
 
   fun instantiate gensym PV T = let
-    val S = map (fn y => (y, Type.VAR (Type.region T, "_" ^ Int.toString (Gensym.gensym gensym)))) PV
+    val S = map (fn y => (y, Type.VAR (Type.region T, Int.toString (Gensym.gensym gensym)))) PV
   in
     Type.subst S T
   end
@@ -33,7 +33,7 @@ structure Inferring :> INFERRING = struct
             (Type.CON x, nil)
           else (case lookup x (!B2F) of
             NONE => let
-              val y = (region x, "_" ^ Int.toString (Gensym.gensym gensym))
+              val y = (region x, Int.toString (Gensym.gensym gensym))
             in
               B2F := (x, y) :: !B2F
             ; (Type.VAR y, [y])
@@ -59,7 +59,7 @@ structure Inferring :> INFERRING = struct
     | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
         val (T, C) = constraint_type gensym PV e t
         val (U, C') = constraint_type gensym PV e u
-        val V = Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym))
+        val V = Type.VAR (r, Int.toString (Gensym.gensym gensym))
       in
         (V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
@@ -67,7 +67,7 @@ structure Inferring :> INFERRING = struct
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
+              Type.VAR (r', Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
         val e' = ((r', x), T) :: e
@@ -79,7 +79,7 @@ structure Inferring :> INFERRING = struct
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
+              Type.VAR (r', Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
         val (T', C) = constraint_type gensym PV e t
