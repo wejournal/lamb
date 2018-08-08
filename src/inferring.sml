@@ -1,15 +1,5 @@
 structure Inferring :> INFERRING = struct
-  type t = int ref
   type constraint = Type.t * Type.t
-
-  fun new () = ref 0
-
-  fun gensym fresh = let
-    val i = !fresh
-  in
-    fresh := !fresh + 1
-  ; "_" ^ Int.toString i
-  end
 
   fun generalize boundedVars suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
     | generalize boundedVars suffix (Type.CON (r, x)) =
@@ -32,51 +22,51 @@ structure Inferring :> INFERRING = struct
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  fun constraint_type fresh polyVars e (AST.VAR (r, x)) =
+  fun constraint_type gensym polyVars e (AST.VAR (r, x)) =
       (case List.find (fn ((_, y), _) => x = y) e of
         NONE =>
           raise NotInScope (r, x)
       | SOME (_, T) => let
           val polyVars' = List.filter (fn (_, y) => List.exists (fn (_, z) => y = z) polyVars) (Type.FV T)
-          val S = map (fn (r', y) => ((r', y), Type.VAR (r, gensym fresh))) polyVars'
+          val S = map (fn (r', y) => ((r', y), Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym)))) polyVars'
         in
           (TypedTerm.VAR (r, x), Type.subst S T, nil)
         end)
-    | constraint_type fresh polyVars e (AST.APP (r, (t, u))) = let
-        val (t', T, C) = constraint_type fresh polyVars e t
-        val (u', U, C') = constraint_type fresh polyVars e u
-        val V = Type.VAR (r, gensym fresh)
+    | constraint_type gensym polyVars e (AST.APP (r, (t, u))) = let
+        val (t', T, C) = constraint_type gensym polyVars e t
+        val (u', U, C') = constraint_type gensym polyVars e u
+        val V = Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym))
       in
         (TypedTerm.APP (r, (t', u')), V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
-    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), Topt, t))) = let
+    | constraint_type gensym polyVars e (AST.ABS (r, ((r', x), Topt, t))) = let
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', gensym fresh)
+              Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
         val e' = ((r', x), T) :: e
-        val (t', U, C) = constraint_type fresh polyVars e' t
+        val (t', U, C) = constraint_type gensym polyVars e' t
       in
         (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
       end
-    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), Topt, t, u))) = let
+    | constraint_type gensym polyVars e (AST.LET (r, ((r', x), Topt, t, u))) = let
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', gensym fresh)
+              Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
-        val (t', T', C) = constraint_type fresh polyVars e t
+        val (t', T', C) = constraint_type gensym polyVars e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
         val boundedVars = List.concat (map (Type.BV o #2) e)
-        val T = generalize boundedVars (gensym fresh) T
+        val T = generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T
         val monoVars = List.concat (map (Type.FV o #2) e)
         val polyVars' = List.filter (fn (_, y) => not (List.exists (fn (_, z) => y = z) monoVars)) (Type.FV T) @ polyVars
         val e' = ((r', x), T) :: e
-        val (u', U, C') = constraint_type fresh polyVars' e' u
+        val (u', U, C') = constraint_type gensym polyVars' e' u
       in
         (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
       end

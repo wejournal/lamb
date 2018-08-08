@@ -55,14 +55,14 @@ in
   Type.ARR (r, (stdin, stdout))
 end
 
-fun inferDecl (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) =
-      (inferring, (r, x) :: boundedVars, e)
-  | inferDecl (AST.VAL (_, ((r, x), T)), (inferring, boundedVars, e)) = (
+fun inferDecl (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
+      (gensym, (r, x) :: boundedVars, e)
+  | inferDecl (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
-    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
+    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T) :: e)
     )
-  | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (inferring, boundedVars, e)) = let
-      val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
+  | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
+      val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
           NONE =>
@@ -77,7 +77,7 @@ fun inferDecl (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) =
               Inferring.unify [(T, U)]
     in
       checkDup (r, x) e
-    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)) :: e)
+    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) (Type.subst S U)) :: e)
     end
 
 local
@@ -155,17 +155,17 @@ in
         showMonoType i e boundedVars T
 end
 
-fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
+fun printDecl outstream (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
       TextIO.output (outstream, "type " ^ x ^ "\n")
-    ; (inferring, (r, x) :: boundedVars, e)
+    ; (gensym, (r, x) :: boundedVars, e)
     )
-  | printDecl outstream (AST.VAL (_, ((r, x), T)), (inferring, boundedVars, e)) = (
+  | printDecl outstream (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (inferring, boundedVars, ((r, x), Inferring.generalize boundedVars (Inferring.gensym inferring) T) :: e)
+    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T) :: e)
     )
-  | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (inferring, boundedVars, e)) = let
-      val (_, U) = Inferring.infer inferring (List.concat (map (Type.FV o #2) e)) e t
+  | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
+      val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
         case Topt of
           NONE =>
@@ -178,11 +178,11 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (inferring, boundedVars, e)) = (
               Inferring.unify [(mainType r, T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val T = Inferring.generalize boundedVars (Inferring.gensym inferring) (Type.subst S U)
+      val T = Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) (Type.subst S U)
     in
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (inferring, boundedVars, ((r, x), T) :: e)
+    ; (gensym, boundedVars, ((r, x), T) :: e)
     end
 
 fun inferFile outstream (file, z0) = let
@@ -407,7 +407,7 @@ in
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
-        val z0 = (Inferring.new (), nil, nil)
+        val z0 = (Gensym.new (), nil, nil)
       in
         foldl (inferFile outstream) z0 files
       ; case output of
@@ -422,7 +422,7 @@ in
           case output of
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
-        val z0 = (Inferring.new (), nil, nil)
+        val z0 = (Gensym.new (), nil, nil)
         val z1 = ((Gensym.new (), Emitting.new ()), nil)
       in
         List.foldl (SystemVMain.compile outstream) (z0, z1) files
@@ -497,7 +497,7 @@ in
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
-        val z0 = (Inferring.new (), nil, nil)
+        val z0 = (Gensym.new (), nil, nil)
       in
         foldl (inferFile outstream) z0 files
       ; case output of
@@ -512,7 +512,7 @@ in
           case output of
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
-        val z0 = (Inferring.new (), nil, nil)
+        val z0 = (Gensym.new (), nil, nil)
         val z1 = ((Gensym.new (), Emitting.new ()), nil)
       in
         List.foldl (MicrosoftMain.compile outstream) (z0, z1) files
