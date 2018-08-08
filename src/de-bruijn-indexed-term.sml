@@ -9,7 +9,7 @@ structure DeBruijnIndexedTerm :> DE_BRUIJN_INDEXED_TERM = struct
   exception NotInScope of id
 
   fun lookup x E  =
-    case List.find (fn (y, _) => #2 x = #2 y) E of
+    case List.find (fn (y, _) => name x = name y) E of
       NONE =>
         raise NotInScope x
     | SOME (_, i) =>

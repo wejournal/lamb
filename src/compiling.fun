@@ -109,10 +109,10 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     ; List.app (compileInstr gensym emitting name) c
     )
   in
-    fun compile gensym emitting E name c = let
-      val name' = name ^ "_" ^ Int.toString (Gensym.gensym gensym)
+    fun compile gensym emitting E x c = let
+      val name' = name x ^ "_" ^ Int.toString (Gensym.gensym gensym)
     in
-      Emitting.emitList [".globl\t", name, "\n", name, ":\n"] emitting
+      Emitting.emitList [".globl\t", name x, "\n", name x, ":\n"] emitting
     ; Emitting.emitList
         [ "\tpushq\t%rbp\n"
         , "\tmovq\t%rsp,\t%rbp\n"
@@ -159,9 +159,9 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\taddq\t%r13,\t", ABI.arg1, "\n" ]
         emitting
     ; List.app
-        (fn (_, name) =>
+        (fn x =>
           Emitting.emitList
-            [ "\tmovq\t$", name, ",\t(", ABI.arg1, ")\n"
+            [ "\tmovq\t$", name x, ",\t(", ABI.arg1, ")\n"
             , "\tmovq\t$0,\t8(", ABI.arg1, ")\n"
             , "\tmovq\t%r14,\t16(", ABI.arg1, ")\n"
             , "\tincq\t", ABI.arg0, "\n"
