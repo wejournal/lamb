@@ -12,8 +12,8 @@ signature INFERRING = sig
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  val instantiate : Gensym.t -> poly -> env -> id ->Type.t -> Type.t
-  val generalize : Gensym.t -> mono -> env -> Type.t -> Type.t * poly
+  val instantiate : Gensym.t -> poly -> Type.t -> Type.t
+  val generalize : Gensym.t -> mono -> mono -> Type.t -> Type.t * poly
 
   val constraint_type : Gensym.t -> poly -> env -> AST.exp -> TypedTerm.t * Type.t * constraint list
   val unify : constraint list -> Type.subst

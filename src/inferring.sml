@@ -19,15 +19,13 @@ structure Inferring :> INFERRING = struct
 
   fun lookup x e = Option.map #2 (List.find (fn (y, _) => value x = value y) e)
 
-  fun instantiate gensym PV e x T = let
-    val S = map (fn y => (y, Type.VAR (region x, "_" ^ Int.toString (Gensym.gensym gensym)))) PV
+  fun instantiate gensym PV T = let
+    val S = map (fn y => (y, Type.VAR (Type.region T, "_" ^ Int.toString (Gensym.gensym gensym)))) PV
   in
     Type.subst S T
   end
 
-  fun generalize gensym BV e T = let
-    val FV = List.concat (map (Type.FV o #2) e)
-    val BV = List.concat (map (Type.BV o #2) e) @ BV
+  fun generalize gensym FV BV T = let
     val B2F = ref nil
 
     fun f (Type.VAR x) =
@@ -62,7 +60,7 @@ structure Inferring :> INFERRING = struct
         NONE =>
           raise NotInScope x
       | SOME T =>
-          (TypedTerm.VAR x, instantiate gensym PV e x T, nil))
+          (TypedTerm.VAR x, instantiate gensym PV T, nil))
     | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
         val (t', T, C) = constraint_type gensym PV e t
         val (u', U, C') = constraint_type gensym PV e u
@@ -92,7 +90,9 @@ structure Inferring :> INFERRING = struct
         val (t', T', C) = constraint_type gensym PV e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
-        val (T, PV') = generalize gensym nil e T
+        val FV = List.concat (map (Type.FV o #2) e)
+        val BV = List.concat (map (Type.BV o #2) e)
+        val (T, PV') = generalize gensym FV BV T
         val e' = ((r', x), T) :: e
         val (u', U, C') = constraint_type gensym (PV' @ PV) e' u
       in
