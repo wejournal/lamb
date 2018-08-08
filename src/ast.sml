@@ -12,8 +12,8 @@ structure AST :> AST = struct
 
   type program = decl list
 
-  fun erase (VAR (r, x)) = Term.VAR (r, x)
-    | erase (APP (r, (t, u))) = Term.APP (r, (erase t, erase u))
-    | erase (ABS (r, ((r', x), _, t))) = Term.ABS (r, ((r', x), erase t))
-    | erase (LET (r, ((r', x), _, t, u))) = Term.APP (r, (Term.ABS (r, ((r', x), erase u)), erase t))
+  fun erase (VAR x) = Term.VAR x
+    | erase (APP (r, (e1, e2))) = Term.APP (r, (erase e1, erase e2))
+    | erase (ABS (r, (x, _, e))) = Term.ABS (r, (x, erase e))
+    | erase (LET (r, (x, _, e1, e2))) = Term.APP (r, (Term.ABS (r, (x, erase e2)), erase e1))
 end
