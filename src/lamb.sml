@@ -59,7 +59,7 @@ fun inferDecl (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
       (gensym, (r, x) :: boundedVars, e)
   | inferDecl (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
-    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T) :: e)
+    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym boundedVars e T)) :: e)
     )
   | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
       val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
@@ -75,9 +75,10 @@ fun inferDecl (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
               Inferring.unify [(mainType r, T), (T, U)]
             else
               Inferring.unify [(T, U)]
+      val T = #1 (Inferring.generalize gensym boundedVars (Inferring.substEnv S e) (Type.subst S U))
     in
       checkDup (r, x) e
-    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) (Type.subst S U)) :: e)
+    ; (gensym, boundedVars, ((r, x), T) :: (Inferring.substEnv S e))
     end
 
 local
@@ -162,7 +163,7 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
   | printDecl outstream (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (gensym, boundedVars, ((r, x), Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T) :: e)
+    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym boundedVars e T)) :: e)
     )
   | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
       val (_, U) = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
@@ -178,11 +179,11 @@ fun printDecl outstream (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
               Inferring.unify [(mainType r, T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val T = Inferring.generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) (Type.subst S U)
+      val T = #1 (Inferring.generalize gensym boundedVars (Inferring.substEnv S e) (Type.subst S U))
     in
       checkDup (r, x) e
     ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (gensym, boundedVars, ((r, x), T) :: e)
+    ; (gensym, boundedVars, ((r, x), T) :: Inferring.substEnv S e)
     end
 
 fun inferFile outstream (file, z0) = let

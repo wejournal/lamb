@@ -1,15 +1,8 @@
 structure Inferring :> INFERRING = struct
   type constraint = Type.t * Type.t
   type poly = id list
+  type mono = id list
   type env = (id * Type.t) list
-
-  fun generalize boundedVars suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
-    | generalize boundedVars suffix (Type.CON (r, x)) =
-        if List.exists (fn (_, y) => x = y) boundedVars then
-          Type.CON (r, x)
-        else
-          Type.VAR (r, x ^ suffix)
-    | generalize boundedVars suffix (Type.ARR (r, (T, U))) = Type.ARR (r, (generalize boundedVars suffix T, generalize boundedVars suffix U))
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
 
@@ -24,16 +17,52 @@ structure Inferring :> INFERRING = struct
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  fun constraint_type gensym PV e (AST.VAR (r, x)) =
-      (case List.find (fn ((_, y), _) => x = y) e of
+  fun lookup x e = Option.map #2 (List.find (fn (y, _) => value x = value y) e)
+
+  fun instantiate gensym PV e x T = let
+    val S = map (fn y => (y, Type.VAR (region x, "_" ^ Int.toString (Gensym.gensym gensym)))) PV
+  in
+    Type.subst S T
+  end
+
+  fun generalize gensym BV e T = let
+    val FV = List.concat (map (Type.FV o #2) e)
+    val BV = List.concat (map (Type.BV o #2) e) @ BV
+    val B2F = ref nil
+
+    fun f (Type.VAR x) =
+          if List.exists (fn y => value x = value y) FV then
+            (Type.VAR x, nil)
+          else
+            (Type.VAR x, [x])
+      | f (Type.CON x) =
+          if List.exists (fn y => value x = value y) BV then
+            (Type.CON x, nil)
+          else (case lookup x (!B2F) of
+            NONE => let
+              val y = (region x, "_" ^ Int.toString (Gensym.gensym gensym))
+            in
+              B2F := (x, y) :: !B2F
+            ; (Type.VAR y, [y])
+            end
+          | SOME y =>
+              (Type.VAR (region x, value y), [(region x, value y)]))
+      | f (Type.ARR (r, (T, U))) = let
+            val (T', PV) = f T
+            val (U', PV') = f U
+          in
+            (Type.ARR (r, (T', U')), PV @ PV')
+          end
+  in
+    f T
+  end
+
+  fun constraint_type gensym PV e (AST.VAR x) =
+      (case lookup x e of
         NONE =>
-          raise NotInScope (r, x)
-      | SOME (_, T) => let
-          val PV' = List.filter (fn (_, y) => List.exists (fn (_, z) => y = z) PV) (Type.FV T)
-          val S = map (fn (r', y) => ((r', y), Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym)))) PV'
-        in
-          (TypedTerm.VAR (r, x), Type.subst S T, nil)
-        end)
+          raise NotInScope x
+      | SOME T =>
+          (TypedTerm.VAR x, instantiate gensym PV e x T, nil))
     | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
         val (t', T, C) = constraint_type gensym PV e t
         val (u', U, C') = constraint_type gensym PV e u
@@ -63,12 +92,9 @@ structure Inferring :> INFERRING = struct
         val (t', T', C) = constraint_type gensym PV e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
-        val BV = List.concat (map (Type.BV o #2) e)
-        val T = generalize BV ("_" ^ Int.toString (Gensym.gensym gensym)) T
-        val MV = List.concat (map (Type.FV o #2) e)
-        val PV' = List.filter (fn (_, y) => not (List.exists (fn (_, z) => y = z) MV)) (Type.FV T) @ PV
+        val (T, PV') = generalize gensym nil e T
         val e' = ((r', x), T) :: e
-        val (u', U, C') = constraint_type gensym PV' e' u
+        val (u', U, C') = constraint_type gensym (PV' @ PV) e' u
       in
         (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
       end
