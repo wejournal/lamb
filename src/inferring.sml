@@ -23,10 +23,8 @@ structure Inferring :> INFERRING = struct
 
   fun substTypedTerm S (TypedTerm.VAR (r, x)) = TypedTerm.VAR (r, x)
     | substTypedTerm S (TypedTerm.APP (r, (t, u))) = TypedTerm.APP (r, (substTypedTerm S t, substTypedTerm S u))
-    | substTypedTerm S (TypedTerm.ABS (r, ((r', x), NONE, t))) = TypedTerm.ABS (r, ((r', x), NONE, substTypedTerm S t))
-    | substTypedTerm S (TypedTerm.ABS (r, ((r', x), SOME T, t))) = TypedTerm.ABS (r, ((r', x), SOME (Type.subst S T), substTypedTerm S t))
-    | substTypedTerm S (TypedTerm.LET (r, ((r', x), NONE, t, u))) = TypedTerm.LET (r, ((r', x), NONE, substTypedTerm S t, substTypedTerm S u))
-    | substTypedTerm S (TypedTerm.LET (r, ((r', x), SOME T, t, u))) = TypedTerm.LET (r, ((r', x), SOME (Type.subst S T), substTypedTerm S t, substTypedTerm S u))
+    | substTypedTerm S (TypedTerm.ABS (r, ((r', x), T, t))) = TypedTerm.ABS (r, ((r', x), Type.subst S T, substTypedTerm S t))
+    | substTypedTerm S (TypedTerm.LET (r, ((r', x), T, t, u))) = TypedTerm.LET (r, ((r', x), Type.subst S T, substTypedTerm S t, substTypedTerm S u))
 
   fun substEnv S e = map (fn ((r, x), T) => ((r, x), Type.subst S T)) e
 
@@ -34,7 +32,7 @@ structure Inferring :> INFERRING = struct
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  fun constraint_type fresh polyVars e (TypedTerm.VAR (r, x)) =
+  fun constraint_type fresh polyVars e (AST.VAR (r, x)) =
       (case List.find (fn ((_, y), _) => x = y) e of
         NONE =>
           raise NotInScope (r, x)
@@ -44,27 +42,27 @@ structure Inferring :> INFERRING = struct
         in
           (TypedTerm.VAR (r, x), Type.subst S T, nil)
         end)
-    | constraint_type fresh polyVars e (TypedTerm.APP (r, (t, u))) = let
+    | constraint_type fresh polyVars e (AST.APP (r, (t, u))) = let
         val (t', T, C) = constraint_type fresh polyVars e t
         val (u', U, C') = constraint_type fresh polyVars e u
         val V = Type.VAR (r, gensym fresh)
       in
         (TypedTerm.APP (r, (t', u')), V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
-    | constraint_type fresh polyVars e (TypedTerm.ABS (r, ((r', x), NONE, t))) = let
+    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), NONE, t))) = let
         val T = Type.VAR (r', gensym fresh)
         val e' = ((r', x), T) :: e
         val (t', U, C) = constraint_type fresh polyVars e' t
       in
-        (TypedTerm.ABS (r, ((r', x), SOME T, t')), Type.ARR (r, (T, U)), C)
+        (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
       end
-    | constraint_type fresh polyVars e (TypedTerm.ABS (r, ((r', x), SOME T, t))) = let
+    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), SOME T, t))) = let
         val e' = ((r', x), T) :: e
         val (t', U, C) = constraint_type fresh polyVars e' t
       in
-        (TypedTerm.ABS (r, ((r', x), SOME T, t')), Type.ARR (r, (T, U)), C)
+        (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
       end
-    | constraint_type fresh polyVars e (TypedTerm.LET (r, ((r', x), NONE, t, u))) = let
+    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), NONE, t, u))) = let
         val (t', T, C) = constraint_type fresh polyVars e t
         val S = unify C
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
@@ -75,9 +73,9 @@ structure Inferring :> INFERRING = struct
         val e' = ((r', x), T) :: e
         val (u', U, C') = constraint_type fresh polyVars' e' u
       in
-        (TypedTerm.LET (r, ((r', x), SOME T, t', u')), U, C @ C')
+        (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
       end
-    | constraint_type fresh polyVars e (TypedTerm.LET (r, ((r', x), SOME T, t, u))) = let
+    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), SOME T, t, u))) = let
         val (t', T', C) = constraint_type fresh polyVars e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
@@ -88,7 +86,7 @@ structure Inferring :> INFERRING = struct
         val e' = ((r', x), T) :: e
         val (u', U, C') = constraint_type fresh polyVars' e' u
       in
-        (TypedTerm.LET (r, ((r', x), SOME T, t', u')), U, C @ C')
+        (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
       end
   and unify nil = nil
     | unify ((T, U) :: C) =

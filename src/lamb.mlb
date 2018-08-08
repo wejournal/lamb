@@ -19,10 +19,10 @@ in
   type.sml
   typed-term.sig
   typed-term.sml
-  inferring.sig
-  inferring.sml
   ast.sig
   ast.sml
+  inferring.sig
+  inferring.sml
   parsing.grm.sig
   parsing.grm.sml
   lexing.lex.sml

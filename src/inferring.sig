@@ -13,8 +13,8 @@ signature INFERRING = sig
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  val constraint_type : t -> id list -> (id * Type.t) list -> TypedTerm.t -> TypedTerm.t * Type.t * constraint list
+  val constraint_type : t -> id list -> (id * Type.t) list -> AST.exp -> TypedTerm.t * Type.t * constraint list
   val unify : constraint list -> Type.subst
 
-  val infer : t -> id list -> (id * Type.t) list -> TypedTerm.t -> TypedTerm.t * Type.t
+  val infer : t -> id list -> (id * Type.t) list -> AST.exp -> TypedTerm.t * Type.t
 end

@@ -1,4 +1,4 @@
-local open TypedTerm in
+local open AST in
   fun encodeNat' (r, 0w0) = VAR (r, "O")
     | encodeNat' (r, n) = APP (r, (VAR (r, "S"), encodeNat' (r, LargeWord.- (n, 0w1))))
 
@@ -77,15 +77,15 @@ end
 | ID of string
 
 %nonterm
-  program of AST.t
+  program of AST.program
 | decls of AST.decl list
 | decl of AST.decl
 | ty of Type.t
 | atty of Type.t
 | asc of Type.t option
-| exp of TypedTerm.t
-| appexp of TypedTerm.t
-| atexp of TypedTerm.t
+| exp of AST.exp
+| appexp of AST.exp
+| atexp of AST.exp
 
 %name Parsing
 %noshift EOF
@@ -131,15 +131,15 @@ exp:
   appexp
     (appexp)
 | LAMBDA ID asc DOT exp
-    (TypedTerm.ABS ((LAMBDAleft, expright), (((IDleft, IDright), ID), asc, exp)))
+    (AST.ABS ((LAMBDAleft, expright), (((IDleft, IDright), ID), asc, exp)))
 | LET ID asc COLONEQ exp IN exp
-    (TypedTerm.LET ((LETleft, expright), (((IDleft, IDright), ID), asc, exp1, exp2)))
+    (AST.LET ((LETleft, expright), (((IDleft, IDright), ID), asc, exp1, exp2)))
 
 appexp:
   atexp
     (atexp)
 | appexp atexp
-    (TypedTerm.APP ((appexpleft, atexpright), (appexp, atexp)))
+    (AST.APP ((appexpleft, atexpright), (appexp, atexp)))
 
 atexp:
   NAT
@@ -149,6 +149,6 @@ atexp:
 | STRING
     (encodeString ((STRINGleft, STRINGright), STRING))
 | ID
-    (TypedTerm.VAR ((IDleft, IDright), ID))
+    (AST.VAR ((IDleft, IDright), ID))
 | LPAREN exp RPAREN
     (exp)

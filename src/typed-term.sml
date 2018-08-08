@@ -2,8 +2,8 @@ structure TypedTerm :> TYPED_TERM = struct
   datatype t =
     VAR of id
   | APP of (t * t) node
-  | ABS of (id * Type.t option * t) node
-  | LET of (id * Type.t option * t * t) node
+  | ABS of (id * Type.t * t) node
+  | LET of (id * Type.t * t * t) node
 
   fun erase (VAR (r, x)) = Term.VAR (r, x)
     | erase (APP (r, (t, u))) = Term.APP (r, (erase t, erase u))

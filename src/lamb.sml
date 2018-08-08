@@ -244,7 +244,7 @@ functor Main(Compiler : COMPILER) = struct
         (compiler, e')
       end
     | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
-        val t = TypedTerm.erase t
+        val t = AST.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
         val s = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
