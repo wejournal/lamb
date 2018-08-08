@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/runtime.h"
-#include "../include/gc.h"
+#include "../include/lamb/runtime.h"
+#include "../include/lamb/gc.h"
 
 uintptr_t lamb_main(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values);
 

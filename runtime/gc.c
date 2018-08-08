@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../include/runtime.h"
-#include "../include/gc.h"
+#include "../include/lamb/runtime.h"
+#include "../include/lamb/gc.h"
 
 memory_t *memory = NULL;
 free_chunk_t *free_chunk = NULL;

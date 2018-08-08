@@ -1,6 +1,6 @@
 #include <string.h>
-#include "../include/runtime.h"
-#include "../include/gc.h"
+#include "../include/lamb/runtime.h"
+#include "../include/lamb/gc.h"
 
 void runtime_init(void) {
   gc_init();
