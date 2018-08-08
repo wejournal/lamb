@@ -1,11 +1,13 @@
 functor Compiling (ABI : ABI) :> COMPILING = struct
+  type env = id list
+
   local
     fun push r NONE = ["\tpushq\t", r, "\n"]
       | push r (SOME r') = ["\tmovq\t", r, ",\t", r', "\n"]
     fun pop NONE = ["\tpopq\t%r14\n"]
       | pop (SOME _) = nil
 
-    fun compileInstr gensym emitting name (KrivineMachine.ACCESS i) =
+    fun compileInstr _ emitting _ (KrivineMachine.ACCESS i) =
           Emitting.emitList
             [ "\tsubq\t$", Int.toString (i + 1), ",\t", ABI.arg0, "\n"
             , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n"
@@ -18,7 +20,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tpopq\t%rbp\n"
             , "\tjmp\t*%r10\n" ]
             emitting
-      | compileInstr gensym emitting name KrivineMachine.GRAB = (
+      | compileInstr _ emitting _ KrivineMachine.GRAB = (
           Emitting.emitList
             [ "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n"
             , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
@@ -107,7 +109,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     ; List.app (compileInstr gensym emitting name) c
     )
   in
-    fun compile gensym emitting names name c = let
+    fun compile gensym emitting E name c = let
       val name' = name ^ "_" ^ Int.toString (Gensym.gensym gensym)
     in
       Emitting.emitList [".globl\t", name, "\n", name, ":\n"] emitting
@@ -119,7 +121,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
         , "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n"
         , "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n"
-        , "\tleaq\t", Int.toString (List.length names), "(", ABI.arg0, "),\t%r10\n"
+        , "\tleaq\t", Int.toString (List.length E), "(", ABI.arg0, "),\t%r10\n"
         , "\tmovq\t$24,\t%r11\n"
         , "\tmovq\t$4,\t%r12\n"
         , "\tpushq\t%r12\n"
@@ -157,7 +159,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\taddq\t%r13,\t", ABI.arg1, "\n" ]
         emitting
     ; List.app
-        (fn name =>
+        (fn (_, name) =>
           Emitting.emitList
             [ "\tmovq\t$", name, ",\t(", ABI.arg1, ")\n"
             , "\tmovq\t$0,\t8(", ABI.arg1, ")\n"
@@ -165,9 +167,9 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tincq\t", ABI.arg0, "\n"
             , "\taddq\t$24,\t", ABI.arg1, "\n"]
             emitting)
-        (List.rev names)
+        (List.rev E)
     ; Emitting.emitList
-        [ "\tsubq\t$", Int.toString (List.length names * 24), ",\t", ABI.arg1, "\n"
+        [ "\tsubq\t$", Int.toString (List.length E * 24), ",\t", ABI.arg1, "\n"
         , "\tsubq\t%r13,\t", ABI.arg1, "\n"
         , "\taddq\t$32,\t%rsp\n"
         , "\tpopq\t%rbp\n" ]

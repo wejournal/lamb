@@ -7,6 +7,6 @@ structure KrivineMachine :> KRIVINE_MACHINE = struct
   type code = instr list
 
   fun compile (DeBruijnIndexedTerm.VAR i) = [ACCESS i]
-    | compile (DeBruijnIndexedTerm.APP (t, u)) = PUSH (compile u) :: compile t
-    | compile (DeBruijnIndexedTerm.ABS t) = GRAB :: compile t
+    | compile (DeBruijnIndexedTerm.APP (e1, e2)) = PUSH (compile e2) :: compile e1
+    | compile (DeBruijnIndexedTerm.ABS e) = GRAB :: compile e
 end

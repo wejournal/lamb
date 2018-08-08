@@ -247,7 +247,7 @@ functor Main(Compiling : COMPILING) = struct
         val t = AST.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val () = Compiling.compile gensym emitting (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val () = Compiling.compile gensym emitting (map (fn ((r, y), _) => (r, "lamb_" ^ y)) e) ("lamb_" ^ x) c
         val s = concat (List.rev (Emitting.toList emitting))
         val () = Emitting.setList nil emitting
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e

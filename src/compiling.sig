@@ -1,3 +1,5 @@
 signature COMPILING = sig
-  val compile : Gensym.t -> string Emitting.t -> string list -> string -> KrivineMachine.code -> unit
+  type env = id list
+
+  val compile : Gensym.t -> string Emitting.t -> env -> string -> KrivineMachine.code -> unit
 end

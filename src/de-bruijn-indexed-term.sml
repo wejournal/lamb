@@ -8,17 +8,17 @@ structure DeBruijnIndexedTerm :> DE_BRUIJN_INDEXED_TERM = struct
 
   exception NotInScope of id
 
-  fun lookup (r, x) e  =
-    case List.find (fn ((_, y), _) => x = y) e of
+  fun lookup x E  =
+    case List.find (fn (y, _) => #2 x = #2 y) E of
       NONE =>
-        raise NotInScope (r, x)
+        raise NotInScope x
     | SOME (_, i) =>
         VAR i
 
-  fun compile e (Term.VAR (r, x)) =
-        lookup (r, x) e
-    | compile e (Term.APP (_, (t, u))) =
-        APP (compile e t, compile e u)
-    | compile e (Term.ABS (_, ((r, x), t))) =
-        ABS (compile (((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e) t)
+  fun compile E (Term.VAR x) =
+        lookup x E
+    | compile E (Term.APP (_, (e1, e2))) =
+        APP (compile E e1, compile E e2)
+    | compile E (Term.ABS (_, (x, e))) =
+        ABS (compile ((x, 0) :: map (fn (y, i) => (y, i + 1)) E) e)
 end
