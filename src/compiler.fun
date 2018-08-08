@@ -1,19 +1,18 @@
 functor Compiler (ABI : ABI) :> COMPILER = struct
-  type t = { fresh : int ref, emit : string -> unit, code : string list ref }
+  type t = { fresh : int ref, code : string list ref }
 
-  fun new emit = { fresh = ref 0, emit = emit, code = ref nil }
+  fun new emit = { fresh = ref 0, code = ref nil }
 
-  fun gensym {fresh, emit, code} = let
+  fun gensym {fresh, code} = let
     val i = !fresh
   in
     fresh := !fresh + 1
   ; "_" ^ Int.toString i
   end
 
-  fun emit {fresh, emit, code} = emit
-  fun emitList {fresh, emit, code} = foldl (fn (s, ()) => emit s) ()
-  fun emitRevList {fresh, emit, code} = foldr (fn (s, ()) => emit s) ()
-  fun emitCode {fresh, emit, code} s = code := s :: !code
+  fun emit {fresh, code} s = code := s :: !code
+  fun emitList compiling = foldl (fn (s, ()) => emit compiling s) ()
+  fun emitRevList compiling = foldr (fn (s, ()) => emit compiling s) ()
 
   local
     fun push r NONE = ["\tpushq\t", r, "\n"]
@@ -105,10 +104,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
             val code = !(#code compiling)
           in
             #code compiling := nil
-          ; compileCode
-              {fresh = #fresh compiling, emit = emitCode compiling, code = #code compiling}
-              (name ^ x)
-              c
+          ; compileCode compiling (name ^ x) c
           ; #code compiling := code @ !(#code compiling)
           end
         end
@@ -183,7 +179,7 @@ functor Compiler (ABI : ABI) :> COMPILER = struct
         , "\taddq\t$32,\t%rsp\n"
         , "\tpopq\t%rbp\n" ]
     ; compileCode compiling name' c
-    ; emitRevList compiling (!(#code compiling))
+    ; concat (List.rev (!(#code compiling)))
     end
   end
 end

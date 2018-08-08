@@ -236,24 +236,25 @@ end handle
   )
 
 functor Main(Compiler : COMPILER) = struct
-  fun compileDecl (AST.TYPE _, (compiler, e)) =
+  fun compileDecl outstream (AST.TYPE _, (compiler, e)) =
         (compiler, e)
-    | compileDecl (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
+    | compileDecl outstream (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         (compiler, e')
       end
-    | compileDecl (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
+    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
         val t = TypedTerm.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val () = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val s = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
-        (compiler, e')
+        TextIO.output (outstream, s)
+      ; (compiler, e')
       end
 
-  fun compile (file, (z0, z1)) = let
+  fun compile outstream (file, (z0, z1)) = let
     val instream = TextIO.openIn file
     val s = TextIO.inputAll instream
     val () = TextIO.closeIn instream
@@ -267,7 +268,7 @@ functor Main(Compiler : COMPILER) = struct
       val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
     in
       z0 := foldl inferDecl (!z0) decls
-    ; z1 := foldl compileDecl (!z1) decls
+    ; z1 := foldl (compileDecl outstream) (!z1) decls
     ; success := true
     end handle
       Lexing.LexError => let
@@ -420,9 +421,9 @@ in
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
         val z0 = (Inferring.new (), nil, nil)
-        val z1 = (SystemVCompiler.new (fn s => TextIO.output (outstream, s)), nil)
+        val z1 = (SystemVCompiler.new (), nil)
       in
-        List.foldl SystemVMain.compile (z0, z1) files
+        List.foldl (SystemVMain.compile outstream) (z0, z1) files
       ; TextIO.closeOut outstream
       end
 
@@ -510,9 +511,9 @@ in
             NONE => TextIO.openOut (List.last files ^ ".s")
           | SOME output => TextIO.openOut output
         val z0 = (Inferring.new (), nil, nil)
-        val z1 = (MicrosoftCompiler.new (fn s => TextIO.output (outstream, s)), nil)
+        val z1 = (MicrosoftCompiler.new (), nil)
       in
-        List.foldl MicrosoftMain.compile (z0, z1) files
+        List.foldl (MicrosoftMain.compile outstream) (z0, z1) files
       ; TextIO.closeOut outstream
       end
 
