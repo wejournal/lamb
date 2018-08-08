@@ -49,33 +49,25 @@ structure Inferring :> INFERRING = struct
       in
         (TypedTerm.APP (r, (t', u')), V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
-    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), NONE, t))) = let
-        val T = Type.VAR (r', gensym fresh)
+    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), Topt, t))) = let
+        val T =
+          case Topt of
+            NONE =>
+              Type.VAR (r', gensym fresh)
+          | SOME T =>
+              T
         val e' = ((r', x), T) :: e
         val (t', U, C) = constraint_type fresh polyVars e' t
       in
         (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
       end
-    | constraint_type fresh polyVars e (AST.ABS (r, ((r', x), SOME T, t))) = let
-        val e' = ((r', x), T) :: e
-        val (t', U, C) = constraint_type fresh polyVars e' t
-      in
-        (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
-      end
-    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), NONE, t, u))) = let
-        val (t', T, C) = constraint_type fresh polyVars e t
-        val S = unify C
-        val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
-        val boundedVars = List.concat (map (Type.BV o #2) e)
-        val T = generalize boundedVars (gensym fresh) T
-        val monoVars = List.concat (map (Type.FV o #2) e)
-        val polyVars' = List.filter (fn (_, y) => not (List.exists (fn (_, z) => y = z) monoVars)) (Type.FV T) @ polyVars
-        val e' = ((r', x), T) :: e
-        val (u', U, C') = constraint_type fresh polyVars' e' u
-      in
-        (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
-      end
-    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), SOME T, t, u))) = let
+    | constraint_type fresh polyVars e (AST.LET (r, ((r', x), Topt, t, u))) = let
+        val T =
+          case Topt of
+            NONE =>
+              Type.VAR (r', gensym fresh)
+          | SOME T =>
+              T
         val (t', T', C) = constraint_type fresh polyVars e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
