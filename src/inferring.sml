@@ -1,5 +1,7 @@
 structure Inferring :> INFERRING = struct
   type constraint = Type.t * Type.t
+  type poly = id list
+  type env = (id * Type.t) list
 
   fun generalize boundedVars suffix (Type.VAR (r, x)) = Type.VAR (r, x ^ suffix)
     | generalize boundedVars suffix (Type.CON (r, x)) =
@@ -22,24 +24,24 @@ structure Inferring :> INFERRING = struct
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  fun constraint_type gensym polyVars e (AST.VAR (r, x)) =
+  fun constraint_type gensym PV e (AST.VAR (r, x)) =
       (case List.find (fn ((_, y), _) => x = y) e of
         NONE =>
           raise NotInScope (r, x)
       | SOME (_, T) => let
-          val polyVars' = List.filter (fn (_, y) => List.exists (fn (_, z) => y = z) polyVars) (Type.FV T)
-          val S = map (fn (r', y) => ((r', y), Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym)))) polyVars'
+          val PV' = List.filter (fn (_, y) => List.exists (fn (_, z) => y = z) PV) (Type.FV T)
+          val S = map (fn (r', y) => ((r', y), Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym)))) PV'
         in
           (TypedTerm.VAR (r, x), Type.subst S T, nil)
         end)
-    | constraint_type gensym polyVars e (AST.APP (r, (t, u))) = let
-        val (t', T, C) = constraint_type gensym polyVars e t
-        val (u', U, C') = constraint_type gensym polyVars e u
+    | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
+        val (t', T, C) = constraint_type gensym PV e t
+        val (u', U, C') = constraint_type gensym PV e u
         val V = Type.VAR (r, "_" ^ Int.toString (Gensym.gensym gensym))
       in
         (TypedTerm.APP (r, (t', u')), V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
-    | constraint_type gensym polyVars e (AST.ABS (r, ((r', x), Topt, t))) = let
+    | constraint_type gensym PV e (AST.ABS (r, ((r', x), Topt, t))) = let
         val T =
           case Topt of
             NONE =>
@@ -47,26 +49,26 @@ structure Inferring :> INFERRING = struct
           | SOME T =>
               T
         val e' = ((r', x), T) :: e
-        val (t', U, C) = constraint_type gensym polyVars e' t
+        val (t', U, C) = constraint_type gensym PV e' t
       in
         (TypedTerm.ABS (r, ((r', x), T, t')), Type.ARR (r, (T, U)), C)
       end
-    | constraint_type gensym polyVars e (AST.LET (r, ((r', x), Topt, t, u))) = let
+    | constraint_type gensym PV e (AST.LET (r, ((r', x), Topt, t, u))) = let
         val T =
           case Topt of
             NONE =>
               Type.VAR (r', "_" ^ Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
-        val (t', T', C) = constraint_type gensym polyVars e t
+        val (t', T', C) = constraint_type gensym PV e t
         val S = unify ((T, T') :: C)
         val (t', T, C, e) = (substTypedTerm S t', Type.subst S T, substConstraints S C, substEnv S e)
-        val boundedVars = List.concat (map (Type.BV o #2) e)
-        val T = generalize boundedVars ("_" ^ Int.toString (Gensym.gensym gensym)) T
-        val monoVars = List.concat (map (Type.FV o #2) e)
-        val polyVars' = List.filter (fn (_, y) => not (List.exists (fn (_, z) => y = z) monoVars)) (Type.FV T) @ polyVars
+        val BV = List.concat (map (Type.BV o #2) e)
+        val T = generalize BV ("_" ^ Int.toString (Gensym.gensym gensym)) T
+        val MV = List.concat (map (Type.FV o #2) e)
+        val PV' = List.filter (fn (_, y) => not (List.exists (fn (_, z) => y = z) MV)) (Type.FV T) @ PV
         val e' = ((r', x), T) :: e
-        val (u', U, C') = constraint_type gensym polyVars' e' u
+        val (u', U, C') = constraint_type gensym PV' e' u
       in
         (TypedTerm.LET (r, ((r', x), T, t', u')), U, C @ C')
       end
@@ -107,8 +109,8 @@ structure Inferring :> INFERRING = struct
       | _ =>
           raise Incompatible (T, U))
 
-  fun infer inferring polyVars e t = let
-    val (t', T, C) = constraint_type inferring polyVars e t
+  fun infer inferring PV e t = let
+    val (t', T, C) = constraint_type inferring PV e t
     val S = unify C
     val U = Type.subst S T
     val u = substTypedTerm S t'
