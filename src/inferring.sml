@@ -4,15 +4,16 @@ structure Inferring :> INFERRING = struct
   type mono = id list
   type env = (id * Type.t) list
 
-  fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
-
-  fun substEnv S e = map (fn ((r, x), T) => ((r, x), Type.subst S T)) e
-
   exception NotInScope of id
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
-  fun lookup x e = Option.map #2 (List.find (fn (y, _) => value x = value y) e)
+  fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
+  fun substEnv S E = map (fn (x, T) => (x, Type.subst S T)) E
+  fun FVEnv E = List.concat (map (Type.FV o #2) E)
+  fun BVEnv E = List.concat (map (Type.BV o #2) E)
+
+  fun lookup x E = Option.map #2 (List.find (fn (y, _) => value x = value y) E)
 
   fun instantiate gensym PV T = let
     val S = map (fn y => (y, Type.VAR (Type.region T, Int.toString (Gensym.gensym gensym)))) PV
@@ -50,46 +51,44 @@ structure Inferring :> INFERRING = struct
     f T
   end
 
-  fun constraint_type gensym PV e (AST.VAR x) =
-      (case lookup x e of
+  fun constraint_type gensym PV E (AST.VAR x) =
+      (case lookup x E of
         NONE =>
           raise NotInScope x
       | SOME T =>
           (instantiate gensym PV T, nil))
-    | constraint_type gensym PV e (AST.APP (r, (t, u))) = let
-        val (T, C) = constraint_type gensym PV e t
-        val (U, C') = constraint_type gensym PV e u
+    | constraint_type gensym PV E (AST.APP (r, (e1, e2))) = let
+        val (T, C) = constraint_type gensym PV E e1
+        val (U, C') = constraint_type gensym PV E e2
         val V = Type.VAR (r, Int.toString (Gensym.gensym gensym))
       in
         (V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
-    | constraint_type gensym PV e (AST.ABS (r, ((r', x), Topt, t))) = let
+    | constraint_type gensym PV E (AST.ABS (r, (x, Topt, e))) = let
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', Int.toString (Gensym.gensym gensym))
+              Type.VAR (region x, Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
-        val e' = ((r', x), T) :: e
-        val (U, C) = constraint_type gensym PV e' t
+        val E' = (x, T) :: E
+        val (U, C) = constraint_type gensym PV E' e
       in
         (Type.ARR (r, (T, U)), C)
       end
-    | constraint_type gensym PV e (AST.LET (r, ((r', x), Topt, t, u))) = let
+    | constraint_type gensym PV E (AST.LET (r, (x, Topt, e1, e2))) = let
         val T =
           case Topt of
             NONE =>
-              Type.VAR (r', Int.toString (Gensym.gensym gensym))
+              Type.VAR (region x, Int.toString (Gensym.gensym gensym))
           | SOME T =>
               T
-        val (T', C) = constraint_type gensym PV e t
+        val (T', C) = constraint_type gensym PV E e1
         val S = unify ((T, T') :: C)
-        val (T, C, e) = (Type.subst S T, substConstraints S C, substEnv S e)
-        val FV = List.concat (map (Type.FV o #2) e)
-        val BV = List.concat (map (Type.BV o #2) e)
-        val (T, PV') = generalize gensym FV BV T
-        val e' = ((r', x), T) :: e
-        val (U, C') = constraint_type gensym (PV' @ PV) e' u
+        val (T, C, E) = (Type.subst S T, substConstraints S C, substEnv S E)
+        val (T, PV') = generalize gensym (FVEnv E) (BVEnv E) T
+        val E' = (x, T) :: E
+        val (U, C') = constraint_type gensym (PV' @ PV) E' e2
       in
         (U, C @ C')
       end

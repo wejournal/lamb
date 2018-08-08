@@ -4,12 +4,12 @@ signature INFERRING = sig
   type mono = id list
   type env = (id * Type.t) list
 
-  val substConstraints : Type.subst -> constraint list -> constraint list
-  val substEnv : Type.subst -> env -> env
-
   exception NotInScope of id
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
+
+  val substConstraints : Type.subst -> constraint list -> constraint list
+  val substEnv : Type.subst -> env -> env
 
   val instantiate : Gensym.t -> poly -> Type.t -> Type.t
   val generalize : Gensym.t -> mono -> mono -> Type.t -> Type.t * poly
