@@ -236,25 +236,24 @@ end handle
   )
 
 functor Main(Compiler : COMPILER) = struct
-  fun compileDecl outstream (AST.TYPE _, (compiler, e)) =
+  fun compileDecl (AST.TYPE _, (compiler, e)) =
         (compiler, e)
-    | compileDecl outstream (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
+    | compileDecl (AST.VAL (_, ((r, x), _)), (compiler, e)) = let
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         (compiler, e')
       end
-    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
+    | compileDecl (AST.DEF (_, ((r, x), _, t)), (compiler, e)) = let
         val t = TypedTerm.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val s' = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val () = Compiler.compile compiler (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
-        TextIO.output (outstream, s')
-      ; (compiler, e')
+        (compiler, e')
       end
 
-  fun compile outstream (file, (z0, z1)) = let
+  fun compile (file, (z0, z1)) = let
     val instream = TextIO.openIn file
     val s = TextIO.inputAll instream
     val () = TextIO.closeIn instream
@@ -268,22 +267,8 @@ functor Main(Compiler : COMPILER) = struct
       val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
     in
       z0 := foldl inferDecl (!z0) decls
-    ; let
-        val outstream' =
-          case outstream of
-            NONE =>
-              TextIO.openOut (file ^ ".s")
-          | SOME outstream =>
-              outstream
-      in
-        z1 := foldl (compileDecl outstream') (!z1) decls
-      ; case outstream of
-          NONE =>
-            TextIO.closeOut outstream'
-        | SOME _ =>
-            ()
-      ; success := true
-      end
+    ; z1 := foldl compileDecl (!z1) decls
+    ; success := true
     end handle
       Lexing.LexError => let
         val i = !Lexing.UserDeclarations.cursor
@@ -414,14 +399,12 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
 
-      val z0 = (Inferring.new (), nil, nil)
-      val z1 = (SystemVCompiler.new (), nil)
-
       fun infer output = let
         val outstream =
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
+        val z0 = (Inferring.new (), nil, nil)
       in
         foldl (inferFile outstream) z0 files
       ; case output of
@@ -434,13 +417,13 @@ in
       fun compile output = let
         val outstream =
           case output of
-            NONE => SOME (TextIO.openOut (List.last files ^ ".s"))
-          | SOME output => SOME (TextIO.openOut output)
+            NONE => TextIO.openOut (List.last files ^ ".s")
+          | SOME output => TextIO.openOut output
+        val z0 = (Inferring.new (), nil, nil)
+        val z1 = (SystemVCompiler.new (fn s => TextIO.output (outstream, s)), nil)
       in
-        List.foldl (SystemVMain.compile outstream) (z0, z1) files
-      ; case outstream of
-          NONE => ()
-        | SOME outstream => TextIO.closeOut outstream
+        List.foldl SystemVMain.compile (z0, z1) files
+      ; TextIO.closeOut outstream
       end
 
       fun assemble output = let
@@ -506,14 +489,12 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
 
-      val z0 = (Inferring.new (), nil,nil)
-      val z1 = (MicrosoftCompiler.new (), nil)
-
       fun infer output = let
         val outstream =
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
+        val z0 = (Inferring.new (), nil, nil)
       in
         foldl (inferFile outstream) z0 files
       ; case output of
@@ -526,13 +507,13 @@ in
       fun compile output = let
         val outstream =
           case output of
-            NONE => SOME (TextIO.openOut (List.last files ^ ".s"))
-          | SOME output => SOME (TextIO.openOut output)
+            NONE => TextIO.openOut (List.last files ^ ".s")
+          | SOME output => TextIO.openOut output
+        val z0 = (Inferring.new (), nil, nil)
+        val z1 = (MicrosoftCompiler.new (fn s => TextIO.output (outstream, s)), nil)
       in
-        List.foldl (MicrosoftMain.compile outstream) (z0, z1) files
-      ; case outstream of
-          NONE => ()
-        | SOME outstream => TextIO.closeOut outstream
+        List.foldl MicrosoftMain.compile (z0, z1) files
+      ; TextIO.closeOut outstream
       end
 
       fun assemble output = let
