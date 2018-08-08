@@ -75,34 +75,28 @@ src/parsing.grm.sig src/parsing.grm.sml: src/parsing.grm
 src/lexing.lex.sml: src/lexing.lex
 	$(MLLEX) $<
 
-include/lamb/runtime.h: runtime/include/runtime.h
-	cp $< $@
-
-include/lamb/gc.h: runtime/include/gc.h
-	cp $< $@
-
-lib/lamb/linux/runtime.o: runtime/src/runtime.c
+lib/lamb/linux/runtime.o: runtime/runtime.c
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
-lib/lamb/linux/gc.o: runtime/src/gc.c
+lib/lamb/linux/gc.o: runtime/gc.c
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
 lib/lamb/linux/numbers.o: runtime/linux/numbers.s
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
-lib/lamb/linux/lamb.o: runtime/src/lamb.c
+lib/lamb/linux/lamb.o: runtime/lamb.c
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
-lib/lamb/windows/runtime.o: runtime/src/runtime.c
+lib/lamb/windows/runtime.o: runtime/runtime.c
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
-lib/lamb/windows/gc.o: runtime/src/gc.c
+lib/lamb/windows/gc.o: runtime/gc.c
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
 lib/lamb/windows/numbers.o: runtime/windows/numbers.s
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
-lib/lamb/windows/lamb.o: runtime/src/lamb.c
+lib/lamb/windows/lamb.o: runtime/lamb.c
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
 .INTERMEDIATE: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
