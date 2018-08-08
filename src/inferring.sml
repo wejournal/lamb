@@ -92,30 +92,40 @@ structure Inferring :> INFERRING = struct
       end
   and unify nil = nil
     | unify ((T, U) :: C) =
-        if Type.eq T U then
-          unify C
-        else
-          (case (T, U) of
-            (Type.VAR (r, x), _) =>
-              if List.exists (fn (_, y) => x = y) (Type.FV U) then
-                raise Cyclic ((r, x), U)
-              else let
-                val S = [((r, x), U)]
-              in
-                Type.compose (unify (substConstraints S C)) S
-              end
-          | (_, Type.VAR (r, y)) =>
-              if List.exists (fn (_, x) => x = y) (Type.FV T) then
-                raise Cyclic ((r, y), T)
-              else let
-                val S = [((r, y), T)]
-              in
-                Type.compose (unify (substConstraints S C)) S
-              end
-          | (Type.ARR (r, (T1, T2)), Type.ARR (r', (U1, U2))) =>
-              unify ((T1, U1) :: (T2, U2) :: C)
-          | _ =>
-              raise Incompatible (T, U))
+      (case (T, U) of
+        (Type.VAR (r, x), Type.VAR (_, y)) =>
+          if x = y then
+            unify C
+          else let
+            val S = [((r, x), U)]
+          in
+            Type.compose (unify (substConstraints S C)) S
+          end
+      | (Type.VAR (r, x), _) =>
+          if List.exists (fn (_, y) => x = y) (Type.FV U) then
+            raise Cyclic ((r, x), U)
+          else let
+            val S = [((r, x), U)]
+          in
+            Type.compose (unify (substConstraints S C)) S
+          end
+      | (_, Type.VAR (r, y)) =>
+          if List.exists (fn (_, x) => x = y) (Type.FV T) then
+            raise Cyclic ((r, y), T)
+          else let
+            val S = [((r, y), T)]
+          in
+            Type.compose (unify (substConstraints S C)) S
+          end
+      | (Type.CON (r, x), Type.CON (r', y)) =>
+          if x = y then
+            unify C
+          else
+            raise Incompatible (T, U)
+      | (Type.ARR (r, (T1, T2)), Type.ARR (r', (U1, U2))) =>
+          unify ((T1, U1) :: (T2, U2) :: C)
+      | _ =>
+          raise Incompatible (T, U))
 
   fun infer inferring polyVars e t = let
     val (t', T, C) = constraint_type inferring polyVars e t

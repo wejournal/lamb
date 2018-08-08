@@ -6,11 +6,6 @@ structure Type :> TYPE = struct
 
   type subst = (id * t) list
 
-  fun eq (VAR (_, x)) (VAR (_, y)) = x = y
-    | eq (CON (_, x)) (CON (_, y)) = x = y
-    | eq (ARR (_, (T1, T2))) (ARR (_, (U1, U2))) = eq T1 U1 andalso eq U1 U2
-    | eq _ _ = false
-
   fun subst S (VAR (r, x)) =
         (case List.find (fn ((_, y), _) => x = y) S of
           NONE =>
