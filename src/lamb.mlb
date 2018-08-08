@@ -15,10 +15,10 @@ in
   gensym.sml
   emitting.sig
   emitting.sml
-  compiler.sig
-  compiler.fun
-  system-v-compiler.sml
-  microsoft-compiler.sml
+  compiling.sig
+  compiling.fun
+  system-v-compiling.sml
+  microsoft-compiling.sml
   type.sig
   type.sml
   typed-term.sig

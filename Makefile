@@ -45,14 +45,20 @@ bin/lamb:	src/lamb.mlb \
 		src/abi.sig \
 		src/system-v-abi.sml \
 		src/microsoft-abi.sml \
-		src/compiler.sig \
-		src/compiler.fun \
-		src/system-v-compiler.sml \
-		src/microsoft-compiler.sml \
+		src/gensym.sig \
+		src/gensym.sml \
+		src/emitting.sig \
+		src/emitting.sml \
+		src/compiling.sig \
+		src/compiling.fun \
+		src/system-v-compiling.sml \
+		src/microsoft-compiling.sml \
 		src/type.sig \
 		src/type.sml \
 		src/typed-term.sig \
 		src/typed-term.sml \
+		src/ast.sig \
+		src/ast.sml \
 		src/inferring.sig \
 		src/inferring.sml \
 		src/parsing.grm.sig \

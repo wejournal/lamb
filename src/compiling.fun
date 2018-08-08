@@ -1,4 +1,4 @@
-functor Compiler (ABI : ABI) :> COMPILER = struct
+functor Compiling (ABI : ABI) :> COMPILING = struct
   local
     fun push r NONE = ["\tpushq\t", r, "\n"]
       | push r (SOME r') = ["\tmovq\t", r, ",\t", r', "\n"]

@@ -235,7 +235,7 @@ end handle
   ; OS.Process.exit OS.Process.failure
   )
 
-functor Main(Compiler : COMPILER) = struct
+functor Main(Compiling : COMPILING) = struct
   fun compileDecl outstream (AST.TYPE _, ((gensym, emitting), e)) =
         ((gensym, emitting), e)
     | compileDecl outstream (AST.VAL (_, ((r, x), _)), ((gensym, emitting), e)) = let
@@ -247,7 +247,7 @@ functor Main(Compiler : COMPILER) = struct
         val t = AST.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
-        val () = Compiler.compile gensym emitting (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
+        val () = Compiling.compile gensym emitting (map (fn ((r, y), _) => "lamb_" ^ y) e) ("lamb_" ^ x) c
         val s = concat (List.rev (Emitting.toList emitting))
         val () = Emitting.setList nil emitting
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
@@ -365,8 +365,8 @@ fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
         { target = target, doing = doing, output = output, files = arg :: files }
       end
 
-structure SystemVMain = Main(SystemVCompiler)
-structure MicrosoftMain = Main(MicrosoftCompiler)
+structure SystemVMain = Main(SystemVCompiling)
+structure MicrosoftMain = Main(MicrosoftCompiling)
 
 val () = let
   val LAMB_HOME =
