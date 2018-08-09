@@ -151,7 +151,7 @@ functor Main(Compiling : COMPILING) = struct
         E'
       end
 
-  fun compile infer gensym emitting (file, (z0, z1)) = let
+  fun compile' infer gensym emitting (file, (z0, z1)) = let
     val instream = TextIO.openIn file
     val s = TextIO.inputAll instream
     val () = TextIO.closeIn instream
@@ -172,7 +172,7 @@ functor Main(Compiling : COMPILING) = struct
       else (
         List.app
           (fn decl =>
-            z0 := inferDecl gensym (SOME emitting) (decl, !z0))
+            z0 := inferDecl gensym NONE (decl, !z0))
           decls
       ; List.app
           (fn decl =>
@@ -217,6 +217,75 @@ functor Main(Compiling : COMPILING) = struct
       print_error file "no such file or directory." ""
     ; OS.Process.exit OS.Process.failure
     )
+
+  fun infer output files = let
+    val outstream =
+      case output of
+        NONE => TextIO.stdOut
+      | SOME output => TextIO.openOut output
+    val gensym = Gensym.new ()
+    val emitting = Emitting.new ()
+    val z0 = (nil, nil, nil)
+    val z1 = nil
+  in
+    List.foldl (compile' true gensym emitting) (z0, z1) files
+  ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
+  ; TextIO.closeOut outstream
+  end
+
+  fun compile output files = let
+    val outstream =
+      case output of
+        NONE => TextIO.openOut (List.last files ^ ".s")
+      | SOME output => TextIO.openOut output
+    val gensym = Gensym.new ()
+    val emitting = Emitting.new ()
+    val z0 = (nil, nil, nil)
+    val z1 = nil
+  in
+    List.foldl (compile' false gensym emitting) (z0, z1) files
+  ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
+  ; TextIO.closeOut outstream
+  end
+
+  fun assemble output files = let
+    val asmfile =
+      List.last files ^ ".s"
+    val objfile =
+      case output of
+        NONE => List.last files ^ ".o"
+      | SOME output => output
+  in
+    OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
+  ; ()
+  end
+
+  fun link output objfiles = let
+    val output =
+      case output of
+        NONE => "a.out"
+      | SOME output => output
+  in
+    (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " objfiles); ())
+  end
+
+  fun removeAssembly output files = let
+    val asmfile =
+      case output of
+        NONE => List.last files ^ ".s"
+      | SOME output => output
+  in
+    OS.FileSys.remove asmfile
+  end
+
+  fun removeObjectCode output files = let
+    val objfile =
+      case output of
+        NONE => List.last files ^ ".o"
+      | SOME output => output
+  in
+    OS.FileSys.remove objfile
+  end
 end
 
 datatype target = LINUX | WINDOWS
@@ -309,186 +378,48 @@ in
         map
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
-
-      fun infer output = let
-        val outstream =
-          case output of
-            NONE => TextIO.stdOut
-          | SOME output => TextIO.openOut output
-        val gensym = Gensym.new ()
-        val emitting = Emitting.new ()
-        val z0 = (nil, nil, nil)
-        val z1 = nil
-      in
-        List.foldl (SystemVMain.compile true gensym emitting) (z0, z1) files
-      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
-      ; TextIO.closeOut outstream
-      end
-
-      fun compile output = let
-        val outstream =
-          case output of
-            NONE => TextIO.openOut (List.last files ^ ".s")
-          | SOME output => TextIO.openOut output
-        val gensym = Gensym.new ()
-        val emitting = Emitting.new ()
-        val z0 = (nil, nil, nil)
-        val z1 = nil
-      in
-        List.foldl (SystemVMain.compile false gensym emitting) (z0, z1) files
-      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
-      ; TextIO.closeOut outstream
-      end
-
-      fun assemble output = let
-        val asmfile =
-          List.last files ^ ".s"
-        val objfile =
-          case output of
-            NONE => List.last files ^ ".o"
-          | SOME output => output
-      in
-        OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
-      ; ()
-      end
-
-      fun link output objfiles = let
-        val output =
-          case output of
-            NONE => "a.out"
-          | SOME output => output
-      in
-        (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
-      end
-
-      fun removeAssembly output = let
-        val asmfile =
-          case output of
-            NONE => List.last files ^ ".s"
-          | SOME output => output
-      in
-        OS.FileSys.remove asmfile
-      end
-
-      fun removeObjectCode output = let
-        val objfile =
-          case output of
-            NONE => List.last files ^ ".o"
-          | SOME output => output
-      in
-        OS.FileSys.remove objfile
-      end
     in
       case doing of
         INFER =>
-          infer output
+          SystemVMain.infer output files
       | COMPILE =>
-          compile output
+          SystemVMain.compile output files
       | ASSEMBLE =>
-          ( compile NONE
-          ; assemble output
-          ; removeAssembly NONE )
+          ( SystemVMain.compile NONE files
+          ; SystemVMain.assemble output files
+          ; SystemVMain.removeAssembly NONE files )
       | LINK =>
-          link output files
+          SystemVMain.link output (runtimes @ files)
       | MAKE =>
-          ( compile NONE
-          ; assemble NONE
-          ; link output [List.last files ^ ".o"]
-          ; removeObjectCode NONE
-          ; removeAssembly NONE )
+          ( SystemVMain.compile NONE files
+          ; SystemVMain.assemble NONE files
+          ; SystemVMain.link output (runtimes @ [List.last files ^ ".o"])
+          ; SystemVMain.removeObjectCode NONE files
+          ; SystemVMain.removeAssembly NONE files )
     end
   | WINDOWS => let
       val runtimes =
         map
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
-
-      fun infer output = let
-        val outstream =
-          case output of
-            NONE => TextIO.stdOut
-          | SOME output => TextIO.openOut output
-        val gensym = Gensym.new ()
-        val emitting = Emitting.new ()
-        val z0 = (nil, nil, nil)
-        val z1 = nil
-      in
-        List.foldl (MicrosoftMain.compile true gensym emitting) (z0, z1) files
-      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
-      ; TextIO.closeOut outstream
-      end
-
-      fun compile output = let
-        val outstream =
-          case output of
-            NONE => TextIO.openOut (List.last files ^ ".s")
-          | SOME output => TextIO.openOut output
-        val gensym = Gensym.new ()
-        val emitting = Emitting.new ()
-        val z0 = (nil, nil, nil)
-        val z1 = nil
-      in
-        List.foldl (MicrosoftMain.compile false gensym emitting) (z0, z1) files
-      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
-      ; TextIO.closeOut outstream
-      end
-
-      fun assemble output = let
-        val asmfile =
-          List.last files ^ ".s"
-        val objfile =
-          case output of
-            NONE => List.last files ^ ".o"
-          | SOME output => output
-      in
-        OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
-      ; ()
-      end
-
-      fun link output objfiles = let
-        val output =
-          case output of
-            NONE => "a.out"
-          | SOME output => output
-      in
-        (OS.Process.system ("x86_64-w64-mingw32-gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " runtimes ^ " " ^ String.concatWith " " objfiles); ())
-      end
-
-      fun removeAssembly output = let
-        val asmfile =
-          case output of
-            NONE => List.last files ^ ".s"
-          | SOME output => output
-      in
-        OS.FileSys.remove asmfile
-      end
-
-      fun removeObjectCode output = let
-        val objfile =
-          case output of
-            NONE => List.last files ^ ".o"
-          | SOME output => output
-      in
-        OS.FileSys.remove objfile
-      end
     in
       case doing of
         INFER =>
-          infer output
+          MicrosoftMain.infer output files
       | COMPILE =>
-          compile output
+          MicrosoftMain.compile output files
       | ASSEMBLE =>
-          ( compile NONE
-          ; assemble output
-          ; removeAssembly NONE )
+          ( MicrosoftMain.compile NONE files
+          ; MicrosoftMain.assemble output files
+          ; MicrosoftMain.removeAssembly NONE files )
       | LINK =>
-          link output files
+          MicrosoftMain.link output (runtimes @ files)
       | MAKE =>
-          ( compile NONE
-          ; assemble NONE
-          ; link output [List.last files ^ ".o"]
-          ; removeObjectCode NONE
-          ; removeAssembly NONE )
+          ( MicrosoftMain.compile NONE files
+          ; MicrosoftMain.assemble NONE files
+          ; MicrosoftMain.link output (runtimes @ [List.last files ^ ".o"])
+          ; MicrosoftMain.removeObjectCode NONE files
+          ; MicrosoftMain.removeAssembly NONE files )
     end
 end handle
   Unrecognized arg => (
