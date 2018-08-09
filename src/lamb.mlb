@@ -23,6 +23,8 @@ in
   type.sml
   ast.sig
   ast.sml
+  typed-term.sig
+  typed-term.sml
   inferring.sig
   inferring.sml
   parsing.grm.sig

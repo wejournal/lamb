@@ -107,7 +107,7 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
     ; (PV' @ PV, BV, (x, T) :: E)
     end
   | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (PV, BV, E)) = let
-      val U = Inferring.infer gensym PV E e
+      val U = Inferring.infer gensym PV E (TypedTerm.implicit gensym e)
       val S =
         case Option.map AST.Type.eval Topt of
           NONE =>
