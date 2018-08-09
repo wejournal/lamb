@@ -129,8 +129,8 @@ structure Inferring :> INFERRING = struct
       | _ =>
           raise Incompatible (T, U))
 
-  fun infer inferring PV e t = let
-    val (T, C) = constraint_type inferring PV e t
+  fun infer gensym PV e t = let
+    val (T, C) = constraint_type gensym PV e t
     val S = unify C
     val U = Type.subst S T
   in
