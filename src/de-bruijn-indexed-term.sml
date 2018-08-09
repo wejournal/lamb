@@ -8,8 +8,6 @@ structure DeBruijnIndexedTerm :> DE_BRUIJN_INDEXED_TERM = struct
 
   exception NotInScope of id
 
-  fun lookup x E = Option.map #2 (List.find (fn (y, _) => value x = value y) E)
-
   fun compile E (Term.VAR x) =
         (case lookup x E of
           NONE =>

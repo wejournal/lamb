@@ -8,6 +8,5 @@ signature DE_BRUIJN_INDEXED_TERM = sig
 
   exception NotInScope of id
 
-  val lookup : id -> env -> int option
   val compile : env -> Term.t -> t
 end

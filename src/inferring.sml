@@ -13,8 +13,6 @@ structure Inferring :> INFERRING = struct
   fun FVEnv E = List.concat (map (Type.FV o #2) E)
   fun BVEnv E = List.concat (map (Type.BV o #2) E)
 
-  fun lookup x E = Option.map #2 (List.find (fn (y, _) => value x = value y) E)
-
   fun instantiate gensym PV T = let
     val S = map (fn y => (y, Type.VAR (Type.region T, Int.toString (Gensym.gensym gensym)))) PV
   in

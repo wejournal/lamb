@@ -6,8 +6,6 @@ structure Type :> TYPE = struct
 
   type subst = (id * t) list
 
-  fun lookup x S = Option.map #2 (List.find (fn (y, _) => value x = value y) S)
-
   fun subst S (VAR x) =
         (case lookup x S of
           NONE =>

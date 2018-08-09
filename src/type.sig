@@ -6,7 +6,6 @@ signature TYPE = sig
 
   type subst = (id * t) list
 
-  val lookup : id -> subst -> t option
   val subst : subst -> t -> t
   val compose : subst -> subst -> subst
   val FV : t -> id list
