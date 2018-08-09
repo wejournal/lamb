@@ -17,6 +17,17 @@ structure Type :> TYPE = struct
     | subst S (ARR (r, (T, U))) =
         ARR (r, (subst S T, subst S U))
 
+  fun replace _ (VAR x) =
+        VAR x
+    | replace S (CON x) =
+        (case lookup x S of
+          NONE =>
+            CON x
+        | SOME T =>
+            T)
+    | replace S (ARR (r, (T, U))) =
+        ARR (r, (replace S T, replace S U))
+
   fun compose S S' =
       List.filter (fn (x, _) => List.all (fn (y, _) => value x <> value y) S') S @ map (fn (x, T) => (x, subst S T)) S'
 

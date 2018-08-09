@@ -14,39 +14,19 @@ structure Inferring :> INFERRING = struct
   fun BVEnv E = List.concat (map (Type.BV o #2) E)
 
   fun instantiate gensym PV T = let
-    val S = map (fn y => (y, Type.VAR (Type.region T, Int.toString (Gensym.gensym gensym)))) PV
+    val S = map (fn y => (y, Type.VAR (region y, Int.toString (Gensym.gensym gensym)))) PV
   in
     Type.subst S T
   end
 
   fun generalize gensym FV BV T = let
-    val B2F = ref nil
-
-    fun f (Type.VAR x) =
-          if List.exists (fn y => value x = value y) FV then
-            (Type.VAR x, nil)
-          else
-            (Type.VAR x, [x])
-      | f (Type.CON x) =
-          if List.exists (fn y => value x = value y) BV then
-            (Type.CON x, nil)
-          else (case lookup x (!B2F) of
-            NONE => let
-              val y = (region x, Int.toString (Gensym.gensym gensym))
-            in
-              B2F := (x, y) :: !B2F
-            ; (Type.VAR y, [y])
-            end
-          | SOME y =>
-              (Type.VAR (region x, value y), [(region x, value y)]))
-      | f (Type.ARR (r, (T, U))) = let
-            val (T', PV) = f T
-            val (U', PV') = f U
-          in
-            (Type.ARR (r, (T', U')), PV @ PV')
-          end
+    val PFV = List.filter (fn x => not (List.exists (fn y => value x = value y) FV)) (Type.FV T)
+    val PBV = List.filter (fn x => not (List.exists (fn y => value x = value y) BV)) (Type.BV T)
+    val B2F = map (fn x => (x, (region x, Int.toString (Gensym.gensym gensym)))) PBV
+    val PV = PFV @ map #2 B2F
+    val S = map (fn (x, y) => (x, Type.VAR y)) B2F
   in
-    f T
+    (Type.replace S T, PV)
   end
 
   fun constraint_type gensym PV E (TypedTerm.VAR x) =
