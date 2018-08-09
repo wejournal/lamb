@@ -101,15 +101,15 @@ end
 fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
       (PV, x :: BV, E)
   | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (PV, BV, E)) = let
-      val (T, PV') = Inferring.generalize gensym nil BV (AST.Type.eval T)
+      val (T, PV') = Inferring.generalize gensym nil BV (AST.Type.toType T)
     in
       checkDup x E
     ; (PV' @ PV, BV, (x, T) :: E)
     end
   | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (PV, BV, E)) = let
-      val U = Inferring.infer gensym PV E (TypedTerm.implicit gensym e)
+      val U = Inferring.infer gensym PV E (AST.Exp.toTypedTerm gensym e)
       val S =
-        case Option.map AST.Type.eval Topt of
+        case Option.map AST.Type.toType Topt of
           NONE =>
             if value x = "main" then
               Inferring.unify [(mainType (region x), U)]

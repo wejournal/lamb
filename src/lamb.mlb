@@ -21,12 +21,12 @@ in
   microsoft-compiling.sml
   type.sig
   type.sml
-  ast.sig
-  ast.sml
   typed-term.sig
   typed-term.sml
   inferring.sig
   inferring.sml
+  ast.sig
+  ast.sml
   parsing.grm.sig
   parsing.grm.sml
   lexing.lex.sml

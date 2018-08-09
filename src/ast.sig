@@ -5,7 +5,7 @@ signature AST = sig
     | CON of id
     | ARR of (t * t) node
 
-    val eval : t -> Type.t
+    val toType : t -> Type.t
   end
 
   structure Exp : sig
@@ -15,6 +15,7 @@ signature AST = sig
     | ABS of (id * Type.t option * t) node
     | LET of (id * Type.t option * t * t) node
 
+    val toTypedTerm : Gensym.t -> t -> TypedTerm.t
     val erase : t -> Term.t
   end
 
