@@ -1,6 +1,8 @@
 PREFIX := $(HOME)/.lamb
 
 MKDIR := mkdir
+INSTALL := install
+CAT := cat
 
 GCC := gcc
 X86_64_W64_MINGW32_GCC := x86_64-w64-mingw32-gcc
@@ -17,22 +19,22 @@ all:	bin/lamb \
 
 .PHONY: install
 install:
-	mkdir -p $(PREFIX)
-	mkdir -p $(PREFIX)/bin
-	mkdir -p $(PREFIX)/lib/lamb/linux
-	mkdir -p $(PREFIX)/lib/lamb/windows
-	mkdir -p $(PREFIX)/include/lamb
-	install bin/lamb $(PREFIX)/bin
-	install lib/lamb/linux/runtime.o $(PREFIX)/lib/lamb/linux/runtime.o
-	install lib/lamb/linux/gc.o $(PREFIX)/lib/lamb/linux/gc.o
-	install lib/lamb/linux/numbers.o $(PREFIX)/lib/lamb/linux/numbers.o
-	install lib/lamb/linux/lamb.o $(PREFIX)/lib/lamb/linux/lamb.o
-	install lib/lamb/windows/runtime.o $(PREFIX)/lib/lamb/windows/runtime.o
-	install lib/lamb/windows/gc.o $(PREFIX)/lib/lamb/windows/gc.o
-	install lib/lamb/windows/numbers.o $(PREFIX)/lib/lamb/windows/numbers.o
-	install lib/lamb/windows/lamb.o $(PREFIX)/lib/lamb/windows/lamb.o
-	install include/lamb/runtime.h $(PREFIX)/include/lamb/runtime.h
-	install include/lamb/gc.h $(PREFIX)/include/lamb/gc.h
+	$(MKDIR) -p $(PREFIX)
+	$(MKDIR) -p $(PREFIX)/bin
+	$(MKDIR) -p $(PREFIX)/lib/lamb/linux
+	$(MKDIR) -p $(PREFIX)/lib/lamb/windows
+	$(MKDIR) -p $(PREFIX)/include/lamb
+	$(INSTALL) bin/lamb $(PREFIX)/bin
+	$(INSTALL) lib/lamb/linux/runtime.o $(PREFIX)/lib/lamb/linux/runtime.o
+	$(INSTALL) lib/lamb/linux/gc.o $(PREFIX)/lib/lamb/linux/gc.o
+	$(INSTALL) lib/lamb/linux/numbers.o $(PREFIX)/lib/lamb/linux/numbers.o
+	$(INSTALL) lib/lamb/linux/lamb.o $(PREFIX)/lib/lamb/linux/lamb.o
+	$(INSTALL) lib/lamb/windows/runtime.o $(PREFIX)/lib/lamb/windows/runtime.o
+	$(INSTALL) lib/lamb/windows/gc.o $(PREFIX)/lib/lamb/windows/gc.o
+	$(INSTALL) lib/lamb/windows/numbers.o $(PREFIX)/lib/lamb/windows/numbers.o
+	$(INSTALL) lib/lamb/windows/lamb.o $(PREFIX)/lib/lamb/windows/lamb.o
+	$(INSTALL) include/lamb/runtime.h $(PREFIX)/include/lamb/runtime.h
+	$(INSTALL) include/lamb/gc.h $(PREFIX)/include/lamb/gc.h
 
 bin/lamb:	src/lamb.mlb \
 		src/lamb.sml \
@@ -99,14 +101,14 @@ lib/lamb/windows/lamb.o: runtime/lamb.c
 
 .INTERMEDIATE: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
 runtime/linux/numbers.s: $(patsubst %,runtime/linux/n%.s,$(shell seq 0 255))
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 runtime/linux/n%.s: runtime/lam/n%.lam bin/lamb
 	LAMB_HOME=. bin/lamb --target linux -o $@ -S $<
 
 .INTERMEDIATE: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
 runtime/windows/numbers.s: $(patsubst %,runtime/windows/n%.s,$(shell seq 0 255))
-	cat $^ > $@
+	$(CAT) $^ > $@
 
 runtime/windows/n%.s: runtime/lam/n%.lam bin/lamb
 	LAMB_HOME=. bin/lamb --target windows -o $@ -S $<
