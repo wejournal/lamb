@@ -75,38 +75,6 @@ in
         showType i e boundedVars T ^ " -> " ^ showTypeArr i e boundedVars U
     | showTypeArr i e boundedVars T =
         showType i e boundedVars T
-
-  fun showMonoType i e boundedVars (Type.VAR (r, x)) = let
-        val (j, e') =
-          case List.find (fn ((_, y), _) => x = y) (!e) of
-            NONE => let
-              val j = !i
-            in
-              i := !i + 1
-            ; e := ((r, x), j) :: !e
-            ; (j, !e)
-            end
-          | SOME (_, j) =>
-              (j, !e)
-
-        val a = alpha j
-        val k = ref 0
-      in
-        if List.exists (fn (_, b) => x = b) boundedVars then (
-          while List.exists (fn (_, b) => a ^ Int.toString (!k) = b) boundedVars do
-            k := !k + 1
-        ; "'" ^ a ^ Int.toString (!k)
-        ) else
-          "'" ^ a
-      end
-    | showMonoType _ _ _ (Type.CON (_, x)) =
-        x
-    | showMonoType i e boundedVars (Type.ARR (_, (T, U))) =
-        "(" ^ showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U ^ ")"
-  and showMonoTypeArr i e boundedVars (Type.ARR (_, (T, U))) =
-        showMonoType i e boundedVars T ^ " -> " ^ showMonoTypeArr i e boundedVars U
-    | showMonoTypeArr i e boundedVars T =
-        showMonoType i e boundedVars T
 end
 
 exception Duplicate of id
@@ -197,10 +165,19 @@ functor Main(Compiling : COMPILING) = struct
       val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
     in
       if infer then
-        z0 := foldl (inferDecl gensym (SOME emitting)) (!z0) decls
+        List.app
+          (fn decl =>
+            z0 := inferDecl gensym (SOME emitting) (decl, !z0))
+          decls
       else (
-        z0 := foldl (inferDecl gensym NONE) (!z0) decls
-      ; z1 := foldl (compileDecl gensym emitting) (!z1) decls
+        List.app
+          (fn decl =>
+            z0 := inferDecl gensym (SOME emitting) (decl, !z0))
+          decls
+      ; List.app
+          (fn decl =>
+            z1 := compileDecl gensym emitting (decl, !z1))
+          decls
       )
     ; success := true
     end handle
@@ -220,14 +197,14 @@ functor Main(Compiling : COMPILING) = struct
         val i = ref 0
         val e = ref nil
       in
-        print_error_in_file file s r ("cyclic: " ^ showMonoType i e nil (Type.VAR (r, x)) ^ " in " ^  showMonoType i e nil T)
+        print_error_in_file file s r ("cyclic: " ^ showTypeArr i e (#2 (!z0)) (Type.VAR (r, x)) ^ " in " ^ showTypeArr i e (#2 (!z0)) T)
       end
     | Inferring.Incompatible (T, U) => let
         val r = Type.region T
         val i = ref 0
         val e = ref nil
       in
-        print_error_in_file file s r ("incompatible types: " ^  showMonoType i e nil T ^ " and " ^  showMonoType i e nil U)
+        print_error_in_file file s r ("incompatible types: " ^ showTypeArr i e (#2 (!z0)) T ^ " and " ^ showTypeArr i e (#2 (!z0)) U)
       end
     | Duplicate (r, x) =>
         print_error_in_file file s r ("duplicate variable: `" ^ x ^ "'")
