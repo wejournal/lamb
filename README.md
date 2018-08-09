@@ -55,7 +55,7 @@ The classes are defined by regular expressions.
 - *atty* ::= `'` **ID** | **ID** | `(` *ty* `)`
 - *asc* ::= ε | `:` *ty*
 - *exp* ::= *appexp* | `^` **ID** *asc* `.` *exp* | `let` **ID** *asc* `:=` *exp* `in` *exp*
-- *appexp* ::= **atexp** | **appexp** **atexp**
+- *appexp* ::= *atexp* | *appexp* *atexp*
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
 
 ## LICENSE

@@ -144,7 +144,7 @@ Lamb では，この場合 `two` の型に含まれる `a` と，
 
 - *asc* ::= ε | `:` *ty*
 - *exp* ::= *appexp* | `^` **ID** *asc* `.` *exp* | `let` **ID** *asc* `:=` *exp* `in` *exp*
-- *appexp* ::= **atexp** | **appexp** **atexp**
+- *appexp* ::= *atexp* | *appexp* *atexp*
 - *atexp* ::= **NAT** | **CHAR** | **STRING** | **ID** | `(` *exp* `)`
 
 このうち自然数，文字および文字列は，変数，抽象，抽象のみっつの要素に還元できます．
