@@ -34,53 +34,6 @@ in
   print_error (file ^ ":" ^ Int.toString lineno ^ ":" ^ Int.toString colno) msg (highlight_line ^ "\n")
 end
 
-exception Duplicate of id
-
-fun checkDup (r, x) e =
-  if List.exists (fn ((_, y), _) => x = y) e then
-    raise Duplicate (r, x)
-  else
-    ()
-
-fun mainType r = let
-  val n = Type.VAR (r, "n")
-  val a = Type.VAR (r, "a")
-  val nat = Type.ARR (r, (Type.ARR (r, (n, n)), Type.ARR (r, (n, n))))
-  val stdin = Type.ARR (r, (Type.ARR (r, (nat, Type.ARR (r, (a, a)))), Type.ARR (r, (a, a))))
-  val N = Type.CON (r, "N")
-  val A = Type.CON (r, "A")
-  val NAT = Type.ARR (r, (Type.ARR (r, (N, N)), Type.ARR (r, (N, N))))
-  val stdout = Type.ARR (r, (Type.ARR (r, (NAT, Type.ARR (r, (A, A)))), Type.ARR (r, (A, A))))
-in
-  Type.ARR (r, (stdin, stdout))
-end
-
-fun inferDecl (AST.Decl.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
-      (gensym, (r, x) :: boundedVars, e)
-  | inferDecl (AST.Decl.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
-      checkDup (r, x) e
-    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars (AST.Type.eval T))) :: e)
-    )
-  | inferDecl (AST.Decl.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
-      val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
-      val S =
-        case Option.map AST.Type.eval Topt of
-          NONE =>
-            if x = "main" then
-              Inferring.unify [(mainType r, U)]
-            else
-              nil
-        | SOME T =>
-            if x = "main" then
-              Inferring.unify [(mainType r, T), (T, U)]
-            else
-              Inferring.unify [(T, U)]
-      val T = #1 (Inferring.generalize gensym nil boundedVars (Type.subst S U))
-    in
-      checkDup (r, x) e
-    ; (gensym, boundedVars, ((r, x), T) :: (Inferring.substEnv S e))
-    end
-
 local
   fun alpha i = let
     val letter = str (chr ((i mod 26) + 97))
@@ -156,105 +109,81 @@ in
         showMonoType i e boundedVars T
 end
 
-fun printDecl outstream (AST.Decl.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
-      TextIO.output (outstream, "type " ^ x ^ "\n")
-    ; (gensym, (r, x) :: boundedVars, e)
-    )
-  | printDecl outstream (AST.Decl.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
-      checkDup (r, x) e
-    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars (AST.Type.eval T) ^ "\n")
-    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars (AST.Type.eval T))) :: e)
-    )
-  | printDecl outstream (AST.Decl.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
-      val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
+exception Duplicate of id
+
+fun checkDup (r, x) e =
+  if List.exists (fn ((_, y), _) => x = y) e then
+    raise Duplicate (r, x)
+  else
+    ()
+
+fun mainType r = let
+  val n = Type.VAR (r, "n")
+  val a = Type.VAR (r, "a")
+  val nat = Type.ARR (r, (Type.ARR (r, (n, n)), Type.ARR (r, (n, n))))
+  val stdin = Type.ARR (r, (Type.ARR (r, (nat, Type.ARR (r, (a, a)))), Type.ARR (r, (a, a))))
+  val N = Type.CON (r, "N")
+  val A = Type.CON (r, "A")
+  val NAT = Type.ARR (r, (Type.ARR (r, (N, N)), Type.ARR (r, (N, N))))
+  val stdout = Type.ARR (r, (Type.ARR (r, (NAT, Type.ARR (r, (A, A)))), Type.ARR (r, (A, A))))
+in
+  Type.ARR (r, (stdin, stdout))
+end
+
+fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
+      (PV, x :: BV, E)
+  | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (PV, BV, E)) = let
+      val (T, PV') = Inferring.generalize gensym nil BV (AST.Type.eval T)
+    in
+      checkDup x E
+    ; (PV' @ PV, BV, (x, T) :: E)
+    end
+  | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (PV, BV, E)) = let
+      val U = Inferring.infer gensym PV E e
       val S =
         case Option.map AST.Type.eval Topt of
           NONE =>
-            if x = "main" then
-              Inferring.unify [(mainType r, U)]
+            if value x = "main" then
+              Inferring.unify [(mainType (region x), U)]
             else
               nil
         | SOME T =>
-            if x = "main" then
-              Inferring.unify [(mainType r, T), (T, U)]
+            if value x = "main" then
+              Inferring.unify [(mainType (region x), T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val T = #1 (Inferring.generalize gensym nil boundedVars (Type.subst S U))
+      val (T, PV') = Inferring.generalize gensym nil BV (Type.subst S U)
     in
-      checkDup (r, x) e
-    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (gensym, boundedVars, ((r, x), T) :: Inferring.substEnv S e)
+      checkDup x E
+    ; Option.app (Emitting.emitList ["val ", value x, " : ", showTypeArr (ref 0) (ref nil) BV T, "\n"]) emitting
+    ; (PV' @ PV, BV, (x, T) :: (Inferring.substEnv S E))
     end
-
-fun inferFile outstream (file, z0) = let
-  val instream = TextIO.openIn file
-  val s = TextIO.inputAll instream
-  val () = TextIO.closeIn instream
-  val z0 = ref z0
-  val success = ref false
-in
-  let
-    val read = ref false
-    val lexer = Parsing.makeLexer (fn _ => if !read then "" else (read := true; s))
-    val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
-  in
-    z0 := foldl (printDecl outstream) (!z0) decls
-  ; success := true
-  end handle
-    Lexing.LexError => let
-      val i = !Lexing.UserDeclarations.cursor
-      val j = i + 1
-    in
-      print_error_in_file file s (i, j) ("unrecognized character `" ^ str (String.sub (s, i)) ^ "'")
-    end
-  | Parsing.ParseError =>
-      ()
-  | Inferring.NotInScope (r, x) =>
-      print_error_in_file file s r ("not in scope: `" ^ x ^ "'")
-  | Inferring.Cyclic ((r, x), T) => let
-      val i = ref 0
-      val e = ref nil
-    in
-      print_error_in_file file s r ("cyclic: " ^ showMonoType i e nil (Type.VAR (r, x)) ^ " in " ^ showMonoType i e nil T)
-    end
-  | Inferring.Incompatible (T, U) => let
-      val r = Type.region T
-      val i = ref 0
-      val e = ref nil
-    in
-      print_error_in_file file s r ("incompatible types: " ^  showMonoType i e nil T ^ " and " ^ showMonoType i e nil U)
-    end
-  | Duplicate (r, x) =>
-      print_error_in_file file s r ("duplicate variable: `" ^ x ^ "'")
-; if not (!success) then
-    OS.Process.exit OS.Process.failure
-  else
-    !z0
-end handle
-  IO.Io _ => (
-    print_error file "no such file or directory." ""
-  ; OS.Process.exit OS.Process.failure
-  )
 
 functor Main(Compiling : COMPILING) = struct
-  fun compileDecl (AST.Decl.TYPE _, ((gensym, emitting), e)) =
-        ((gensym, emitting), e)
-    | compileDecl (AST.Decl.VAL (_, ((r, x), _)), ((gensym, emitting), e)) = let
-        val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
+  fun compileDecl _ _ (AST.Decl.TYPE _, E) =
+        E
+    | compileDecl _ _ (AST.Decl.VAL (_, (x, _)), E) = let
+        val E' = (x, 0) :: map (fn (y, i) => (y, i + 1)) E
       in
-        ((gensym, emitting), e')
+        E'
       end
-    | compileDecl (AST.Decl.DEF (_, ((r, x), _, t)), ((gensym, emitting), e)) = let
-        val t = AST.Exp.erase t
-        val t = DeBruijnIndexedTerm.compile e t
-        val c = KrivineMachine.compile t
-        val () = Compiling.compile gensym emitting (map (fn ((r, y), _) => (r, "lamb_" ^ y)) e) (r, "lamb_" ^ x) c
-        val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
+    | compileDecl gensym emitting (AST.Decl.DEF (_, (x, _, e)), E) = let
+        val e = AST.Exp.erase e
+        val e = DeBruijnIndexedTerm.compile E e
+        val c = KrivineMachine.compile e
+        val () =
+          Compiling.compile
+            gensym
+            emitting
+            (map (fn (y, _) => (region y, "lamb_" ^ value y)) E)
+            (region x, "lamb_" ^ value x)
+            c
+        val E' = (x, 0) :: map (fn (y, i) => (y, i + 1)) E
       in
-        ((gensym, emitting), e')
+        E'
       end
 
-  fun compile (file, (z0, z1)) = let
+  fun compile infer gensym emitting (file, (z0, z1)) = let
     val instream = TextIO.openIn file
     val s = TextIO.inputAll instream
     val () = TextIO.closeIn instream
@@ -267,8 +196,12 @@ functor Main(Compiling : COMPILING) = struct
       val lexer = Parsing.makeLexer (fn _ => if !read then "" else (read := true; s))
       val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
     in
-      z0 := foldl inferDecl (!z0) decls
-    ; z1 := foldl compileDecl (!z1) decls
+      if infer then
+        z0 := foldl (inferDecl gensym (SOME emitting)) (!z0) decls
+      else (
+        z0 := foldl (inferDecl gensym NONE) (!z0) decls
+      ; z1 := foldl (compileDecl gensym emitting) (!z1) decls
+      )
     ; success := true
     end handle
       Lexing.LexError => let
@@ -405,14 +338,14 @@ in
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
-        val z0 = (Gensym.new (), nil, nil)
+        val gensym = Gensym.new ()
+        val emitting = Emitting.new ()
+        val z0 = (nil, nil, nil)
+        val z1 = nil
       in
-        foldl (inferFile outstream) z0 files
-      ; case output of
-          NONE =>
-            ()
-        | SOME _ =>
-            TextIO.closeOut outstream
+        List.foldl (SystemVMain.compile true gensym emitting) (z0, z1) files
+      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
+      ; TextIO.closeOut outstream
       end
 
       fun compile output = let
@@ -422,10 +355,10 @@ in
           | SOME output => TextIO.openOut output
         val gensym = Gensym.new ()
         val emitting = Emitting.new ()
-        val z0 = (gensym, nil, nil)
-        val z1 = ((gensym, emitting), nil)
+        val z0 = (nil, nil, nil)
+        val z1 = nil
       in
-        List.foldl SystemVMain.compile (z0, z1) files
+        List.foldl (SystemVMain.compile false gensym emitting) (z0, z1) files
       ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
       ; TextIO.closeOut outstream
       end
@@ -498,14 +431,14 @@ in
           case output of
             NONE => TextIO.stdOut
           | SOME output => TextIO.openOut output
-        val z0 = (Gensym.new (), nil, nil)
+        val gensym = Gensym.new ()
+        val emitting = Emitting.new ()
+        val z0 = (nil, nil, nil)
+        val z1 = nil
       in
-        foldl (inferFile outstream) z0 files
-      ; case output of
-          NONE =>
-            ()
-        | SOME _ =>
-            TextIO.closeOut outstream
+        List.foldl (MicrosoftMain.compile true gensym emitting) (z0, z1) files
+      ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
+      ; TextIO.closeOut outstream
       end
 
       fun compile output = let
@@ -515,10 +448,10 @@ in
           | SOME output => TextIO.openOut output
         val gensym = Gensym.new ()
         val emitting = Emitting.new ()
-        val z0 = (gensym, nil, nil)
-        val z1 = ((gensym, emitting), nil)
+        val z0 = (nil, nil, nil)
+        val z1 = nil
       in
-        List.foldl MicrosoftMain.compile (z0, z1) files
+        List.foldl (MicrosoftMain.compile false gensym emitting) (z0, z1) files
       ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
       ; TextIO.closeOut outstream
       end
