@@ -14,8 +14,8 @@ signature INFERRING = sig
   val instantiate : Gensym.t -> poly -> Type.t -> Type.t
   val generalize : Gensym.t -> mono -> mono -> Type.t -> Type.t * poly
 
-  val constraint_type : Gensym.t -> poly -> env -> AST.exp -> Type.t * constraint list
+  val constraint_type : Gensym.t -> poly -> env -> AST.Exp.t -> Type.t * constraint list
   val unify : constraint list -> Type.subst
 
-  val infer : Gensym.t -> id list -> (id * Type.t) list -> AST.exp -> Type.t
+  val infer : Gensym.t -> id list -> (id * Type.t) list -> AST.Exp.t -> Type.t
 end

@@ -1,4 +1,4 @@
-local open AST in
+local open AST.Exp in
   fun encodeNat' (r, 0w0) = VAR (r, "O")
     | encodeNat' (r, n) = APP (r, (VAR (r, "S"), encodeNat' (r, LargeWord.- (n, 0w1))))
 
@@ -77,15 +77,15 @@ end
 | ID of string
 
 %nonterm
-  program of AST.program
-| decls of AST.decl list
-| decl of AST.decl
-| ty of Type.t
-| atty of Type.t
-| asc of Type.t option
-| exp of AST.exp
-| appexp of AST.exp
-| atexp of AST.exp
+  program of AST.Program.t
+| decls of AST.Decl.t list
+| decl of AST.Decl.t
+| ty of AST.Type.t
+| atty of AST.Type.t
+| asc of AST.Type.t option
+| exp of AST.Exp.t
+| appexp of AST.Exp.t
+| atexp of AST.Exp.t
 
 %name Parsing
 %noshift EOF
@@ -102,23 +102,23 @@ decls:
 
 decl:
   TYPE ID
-    (AST.TYPE ((TYPEleft, IDright), (((IDleft, IDright), ID))))
+    (AST.Decl.TYPE ((TYPEleft, IDright), (((IDleft, IDright), ID))))
 | VAL ID COLON ty
-    (AST.VAL ((VALleft, tyright), (((IDleft, IDright), ID), ty)))
+    (AST.Decl.VAL ((VALleft, tyright), (((IDleft, IDright), ID), ty)))
 | DEF ID asc COLONEQ exp
-    (AST.DEF ((DEFleft, expright), (((IDleft, IDright), ID), asc, exp)))
+    (AST.Decl.DEF ((DEFleft, expright), (((IDleft, IDright), ID), asc, exp)))
 
 ty:
   atty
     (atty)
 | atty ARROW ty
-    (Type.ARR ((attyleft, tyright), (atty, ty)))
+    (AST.Type.ARR ((attyleft, tyright), (atty, ty)))
 
 atty:
   QUOTE ID
-    (Type.VAR ((QUOTEleft, IDright), ID))
+    (AST.Type.VAR ((QUOTEleft, IDright), ID))
 | ID
-    (Type.CON ((IDleft, IDright), ID))
+    (AST.Type.CON ((IDleft, IDright), ID))
 | LPAREN ty RPAREN
     (ty)
 
@@ -131,15 +131,15 @@ exp:
   appexp
     (appexp)
 | LAMBDA ID asc DOT exp
-    (AST.ABS ((LAMBDAleft, expright), (((IDleft, IDright), ID), asc, exp)))
+    (AST.Exp.ABS ((LAMBDAleft, expright), (((IDleft, IDright), ID), asc, exp)))
 | LET ID asc COLONEQ exp IN exp
-    (AST.LET ((LETleft, expright), (((IDleft, IDright), ID), asc, exp1, exp2)))
+    (AST.Exp.LET ((LETleft, expright), (((IDleft, IDright), ID), asc, exp1, exp2)))
 
 appexp:
   atexp
     (atexp)
 | appexp atexp
-    (AST.APP ((appexpleft, atexpright), (appexp, atexp)))
+    (AST.Exp.APP ((appexpleft, atexpright), (appexp, atexp)))
 
 atexp:
   NAT
@@ -149,6 +149,6 @@ atexp:
 | STRING
     (encodeString ((STRINGleft, STRINGright), STRING))
 | ID
-    (AST.VAR ((IDleft, IDright), ID))
+    (AST.Exp.VAR ((IDleft, IDright), ID))
 | LPAREN exp RPAREN
     (exp)

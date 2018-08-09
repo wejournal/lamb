@@ -1,16 +1,31 @@
 signature AST = sig
-  datatype exp =
-    VAR of id
-  | APP of (exp * exp) node
-  | ABS of (id * Type.t option * exp) node
-  | LET of (id * Type.t option * exp * exp) node
+  structure Type : sig
+    datatype t =
+      VAR of id
+    | CON of id
+    | ARR of (t * t) node
 
-  datatype decl =
-    TYPE of id node
-  | VAL of (id * Type.t) node
-  | DEF of (id * Type.t option * exp) node
+    val eval : t -> Type.t
+  end
 
-  type program = decl list
+  structure Exp : sig
+    datatype t =
+      VAR of id
+    | APP of (t * t) node
+    | ABS of (id * Type.t option * t) node
+    | LET of (id * Type.t option * t * t) node
 
-  val erase : exp -> Term.t
+    val erase : t -> Term.t
+  end
+
+  structure Decl : sig
+    datatype t =
+      TYPE of id node
+    | VAL of (id * Type.t) node
+    | DEF of (id * Type.t option * Exp.t) node
+  end
+
+  structure Program : sig
+    type t = Decl.t list
+  end
 end

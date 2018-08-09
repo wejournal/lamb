@@ -55,16 +55,16 @@ in
   Type.ARR (r, (stdin, stdout))
 end
 
-fun inferDecl (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
+fun inferDecl (AST.Decl.TYPE (_, (r, x)), (gensym, boundedVars, e)) =
       (gensym, (r, x) :: boundedVars, e)
-  | inferDecl (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
+  | inferDecl (AST.Decl.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
-    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars T)) :: e)
+    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars (AST.Type.eval T))) :: e)
     )
-  | inferDecl (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
+  | inferDecl (AST.Decl.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
       val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
-        case Topt of
+        case Option.map AST.Type.eval Topt of
           NONE =>
             if x = "main" then
               Inferring.unify [(mainType r, U)]
@@ -156,19 +156,19 @@ in
         showMonoType i e boundedVars T
 end
 
-fun printDecl outstream (AST.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
+fun printDecl outstream (AST.Decl.TYPE (_, (r, x)), (gensym, boundedVars, e)) = (
       TextIO.output (outstream, "type " ^ x ^ "\n")
     ; (gensym, (r, x) :: boundedVars, e)
     )
-  | printDecl outstream (AST.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
+  | printDecl outstream (AST.Decl.VAL (_, ((r, x), T)), (gensym, boundedVars, e)) = (
       checkDup (r, x) e
-    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars T ^ "\n")
-    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars T)) :: e)
+    ; TextIO.output (outstream, "val " ^ x ^ " : " ^ showTypeArr (ref 0) (ref nil) boundedVars (AST.Type.eval T) ^ "\n")
+    ; (gensym, boundedVars, ((r, x), #1 (Inferring.generalize gensym nil boundedVars (AST.Type.eval T))) :: e)
     )
-  | printDecl outstream (AST.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
+  | printDecl outstream (AST.Decl.DEF (_, ((r, x), Topt, t)), (gensym, boundedVars, e)) = let
       val U = Inferring.infer gensym (List.concat (map (Type.FV o #2) e)) e t
       val S =
-        case Topt of
+        case Option.map AST.Type.eval Topt of
           NONE =>
             if x = "main" then
               Inferring.unify [(mainType r, U)]
@@ -237,15 +237,15 @@ end handle
   )
 
 functor Main(Compiling : COMPILING) = struct
-  fun compileDecl outstream (AST.TYPE _, ((gensym, emitting), e)) =
+  fun compileDecl outstream (AST.Decl.TYPE _, ((gensym, emitting), e)) =
         ((gensym, emitting), e)
-    | compileDecl outstream (AST.VAL (_, ((r, x), _)), ((gensym, emitting), e)) = let
+    | compileDecl outstream (AST.Decl.VAL (_, ((r, x), _)), ((gensym, emitting), e)) = let
         val e' = ((r, x), 0) :: map (fn (y, i) => (y, i + 1)) e
       in
         ((gensym, emitting), e')
       end
-    | compileDecl outstream (AST.DEF (_, ((r, x), _, t)), ((gensym, emitting), e)) = let
-        val t = AST.erase t
+    | compileDecl outstream (AST.Decl.DEF (_, ((r, x), _, t)), ((gensym, emitting), e)) = let
+        val t = AST.Exp.erase t
         val t = DeBruijnIndexedTerm.compile e t
         val c = KrivineMachine.compile t
         val () = Compiling.compile gensym emitting (map (fn ((r, y), _) => (r, "lamb_" ^ y)) e) (r, "lamb_" ^ x) c
