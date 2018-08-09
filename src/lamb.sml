@@ -127,6 +127,60 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
     ; (PV' @ PV, BV, (x, T) :: (Inferring.substEnv S E))
     end
 
+datatype target = LINUX | WINDOWS
+datatype doing = INFER | COMPILE | ASSEMBLE | LINK | MAKE
+exception Unrecognized of string
+
+fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
+  | args ("--target" :: "linux" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = LINUX, doing = doing, output = output, files = files }
+    end
+  | args ("--target" :: "windows" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = WINDOWS, doing = doing, output = output, files = files }
+    end
+  | args ("-i" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = LINUX, doing = INFER, output = output, files = files }
+    end
+  | args ("-S" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = LINUX, doing = COMPILE, output = output, files = files }
+    end
+  | args ("-c" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = LINUX, doing = ASSEMBLE, output = output, files = files }
+    end
+  | args ("--link" :: argv) = let
+      val {target, doing, output, files} = args argv
+    in
+      { target = LINUX, doing = LINK, output = output, files = files }
+    end
+  | args ("-o" :: arg :: argv) =
+      if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
+        raise Unrecognized arg
+      else let
+        val {target, doing, output, files} = args argv
+      in
+        { target = target, doing = doing, output = SOME arg, files = files }
+      end
+  | args ("--" :: files) =
+      { target = LINUX, doing = MAKE, output = NONE, files = files }
+  | args (arg :: argv) =
+      if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
+        raise Unrecognized arg
+      else let
+        val {target, doing, output, files} = args argv
+      in
+        { target = target, doing = doing, output = output, files = arg :: files }
+      end
+
 functor Main(Compiling : COMPILING) = struct
   fun compileDecl _ _ (AST.Decl.TYPE _, E) =
         E
@@ -286,61 +340,26 @@ functor Main(Compiling : COMPILING) = struct
   in
     OS.FileSys.remove objfile
   end
+
+  fun main runtimes {target, doing, output, files} =
+    case doing of
+      INFER =>
+        infer output files
+    | COMPILE =>
+        compile output files
+    | ASSEMBLE =>
+        ( compile NONE files
+        ; assemble output files
+        ; removeAssembly NONE files )
+    | LINK =>
+        link output (runtimes @ files)
+    | MAKE =>
+        ( compile NONE files
+        ; assemble NONE files
+        ; link output (runtimes @ [List.last files ^ ".o"])
+        ; removeObjectCode NONE files
+        ; removeAssembly NONE files )
 end
-
-datatype target = LINUX | WINDOWS
-datatype doing = INFER | COMPILE | ASSEMBLE | LINK | MAKE
-exception Unrecognized of string
-
-fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
-  | args ("--target" :: "linux" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = LINUX, doing = doing, output = output, files = files }
-    end
-  | args ("--target" :: "windows" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = WINDOWS, doing = doing, output = output, files = files }
-    end
-  | args ("-i" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = LINUX, doing = INFER, output = output, files = files }
-    end
-  | args ("-S" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = LINUX, doing = COMPILE, output = output, files = files }
-    end
-  | args ("-c" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = LINUX, doing = ASSEMBLE, output = output, files = files }
-    end
-  | args ("--link" :: argv) = let
-      val {target, doing, output, files} = args argv
-    in
-      { target = LINUX, doing = LINK, output = output, files = files }
-    end
-  | args ("-o" :: arg :: argv) =
-      if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
-        raise Unrecognized arg
-      else let
-        val {target, doing, output, files} = args argv
-      in
-        { target = target, doing = doing, output = SOME arg, files = files }
-      end
-  | args ("--" :: files) =
-      { target = LINUX, doing = MAKE, output = NONE, files = files }
-  | args (arg :: argv) =
-      if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
-        raise Unrecognized arg
-      else let
-        val {target, doing, output, files} = args argv
-      in
-        { target = target, doing = doing, output = output, files = arg :: files }
-      end
 
 structure SystemVMain = Main(SystemVCompiling)
 structure MicrosoftMain = Main(MicrosoftCompiling)
@@ -379,23 +398,7 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
     in
-      case doing of
-        INFER =>
-          SystemVMain.infer output files
-      | COMPILE =>
-          SystemVMain.compile output files
-      | ASSEMBLE =>
-          ( SystemVMain.compile NONE files
-          ; SystemVMain.assemble output files
-          ; SystemVMain.removeAssembly NONE files )
-      | LINK =>
-          SystemVMain.link output (runtimes @ files)
-      | MAKE =>
-          ( SystemVMain.compile NONE files
-          ; SystemVMain.assemble NONE files
-          ; SystemVMain.link output (runtimes @ [List.last files ^ ".o"])
-          ; SystemVMain.removeObjectCode NONE files
-          ; SystemVMain.removeAssembly NONE files )
+      SystemVMain.main runtimes {target = target, doing = doing, output = output, files = files}
     end
   | WINDOWS => let
       val runtimes =
@@ -403,23 +406,7 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
           ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
     in
-      case doing of
-        INFER =>
-          MicrosoftMain.infer output files
-      | COMPILE =>
-          MicrosoftMain.compile output files
-      | ASSEMBLE =>
-          ( MicrosoftMain.compile NONE files
-          ; MicrosoftMain.assemble output files
-          ; MicrosoftMain.removeAssembly NONE files )
-      | LINK =>
-          MicrosoftMain.link output (runtimes @ files)
-      | MAKE =>
-          ( MicrosoftMain.compile NONE files
-          ; MicrosoftMain.assemble NONE files
-          ; MicrosoftMain.link output (runtimes @ [List.last files ^ ".o"])
-          ; MicrosoftMain.removeObjectCode NONE files
-          ; MicrosoftMain.removeAssembly NONE files )
+      MicrosoftMain.main runtimes {target = target, doing = doing, output = output, files = files}
     end
 end handle
   Unrecognized arg => (
