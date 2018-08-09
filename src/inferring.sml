@@ -81,32 +81,32 @@ structure Inferring :> INFERRING = struct
   and unify nil = nil
     | unify ((T, U) :: C) =
       (case (T, U) of
-        (Type.VAR (r, x), Type.VAR (_, y)) =>
-          if x = y then
+        (Type.VAR x, Type.VAR y) =>
+          if value x = value y then
             unify C
           else let
-            val S = [((r, x), U)]
+            val S = [(x, U)]
           in
             Type.compose (unify (substConstraints S C)) S
           end
-      | (Type.VAR (r, x), _) =>
-          if List.exists (fn (_, y) => x = y) (Type.FV U) then
-            raise Cyclic ((r, x), U)
+      | (Type.VAR x, _) =>
+          if List.exists (fn y => value x = value y) (Type.FV U) then
+            raise Cyclic (x, U)
           else let
-            val S = [((r, x), U)]
+            val S = [(x, U)]
           in
             Type.compose (unify (substConstraints S C)) S
           end
-      | (_, Type.VAR (r, y)) =>
-          if List.exists (fn (_, x) => x = y) (Type.FV T) then
-            raise Cyclic ((r, y), T)
+      | (_, Type.VAR y) =>
+          if List.exists (fn x => value x = value y) (Type.FV T) then
+            raise Cyclic (y, T)
           else let
-            val S = [((r, y), T)]
+            val S = [(y, T)]
           in
             Type.compose (unify (substConstraints S C)) S
           end
-      | (Type.CON (r, x), Type.CON (r', y)) =>
-          if x = y then
+      | (Type.CON x, Type.CON y) =>
+          if value x = value y then
             unify C
           else
             raise Incompatible (T, U)
