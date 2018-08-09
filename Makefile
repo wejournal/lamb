@@ -37,7 +37,7 @@ install:
 	$(INSTALL) include/lamb/gc.h $(PREFIX)/include/lamb/gc.h
 
 bin/lamb:	src/lamb.mlb \
-		src/lamb.sml \
+		src/common.sml \
 		src/term.sig \
 		src/term.sml \
 		src/de-bruijn-indexed-term.sig \
@@ -65,7 +65,8 @@ bin/lamb:	src/lamb.mlb \
 		src/inferring.sml \
 		src/parsing.grm.sig \
 		src/parsing.grm.sml \
-		src/lexing.lex.sml
+		src/lexing.lex.sml \
+		src/lamb.sml
 	$(MKDIR) -p bin
 	$(MLTON) -output $@ $<
 

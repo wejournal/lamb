@@ -2,6 +2,7 @@ local
   $(SML_LIB)/basis/basis.mlb
   $(SML_LIB)/mlyacc-lib/mlyacc-lib.mlb
 in
+  common.sml
   term.sig
   term.sml
   de-bruijn-indexed-term.sig
