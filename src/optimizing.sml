@@ -22,7 +22,11 @@ structure Optimizing : OPTIMIZING = struct
       | replace i c (PUSH c' :: c'') = PUSH (replace i c c') :: replace i c c''
 
     fun inline nil = nil
-      | inline (PUSH c :: GRAB :: c') = dec 0 (replace 0 (inc 0 c) (inline c'))
+      | inline (PUSH c :: GRAB :: c') =
+          (case occur 0 c' of
+            0 => dec 0 c'
+          | 1 => dec 0 (replace 0 (inc 0 c) (inline c'))
+          | _ => PUSH c :: GRAB :: inline c')
       | inline (i :: c) = i :: inline c
   end
 end
