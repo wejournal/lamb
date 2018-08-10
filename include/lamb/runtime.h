@@ -1,5 +1,5 @@
-#ifndef RUNTIME_H__
-#define RUNTIME_H__
+#ifndef LAMB_RUNTIME_H__
+#define LAMB_RUNTIME_H__
 
 #include <stdint.h>
 

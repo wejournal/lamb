@@ -1,5 +1,5 @@
-#ifndef GC_H__
-#define GC_H__
+#ifndef LAMB_GC_H__
+#define LAMB_GC_H__
 
 #include <stdint.h>
 #include "runtime.h"
