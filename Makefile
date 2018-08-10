@@ -59,10 +59,10 @@ bin/lamb:	src/lamb.mlb \
 		src/type.sml \
 		src/typed-term.sig \
 		src/typed-term.sml \
-		src/ast.sig \
-		src/ast.sml \
 		src/inferring.sig \
 		src/inferring.sml \
+		src/ast.sig \
+		src/ast.sml \
 		src/parsing.grm.sig \
 		src/parsing.grm.sml \
 		src/lexing.lex.sml \
