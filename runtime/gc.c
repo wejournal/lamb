@@ -148,31 +148,34 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
   while (tmp) {
     uintptr_t tmp_addr = (uintptr_t) tmp;
     uintptr_t succ_addr = tmp_addr + tmp->size + sizeof(free_chunk_t);
+    void *p = (void *) (succ_addr + sizeof(free_chunk_t));
+
+    if (!is_free(p)) {
+      tmp = tmp->next;
+      continue;
+    }
 
     free_chunk_t *pred = NULL;
-    free_chunk_t *succ = NULL;
+    free_chunk_t *succ = (free_chunk_t *) succ_addr;
 
     free_chunk_t *tmp1 = free_chunk;
 
     while (tmp1) {
-      if (((uintptr_t)tmp1->next) == succ_addr)
+      if (((uintptr_t)tmp1->next) == succ_addr) {
         pred = tmp1;
-
-      if (succ && pred)
         break;
+      }
 
       tmp1 = tmp1->next;
     }
 
-    if (succ) {
-      if (pred)
-        pred->next = succ->next;
+    if (pred)
+      pred->next = succ->next;
 
-      if (((uintptr_t) free_chunk) == succ_addr)
-        free_chunk = free_chunk->next;
+    if (((uintptr_t) free_chunk) == succ_addr)
+      free_chunk = free_chunk->next;
 
-      tmp->size += sizeof(free_chunk_t) + succ->size;
-    }
+    tmp->size += sizeof(free_chunk_t) + succ->size;
 
     tmp = tmp->next;
   }
