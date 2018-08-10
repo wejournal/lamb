@@ -25,8 +25,8 @@ structure Optimizing : OPTIMIZING = struct
       | inline (PUSH c :: GRAB :: c') =
           (case occur 0 c' of
             0 => dec 0 c'
-          | 1 => dec 0 (replace 0 (inc 0 c) (inline c'))
-          | _ => PUSH c :: GRAB :: inline c')
+          | 1 => dec 0 (replace 0 (inc 0 (inline c)) (inline c'))
+          | _ => PUSH (inline c) :: GRAB :: inline c')
       | inline (i :: c) = i :: inline c
   end
 end
