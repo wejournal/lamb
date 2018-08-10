@@ -55,7 +55,6 @@ void gc_init(void);
 void gc_exit(void);
 void gc_mark(uintptr_t, closure_t *, uintptr_t, closure_t *);
 void gc_sweep(uintptr_t, closure_t *, uintptr_t, closure_t *);
-void gc_compact(void);
 void gc_free(void);
 void gc_perform(uintptr_t, closure_t *, uintptr_t, closure_t *);
 void gc_extend(void);

@@ -142,9 +142,7 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
       *addr = tmp->next;
     }
   }
-}
 
-void gc_compact(void) {
   free_chunk_t *tmp = free_chunk;
 
   while (tmp) {
@@ -157,11 +155,7 @@ void gc_compact(void) {
     free_chunk_t *tmp1 = free_chunk;
 
     while (tmp1) {
-      uintptr_t tmp1_addr = (uintptr_t) tmp1;
-
-      if (tmp1_addr == succ_addr)
-        succ = tmp1;
-      else if (((uintptr_t)tmp1->next) == succ_addr)
+      if (((uintptr_t)tmp1->next) == succ_addr)
         pred = tmp1;
 
       if (succ && pred)
@@ -236,7 +230,6 @@ void gc_free() {
 void gc_perform(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   gc_mark(env_count, env_values, stack_count, stack_values);
   gc_sweep(env_count, env_values, stack_count, stack_values);
-  gc_compact();
   gc_free();
 }
 
