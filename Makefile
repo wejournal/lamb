@@ -55,6 +55,8 @@ bin/lamb:	src/lamb.mlb \
 		src/compiling.fun \
 		src/system-v-compiling.sml \
 		src/microsoft-compiling.sml \
+		src/optimizing.sig \
+		src/optimizing.sml \
 		src/type.sig \
 		src/type.sml \
 		src/typed-term.sig \

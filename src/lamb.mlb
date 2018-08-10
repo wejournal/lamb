@@ -20,6 +20,8 @@ in
   compiling.fun
   system-v-compiling.sml
   microsoft-compiling.sml
+  optimizing.sig
+  optimizing.sml
   type.sig
   type.sml
   typed-term.sig
