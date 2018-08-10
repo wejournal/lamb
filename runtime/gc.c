@@ -27,6 +27,7 @@ void gc_init(void) {
 
   free_chunk = memory->array;
   free_chunk->size = GC_MEMORY_SIZE - sizeof(free_chunk_t);
+  free_chunk->prev = NULL;
   free_chunk->next = NULL;
 }
 
@@ -137,7 +138,9 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
       uintptr_t stack_map_size = calc_stack_map_size(tmp->size);
       free_chunk_t *freed = (free_chunk_t *) (((uintptr_t) tmp) - stack_map_size);
       freed->size = tmp->n * tmp->size + stack_map_size + sizeof(used_chunk_t) - sizeof(free_chunk_t);
+      freed->prev = NULL;
       freed->next = free_chunk;
+      free_chunk->prev = freed;
       free_chunk = freed;
       *addr = tmp->next;
     }
@@ -155,25 +158,20 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
       continue;
     }
 
-    free_chunk_t *pred = NULL;
     free_chunk_t *succ = (free_chunk_t *) succ_addr;
+    free_chunk_t *pred = succ->prev;
 
-    free_chunk_t *tmp1 = free_chunk;
-
-    while (tmp1) {
-      if (((uintptr_t)tmp1->next) == succ_addr) {
-        pred = tmp1;
-        break;
-      }
-
-      tmp1 = tmp1->next;
-    }
-
-    if (pred)
+    if (pred) {
       pred->next = succ->next;
 
-    if (((uintptr_t) free_chunk) == succ_addr)
+      if (succ->next)
+        succ->next->prev = pred;
+    }
+
+    if (((uintptr_t) free_chunk) == succ_addr) {
       free_chunk = free_chunk->next;
+      free_chunk->prev = NULL;
+    }
 
     tmp->size += sizeof(free_chunk_t) + succ->size;
 
@@ -246,7 +244,9 @@ void gc_extend() {
 
   free_chunk_t *tmp = memory->array;
   tmp->size = GC_MEMORY_SIZE - sizeof(free_chunk_t);
+  tmp->prev = NULL;
   tmp->next = free_chunk;
+  free_chunk->prev = tmp;
 
   free_chunk = tmp;
 }
@@ -276,7 +276,14 @@ void *gc_allocate(uintptr_t n, uintptr_t size, const uintptr_t *stack_map) {
 
     free_chunk_t *next = (free_chunk_t *) (((uintptr_t) tmp) + used_chunk_size);
     next->size = tmp->size - used_chunk_size;
+    next->prev = tmp->prev;
     next->next = tmp->next;
+
+    if (tmp->prev)
+      tmp->prev->next = next;
+    if (tmp->next)
+      tmp->next->prev = next;
+
     *addr = next;
 
     uintptr_t *stack_map_addr = (uintptr_t *) tmp;

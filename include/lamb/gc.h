@@ -18,18 +18,19 @@ struct memory {
   memory_t *next;
 };
 
-/*     +======================+     *
- *     |  THE  MEMORY LAYOUT  |     *
- *     |  for the free_chunk  |     *
- *     +======================+     *
- *     |0|..|7|8|..|15|16|..|S|     *
- * MSB +------+-------+-------+ LSB *
- *     | size |  next |  free |     *
- *     +------+-------+-------+     *
- * where                            *
- *   S = size + 15                  */
+/*     +===============================+     *
+ *     |      THE  MEMORY  LAYOUT      |     *
+ *     |      for  the free_chunk      |     *
+ *     +===============================+     *
+ *     |0|..|7|8|..|15|16|..|23|24|..|S|     *
+ * MSB +------+-------+--------+-------+ LSB *
+ *     | size |  next |  free  |  free |     *
+ *     +------+-------+--------+-------+     *
+ * where                                     *
+ *   S = size + 23                           */
 struct free_chunk {
   uintptr_t size;
+  free_chunk_t *prev;
   free_chunk_t *next;
 };
 
