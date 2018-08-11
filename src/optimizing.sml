@@ -15,11 +15,11 @@ structure Optimizing : OPTIMIZING = struct
       | dec i (GRAB :: c) = GRAB :: dec (i + 1) c
       | dec i (PUSH c :: c') = PUSH (dec i c) :: (dec i c')
 
-    fun replace _ _ nil = nil
-      | replace i c [ACCESS j] = if i = j then c else [ACCESS j]
-      | replace i c (ACCESS j :: c') = if i = j then c @ (replace i c c') else ACCESS j :: replace i c c'
-      | replace i c (GRAB :: c') = GRAB :: replace (i + 1) (inc 0 c) c'
-      | replace i c (PUSH c' :: c'') = PUSH (replace i c c') :: replace i c c''
+    fun subst _ _ nil = nil
+      | subst i c [ACCESS j] = if i = j then c else [ACCESS j]
+      | subst i c (ACCESS j :: c') = if i = j then c @ (subst i c c') else ACCESS j :: subst i c c'
+      | subst i c (GRAB :: c') = GRAB :: subst (i + 1) (inc 0 c) c'
+      | subst i c (PUSH c' :: c'') = PUSH (subst i c c') :: subst i c c''
 
     fun eta nil = nil
       | eta (GRAB :: PUSH [ACCESS 0] :: c) =
@@ -33,8 +33,48 @@ structure Optimizing : OPTIMIZING = struct
       | inline (PUSH c :: GRAB :: c') =
           (case occur 0 c' of
             0 => dec 0 c'
-          | 1 => dec 0 (replace 0 (inc 0 (inline c)) (inline c'))
+          | 1 => dec 0 (subst 0 (inc 0 (inline c)) (inline c'))
           | _ => PUSH (inline c) :: GRAB :: inline c')
       | inline (i :: c) = i :: inline c
+
+    fun closed i nil = true
+      | closed i (ACCESS j :: c) = i > j andalso closed i c
+      | closed i (GRAB :: c) = closed (i + 1) c
+      | closed i (PUSH c :: c') = closed i c andalso closed i c'
+
+    fun closures nil = nil
+      | closures (ACCESS i :: c) = closures c
+      | closures (GRAB :: c) = closures c
+      | closures (PUSH c :: c') = let
+          val clos = closures c @ closures c'
+        in
+          if closed 0 c andalso not (List.exists (fn c'' => c = c'') clos) andalso List.length c > 8 then
+            c :: clos
+          else
+            clos
+        end
+
+    fun replace _ _ nil = nil
+      | replace c i (ACCESS j :: c') = ACCESS j :: replace c i c'
+      | replace c i (GRAB :: c') = GRAB :: replace c (i + 1) c'
+      | replace c i (PUSH c' :: c'') =
+          if c = c' then
+            PUSH [ACCESS i] :: replace c i c''
+          else
+            PUSH (replace c i c') :: replace c i c''
+
+    fun factor c =
+      foldr (fn (c', c) => PUSH c' :: GRAB :: replace c' 0 c) c (closures c)
+
+    (*
+    fun factor nil = nil
+      | factor (ACCESS i :: c) = ACCESS i :: factor c
+      | factor (GRAB :: c) = GRAB :: factor c
+      | factor (PUSH c :: c') =
+          if closed 0 c then
+            PUSH c :: GRAB :: PUSH [ACCESS 0] :: replace c 0 (inc 0 (factor c'))
+          else
+            PUSH c :: factor c'
+    *)
   end
 end
