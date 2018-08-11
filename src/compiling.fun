@@ -27,9 +27,8 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n"
             , "\tleaq\t1(", ABI.arg0, "),\t%r10\n"
             , "\tmovq\t$24,\t%r11\n"
-            , "\tmovq\t$4,\t%r12\n"
-            , "\tpushq\t%r12\n"
-            , "\tmovq\t%rsp,\t%r12\n" ]
+            , "\tmovq\t$4,\t-40(%rbp)\n"
+            , "\tleaq\t-40(%rbp),\t%r12\n" ]
             emitting
         ; Emitting.emitList (ABI.enter 1) emitting
         ; Emitting.emit "\tpushq\t%r12\n" emitting
@@ -43,8 +42,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         ; Emitting.emit "\tpopq\t%r12\n" emitting
         ; Emitting.emitList(ABI.leave 1) emitting
         ; Emitting.emitList
-            [ "\tpopq\t%r12\n"
-            , "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
+            [ "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
             , "\tpushq\t%rax\n"
             , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n"
@@ -95,7 +93,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     and compileCode gensym emitting name c = (
       Emitting.emitList
         [ name, ":\n"
-        , "\tenter\t$32,\t$0\n" ]
+        , "\tenter\t$64,\t$0\n" ]
         emitting
     ; List.app (compileInstr gensym emitting name) c
     )
