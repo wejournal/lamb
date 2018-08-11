@@ -9,8 +9,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
 
     fun compileInstr _ emitting _ (KrivineMachine.ACCESS i) =
           Emitting.emitList
-            [ "\tsubq\t$", Int.toString (i + 1), ",\t", ABI.arg0, "\n"
-            , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n"
+            [ "\tleaq\t-", Int.toString ((i + 1) * 3), "(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n"
             , "\tsalq\t$3,\t", ABI.arg0, "\n"
             , "\taddq\t", ABI.arg0, ",\t", ABI.arg1, "\n"
             , "\tmovq\t(", ABI.arg1, "),\t%r10\n"
