@@ -33,6 +33,10 @@ structure Optimizing : OPTIMIZING = struct
       | inline (PUSH c :: GRAB :: c') = dec 0 (subst 0 (inc 0 (inline c)) (inline c'))
       | inline (i :: c) = i :: inline c
 
+    fun eval nil = nil
+      | eval (PUSH c :: GRAB :: c') = eval (dec 0 (subst 0 (inc 0 (eval c)) c'))
+      | eval (i :: c) = i :: inline c
+
     fun closed i nil = true
       | closed i (ACCESS j :: c) = i > j andalso closed i c
       | closed i (GRAB :: c) = closed (i + 1) c

@@ -195,6 +195,7 @@ functor Main(Compiling : COMPILING) = struct
         val c = KrivineMachine.compile e
         (*val c = Optimizing.factor (Optimizing.inline (Optimizing.eta c))*)
         (*val c = Optimizing.inline c*)
+        val c = Optimizing.eval c
         val () =
           Compiling.compile
             gensym
