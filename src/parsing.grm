@@ -12,17 +12,12 @@ local open AST.Exp in
 
   fun encodeChar (r, c) = encodeNat (r, LargeWord.fromInt (ord c))
 
-  fun encodeCharList' (r, nil) = VAR (r, "nil")
-    | encodeCharList' (r, t :: ts) = APP (r, (APP (r, (VAR (r, "cons"), t)), encodeCharList' (r, ts)))
+  fun encodeList (r, nil) = VAR (r, "z")
+    | encodeList (r, t :: ts) = APP (r, (APP (r, (VAR (r, "f"), t)), encodeList (r, ts)))
 
-  fun encodeCharList (r, l) = let
-    val nil' = ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, VAR (r, "z")))))
-    val cons = ABS (r, ((r, "x"), NONE, ABS (r, ((r, "xs"), NONE, ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE, APP (r, (APP (r, (VAR (r, "f"), VAR (r, "x"))), APP (r, (APP (r, (VAR (r, "xs"), VAR (r, "f"))), VAR (r, "z")))))))))))))
-  in
-    LET (r, ((r, "nil"), NONE, nil', LET (r, ((r, "cons"), NONE, cons, encodeCharList' (r, l)))))
-  end
-
-  fun encodeString (r, s) = encodeCharList (r, map (fn c => encodeChar (r, c)) (String.explode s))
+  fun encodeString (r, s) =
+    ABS (r, ((r, "f"), NONE, ABS (r, ((r, "z"), NONE,
+      encodeList (r, map (fn c => encodeChar (r, c)) (String.explode s))))))
 end
 
 %%
