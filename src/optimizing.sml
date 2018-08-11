@@ -65,16 +65,5 @@ structure Optimizing : OPTIMIZING = struct
 
     fun factor c =
       foldr (fn (c', c) => PUSH c' :: GRAB :: replace c' 0 c) c (closures c)
-
-    (*
-    fun factor nil = nil
-      | factor (ACCESS i :: c) = ACCESS i :: factor c
-      | factor (GRAB :: c) = GRAB :: factor c
-      | factor (PUSH c :: c') =
-          if closed 0 c then
-            PUSH c :: GRAB :: PUSH [ACCESS 0] :: replace c 0 (inc 0 (factor c'))
-          else
-            PUSH c :: factor c'
-    *)
   end
 end
