@@ -7,6 +7,8 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     fun pop NONE = ["\tpopq\t%r14\n"]
       | pop (SOME _) = nil
 
+    val memo = ref nil
+
     fun compileInstr _ emitting _ (KrivineMachine.ACCESS i) =
           Emitting.emitList
             [ "\tleaq\t-", Int.toString ((i + 1) * 3), "(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n"
@@ -87,23 +89,34 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             emitting
         )
       | compileInstr gensym emitting name (KrivineMachine.PUSH c) = let
-          val x = "_" ^ Int.toString (Gensym.gensym gensym)
+          val already = Option.map #2 (List.find (fn (c', _) => c = c') (!memo))
+
+          val name =
+            case already of
+              NONE =>
+                name ^ "_" ^ Int.toString (Gensym.gensym gensym)
+            | SOME name =>
+                name
         in
           Emitting.emitList
             [ "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n"
             , "\tsalq\t$3,\t%r10\n"
             , "\taddq\t", ABI.arg3, ",\t%r10\n"
-            , "\tmovq\t$", name, x, ",\t(%r10)\n"
+            , "\tmovq\t$", name, ",\t(%r10)\n"
             , "\tmovq\t", ABI.arg0, ",\t8(%r10)\n"
             , "\tmovq\t", ABI.arg1, ",\t16(%r10)\n"
             , "\tincq\t", ABI.arg2, "\n" ]
             emitting
-        ; let
-            val emitting' = Emitting.new ()
-          in
-            compileCode gensym emitting' (name ^ x) c
-          ; Emitting.setList (Emitting.toList emitting @ Emitting.toList emitting') emitting
-          end
+        ; if not (Option.isSome already) then
+            let
+              val emitting' = Emitting.new ()
+            in
+              memo := (c, name) :: !memo
+            ; compileCode gensym emitting' name c
+            ; Emitting.setList (Emitting.toList emitting @ Emitting.toList emitting') emitting
+            end
+          else
+            ()
         end
     and compileCode gensym emitting name c = (
       Emitting.emitList
@@ -183,6 +196,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\tpopq\t%rbp\n" ]
         emitting
     ; compileCode gensym emitting name' c
+    ; memo := nil
     end
   end
 end
