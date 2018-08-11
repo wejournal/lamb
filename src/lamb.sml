@@ -194,7 +194,7 @@ functor Main(Compiling : COMPILING) = struct
         val e = DeBruijnIndexedTerm.compile E e
         val c = KrivineMachine.compile e
         (*val c = Optimizing.factor (Optimizing.inline (Optimizing.eta c))*)
-        val c = Optimizing.inline c
+        (*val c = Optimizing.inline c*)
         val () =
           Compiling.compile
             gensym
