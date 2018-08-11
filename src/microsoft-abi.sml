@@ -9,6 +9,5 @@ structure MicrosoftABI :> ABI = struct
   val arg4 = NONE
   val arg5 = NONE
 
-  fun enter i = ["\tsubq\t$" ^ Int.toString (i * 8) ^ ",\t%rsp\n"]
-  fun leave i = ["\taddq\t$" ^ Int.toString (i * 8) ^ ",\t%rsp\n"]
+  val padding = 32
 end

@@ -9,6 +9,5 @@ structure SystemVABI :> ABI = struct
   val arg4 = SOME "%r8"
   val arg5 = SOME "%r9"
 
-  fun enter i = nil
-  fun leave i = nil
+  val padding  = 0
 end

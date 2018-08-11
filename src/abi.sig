@@ -9,6 +9,5 @@ signature ABI = sig
   val arg4 : register option
   val arg5 : register option
 
-  val enter : int -> instr list
-  val leave : int -> instr list
+  val padding : int
 end

@@ -30,17 +30,21 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t$4,\t-40(%rbp)\n"
             , "\tleaq\t-40(%rbp),\t%r12\n" ]
             emitting
-        ; Emitting.emitList (ABI.enter 1) emitting
         ; Emitting.emit "\tpushq\t%r12\n" emitting
         ; Emitting.emitList (push "%r11" ABI.arg5) emitting
         ; Emitting.emitList (push "%r10" ABI.arg4) emitting
-        ; Emitting.emitList (ABI.enter 4) emitting
+        ; if ABI.padding > 0 then
+            Emitting.emitList ["\tsubq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+          else
+            ()
         ; Emitting.emit "\tcall\tgc_alloc\n" emitting
-        ; Emitting.emitList (ABI.leave 4) emitting
+        ; if ABI.padding > 0 then
+            Emitting.emitList ["\taddq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+          else
+            ()
         ; Emitting.emitList (pop ABI.arg4) emitting
         ; Emitting.emitList (pop ABI.arg5) emitting
         ; Emitting.emit "\tpopq\t%r12\n" emitting
-        ; Emitting.emitList(ABI.leave 1) emitting
         ; Emitting.emitList
             [ "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
@@ -116,17 +120,21 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\tpushq\t%r12\n"
         , "\tmovq\t%rsp,\t%r12\n" ]
         emitting
-    ; Emitting.emitList (ABI.enter 1) emitting
     ; Emitting.emit "\tpushq\t%r12\n" emitting
     ; Emitting.emitList (push "%r11" ABI.arg5) emitting
     ; Emitting.emitList (push "%r10" ABI.arg4) emitting
-    ; Emitting.emitList (ABI.enter 4) emitting
+    ; if ABI.padding > 0 then
+        Emitting.emitList ["\tsubq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+      else
+        ()
     ; Emitting.emit "\tcall\tgc_alloc\n" emitting
-    ; Emitting.emitList (ABI.leave 4) emitting
+    ; if ABI.padding > 0 then
+        Emitting.emitList ["\taddq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+      else
+        ()
     ; Emitting.emitList (pop ABI.arg4) emitting
     ; Emitting.emitList (pop ABI.arg5) emitting
     ; Emitting.emit "\tpopq\t%r12\n" emitting
-    ; Emitting.emitList (ABI.leave 1) emitting
     ; Emitting.emitList
         [ "\tpopq\t%r12\n"
         , "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
