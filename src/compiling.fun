@@ -24,7 +24,6 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
             , "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n"
             , "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n"
-            , "\tmovq\t$24,\t%r11\n"
             , "\tmovq\t$4,\t-40(%rbp)\n"
             , "\tleaq\t-40(%rbp),\t%r12\n" ]
             emitting
