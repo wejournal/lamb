@@ -31,11 +31,10 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             Emitting.emit "\tmovq\t%r12,\t-64(%rbp)\n" emitting
           else
             Emitting.emit "\tmovq\t%r12,\t-48(%rbp)\n" emitting
+
         ; case ABI.arg5 of
             NONE =>
-              Emitting.emitList
-                [ "\tmovq\t$24,\t-56(%rbp)\n" ]
-                emitting
+              Emitting.emit "\tmovq\t$24,\t-56(%rbp)\n" emitting
           | SOME arg5 =>
               Emitting.emitList ["\tmovq\t$24,\t", arg5, "\n"] emitting
 
