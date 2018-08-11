@@ -30,11 +30,7 @@ structure Optimizing : OPTIMIZING = struct
       | eta (i :: c) = i :: eta c
 
     fun inline nil = nil
-      | inline (PUSH c :: GRAB :: c') =
-          (case occur 0 c' of
-            0 => dec 0 c'
-          | 1 => dec 0 (subst 0 (inc 0 (inline c)) (inline c'))
-          | _ => PUSH (inline c) :: GRAB :: inline c')
+      | inline (PUSH c :: GRAB :: c') = dec 0 (subst 0 (inc 0 (inline c)) (inline c'))
       | inline (i :: c) = i :: inline c
 
     fun closed i nil = true
