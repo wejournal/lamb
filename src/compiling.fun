@@ -25,14 +25,31 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
             , "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n"
             , "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n"
-            , "\tleaq\t1(", ABI.arg0, "),\t%r10\n"
             , "\tmovq\t$24,\t%r11\n"
             , "\tmovq\t$4,\t-40(%rbp)\n"
-            , "\tleaq\t-40(%rbp),\t%r12\n"
-            , "\tmovq\t%r12,\t-64(%rbp)\n" ]
+            , "\tleaq\t-40(%rbp),\t%r12\n" ]
             emitting
-        ; Emitting.emitList (push "%r11" ABI.arg5) emitting
-        ; Emitting.emitList (push "%r10" ABI.arg4) emitting
+        ; if Option.isSome ABI.arg4 then
+            Emitting.emit "\tmovq\t%r12,\t-64(%rbp)\n" emitting
+          else
+            Emitting.emit "\tmovq\t%r12,\t-48(%rbp)\n" emitting
+        ; case ABI.arg5 of
+            NONE =>
+              Emitting.emitList
+                [ "\tmovq\t$24,\t-56(%rbp)\n" ]
+                emitting
+          | SOME arg5 =>
+              Emitting.emitList ["\tmovq\t$24,\t", arg5, "\n"] emitting
+
+        ; case ABI.arg4 of
+            NONE =>
+              Emitting.emitList
+                [ "\tleaq\t1(", ABI.arg0, "),\t%r10\n"
+                , "\tmovq\t%r10,\t-64(%rbp)\n" ]
+                emitting
+          | SOME arg4 =>
+              Emitting.emitList ["\tleaq\t1(", ABI.arg0, "),\t", arg4, "\n"] emitting
+
         ; if ABI.padding > 0 then
             Emitting.emitList ["\tsubq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
           else
@@ -42,8 +59,6 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             Emitting.emitList ["\taddq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
           else
             ()
-        ; Emitting.emitList (pop ABI.arg4) emitting
-        ; Emitting.emitList (pop ABI.arg5) emitting
         ; Emitting.emitList
             [ "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
