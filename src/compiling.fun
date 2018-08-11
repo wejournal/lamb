@@ -101,9 +101,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     and compileCode gensym emitting name c = (
       Emitting.emitList
         [ name, ":\n"
-        , "\tpushq\t%rbp\n"
-        , "\tmovq\t%rsp,\t%rbp\n"
-        , "\tsubq\t$32,\t%rsp\n" ]
+        , "\tenter\t$32,\t$0\n" ]
         emitting
     ; List.app (compileInstr gensym emitting name) c
     )
