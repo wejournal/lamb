@@ -84,11 +84,10 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
           Emitting.emitList
             [ "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n"
             , "\tsalq\t$3,\t%r10\n"
-            , "\taddq\t%r10,\t", ABI.arg3, "\n"
-            , "\tmovq\t$", name, x, ",\t(", ABI.arg3, ")\n"
-            , "\tmovq\t", ABI.arg0, ",\t8(", ABI.arg3, ")\n"
-            , "\tmovq\t", ABI.arg1, ",\t16(", ABI.arg3, ")\n"
-            , "\tsubq\t%r10,\t", ABI.arg3, "\n"
+            , "\taddq\t", ABI.arg3, ",\t%r10\n"
+            , "\tmovq\t$", name, x, ",\t(%r10)\n"
+            , "\tmovq\t", ABI.arg0, ",\t8(%r10)\n"
+            , "\tmovq\t", ABI.arg1, ",\t16(%r10)\n"
             , "\tincq\t", ABI.arg2, "\n" ]
             emitting
         ; let
