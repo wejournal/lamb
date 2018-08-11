@@ -96,7 +96,7 @@ def plus
   : ((a -> a) -> a -> a) -- nat[a]
   -> ((a -> a) -> a -> a) -- nat[a]
   -> ((a -> a) -> a -> a) -- nat[a]
-  := ^n. ^m. ^f. ^x. n f (m f x) 
+  := ^n. ^m. ^f. ^x. n f (m f x)
 
 --| odd : nat[bool[a]] -> bool[a]
 def odd
