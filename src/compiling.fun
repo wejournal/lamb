@@ -16,8 +16,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t(", ABI.arg1, "),\t%r10\n"
             , "\tmovq\t8(", ABI.arg1, "),\t", ABI.arg0, "\n"
             , "\tmovq\t16(", ABI.arg1, "),\t", ABI.arg1, "\n"
-            , "\taddq\t$32,\t%rsp\n"
-            , "\tpopq\t%rbp\n"
+            , "\tleave\n"
             , "\tjmp\t*%r10\n" ]
             emitting
       | compileInstr _ emitting _ KrivineMachine.GRAB = (
