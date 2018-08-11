@@ -303,7 +303,7 @@ functor Main(Compiling : COMPILING) = struct
   ; TextIO.closeOut outstream
   end
 
-  fun assemble output files = let
+  fun assemble gcc output files = let
     val asmfile =
       List.last files ^ ".s"
     val objfile =
@@ -311,17 +311,17 @@ functor Main(Compiling : COMPILING) = struct
         NONE => List.last files ^ ".o"
       | SOME output => output
   in
-    OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
+    OS.Process.system (gcc ^ " -std=c11 -pedantic-errors -Wall -Werror -o " ^ objfile ^ " -c " ^ asmfile)
   ; ()
   end
 
-  fun link output objfiles = let
+  fun link gcc output objfiles = let
     val output =
       case output of
         NONE => "a.out"
       | SOME output => output
   in
-    (OS.Process.system ("gcc -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " objfiles); ())
+    (OS.Process.system (gcc ^ " -std=c11 -pedantic-errors -Wall -Werror -o " ^ output ^ " " ^ String.concatWith " " objfiles); ())
   end
 
   fun removeAssembly output files = let
@@ -342,7 +342,14 @@ functor Main(Compiling : COMPILING) = struct
     OS.FileSys.remove objfile
   end
 
-  fun main runtimes {target, doing, output, files} =
+  fun main runtimes {target, doing, output, files} = let
+    val gcc =
+      case target of
+        LINUX =>
+          "gcc"
+      | WINDOWS =>
+          "x86_64-w64-mingw32-gcc"
+  in
     case doing of
       INFER =>
         infer output files
@@ -350,16 +357,17 @@ functor Main(Compiling : COMPILING) = struct
         compile output files
     | ASSEMBLE =>
         ( compile NONE files
-        ; assemble output files
+        ; assemble gcc output files
         ; removeAssembly NONE files )
     | LINK =>
-        link output (runtimes @ files)
+        link gcc output (runtimes @ files)
     | MAKE =>
         ( compile NONE files
-        ; assemble NONE files
-        ; link output (runtimes @ [List.last files ^ ".o"])
+        ; assemble gcc NONE files
+        ; link gcc output (runtimes @ [List.last files ^ ".o"])
         ; removeObjectCode NONE files
         ; removeAssembly NONE files )
+  end
 end
 
 structure SystemVMain = Main(SystemVCompiling)
