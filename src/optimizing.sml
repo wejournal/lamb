@@ -63,7 +63,11 @@ structure Optimizing : OPTIMIZING = struct
           else
             PUSH (replace c i c') :: replace c i c''
 
-    fun factor c =
-      foldr (fn (c', c) => PUSH c' :: GRAB :: replace c' 0 c) c (closures c)
+    fun factor c = let
+      val clos = closures c
+      val c = foldr (fn (_, c) => inc 0 c) c clos
+    in
+      foldr (fn (c', c) => PUSH c' :: GRAB :: replace c' 0 c) c clos
+    end
   end
 end
