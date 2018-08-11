@@ -306,7 +306,6 @@ void *gc_allocate(uintptr_t n, uintptr_t size, const uintptr_t *stack_map) {
 
 void *gc_alloc(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values, uintptr_t n, uintptr_t size, const uintptr_t *stack_map) {
   void *p = gc_allocate(n, size, stack_map);
-
   if (!p) {
     gc_perform(env_count, env_values, stack_count, stack_values);
     p = gc_allocate(n, size, stack_map);

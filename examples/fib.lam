@@ -181,7 +181,7 @@ def decimal_inc := ^n. ^f. n (^_0. ^_1. ^_2. ^_3. ^_4. ^_5. ^_6. ^_7. ^_8. ^_9.
 def decimal := ^n. n decimal_inc decimal_zero
 
 def main := ^_.
-  100
+  10
     (^p. ^f. p (^n. ^s. f (succ n) (append s (append (decimal_show (decimal (fib n))) "\n"))))
     (^f. f 0 "")
     (^n. ^s. s)

@@ -17,7 +17,7 @@ GCC := gcc
 endif
 
 .PHONY: all
-all: hello$(SUFFIX) cat$(SUFFIX) reverse$(SUFFIX) sep$(SUFFIX) ffi$(SUFFIX)
+all: hello$(SUFFIX) cat$(SUFFIX) reverse$(SUFFIX) sep$(SUFFIX) ffi$(SUFFIX) fib$(SUFFIX)
 
 sep$(SUFFIX): k.lam sep.lam
 	LAMB_HOME=$(LAMB_HOME) $(LAMB) --target $(TARGET) -o k.la -i k.lam
