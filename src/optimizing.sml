@@ -21,6 +21,14 @@ structure Optimizing : OPTIMIZING = struct
       | replace i c (GRAB :: c') = GRAB :: replace (i + 1) (inc 0 c) c'
       | replace i c (PUSH c' :: c'') = PUSH (replace i c c') :: replace i c c''
 
+    fun eta nil = nil
+      | eta (GRAB :: PUSH [ACCESS 0] :: c) =
+          if occur 0 c = 0 then
+            dec 0 (eta c)
+          else
+            GRAB :: PUSH [ACCESS 0] :: c
+      | eta (i :: c) = i :: eta c
+
     fun inline nil = nil
       | inline (PUSH c :: GRAB :: c') =
           (case occur 0 c' of

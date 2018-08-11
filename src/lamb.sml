@@ -193,7 +193,7 @@ functor Main(Compiling : COMPILING) = struct
         val e = AST.Exp.erase e
         val e = DeBruijnIndexedTerm.compile E e
         val c = KrivineMachine.compile e
-        val c = Optimizing.inline c
+        val c = Optimizing.inline (Optimizing.eta c)
         val () =
           Compiling.compile
             gensym
