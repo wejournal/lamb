@@ -194,29 +194,27 @@ functor Main(Compiling : COMPILING) = struct
       in
         (f, E')
       end
-    | compileDecl compiling gensym emitting (AST.Decl.DEF (r, (x, _, e)), (f, E)) = let
-        val c =
-          case f of
+    | compileDecl compiling gensym emitting (AST.Decl.DEF (r, (x, _, e)), (cs, E)) = let
+        val c = KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase e))
+
+        val c' =
+          case cs of
             NONE =>
-              KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase e))
-          | SOME f =>
-              Optimizing.inline (KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase (f e))))
+              c
+          | SOME cs =>
+              Optimizing.inline (foldl (fn (c, c') => KrivineMachine.PUSH c :: KrivineMachine.GRAB :: c') c cs)
+
         val () =
           Compiling.compile
             compiling
             gensym
             emitting
-            (map (fn (y, _) => (region y, "lamb_" ^ value y)) E)
+            (map (fn (y, _) => (region y, "lamb_" ^ value y)) (if Option.isSome cs then nil else E))
             (region x, "lamb_" ^ value x)
-            c
-        val E' =
-          case f of
-            NONE =>
-              (x, 0) :: map (fn (y, i) => (y, i + 1)) E
-          | SOME _ =>
-              E
+            c'
+        val E' = (x, 0) :: map (fn (y, i) => (y, i + 1)) E
       in
-        (Option.map (fn f => fn e' => f (AST.Exp.LET (r, (x, NONE, e, e')))) f, E')
+        (Option.map (fn cs => c :: cs) cs, E')
       end
 
   fun compile' infer gensym emitting (file, (z0, z1)) = let
@@ -310,7 +308,7 @@ functor Main(Compiling : COMPILING) = struct
     val gensym = Gensym.new ()
     val emitting = Emitting.new ()
     val z0 = (nil, nil, nil)
-    val z1 = (if inline then SOME (fn e => e) else NONE, nil)
+    val z1 = (if inline then SOME nil else NONE, nil)
   in
     List.foldl (compile' false gensym emitting) (z0, z1) files
   ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
