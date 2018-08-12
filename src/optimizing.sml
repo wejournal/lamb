@@ -35,7 +35,7 @@ structure Optimizing : OPTIMIZING = struct
 
     fun eval nil = nil
       | eval (PUSH c :: GRAB :: c') = eval (dec 0 (subst 0 (inc 0 (eval c)) c'))
-      | eval (i :: c) = i :: inline c
+      | eval (i :: c) = i :: eval c
 
     fun closed i nil = true
       | closed i (ACCESS j :: c) = i > j andalso closed i c
