@@ -131,81 +131,92 @@ datatype target = LINUX | WINDOWS
 datatype doing = INFER | COMPILE | ASSEMBLE | LINK | MAKE
 exception Unrecognized of string
 
-fun args nil = { target = LINUX, doing = MAKE, output = NONE, files = nil }
+fun args nil = { target = LINUX, doing = MAKE, inline = false, output = NONE, files = nil }
   | args ("--target" :: "linux" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = LINUX, doing = doing, output = output, files = files }
+      { target = LINUX, doing = doing, inline = inline, output = output, files = files }
     end
   | args ("--target" :: "windows" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = WINDOWS, doing = doing, output = output, files = files }
+      { target = WINDOWS, doing = doing, inline = inline, output = output, files = files }
     end
   | args ("-i" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = LINUX, doing = INFER, output = output, files = files }
+      { target = LINUX, doing = INFER, inline = inline, output = output, files = files }
     end
   | args ("-S" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = LINUX, doing = COMPILE, output = output, files = files }
+      { target = LINUX, doing = COMPILE, inline = inline, output = output, files = files }
     end
   | args ("-c" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = LINUX, doing = ASSEMBLE, output = output, files = files }
+      { target = LINUX, doing = ASSEMBLE, inline = inline, output = output, files = files }
     end
   | args ("--link" :: argv) = let
-      val {target, doing, output, files} = args argv
+      val {target, doing, inline, output, files} = args argv
     in
-      { target = LINUX, doing = LINK, output = output, files = files }
+      { target = LINUX, doing = LINK, inline = inline, output = output, files = files }
+    end
+  | args ("--inline" :: argv) = let
+      val {target, doing, inline, output, files} = args argv
+    in
+      { target = target, doing = doing, inline = true, output = output, files = files }
     end
   | args ("-o" :: arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
         raise Unrecognized arg
       else let
-        val {target, doing, output, files} = args argv
+        val {target, doing, inline, output, files} = args argv
       in
-        { target = target, doing = doing, output = SOME arg, files = files }
+        { target = target, doing = doing, inline = inline, output = SOME arg, files = files }
       end
   | args ("--" :: files) =
-      { target = LINUX, doing = MAKE, output = NONE, files = files }
+      { target = LINUX, doing = MAKE, inline = false, output = NONE, files = files }
   | args (arg :: argv) =
       if String.size arg > 0 andalso String.sub (arg, 0) = #"-" then
         raise Unrecognized arg
       else let
-        val {target, doing, output, files} = args argv
+        val {target, doing, inline, output, files} = args argv
       in
-        { target = target, doing = doing, output = output, files = arg :: files }
+        { target = target, doing = doing, inline = inline, output = output, files = arg :: files }
       end
 
 functor Main(Compiling : COMPILING) = struct
-  fun compileDecl _ _ (AST.Decl.TYPE _, E) =
-        E
-    | compileDecl _ _ (AST.Decl.VAL (_, (x, _)), E) = let
+  fun compileDecl _ _ _ (AST.Decl.TYPE _, (f, E)) =
+        (f, E)
+    | compileDecl _ _ _ (AST.Decl.VAL (_, (x, _)), (f, E)) = let
         val E' = (x, 0) :: map (fn (y, i) => (y, i + 1)) E
       in
-        E'
+        (f, E')
       end
-    | compileDecl gensym emitting (AST.Decl.DEF (_, (x, _, e)), E) = let
-        val e = AST.Exp.erase e
-        val e = DeBruijnIndexedTerm.compile E e
-        val c = KrivineMachine.compile e
-        (*val c = Optimizing.factor (Optimizing.inline (Optimizing.eta c))*)
-        (*val c = Optimizing.inline c*)
-        (*val c = Optimizing.eval c*)
+    | compileDecl compiling gensym emitting (AST.Decl.DEF (r, (x, _, e)), (f, E)) = let
+        val c =
+          case f of
+            NONE =>
+              KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase e))
+          | SOME f =>
+              Optimizing.inline (KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase (f e))))
         val () =
           Compiling.compile
+            compiling
             gensym
             emitting
             (map (fn (y, _) => (region y, "lamb_" ^ value y)) E)
             (region x, "lamb_" ^ value x)
             c
-        val E' = (x, 0) :: map (fn (y, i) => (y, i + 1)) E
+        val E' =
+          case f of
+            NONE =>
+              (x, 0) :: map (fn (y, i) => (y, i + 1)) E
+          | SOME _ =>
+              E
       in
-        E'
+        (Option.map (fn f => fn e' => f (AST.Exp.LET (r, (x, NONE, e, e')))) f, E')
       end
 
   fun compile' infer gensym emitting (file, (z0, z1)) = let
@@ -220,6 +231,7 @@ functor Main(Compiling : COMPILING) = struct
       val read = ref false
       val lexer = Parsing.makeLexer (fn _ => if !read then "" else (read := true; s))
       val (decls, _) = Parsing.parse (0, lexer, fn (msg, i, j) => print_error_in_file file s (i, j) msg, ())
+      val compiling = Compiling.new ()
     in
       if infer then
         List.app
@@ -233,7 +245,7 @@ functor Main(Compiling : COMPILING) = struct
           decls
       ; List.app
           (fn decl =>
-            z1 := compileDecl gensym emitting (decl, !z1))
+            z1 := compileDecl compiling gensym emitting (decl, !z1))
           decls
       )
     ; success := true
@@ -283,14 +295,14 @@ functor Main(Compiling : COMPILING) = struct
     val gensym = Gensym.new ()
     val emitting = Emitting.new ()
     val z0 = (nil, nil, nil)
-    val z1 = nil
+    val z1 = (NONE, nil)
   in
     List.foldl (compile' true gensym emitting) (z0, z1) files
   ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
   ; TextIO.closeOut outstream
   end
 
-  fun compile output files = let
+  fun compile inline output files = let
     val outstream =
       case output of
         NONE => TextIO.openOut (List.last files ^ ".s")
@@ -298,7 +310,7 @@ functor Main(Compiling : COMPILING) = struct
     val gensym = Gensym.new ()
     val emitting = Emitting.new ()
     val z0 = (nil, nil, nil)
-    val z1 = nil
+    val z1 = (if inline then SOME (fn e => e) else NONE, nil)
   in
     List.foldl (compile' false gensym emitting) (z0, z1) files
   ; TextIO.output (outstream, concat (List.rev (Emitting.toList emitting)))
@@ -344,7 +356,7 @@ functor Main(Compiling : COMPILING) = struct
     OS.FileSys.remove objfile
   end
 
-  fun main runtimes {target, doing, output, files} = let
+  fun main runtimes {target, doing, inline, output, files} = let
     val gcc =
       case target of
         LINUX =>
@@ -356,15 +368,15 @@ functor Main(Compiling : COMPILING) = struct
       INFER =>
         infer output files
     | COMPILE =>
-        compile output files
+        compile inline output files
     | ASSEMBLE =>
-        ( compile NONE files
+        ( compile inline NONE files
         ; assemble gcc output files
         ; removeAssembly NONE files )
     | LINK =>
         link gcc output (runtimes @ files)
     | MAKE =>
-        ( compile NONE files
+        ( compile inline NONE files
         ; assemble gcc NONE files
         ; link gcc output (runtimes @ [List.last files ^ ".o"])
         ; removeObjectCode NONE files
@@ -396,7 +408,7 @@ val () = let
 
   val LAMB_RUNTIME = OS.Path.concat (OS.Path.concat (LAMB_HOME, "lib"), "lamb")
 
-  val {target, doing, output, files} = args (CommandLine.arguments ())
+  val {target, doing, inline, output, files} = args (CommandLine.arguments ())
 in
   if List.length files = 0 then
     (print_error "lamb" "no input files." ""; OS.Process.exit OS.Process.failure)
@@ -409,7 +421,7 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
           ["runtime.o", "gc.o", "lamb.o"]
     in
-      SystemVMain.main runtimes {target = target, doing = doing, output = output, files = files}
+      SystemVMain.main runtimes {target = target, doing = doing, inline = inline, output = output, files = files}
     end
   | WINDOWS => let
       val runtimes =
@@ -417,7 +429,7 @@ in
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
           ["runtime.o", "gc.o", "lamb.o"]
     in
-      MicrosoftMain.main runtimes {target = target, doing = doing, output = output, files = files}
+      MicrosoftMain.main runtimes {target = target, doing = doing, inline = inline, output = output, files = files}
     end
 end handle
   Unrecognized arg => (

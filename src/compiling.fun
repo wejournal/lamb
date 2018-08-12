@@ -1,5 +1,8 @@
 functor Compiling (ABI : ABI) :> COMPILING = struct
+  type t = (KrivineMachine.code * string) list ref
   type env = id list
+
+  fun new () = ref nil
 
   local
     fun push r NONE = ["\tpushq\t", r, "\n"]
@@ -7,9 +10,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     fun pop NONE = ["\tpopq\t%r14\n"]
       | pop (SOME _) = nil
 
-    val memo = ref nil
-
-    fun compileInstr _ emitting _ (KrivineMachine.ACCESS i) =
+    fun compileInstr _ _ emitting _ (KrivineMachine.ACCESS i) =
           Emitting.emitList
             [ "\tleaq\t-", Int.toString ((i + 1) * 3), "(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg0, "\n"
             , "\tsalq\t$3,\t", ABI.arg0, "\n"
@@ -20,7 +21,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tleave\n"
             , "\tjmp\t*%r10\n" ]
             emitting
-      | compileInstr _ emitting _ KrivineMachine.GRAB = (
+      | compileInstr _ _ emitting _ KrivineMachine.GRAB = (
           Emitting.emitList
             [ "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n"
             , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
@@ -88,7 +89,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tincq\t", ABI.arg0, "\n" ]
             emitting
         )
-      | compileInstr gensym emitting name (KrivineMachine.PUSH c) = let
+      | compileInstr memo gensym emitting name (KrivineMachine.PUSH c) = let
           val already = Option.map #2 (List.find (fn (c', _) => c = c') (!memo))
 
           val name =
@@ -112,21 +113,21 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
               val emitting' = Emitting.new ()
             in
               memo := (c, name) :: !memo
-            ; compileCode gensym emitting' name c
+            ; compileCode memo gensym emitting' name c
             ; Emitting.setList (Emitting.toList emitting @ Emitting.toList emitting') emitting
             end
           else
             ()
         end
-    and compileCode gensym emitting name c = (
+    and compileCode memo gensym emitting name c = (
       Emitting.emitList
         [ name, ":\n"
         , "\tenter\t$64,\t$0\n" ]
         emitting
-    ; List.app (compileInstr gensym emitting name) c
+    ; List.app (compileInstr memo gensym emitting name) c
     )
   in
-    fun compile gensym emitting E x c = let
+    fun compile memo gensym emitting E x c = let
       val name' = value x ^ "_" ^ Int.toString (Gensym.gensym gensym)
     in
       Emitting.emitList [".globl\t", value x, "\n", value x, ":\n"] emitting
@@ -195,8 +196,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\taddq\t$32,\t%rsp\n"
         , "\tpopq\t%rbp\n" ]
         emitting
-    ; compileCode gensym emitting name' c
-    ; memo := nil
+    ; compileCode memo gensym emitting name' c
     end
   end
 end
