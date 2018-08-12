@@ -34,7 +34,7 @@ structure Optimizing : OPTIMIZING = struct
       | inline (i :: c) = i :: inline c
 
     fun eval nil = nil
-      | eval (PUSH c :: GRAB :: c') = eval (dec 0 (subst 0 (inc 0 (eval c)) c'))
+      | eval (PUSH c :: GRAB :: c') = eval (dec 0 (subst 0 (inc 0 c) c'))
       | eval (i :: c) = i :: eval c
 
     fun closed i nil = true
