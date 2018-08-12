@@ -417,7 +417,7 @@ in
       val runtimes =
         map
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("linux", file)))
-          ["runtime.o", "gc.o", "lamb.o"]
+          ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
     in
       SystemVMain.main runtimes {target = target, doing = doing, inline = inline, output = output, files = files}
     end
@@ -425,7 +425,7 @@ in
       val runtimes =
         map
           (fn file => OS.Path.concat (LAMB_RUNTIME, OS.Path.concat ("windows", file)))
-          ["runtime.o", "gc.o", "lamb.o"]
+          ["runtime.o", "gc.o", "numbers.o", "lamb.o"]
     in
       MicrosoftMain.main runtimes {target = target, doing = doing, inline = inline, output = output, files = files}
     end

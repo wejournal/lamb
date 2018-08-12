@@ -14,8 +14,8 @@ MLLEX := mllex
 .PHONY: all
 all:	bin/lamb \
 	include/lamb/runtime.h include/lamb/gc.h \
-	lib/lamb/linux/runtime.o lib/lamb/linux/gc.o lib/lamb/linux/lamb.o \
-	lib/lamb/windows/runtime.o lib/lamb/windows/gc.o lib/lamb/windows/lamb.o
+	lib/lamb/linux/runtime.o lib/lamb/linux/gc.o lib/lamb/linux/numbers.o lib/lamb/linux/lamb.o \
+	lib/lamb/windows/runtime.o lib/lamb/windows/gc.o lib/lamb/windows/numbers.o lib/lamb/windows/lamb.o
 
 .PHONY: install
 install:
@@ -27,9 +27,11 @@ install:
 	$(INSTALL) bin/lamb $(PREFIX)/bin
 	$(INSTALL) lib/lamb/linux/runtime.o $(PREFIX)/lib/lamb/linux/runtime.o
 	$(INSTALL) lib/lamb/linux/gc.o $(PREFIX)/lib/lamb/linux/gc.o
+	$(INSTALL) lib/lamb/linux/numbers.o $(PREFIX)/lib/lamb/linux/numbers.o
 	$(INSTALL) lib/lamb/linux/lamb.o $(PREFIX)/lib/lamb/linux/lamb.o
 	$(INSTALL) lib/lamb/windows/runtime.o $(PREFIX)/lib/lamb/windows/runtime.o
 	$(INSTALL) lib/lamb/windows/gc.o $(PREFIX)/lib/lamb/windows/gc.o
+	$(INSTALL) lib/lamb/windows/numbers.o $(PREFIX)/lib/lamb/windows/numbers.o
 	$(INSTALL) lib/lamb/windows/lamb.o $(PREFIX)/lib/lamb/windows/lamb.o
 	$(INSTALL) include/lamb/runtime.h $(PREFIX)/include/lamb/runtime.h
 	$(INSTALL) include/lamb/gc.h $(PREFIX)/include/lamb/gc.h
@@ -86,6 +88,15 @@ lib/lamb/linux/gc.o: runtime/gc.c
 	$(MKDIR) -p lib/lamb/linux
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
+.INTERMEDIATE: lib/lamb/linux/numbers.s
+lib/lamb/linux/numbers.s: runtime/numbers.lam bin/lamb
+	$(MKDIR) -p lib/lamb/linux
+	LAMB_HOME=. bin/lamb --target linux -S --inline -o $@ $<
+
+lib/lamb/linux/numbers.o: lib/lamb/linux/numbers.s
+	$(MKDIR) -p lib/lamb/linux
+	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
+
 lib/lamb/linux/lamb.o: runtime/lamb.c
 	$(MKDIR) -p lib/lamb/linux
 	$(GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
@@ -95,6 +106,15 @@ lib/lamb/windows/runtime.o: runtime/runtime.c
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
 lib/lamb/windows/gc.o: runtime/gc.c
+	$(MKDIR) -p lib/lamb/windows
+	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
+
+.INTERMEDIATE: lib/lamb/windows/numbers.s
+lib/lamb/windows/numbers.s: runtime/numbers.lam bin/lamb
+	$(MKDIR) -p lib/lamb/windows
+	LAMB_HOME=. bin/lamb --target windows -S --inline -o $@ $<
+
+lib/lamb/windows/numbers.o: lib/lamb/windows/numbers.s
 	$(MKDIR) -p lib/lamb/windows
 	$(X86_64_W64_MINGW32_GCC) -std=c11 -pedantic-errors -Wall -Werror -Iruntime/include -c -O3 -o $@ $<
 
