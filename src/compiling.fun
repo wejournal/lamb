@@ -28,12 +28,12 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n"
             , "\tmovq\t", ABI.arg3, ",\t-32(%rbp)\n"
             , "\tmovq\t$4,\t-40(%rbp)\n"
-            , "\tleaq\t-40(%rbp),\t%r12\n" ]
+            , "\tleaq\t-40(%rbp),\t%r10\n" ]
             emitting
         ; if Option.isSome ABI.arg4 then
-            Emitting.emit "\tmovq\t%r12,\t-64(%rbp)\n" emitting
+            Emitting.emit "\tmovq\t%r10,\t-64(%rbp)\n" emitting
           else
-            Emitting.emit "\tmovq\t%r12,\t-48(%rbp)\n" emitting
+            Emitting.emit "\tmovq\t%r10,\t-48(%rbp)\n" emitting
 
         ; case ABI.arg5 of
             NONE =>
@@ -74,18 +74,20 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
             , "\tpopq\t", ABI.arg1, "\n"
             , "\tdecq\t", ABI.arg2, "\n"
-            , "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r13\n"
-            , "\tsalq\t$3,\t%r13\n"
-            , "\taddq\t", ABI.arg3, ",\t%r13\n"
-            , "\tmovq\t(%r13),\t%r10\n"
-            , "\tmovq\t8(%r13),\t%r11\n"
-            , "\tmovq\t16(%r13),\t%r12\n"
-            , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r13\n"
-            , "\tsalq\t$3,\t%r13\n"
-            , "\taddq\t", ABI.arg1, ",\t%r13\n"
-            , "\tmovq\t%r10,\t(%r13)\n"
-            , "\tmovq\t%r11,\t8(%r13)\n"
-            , "\tmovq\t%r12,\t16(%r13)\n"
+            , "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n"
+            , "\tsalq\t$3,\t%r10\n"
+            , "\taddq\t", ABI.arg3, ",\t%r10\n"
+            , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r11\n"
+            , "\tsalq\t$3,\t%r11\n"
+            , "\taddq\t", ABI.arg1, ",\t%r11\n"
+            , "\tpushq\t%r12\n"
+            , "\tmovq\t(%r10),\t%r12\n"
+            , "\tmovq\t%r12,\t(%r11)\n"
+            , "\tmovq\t8(%r10),\t%r12\n"
+            , "\tmovq\t%r12,\t8(%r11)\n"
+            , "\tmovq\t16(%r10),\t%r12\n"
+            , "\tmovq\t%r12,\t16(%r11)\n"
+            , "\tpopq\t%r12\n"
             , "\tincq\t", ABI.arg0, "\n" ]
             emitting
         )
