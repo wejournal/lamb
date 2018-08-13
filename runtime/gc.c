@@ -142,12 +142,11 @@ void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count,
     free_chunk_t *succ = (free_chunk_t *) succ_addr;
     free_chunk_t *pred = succ->prev;
 
-    if (pred) {
+    if (pred)
       pred->next = succ->next;
 
-      if (succ->next)
-        succ->next->prev = pred;
-    }
+    if (succ->next)
+      succ->next->prev = pred;
 
     if (((uintptr_t) free_chunk) == succ_addr) {
       free_chunk = free_chunk->next;
