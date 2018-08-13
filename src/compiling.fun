@@ -57,7 +57,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         ; Emitting.emitList
             [ "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
-            , "\tpushq\t%rax\n"
+            , "\tmovq\t%rax,\t-40(%rbp)\n"
             , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n"
             , "\tsalq\t$3,\t", ABI.arg2, "\n"
             , "\tmovq\t%rax,\t", ABI.arg0, "\n" ]
@@ -74,8 +74,8 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         ; Emitting.emitList
             [ "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
             , "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n"
+            , "\tmovq\t-40(%rbp),\t", ABI.arg1, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
-            , "\tpopq\t", ABI.arg1, "\n"
             , "\tdecq\t", ABI.arg2, "\n"
             , "\tleaq\t0(", ABI.arg2, ", ", ABI.arg2, ", 2),\t%r10\n"
             , "\tsalq\t$3,\t%r10\n"
@@ -83,14 +83,14 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r11\n"
             , "\tsalq\t$3,\t%r11\n"
             , "\taddq\t", ABI.arg1, ",\t%r11\n"
-            , "\tpushq\t%r12\n"
+            , "\tmovq\t%r12,\t-40(%rbp)\n"
             , "\tmovq\t(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t(%r11)\n"
             , "\tmovq\t8(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t8(%r11)\n"
             , "\tmovq\t16(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t16(%r11)\n"
-            , "\tpopq\t%r12\n"
+            , "\tmovq\t-40(%rbp),\t%r12\n"
             , "\tincq\t", ABI.arg0, "\n" ]
             emitting
         )
@@ -179,7 +179,7 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     ; Emitting.emitList
         [ "\tmovq\t-16(%rbp),\t", ABI.arg1, "\n"
         , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
-        , "\tpushq\t%rax\n"
+        , "\tmovq\t%rax,\t-40(%rbp)\n"
         , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t", ABI.arg2, "\n"
         , "\tsalq\t$3,\t", ABI.arg2, "\n"
         , "\tmovq\t%rax,\t", ABI.arg0, "\n" ]
@@ -196,8 +196,8 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
     ; Emitting.emitList
         [ "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
         , "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n"
+        , "\tmovq\t-40(%rbp),\t", ABI.arg1, "\n"
         , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
-        , "\tpopq\t", ABI.arg1, "\n"
         , "\tmovq\t-16(%rbp),\t%r10\n"
         , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r11\n"
         , "\tsalq\t$3,\t%r11\n"
