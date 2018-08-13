@@ -42,21 +42,6 @@ void gc_exit(void) {
   }
 }
 
-bool is_used(void *p) {
-  used_chunk_t *tmp = used_chunk;
-
-  while (tmp) {
-    uintptr_t q = ((uintptr_t) tmp) + sizeof(used_chunk_t);
-
-    if (((uintptr_t) p) == q)
-      return true;
-
-    tmp = tmp->next;
-  }
-
-  return false;
-}
-
 bool is_free(void *p) {
   free_chunk_t *tmp = free_chunk;
 
@@ -76,12 +61,8 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
   uintptr_t lives_size = 0;
   void **lives = malloc(16777216);
 
-  /* If env_values is an invalid pointer, ignore it. */
-  if (!(env_values && !is_used(env_values) && !is_free(env_values))) {
-    lives[lives_size] = env_values;
-    ++lives_size;
-  }
-
+  lives[lives_size] = env_values;
+  ++lives_size;
   lives[lives_size] = stack_values;
   ++lives_size;
 
