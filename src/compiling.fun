@@ -62,9 +62,17 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tsalq\t$3,\t", ABI.arg2, "\n"
             , "\tmovq\t%rax,\t", ABI.arg0, "\n" ]
             emitting
+        ; if ABI.padding > 0 then
+            Emitting.emitList ["\tsubq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+          else
+            ()
+        ; Emitting.emit "\tcall\tmemcpy\n" emitting
+        ; if ABI.padding > 0 then
+            Emitting.emitList ["\taddq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+          else
+            ()
         ; Emitting.emitList
-            [ "\tcall\tmemcpy\n"
-            , "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
+            [ "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
             , "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n"
             , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
             , "\tpopq\t", ABI.arg1, "\n"
@@ -176,9 +184,17 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\tsalq\t$3,\t", ABI.arg2, "\n"
         , "\tmovq\t%rax,\t", ABI.arg0, "\n" ]
         emitting
+    ; if ABI.padding > 0 then
+        Emitting.emitList ["\tsubq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+      else
+        ()
+    ; Emitting.emit "\tcall\tmemcpy\n" emitting
+    ; if ABI.padding > 0 then
+        Emitting.emitList ["\taddq\t$", Int.toString ABI.padding, ",\t%rsp\n"] emitting
+      else
+        ()
     ; Emitting.emitList
-        [ "\tcall\tmemcpy\n"
-        , "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
+        [ "\tmovq\t-32(%rbp),\t", ABI.arg3, "\n"
         , "\tmovq\t-24(%rbp),\t", ABI.arg2, "\n"
         , "\tmovq\t-8(%rbp),\t", ABI.arg0, "\n"
         , "\tpopq\t", ABI.arg1, "\n"
