@@ -61,3 +61,8 @@ The classes are defined by regular expressions.
 ## LICENSE
 
 GPLv3.
+
+## SEE ALSO
+
+- There is an Emacs major mode for Lamb by @zonuexe: https://github.com/zonuexe/lamb-mode.el
+  Thank you!
