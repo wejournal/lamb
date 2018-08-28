@@ -18,7 +18,7 @@ The directory where lamb is being installed. default: **~/.lamb**
 - mlyacc
 - mllex
 - gcc
-- x86_64-w64-mingw32-gcc
+- x86_64-w64-mingw32-gcc (optional)
 
 ## INSTALLATION
 
