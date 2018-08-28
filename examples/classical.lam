@@ -1,0 +1,42 @@
+-- Axioms
+type false                        -- ⊥
+val absurd : false -> a           -- A: Rule of Explosion.
+val peirce : ((a -> b) -> a) -> a -- P: Peirce's Law. Under CH, the type of call/cc.
+
+--| type not[a] := a -> false            -- ￢a
+--| type and[a, b] := not[a -> not[b]]   -- a∧b
+--| type or[a, b] := (a -> b) -> b       -- a∨b
+--| type eq[a, b] := and[a -> b, b -> a] -- a⇄b
+
+def pair
+  : a
+  -> b
+  -> ((a -> b -> false) -> false) -- and[a, b]
+  := ^a. ^b. ^k. k a b
+
+def fst
+  : ((a -> b -> false) -> false) -- and[a, b]
+  -> a
+  := ^a_and_b. peirce (^k. absurd (a_and_b (^a. ^b. k a)))
+
+def snd
+  : ((a -> b -> false) -> false) -- and[a, b]
+  -> b
+  := ^a_and_b. peirce (^k. absurd (a_and_b (^a. ^b. k b)))
+
+def left
+  : a
+  -> ((a -> b) -> b) -- or[a, b]
+  := ^a. ^f. f a
+
+def right
+  : b
+  -> ((a -> b) -> b) -- or[a, b]
+  := ^b. ^_. b
+
+def case
+  : (a -> c)
+  -> (b -> c)
+  -> ((a -> b) -> b) -- or[a, b]
+  -> c
+  := ^f. ^g. ^a_or_b. peirce (^k. g (a_or_b (^a. k (f a))))
