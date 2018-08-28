@@ -24,12 +24,12 @@ def snd
   -> b
   := ^a_and_b. peirce (^k. absurd (a_and_b (^a. ^b. k b)))
 
-def left
+def inl
   : a
   -> ((a -> b) -> b) -- or[a, b]
   := ^a. ^f. f a
 
-def right
+def inr
   : b
   -> ((a -> b) -> b) -- or[a, b]
   := ^b. ^_. b
