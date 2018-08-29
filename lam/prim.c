@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
 #include <lamb/runtime.h>
+#include <lamb/gc.h>
 
 #define LAMB_BINOP(type, name, op) \
   uintptr_t name(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) { \
@@ -67,8 +69,11 @@ uintptr_t lamb_print64(uintptr_t env_count, closure_t *env_values, uintptr_t sta
 uintptr_t lamb_seq(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   env_t env = {env_count, env_values};
   stack_t stack = {stack_count, stack_values};
+  uintptr_t stack_map = 4;
+  stack_t stack1 = {0, gc_alloc(env_count, env_values, stack_count, stack_values, 256, sizeof(closure_t), &stack_map)};
   GRAB(&env, &stack);
-  ACCESS(&env, &stack, 0);
+  memcpy(stack1.values + (256 - stack.count), stack.values, stack.count * sizeof(closure_t));
+  ACCESS(&env, &stack1, 0);
   GRAB(&env, &stack);
   return ACCESS(&env, &stack, 0);
 }

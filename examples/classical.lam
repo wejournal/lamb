@@ -49,4 +49,5 @@ val seq : a -> b -> b
 
 --def main := ^stdin. fst (pair "a" "b")
 --def main := ^stdin. snd (pair "a" "b")
-def main := ^stdin. case (^x. "b") (^x. seq x "c") (inl "a")
+--def main := ^stdin. case (^x. "b") (^x. seq x "c") (inl "a")
+def main := ^stdin. case (^x. "b") (^x. seq x "c") (inr "a")

@@ -16,8 +16,13 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tleave\n"
             , "\tjmp\t*%r10\n" ]
             emitting
-      | compileInstr _ _ emitting _ KrivineMachine.GRAB = (
+      | compileInstr _ _ emitting name KrivineMachine.GRAB = (
           Emitting.emitList
+            [ "\tmovq\t$0,\t%r10\n"
+            , "\tcmpq\t", ABI.arg2, ",\t%r10\n"
+            , "\tjz\t", name, "_error\n" ]
+            emitting
+        ; Emitting.emitList
             [ "\tmovq\t", ABI.arg0, ",\t-8(%rbp)\n"
             , "\tmovq\t", ABI.arg1, ",\t-16(%rbp)\n"
             , "\tmovq\t", ABI.arg2, ",\t-24(%rbp)\n"
@@ -130,6 +135,12 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
         , "\tenter\t$64,\t$0\n" ]
         emitting
     ; List.app (compileInstr memo gensym emitting name) c
+    ; Emitting.emitList
+        [ name, "_error:\n"
+        , "\txorq\t%rax,\t%rax\n"
+        , "\tleave\n"
+        , "\tret\n" ]
+        emitting
     )
   in
     fun compile memo gensym emitting E x c = let
