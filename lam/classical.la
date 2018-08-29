@@ -1,0 +1,5 @@
+-- Axioms
+type false                        -- ⊥
+val absurd : false -> a           -- A: Rule of Explosion.
+val peirce : ((a -> b) -> a) -> a -- P: Peirce's Law. Under CH, the type of call/cc.
+
