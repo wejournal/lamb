@@ -88,14 +88,12 @@ functor Compiling (ABI : ABI) :> COMPILING = struct
             , "\tleaq\t0(", ABI.arg0, ", ", ABI.arg0, ", 2),\t%r11\n"
             , "\tsalq\t$3,\t%r11\n"
             , "\taddq\t", ABI.arg1, ",\t%r11\n"
-            , "\tmovq\t%r12,\t-40(%rbp)\n"
             , "\tmovq\t(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t(%r11)\n"
             , "\tmovq\t8(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t8(%r11)\n"
             , "\tmovq\t16(%r10),\t%r12\n"
             , "\tmovq\t%r12,\t16(%r11)\n"
-            , "\tmovq\t-40(%rbp),\t%r12\n"
             , "\tincq\t", ABI.arg0, "\n" ]
             emitting
         )
