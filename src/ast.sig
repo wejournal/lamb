@@ -16,7 +16,6 @@ signature AST = sig
     | LET of (id * Type.t option * t * t) node
 
     val toTypedTerm : Gensym.t -> t -> TypedTerm.t
-    val erase : t -> Term.t
   end
 
   structure Decl : sig

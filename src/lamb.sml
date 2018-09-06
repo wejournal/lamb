@@ -195,7 +195,7 @@ functor Main(Compiling : COMPILING) = struct
         (f, E')
       end
     | compileDecl compiling gensym emitting (AST.Decl.DEF (r, (x, _, e)), (cs, E)) = let
-        val c = KrivineMachine.compile (DeBruijnIndexedTerm.compile E (AST.Exp.erase e))
+        val c = KrivineMachine.compile (DeBruijnIndexedTerm.compile E (TypedTerm.erase (AST.Exp.toTypedTerm gensym e)))
 
         val c' =
           case cs of
