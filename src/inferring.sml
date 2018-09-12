@@ -1,19 +1,19 @@
 structure Inferring :> INFERRING = struct
   type constraint = Type.t * Type.t
+  type poly = id list
   type mono = id list
-  type env = (id * Type.t) list
+  type env = (id * (poly * Type.t)) list
 
   exception NotInScope of id
   exception Cyclic of id * Type.t
   exception Incompatible of Type.t * Type.t
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
-  fun substEnv S E = map (fn (x, T) => (x, Type.subst S T)) E
-  fun FVEnv E = List.concat (map (Type.FV o #2) E)
-  fun BVEnv E = List.concat (map (Type.BV o #2) E)
+  fun substEnv S E = map (fn (x, (PV, T)) => (x, (PV, Type.subst S T))) E
+  fun FVEnv E = List.concat (map (Type.FV o #2 o #2) E)
+  fun BVEnv (E : env) = List.concat (map (Type.BV o #2 o #2) E)
 
-  fun instantiate gensym BV T = let
-    val PV = List.filter (fn x => not (List.exists (fn y => value x = value y) BV)) (Type.BV T)
+  fun instantiate gensym (PV, T) = let
     val S = map (fn y => (y, Type.VAR (region y, Int.toString (Gensym.gensym gensym)))) PV
   in
     Type.replace S T
@@ -21,9 +21,10 @@ structure Inferring :> INFERRING = struct
 
   fun generalize gensym FV T = let
     val PV = List.filter (fn x => not (List.exists (fn y => value x = value y) FV)) (Type.FV T)
-    val S = map (fn y => (y, Type.CON (region y, Int.toString (Gensym.gensym gensym)))) PV
+    val PV' = map (fn y => (region y, Int.toString (Gensym.gensym gensym))) PV
+    val S = map (fn (y, z) => (y, Type.CON z)) (ListPair.zip (PV, PV'))
   in
-    Type.subst S T
+    (PV', Type.subst S T)
   end
 
   fun unify nil = nil
@@ -67,8 +68,8 @@ structure Inferring :> INFERRING = struct
       (case lookup x E of
         NONE =>
           raise NotInScope x
-      | SOME T =>
-          (instantiate gensym (BVEnv (List.filter (fn (y, _) => value x <> value y) E)) T, nil))
+      | SOME PT =>
+          (instantiate gensym PT, nil))
     | constraint_type gensym E (TypedTerm.APP (r, (e1, e2))) = let
         val (T, C) = constraint_type gensym E e1
         val (U, C') = constraint_type gensym E e2
@@ -77,8 +78,7 @@ structure Inferring :> INFERRING = struct
         (V, (T, Type.ARR (r, (U, V))) :: C @ C')
       end
     | constraint_type gensym E (TypedTerm.ABS (r, (x, T, e))) = let
-        val T = instantiate gensym (BVEnv E) T
-        val E' = (x, T) :: E
+        val E' = (x, (nil, T)) :: E
         val (U, C) = constraint_type gensym E' e
       in
         (Type.ARR (r, (T, U)), C)
@@ -87,15 +87,15 @@ structure Inferring :> INFERRING = struct
         val (T', C) = constraint_type gensym E e1
         val S = unify ((T, T') :: C)
         val (T, E) = (Type.subst S T, substEnv S E)
-        val T = generalize gensym (FVEnv E) T
-        val E' = (x, T) :: E
+        val PT = generalize gensym (FVEnv E) T
+        val E' = (x, PT) :: E
         val (U, C') = constraint_type gensym E' e2
       in
         (U, (T, T') :: C @ C')
       end
 
-  fun infer gensym E t = let
-    val (T, C) = constraint_type gensym E t
+  fun infer gensym E e = let
+    val (T, C) = constraint_type gensym E e
     val S = unify C
     val U = Type.subst S T
   in
