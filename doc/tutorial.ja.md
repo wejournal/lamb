@@ -110,12 +110,12 @@ Lamb の語彙素はつぎのとおり．
 
 では，つぎの場合はどうでしょうか？
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> y : a := f x <strong>in</strong>
     f y</code></pre>
 
 すくなくともわたしは， `y : a` という部分の `a` は，
-`two` の型に含まれる `a` と同じ型を表しているつもりです．
+`f : a -> a` や `x : a` の型に含まれる `a` と同じ型を表しているつもりです．
 
 Lamb では，この場合 `two` の型に含まれる `a` と，
 `y : a` の `a` は同じ型として扱われます．
@@ -257,32 +257,32 @@ C の `uint64_t` などを直接使いたい，としましょう．
 まず，先ほど，つぎのような例では `two` の型に含まれる `a` と
 `y : a` の `a` は同じ型として扱われると述べました:
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> y : a := f x <strong>in</strong>
     f y</code></pre>
 
 このとき，ある種の視点では `a` は単相な型と考えることもできます．
 たとえば，もし
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
     I (f (f x))</code></pre>
 
 と定義したとすれば，これは以前合法ですが， `I` は多相ではないので，
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
     I f (f x)</code></pre>
 
 ということはできないのです．このように書きたければ，
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> I : (a -> a) -> a -> a := ^y. y <strong>in</strong>
     I f (f x)</code></pre>
 
 のように具体化するか，もしくは
 
-<pre><code><strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x.
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> I : b -> b := ^y. y <strong>in</strong>
     I f (f x)</code></pre>
 
