@@ -268,7 +268,7 @@ C の `uint64_t` などを直接使いたい，としましょう．
   <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
     I (f (f x))</code></pre>
 
-と定義したとすれば，これは以前合法ですが， `I` は多相ではないので，
+と定義したとすれば，これは依然合法ですが， `I` は多相ではないので，
 
 <pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
   <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
