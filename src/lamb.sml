@@ -124,13 +124,14 @@ end
 fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
       (x :: BV, E)
   | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (BV, E)) = let
-      val T = Inferring.generalize gensym nil (Inferring.instantiate gensym BV (AST.Type.toType T))
+      val T = Inferring.instantiate gensym (List.filter (fn x => not (List.exists (fn y => value x = value y) BV)) (Inferring.BVEnv E)) (AST.Type.toType T)
+      val T = Inferring.generalize gensym (Type.FV T) T
     in
       checkDup x E
     ; (BV, (x, T) :: E)
     end
   | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (BV, E)) = let
-      val U = Inferring.infer gensym (E @ map (fn y => ((region y, Int.toString (Gensym.gensym gensym)), Type.CON y)) BV) (AST.Exp.toTypedTerm gensym e)
+      val U = Inferring.infer gensym (List.filter (fn x => not (List.exists (fn y => value x = value y) BV)) (Inferring.BVEnv E)) E (AST.Exp.toTypedTerm gensym e)
       val S =
         case Option.map AST.Type.toType Topt of
           NONE =>
@@ -143,7 +144,8 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
               Inferring.unify [(mainType (region x), T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val T = Inferring.generalize gensym nil (Inferring.instantiate gensym BV (Type.subst S U))
+      val T = Inferring.instantiate gensym (List.filter (fn x => not (List.exists (fn y => value x = value y) BV)) (Inferring.BVEnv E)) (Type.subst S U)
+      val T = Inferring.generalize gensym (Type.FV T) T
     in
       checkDup x E
     ; Option.app (Emitting.emitList ["val ", value x, " : ", showTypeArr (ref 0) (ref nil) BV T, "\n"]) emitting
