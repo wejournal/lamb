@@ -67,8 +67,31 @@ in
         ) else
           a
       end
-    | showType _ _ _ (Type.CON (_, x)) =
-        x
+    | showType i e boundedVars (Type.CON (r, x)) = let
+        val (j, e') =
+          case List.find (fn ((_, y), _) => x = y) (!e) of
+            NONE => let
+              val j = !i
+            in
+              i := !i + 1
+            ; e := ((r, x), j) :: !e
+            ; (j, !e)
+            end
+          | SOME (_, j) =>
+              (j, !e)
+
+        val a = alpha j
+        val k = ref 0
+      in
+        if List.exists (fn (_, y) => x = y) boundedVars then
+          x
+        else if List.exists (fn (_, b) => a = b) boundedVars then (
+          while List.exists (fn (_, b) => a ^ Int.toString (!k) = b) boundedVars do
+            k := !k + 1
+        ; a ^ Int.toString (!k)
+        ) else
+          a
+      end
     | showType i e boundedVars (Type.ARR (_, (T, U))) =
         "(" ^ showType i e boundedVars T ^ " -> " ^ showTypeArr i e boundedVars U ^ ")"
   and showTypeArr i e boundedVars (Type.ARR (_, (T, U))) =
@@ -101,13 +124,13 @@ end
 fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
       (x :: BV, E)
   | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (BV, E)) = let
-      val PT = Inferring.generalize gensym nil BV (AST.Type.toType T)
+      val T = Inferring.generalize gensym nil (Inferring.instantiate gensym BV (AST.Type.toType T))
     in
       checkDup x E
-    ; (BV, (x, PT) :: E)
+    ; (BV, (x, T) :: E)
     end
   | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (BV, E)) = let
-      val U = Inferring.infer gensym E (AST.Exp.toTypedTerm gensym e)
+      val U = Inferring.infer gensym BV E (AST.Exp.toTypedTerm gensym e)
       val S =
         case Option.map AST.Type.toType Topt of
           NONE =>
@@ -120,11 +143,11 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
               Inferring.unify [(mainType (region x), T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val (PV, T) = Inferring.generalize gensym nil BV (Type.subst S U)
+      val T = Inferring.generalize gensym nil (Inferring.instantiate gensym BV (Type.subst S U))
     in
       checkDup x E
     ; Option.app (Emitting.emitList ["val ", value x, " : ", showTypeArr (ref 0) (ref nil) BV T, "\n"]) emitting
-    ; (BV, (x, (PV, T)) :: (Inferring.substEnv S E))
+    ; (BV, (x, T) :: (Inferring.substEnv S E))
     end
 
 datatype target = LINUX | WINDOWS
