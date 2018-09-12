@@ -10,11 +10,11 @@ signature INFERRING = sig
   val substConstraints : Type.subst -> constraint list -> constraint list
   val substEnv : Type.subst -> env -> env
   val FVEnv : env -> mono
-  (*val BVEnv : env -> mono*)
+  val BVEnv : env -> mono
 
   val instantiate : Gensym.t -> mono -> Type.t -> Type.t
   val generalize : Gensym.t -> mono -> Type.t -> Type.t
   val unify : constraint list -> Type.subst
-  val constraint_type : Gensym.t -> mono -> env -> TypedTerm.t -> Type.t * constraint list
-  val infer : Gensym.t -> mono -> env -> TypedTerm.t -> Type.t
+  val constraint_type : Gensym.t -> env -> TypedTerm.t -> Type.t * constraint list
+  val infer : Gensym.t -> env -> TypedTerm.t -> Type.t
 end
