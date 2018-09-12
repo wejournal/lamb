@@ -98,6 +98,46 @@ Lamb の語彙素はつぎのとおり．
 
 型変数は，そこに具体的な，すなわち基底型もしくは関数型が代入されることを表すわけです．
 
+### 型変数と基底型のスコープ
+
+型変数と基底型にはスコープがあります．
+たとえば，つぎのように `one` と `two` を定義した場合，
+`one` の型に含まれる `a` と `two` の型に含まれる `a` はべつのものである，
+と考えるほうが自然でしょう．
+
+<pre><code><strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+では，つぎの場合はどうでしょうか？
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> y : a := f x <strong>in</strong>
+    f y</code></pre>
+
+すくなくともわたしは， `y : a` という部分の `a` は，
+`f : a -> a` や `x : a` の型に含まれる `a` と同じ型を表しているつもりです．
+
+Lamb では，この場合 `two` の型に含まれる `a` と，
+`y : a` の `a` は同じ型として扱われます．
+したがって，上記の例は合法です．
+基底型だけでなく型変数についてもまったく同様に扱われます．
+
+ところが，プログラム全体ですべての `a` が同じ型として扱われるわけではありません．
+たとえば，この節の最初で示したつぎの例では，
+`a` はべつの型として扱われます．
+
+<pre><code><strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+まれではありますが， `one` と `two` の `a` を同じ型として扱いたいこともあるかもしれません．
+その場合， `type` 宣言をすればよろしい:
+
+<pre><code><strong>type</strong> a
+<strong>def</strong> one : (a -> a) -> a -> a := ^f. ^x. f x
+<strong>def</strong> two : (a -> a) -> a -> a := ^f. ^x. f (f x)</code></pre>
+
+この仕様は FFI を書くとき便利です．このことはのちのちの節でくわしく説明します．
+
 ## EXPRESSIONS
 
 式は自然数，文字，文字列，変数，適用，抽象そして `let` です．
@@ -204,6 +244,58 @@ C の `uint64_t` などを直接使いたい，としましょう．
 
 しかし `uint64_t` に多相になってほしいわけではないでしょう．
 そこで `type` で単相であることを宣言しておくわけです．
+
+この仕様に疑問をもたれるかたもいるかもしれません．
+つまり，どうして単相な型と多相な型をもともと字句的に，
+たとえば `Int` のように大文字で始まる場合は単相，
+`a` のように小文字で始まる場合は多相というふうにしないのか？
+これには，根拠があります．
+前述したように型変数と基底型にはスコープがあるので，
+単相宣言がなくとも， 単相な型を表すことは可能だからです．
+
+どういうことでしょうか？
+まず，先ほど，つぎのような例では `two` の型に含まれる `a` と
+`y : a` の `a` は同じ型として扱われると述べました:
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> y : a := f x <strong>in</strong>
+    f y</code></pre>
+
+このとき，ある種の視点では `a` は単相な型と考えることもできます．
+たとえば，もし
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
+    I (f (f x))</code></pre>
+
+と定義したとすれば，これは依然合法ですが， `I` は多相ではないので，
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> I : a -> a := ^y. y <strong>in</strong>
+    I f (f x)</code></pre>
+
+ということはできないのです．このように書きたければ，
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> I : (a -> a) -> a -> a := ^y. y <strong>in</strong>
+    I f (f x)</code></pre>
+
+のように具体化するか，もしくは
+
+<pre><code><strong>def</strong> two := ^f : a -> a. ^x : a.
+  <strong>let</strong> I : b -> b := ^y. y <strong>in</strong>
+    I f (f x)</code></pre>
+
+というふうに， `a` とべつの変数を選んで多相にすればよろしい．
+
+言いかえれば， 型変数と基底型にスコープがある仕様によって，
+型環境に含まれる型変数と基底型は多相にできない，
+つまり単相であるということです．
+
+したがって， `type a` という宣言は，ただ単純に，
+型環境に `a` という基底型を加えればよろしい．
+そうすれば型変数と基底型にスコープがある仕様から，
+自然に `a` を単相にすることができるのです．
 
 ### val 宣言
 
