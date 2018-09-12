@@ -11,7 +11,7 @@ structure Inferring :> INFERRING = struct
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
   fun substEnv S E = map (fn (x, (PV, T)) => (x, (PV, Type.subst S T))) E
   fun FVEnv E = List.concat (map (Type.FV o #2 o #2) E)
-  fun BVEnv (E : env) = List.concat (map (Type.BV o #2 o #2) E)
+  fun BVEnv E = List.concat (map (Type.BV o #2 o #2) E)
 
   fun instantiate gensym (PV, T) = let
     val S = map (fn y => (y, Type.VAR (region y, Int.toString (Gensym.gensym gensym)))) PV
@@ -19,12 +19,13 @@ structure Inferring :> INFERRING = struct
     Type.replace S T
   end
 
-  fun generalize gensym FV T = let
-    val PV = List.filter (fn x => not (List.exists (fn y => value x = value y) FV)) (Type.FV T)
-    val PV' = map (fn y => (region y, Int.toString (Gensym.gensym gensym))) PV
-    val S = map (fn (y, z) => (y, Type.CON z)) (ListPair.zip (PV, PV'))
+  fun generalize gensym E T = let
+    val PFV = List.filter (fn x => not (List.exists (fn y => value x = value y) (FVEnv E))) (Type.FV T)
+    val PBV = List.filter (fn x => not (List.exists (fn y => value x = value y) (BVEnv E))) (Type.BV T)
+    val PV' = map (fn y => (region y, Int.toString (Gensym.gensym gensym))) PFV
+    val S = map (fn (y, z) => (y, Type.CON z)) (ListPair.zip (PFV, PV'))
   in
-    (PV', Type.subst S T)
+    (PV' @ PBV, Type.subst S T)
   end
 
   fun unify nil = nil
@@ -87,7 +88,7 @@ structure Inferring :> INFERRING = struct
         val (T', C) = constraint_type gensym E e1
         val S = unify ((T, T') :: C)
         val (T, E) = (Type.subst S T, substEnv S E)
-        val PT = generalize gensym (FVEnv E) T
+        val PT = generalize gensym E T
         val E' = (x, PT) :: E
         val (U, C') = constraint_type gensym E' e2
       in

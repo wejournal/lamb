@@ -14,7 +14,7 @@ signature INFERRING = sig
   val BVEnv : env -> id list
 
   val instantiate : Gensym.t -> poly * Type.t -> Type.t
-  val generalize : Gensym.t -> mono -> Type.t -> poly * Type.t
+  val generalize : Gensym.t -> env -> Type.t -> poly * Type.t
   val unify : constraint list -> Type.subst
   val constraint_type : Gensym.t -> env -> TypedTerm.t -> Type.t * constraint list
   val infer : Gensym.t -> env -> TypedTerm.t -> Type.t

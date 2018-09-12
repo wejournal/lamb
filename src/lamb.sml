@@ -131,7 +131,7 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
     ; (BV, (x, T) :: E)
     end
   | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (BV, E)) = let
-      val U = Inferring.infer gensym E (AST.Exp.toTypedTerm gensym e)
+      val U = Inferring.infer gensym (E @ map (fn y => ((region y, Int.toString (Gensym.gensym gensym)), (nil, Type.CON y))) BV) (AST.Exp.toTypedTerm gensym e)
       val S =
         case Option.map AST.Type.toType Topt of
           NONE =>
