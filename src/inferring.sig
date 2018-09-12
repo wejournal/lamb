@@ -1,6 +1,6 @@
 signature INFERRING = sig
   type constraint = Type.t * Type.t
-  type poly = id list
+  type mono = id list
   type env = (id * Type.t) list
 
   exception NotInScope of id
@@ -9,12 +9,12 @@ signature INFERRING = sig
 
   val substConstraints : Type.subst -> constraint list -> constraint list
   val substEnv : Type.subst -> env -> env
-  val FVEnv : env -> id list
-  val BVEnv : env -> id list
+  val FVEnv : env -> mono
+  val BVEnv : env -> mono
 
-  val instantiate : Gensym.t -> poly -> Type.t -> Type.t
-  val generalize : Gensym.t -> poly -> Type.t -> Type.t
+  val instantiate : Gensym.t -> mono -> Type.t -> Type.t
+  val generalize : Gensym.t -> mono -> Type.t -> Type.t
   val unify : constraint list -> Type.subst
-  val constraint_type : Gensym.t -> poly -> env -> TypedTerm.t -> Type.t * constraint list
-  val infer : Gensym.t -> poly -> env -> TypedTerm.t -> Type.t
+  val constraint_type : Gensym.t -> env -> TypedTerm.t -> Type.t * constraint list
+  val infer : Gensym.t -> env -> TypedTerm.t -> Type.t
 end
