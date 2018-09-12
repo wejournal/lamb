@@ -98,16 +98,16 @@ in
   Type.ARR (r, (stdin, stdout))
 end
 
-fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
-      (PV, x :: BV, E)
-  | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (PV, BV, E)) = let
-      val (T, PV') = Inferring.generalize gensym nil BV (AST.Type.toType T)
+fun inferDecl _ _ (AST.Decl.TYPE (_, x), (BV, E)) =
+      (x :: BV, E)
+  | inferDecl gensym _ (AST.Decl.VAL (_, (x, T)), (BV, E)) = let
+      val PT = Inferring.generalize gensym nil BV (AST.Type.toType T)
     in
       checkDup x E
-    ; (PV' @ PV, BV, (x, T) :: E)
+    ; (BV, (x, PT) :: E)
     end
-  | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (PV, BV, E)) = let
-      val U = Inferring.infer gensym PV E (AST.Exp.toTypedTerm gensym e)
+  | inferDecl gensym emitting (AST.Decl.DEF (_, (x, Topt, e)), (BV, E)) = let
+      val U = Inferring.infer gensym E (AST.Exp.toTypedTerm gensym e)
       val S =
         case Option.map AST.Type.toType Topt of
           NONE =>
@@ -120,11 +120,11 @@ fun inferDecl _ _ (AST.Decl.TYPE (_, x), (PV, BV, E)) =
               Inferring.unify [(mainType (region x), T), (T, U)]
             else
               Inferring.unify [(T, U)]
-      val (T, PV') = Inferring.generalize gensym nil BV (Type.subst S U)
+      val (PV, T) = Inferring.generalize gensym nil BV (Type.subst S U)
     in
       checkDup x E
     ; Option.app (Emitting.emitList ["val ", value x, " : ", showTypeArr (ref 0) (ref nil) BV T, "\n"]) emitting
-    ; (PV' @ PV, BV, (x, T) :: (Inferring.substEnv S E))
+    ; (BV, (x, (PV, T)) :: (Inferring.substEnv S E))
     end
 
 datatype target = LINUX | WINDOWS
@@ -264,14 +264,14 @@ functor Main(Compiling : COMPILING) = struct
         val i = ref 0
         val e = ref nil
       in
-        print_error_in_file file s r ("cyclic: " ^ showTypeArr i e (#2 (!z0)) (Type.VAR (r, x)) ^ " in " ^ showTypeArr i e (#2 (!z0)) T)
+        print_error_in_file file s r ("cyclic: " ^ showTypeArr i e (#1 (!z0)) (Type.VAR (r, x)) ^ " in " ^ showTypeArr i e (#1 (!z0)) T)
       end
     | Inferring.Incompatible (T, U) => let
         val r = Type.region T
         val i = ref 0
         val e = ref nil
       in
-        print_error_in_file file s r ("incompatible types: " ^ showTypeArr i e (#2 (!z0)) T ^ " and " ^ showTypeArr i e (#2 (!z0)) U)
+        print_error_in_file file s r ("incompatible types: " ^ showTypeArr i e (#1 (!z0)) T ^ " and " ^ showTypeArr i e (#1 (!z0)) U)
       end
     | Duplicate (r, x) =>
         print_error_in_file file s r ("duplicate variable: `" ^ x ^ "'")
@@ -292,7 +292,7 @@ functor Main(Compiling : COMPILING) = struct
       | SOME output => TextIO.openOut output
     val gensym = Gensym.new ()
     val emitting = Emitting.new ()
-    val z0 = (nil, nil, nil)
+    val z0 = (nil, nil)
     val z1 = (NONE, nil)
   in
     List.foldl (compile' true gensym emitting) (z0, z1) files
@@ -307,7 +307,7 @@ functor Main(Compiling : COMPILING) = struct
       | SOME output => TextIO.openOut output
     val gensym = Gensym.new ()
     val emitting = Emitting.new ()
-    val z0 = (nil, nil, nil)
+    val z0 = (nil, nil)
     val z1 = (if inline then SOME nil else NONE, nil)
   in
     List.foldl (compile' false gensym emitting) (z0, z1) files

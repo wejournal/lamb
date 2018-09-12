@@ -6,8 +6,6 @@ def K : a -> b -> a := ^x. ^_. x
 def S : (a -> b -> c) -> (a -> b) -> a -> c := ^x. ^y. ^z. x z (y z)
 def W : (a -> a -> b) -> a -> b := ^x. ^y. x y y
 
-def tmp := C B
-
 -- Booleans
 -- type bool[a] := a -> a -> a
 
