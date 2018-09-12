@@ -90,7 +90,7 @@ structure Inferring :> INFERRING = struct
         val E' = (x, T) :: E
         val (U, C') = constraint_type gensym E' e2
       in
-        (U, C @ C')
+        (U, (T, T') :: C @ C')
       end
 
   fun infer gensym E t = let
