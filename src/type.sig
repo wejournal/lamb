@@ -9,7 +9,7 @@ signature TYPE = sig
   val subst : subst -> t -> t
   val replace : subst -> t -> t
   val compose : subst -> subst -> subst
-  val FV : t -> id list
-  val BV : t -> id list
+  val TV : t -> id list
+  val BT : t -> id list
   val region : t -> region
 end

@@ -10,8 +10,8 @@ structure Inferring :> INFERRING = struct
 
   fun substConstraints S C = map (fn (T, U) => (Type.subst S T, Type.subst S U)) C
   fun substEnv S E = map (fn (x, (PV, T)) => (x, (PV, Type.subst S T))) E
-  fun FVEnv E = List.concat (map (Type.FV o #2 o #2) E)
-  fun BVEnv E = List.concat (map (Type.BV o #2 o #2) E)
+  fun TVEnv E = List.concat (map (Type.TV o #2 o #2) E)
+  fun BTEnv E = List.concat (map (Type.BT o #2 o #2) E)
 
   fun instantiate gensym (PV, T) = let
     val S = map (fn y => (y, Type.VAR (region y, Int.toString (Gensym.gensym gensym)))) PV
@@ -20,12 +20,12 @@ structure Inferring :> INFERRING = struct
   end
 
   fun generalize gensym E T = let
-    val PFV = List.filter (fn x => not (List.exists (fn y => value x = value y) (FVEnv E))) (Type.FV T)
-    val PBV = List.filter (fn x => not (List.exists (fn y => value x = value y) (BVEnv E))) (Type.BV T)
-    val PV' = map (fn y => (region y, Int.toString (Gensym.gensym gensym))) PFV
-    val S = map (fn (y, z) => (y, Type.CON z)) (ListPair.zip (PFV, PV'))
+    val PTV = List.filter (fn x => not (List.exists (fn y => value x = value y) (TVEnv E))) (Type.TV T)
+    val PBT = List.filter (fn x => not (List.exists (fn y => value x = value y) (BTEnv E))) (Type.BT T)
+    val PV' = map (fn y => (region y, Int.toString (Gensym.gensym gensym))) PTV
+    val S = map (fn (y, z) => (y, Type.CON z)) (ListPair.zip (PTV, PV'))
   in
-    (PV' @ PBV, Type.subst S T)
+    (PV' @ PBT, Type.subst S T)
   end
 
   fun unify nil = nil
@@ -40,7 +40,7 @@ structure Inferring :> INFERRING = struct
             Type.compose (unify (substConstraints S C)) S
           end
       | (Type.VAR x, _) =>
-          if List.exists (fn y => value x = value y) (Type.FV U) then
+          if List.exists (fn y => value x = value y) (Type.TV U) then
             raise Cyclic (x, U)
           else let
             val S = [(x, U)]
@@ -48,7 +48,7 @@ structure Inferring :> INFERRING = struct
             Type.compose (unify (substConstraints S C)) S
           end
       | (_, Type.VAR y) =>
-          if List.exists (fn x => value x = value y) (Type.FV T) then
+          if List.exists (fn x => value x = value y) (Type.TV T) then
             raise Cyclic (y, T)
           else let
             val S = [(y, T)]

@@ -31,13 +31,13 @@ structure Type :> TYPE = struct
   fun compose S S' =
       List.filter (fn (x, _) => List.all (fn (y, _) => value x <> value y) S') S @ map (fn (x, T) => (x, subst S T)) S'
 
-  fun FV (VAR x) = [x]
-    | FV (CON _) = nil
-    | FV (ARR (_, (T, U))) = FV T @ FV U
+  fun TV (VAR x) = [x]
+    | TV (CON _) = nil
+    | TV (ARR (_, (T, U))) = TV T @ TV U
 
-  fun BV (VAR _) = nil
-    | BV (CON x) = [x]
-    | BV (ARR (_, (T, U))) = BV T @ BV U
+  fun BT (VAR _) = nil
+    | BT (CON x) = [x]
+    | BT (ARR (_, (T, U))) = BT T @ BT U
 
   fun region (VAR (r, _)) = r
     | region (CON (r, _)) = r
