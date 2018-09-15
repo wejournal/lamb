@@ -91,7 +91,7 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
         if (!p)
           continue;
 
-        if (lives_size < 16777216) {
+        if (lives_size < 65536) {
           lives[lives_size] = p;
           ++lives_size;
         } else {
