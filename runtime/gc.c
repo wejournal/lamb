@@ -59,7 +59,7 @@ bool is_free(void *p) {
 
 void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
   uintptr_t lives_size = 0;
-  void **lives = malloc(16777216);
+  void *lives[65536];
 
   lives[lives_size] = env_values;
   ++lives_size;
@@ -103,8 +103,6 @@ void gc_mark(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, 
 
     live_chunk->size |= 1;
   }
-
-  free(lives);
 }
 
 void gc_sweep(uintptr_t env_count, closure_t *env_values, uintptr_t stack_count, closure_t *stack_values) {
